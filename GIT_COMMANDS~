@@ -1,0 +1,20 @@
+-------------------
+-- INIT REPO DIR --
+-------------------
+
+cd to repo dir
+> git init
+> git remote add <LOCAL REPO NAME> <GITHUB URL>
+
+----------
+-- PULL --
+----------
+> git pull <LOCAL REPO NAME> master
+
+----------
+-- PUSH --
+----------
+
+> git commit -m "MANDATORY MESSAGE"
+> git push <LOCAL REPO NAME> master
+...authenticate
