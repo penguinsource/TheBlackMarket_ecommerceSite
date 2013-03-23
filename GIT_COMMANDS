@@ -19,3 +19,6 @@ cd to repo dir
 > git commit -m "MANDATORY MESSAGE"
 > git push <LOCAL REPO NAME> master
 ...authenticate
+
+
+ALWAYS COMMIT-PULL-PUSH OR I WILL EAT YOUR BABIES!!!
