@@ -47,25 +47,23 @@
     }
     
     function checkPage(){
+        // start session if any..
+        session_start();
         if(isset($_SESSION['email']) && !empty($_SESSION['email'])){
           echo "<br>USER " . $_SESSION['email'] . " is logged in !<br>";
           // tells php session is initiated
         }
         
+        // if a POST request was made ..
         if ($_SERVER["REQUEST_METHOD"] == 'POST'){
-              echo 'POST REQUEST MADE !';
               if (isset($_POST["registerBtn"])){
-                echo "REGISTER !";
                 registerUser();
               } else if (isset($_POST["loginBtn"])){
-                echo "<br>DONT DO IT<br> " . $_SESSION['email'];
                 loginUser(); 
               } else if (isset($_POST["logoutBtn"])){
                 logoutUser(); 
               }
-        } // if this got a POST request..
-        
-
+        }
     }
     
     

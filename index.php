@@ -11,11 +11,6 @@
 
 <body>
 
-
-
-<?php echo "Hello PHP !"; ?>
-<?php $con = connectToDB(); // connect to the database ?>
-
 <form name="registerForm" action="index.php" method="POST">
     <input type="text" name="emailReg" id="emailReg">
     <input type="text" name="passwordReg" id="passwordReg">

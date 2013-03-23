@@ -43,7 +43,7 @@
         
         closeDBConnection($con);    // close the database connection
         
-        session_start();            // start a php session
+        //session_start();            // start a php session
         $_SESSION['email']=$email;  // save the email of the user in the session
         
     }
@@ -72,16 +72,15 @@
         
         // query the email and password entered
         $loginQuery="SELECT * FROM user WHERE email = '$email' AND password = '$password'";
-        echo "query is:" . $loginQuery;
         
         $result = mysqli_query($con, $loginQuery);
         if (mysqli_num_rows($result) > 0){  // if true, then email and pass are correct
             echo "<br> logged in !";
-            session_start();            // start a php session
+            //session_start();            // start a php session
             $_SESSION['email']=$email;  // save the email of the user in the session
             
             if(isset($_SESSION['email'])){
-                echo "<br>USER" . $_SESSION['email'] . " is logged in !<br>";
+                echo "<br>logging in ..<br>";
                 // tells php session is initiated
             }
         } else{
