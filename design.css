@@ -37,9 +37,12 @@ h1 {
 }
 
 #login {
+    position: absolute;
+    text-align: right;
     float: right;
-    width: 200px;
+    width: 15%;
     color: Red;
+    right: -250px;
 }
 
 #page {
