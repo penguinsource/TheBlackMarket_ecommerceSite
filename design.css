@@ -87,3 +87,11 @@ h1 {
     color: White;
     text-align: center;
 }
+
+.hidden {
+	display:none;
+}
+
+.visible {
+	/* display is defaulted */
+}

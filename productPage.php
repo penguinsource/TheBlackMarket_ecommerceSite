@@ -1,3 +1,12 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<?php include("functionsPHP/generalFuncs.php"); ?>
+<?php checkPage(); ?>
+<html>
+<head>
+</head>
+
+<body>
+
 <?php
 
 echo "Hello from Blah !";
@@ -11,3 +20,6 @@ if (isset($_GET["productsType"])){
 
 
 ?>
+</body>
+
+</html>

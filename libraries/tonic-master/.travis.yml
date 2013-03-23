@@ -1,0 +1,9 @@
+language: php
+php:
+  - 5.3
+  - 5.4
+before_install:
+  - composer install --dev
+script:
+  - php vendor/behat/behat/bin/behat
+  - php vendor/phpspec/phpspec/scripts/phpspec.php spec
