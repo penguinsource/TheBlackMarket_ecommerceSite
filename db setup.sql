@@ -1,3 +1,7 @@
+DROP TABLE user;
+DROP TABLE product;
+DROP TABLE transaction;
+
 CREATE TABLE user (
 	userid INT AUTO_INCREMENT,
 	email VARCHAR(255) NOT NULL,
@@ -28,4 +32,9 @@ CREATE TABLE transaction (
 	PRIMARY KEY (transid),
 	FOREIGN KEY (userid) REFERENCES user (userid),
 	FOREIGN KEY (pid) REFERENCES product (pid)
+)
+
+CREATE TABLE category (
+    name VARCHAR(127),
+    PRIMARY KEY(name)
 )
