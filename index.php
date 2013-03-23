@@ -33,7 +33,10 @@
 <?php
 /*$url = "http://localhost/TheBlackMarket_ecommerceSite/productPage/3322";
 $response = file_get_contents($url);
-echo $response;*/
+echo $response;
+
+//-------------------------------------------------------
+
     require_once "libraries/tonic-master/src/Tonic/Autoloader.php";
 
     $app = new Tonic\Application();
@@ -43,7 +46,7 @@ echo $response;*/
 
     $resource = $app->getResource($request);
     $response = $resource->exec();
-    $response->output();
+    $response->output();*/
 ?>
 
 
