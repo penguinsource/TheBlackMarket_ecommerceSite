@@ -4,7 +4,9 @@
         $con = connectToDB();
         
         // validate email; should no be null or have an incorrect format
-        $email = $_POST['email'];
+        if (isset($_POST['emailReg'])){
+            $email = $_POST['emailReg'];
+        }
         // check if email is empty
         if (($email == '') or ($email == null)){
                 echo "Your email must be filled out !";
@@ -18,7 +20,9 @@
         }
         
         // validate password; should no be null or < 6 characters
-        $password = $_POST['password'];
+        if (isset($_POST['passwordReg'])){
+            $password = $_POST['passwordReg'];
+        }
         if (($password == '') or ($password == null)){
             echo "Did you forget to write a password ?";
             die();
@@ -29,6 +33,52 @@
             die();
         }
         
+        // insert user into database
+        $registerQuery="INSERT INTO user VALUES" 
+        . " (null,'$email','$password', null, null, null, null, null, null)";
+
+        if (!mysqli_query($con,$registerQuery)){
+                die('Error inserting into database.. ');
+        }
+        
+        closeDBConnection($con);    // close the database connection
+        
+        session_start();    // start a php session
+        $_SESSION['email']=$email;  // save the email of the user in the session
+    }
+    
+    function loginUser(){
+        $con = connectToDB();   // connect to the database
+        
+        $email = "";
+        $password = "";
+        
+        // grab the login email entered
+        if (isset($_POST['emailLogin'])){
+            $email = $_POST['emailLogin'];
+        } else {
+            echo "No username ? You need to register first !";
+            die();
+        }
+        
+         // grab the login password entered
+        if (isset($_POST['passwordLogin'])){
+            $password = $_POST['passwordLogin'];
+        } else {
+            echo "Did you forget your password?";
+            die();
+        }
+        
+        // insert user into database
+        $loginQuery="SELECT * FROM user WHERE email = $email AND password = $password;";
+        $loginQuery2 = mysqli_query($con,$adminQuery);	// query db
+        $loginArray = mysqli_fetch_array($resadmin);
+        if ($loginArray[0]){
+                return true;
+                echo 'LOGGED IN !';
+        }
+        
+        closeDBConnection($con);    // close the database connection
     }
     
     function registerUser2(){
