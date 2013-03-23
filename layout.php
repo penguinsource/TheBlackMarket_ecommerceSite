@@ -9,10 +9,21 @@
 
 <body>
   <div id="header">
-    <h1>top shit</h1>
+    <div id="logo">
+      <img src="BM_LOGO.png" />
+    </div>
+    <div id="nlogo">
+      <div id="title">
+	<h1>BLACK MARKET BITCHES</h1>
+      </div>
+      <div id="login">
+	<p>this is login area</p>
+      </div>
+    </div>
   </div>
+
   <div id="page">
-    <div id="nav">
+    <div id="nav">      
       <p>some random nav bar</p>
     </div>
 
@@ -22,12 +33,12 @@
       </div>
 
       <div id="userbar">
-	<p>user info bar</p>
+	<p>user bar content</p>
       </div>
     </div>
     
     <div id="footer">
-      <p>this is footer content</p>
+      <p>&bull; CMPUT 410 &bull;</p>
     </div>
   </div>
 </body>

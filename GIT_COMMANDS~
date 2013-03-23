@@ -15,6 +15,7 @@ cd to repo dir
 -- PUSH --
 ----------
 
+> git add .
 > git commit -m "MANDATORY MESSAGE"
 > git push <LOCAL REPO NAME> master
 ...authenticate
