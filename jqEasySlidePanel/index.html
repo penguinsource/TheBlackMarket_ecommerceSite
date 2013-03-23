@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sliding Panel v5</title>
+<style type="text/css">
+body {
+	color:#333;
+	width:600px;
+	font-size:14px;
+	font-family:Verdana, Geneva, sans-serif;
+	margin:0 auto;
+	padding:0 100px;
+}
+a:focus {
+outline: none;
+}
+a.trigger{
+	position: absolute;
+	background:#88bbd4 url(images/plus.png) 6% 55% no-repeat;
+	text-decoration: none;
+	font-size: 16px;
+	letter-spacing:-1px;
+	font-family: verdana, helvetica, arial, sans-serif;
+	color:#fff;
+	padding:4px 12px 6px 24px;
+	font-weight: bold;
+	
+	z-index:2;
+}
+a.trigger.left {
+	left: 0;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+a.trigger.right {
+	right: 0;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+}
+a.trigger:hover {
+	background-color:#59B;
+}
+a.active.trigger {
+	background:#666 url(images/minus.png) 6% 55% no-repeat;
+}
+.panel {
+	color:#CCC;
+	position: absolute;
+	display: none;
+	background: #000000;
+	width: 300px;
+	height: auto;
+	z-index:1;
+}
+.panel.left {
+	left: 0;
+	padding: 20px 30px 20px 100px;
+	border-top-right-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-webkit-border-top-right-radius: 15px;
+	-moz-border-radius-bottomright: 15px;
+	-webkit-border-bottom-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+.panel.right {
+	right: 0;
+	padding: 20px 100px 20px 30px;
+	border-bottom-left-radius: 15px;
+	border-top-left-radius: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	-moz-border-radius-topleft: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-webkit-border-top-left-radius: 15px;
+}
+.panel p {
+	font-size:11px;
+}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.slidePanel.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	// default settings
+	// $('.panel').slidePanel();
+	
+	// custom settings
+	$('#panel1').slidePanel({
+		triggerName: '#trigger1',
+		position: 'fixed',
+		triggerTopPos: '20px',
+		panelTopPos: '10px',
+		ajax: true,
+		ajaxSource: 'ajax.html'
+	});
+	
+	$('#panel2').slidePanel({
+		triggerName: '#trigger2',
+		triggerTopPos: '20px',
+		panelTopPos: '10px'
+	});
+	
+	$('#panel3').slidePanel({
+		triggerName: '#trigger3',
+		triggerTopPos: '220px',
+		panelTopPos: '200px',
+		ajax: true,
+		ajaxSource: 'ajax.html'
+	});
+});
+</script>
+</head>
+
+<body>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut suscipit orci. Praesent egestas fermentum consectetur. Vestibulum vulputate nibh cursus sapien sagittis egestas. Suspendisse sed magna nisi. Sed faucibus eleifend sapien ut rutrum. Phasellus sed sollicitudin ante. Integer molestie molestie tortor, feugiat porttitor elit tincidunt id. In molestie justo quis turpis feugiat vitae consequat sem vulputate. Aenean orci elit, molestie eu sollicitudin pellentesque, lobortis ultricies nisl. Donec hendrerit lacus nec sapien mattis molestie commodo leo interdum. In a mi a sem lobortis mollis id eget magna. Quisque gravida semper scelerisque. In facilisis ullamcorper consectetur. Donec ornare pretium volutpat. Mauris fermentum, nisl et vehicula congue, orci velit pellentesque nulla, varius gravida turpis libero sed neque.</p>
+<p>Suspendisse tempor, lectus non facilisis blandit, enim magna varius ipsum, sit amet blandit urna sapien et ante. Morbi ac augue eu lacus ullamcorper tincidunt. Phasellus euismod venenatis sem vel commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in augue sed augue pulvinar ultricies. Suspendisse potenti. Proin pharetra, orci fermentum vulputate suscipit, odio arcu laoreet est, eu porttitor erat elit et mi. Nullam ac erat enim, at tincidunt sapien. Donec tellus mi, ultrices vel fringilla vitae, luctus eget urna. Sed dapibus mattis massa, vel hendrerit dolor luctus vitae. Quisque at nunc arcu. Donec consequat rhoncus magna eget ultricies. Praesent felis massa, condimentum sit amet auctor venenatis, eleifend in magna.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut suscipit orci. Praesent egestas fermentum consectetur. Vestibulum vulputate nibh cursus sapien sagittis egestas. Suspendisse sed magna nisi. Sed faucibus eleifend sapien ut rutrum. Phasellus sed sollicitudin ante. Integer molestie molestie tortor, feugiat porttitor elit tincidunt id. In molestie justo quis turpis feugiat vitae consequat sem vulputate. Aenean orci elit, molestie eu sollicitudin pellentesque, lobortis ultricies nisl. Donec hendrerit lacus nec sapien mattis molestie commodo leo interdum. In a mi a sem lobortis mollis id eget magna. Quisque gravida semper scelerisque. In facilisis ullamcorper consectetur. Donec ornare pretium volutpat. Mauris fermentum, nisl et vehicula congue, orci velit pellentesque nulla, varius gravida turpis libero sed neque.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut suscipit orci. Praesent egestas fermentum consectetur. Vestibulum vulputate nibh cursus sapien sagittis egestas. Suspendisse sed magna nisi. Sed faucibus eleifend sapien ut rutrum. Phasellus sed sollicitudin ante. Integer molestie molestie tortor, feugiat porttitor elit tincidunt id. In molestie justo quis turpis feugiat vitae consequat sem vulputate. Aenean orci elit, molestie eu sollicitudin pellentesque, lobortis ultricies nisl. Donec hendrerit lacus nec sapien mattis molestie commodo leo interdum. In a mi a sem lobortis mollis id eget magna. Quisque gravida semper scelerisque. In facilisis ullamcorper consectetur. Donec ornare pretium volutpat. Mauris fermentum, nisl et vehicula congue, orci velit pellentesque nulla, varius gravida turpis libero sed neque.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut suscipit orci. Praesent egestas fermentum consectetur. Vestibulum vulputate nibh cursus sapien sagittis egestas. Suspendisse sed magna nisi. Sed faucibus eleifend sapien ut rutrum. Phasellus sed sollicitudin ante. Integer molestie molestie tortor, feugiat porttitor elit tincidunt id. In molestie justo quis turpis feugiat vitae consequat sem vulputate. Aenean orci elit, molestie eu sollicitudin pellentesque, lobortis ultricies nisl. Donec hendrerit lacus nec sapien mattis molestie commodo leo interdum. In a mi a sem lobortis mollis id eget magna. Quisque gravida semper scelerisque. In facilisis ullamcorper consectetur. Donec ornare pretium volutpat. Mauris fermentum, nisl et vehicula congue, orci velit pellentesque nulla, varius gravida turpis libero sed neque.</p>
+
+<a href="#" id="trigger1" class="trigger left">panel</a>
+<div id="panel1" class="panel left">
+	<p>Here is some static content for Panel 1.</p>
+    <p>Ut purus metus, fermentum vitae pulvinar vel, elementum eget nulla. Pellentesque posuere, enim ut dapibus vestibulum, leo nunc porttitor neque, sed pulvinar orci sem eleifend sapien. Nullam at odio nibh, eu pharetra ipsum.</p>
+</div>
+
+<a href="#" id="trigger2" class="trigger right">panel</a>
+<div id="panel2" class="panel right">
+	<p>Here is some static content for Panel 2.</p>
+    <p>Ut purus metus, fermentum vitae pulvinar vel, elementum eget nulla. Pellentesque posuere, enim ut dapibus vestibulum, leo nunc porttitor neque, sed pulvinar orci sem eleifend sapien. Nullam at odio nibh, eu pharetra ipsum.</p>
+</div>
+
+<a href="#" id="trigger3" class="trigger right">panel</a>
+<div id="panel3" class="panel right">
+	<p>Here is some static content for Panel 2.</p>
+    <p>Ut purus metus, fermentum vitae pulvinar vel, elementum eget nulla. Pellentesque posuere, enim ut dapibus vestibulum, leo nunc porttitor neque, sed pulvinar orci sem eleifend sapien. Nullam at odio nibh, eu pharetra ipsum.</p>
+</div>
+
+</body>
+</html>
