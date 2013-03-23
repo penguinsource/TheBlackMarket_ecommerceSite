@@ -5,6 +5,26 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <link href="design.css" rel="Stylesheet" type="text/css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script language="javascript" type="text/javascript"> 
+  $(document).ready(function() {
+    $("#slide").click(function() {
+      if ($("#slide").val() == "<") {
+	$("#slide").val(">");
+        $("#login").animate({right:0});
+      }
+      else if ($("#slide").val() == ">") {
+        $("#slide").val("<");
+	$("#login").animate({right:-250});
+      }
+    });
+    $("#blogin").click(function() {
+      alert("Login button clicked");
+    });
+  });
+
+  
+  </script>
 </head>
 
 <body>
@@ -17,7 +37,17 @@
 	<h1>BLACK MARKET BITCHES</h1>
       </div>
       <div id="login">
-	<p>this is login area</p>
+	<table border="0">
+	  <tr>
+	    <td><input type="button" id="slide" value="<"></input></td>
+	    <td><input type="text" name="email" value="Email"></input></td>
+	  </tr>
+	  <tr>
+	    <td></td>
+	    <td><input type="text" name="password" value="Password"></input></td>
+	    <td><input type="button" name="blogin" value="login" id="blogin"></input></td>
+	  </tr>
+	</table>
       </div>
     </div>
   </div>
