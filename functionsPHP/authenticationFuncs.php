@@ -1,21 +1,8 @@
 <?php
 	session_start();
-	
-	// GLOBAL VARIABLES:
-    //$url_path = "http://localhost/a3";
-	// local database vars
-    /*$host = "localhost";
-    $username = "root";
-    $password = "";
-    $database_name = "blackmarket";
-	*/
-	
-	// NEW HOST: 
-	$host = "mysql10.000webhost.com";
-	$database_name = "a5900628_bmarket";
-	$username = "a5900628_bmarket";
-	$password = "blackmarket5";
-	// //----------------------------------
+	// database file
+	$dbFile = "../config.ini";
+	//$dbConfig = "../configLocal.ini";
 	
 	if (isset($_POST["loginName"])){
 		loginUser();
@@ -30,20 +17,11 @@
 	} else if (isset($_POST["logOut"])){
 		logoutUser();
 	} else {
-		echo "fail request POST";
+		echo "fail request POST! see file authenticationFuncs.php";	// incorrect POST request sent here..
 	}
 	
     function connectToDB(){
-	/*
-		global $host;
-		// reading database vars from file
-		$handle = fopen("../config.ini", 'r');
-		$parts = explode("  ", fgets($handle));
-		echo "line:" . $parts[1] . "\n";
-		$GLOBALS["host"] = $parts[1];
-		echo "line:" . $GLOBALS["host"] . "\n";
-		fclose($handle);
-		*/
+		getDBvars();	// get the vars to connect to the database
 		
         // Create a connection to the database
         //$con = mysqli_connect("localhost","root","","410a3");
@@ -57,6 +35,30 @@
 			return $con;
         }
     }
+	
+	function getDBvars(){
+		global $host, $username, $password, $database_name;
+		// reading database vars from file
+		$handle = fopen($GLOBALS["dbConfig"], 'r');
+		while(!feof($handle)){
+			$parts = explode(" ", fgets($handle));
+			if (isset($parts[1]) && isset($parts[2])){
+				if (trim($parts[0]) == "host"){
+					$host = trim($parts[2]);
+					//echo "host:".$host."<br>";
+				} else if (trim($parts[0]) == "username"){
+					$username = trim($parts[2]);
+					//echo "user:".$username."<br>";
+				} else if (trim($parts[0]) == "password"){
+					$password = trim($parts[2]);
+					//echo "pass:".$password."<br>";
+				} else if (trim($parts[0]) == "database_name"){
+					$database_name = trim($parts[2]);
+					//echo "db:".$database_name."<br>";
+				}
+			}
+		}
+	}
 	
 	function closeDBConnection($con){
             mysqli_close($con);
@@ -107,7 +109,6 @@
         
         //session_start();            // start a php session
         $_SESSION['email']=$email;  // save the email of the user in the session
-        
     }
     
     function loginUser(){
@@ -148,108 +149,5 @@
     function logoutUser(){
         session_destroy();
     }
-    
-    /*
-    function registerUser2(){
-        $con = connectToDB();
-        
-        // validate text fields..        
-        $name = $_GET['Name'];
-        if (($name == '') or ($name == null)){
-                echo "Your name must be filled out !";
-                die();
-        }
-        // check if another user has already registered with this name..
-        $result = mysqli_query($con,"SELECT name FROM users WHERE name = '$name'");
-
-        if (mysqli_num_rows($result) > 0){
-                echo "A user with the name '" . $name . "' is already registered. Please " .
-                "select a different name!";
-                closeDBConnection($con);	// close db
-                die();
-        }
-        
-        $access = 5;
-        if ($_GET['access'] == "admin"){
-                $access = 1;
-        } else {
-                $access = 0;
-        }
-        
-        $address = $_GET['Address'];
-        $city = $_GET['City'];
-        
-        $postalCode = $_GET['PostalCode'];
-        $postalRegex = '/[a-zA-Z][0-9][a-zA-Z](-| |)[0-9][a-zA-Z][0-9]/';
-        if (($postalCode != '') or ($postalCode != null)){
-                if (!preg_match($postalRegex, $postalCode)){
-                        echo 'Invalid Postal Code entered !';
-                        die();
-                }
-        }
-        
-        $email = $_GET['Email'];
-        // check if email is empty
-        if (($email == '') or ($email == null)){
-                echo "Your email must be filled out !";
-                die();
-        }
-        // validating email
-        $emailRegex = '/^([a-zA-Z0-9])([a-zA-Z0-9\._-])*@(([a-zA-Z0-9])+(\.))+([a-zA-Z]{2,4})+$/';
-        if(!preg_match($emailRegex,$email)){
-                echo "Invalid email entered !";
-                die();
-        }
-        
-        // check if another user has already registered with this name..
-        $result = mysqli_query($con,"SELECT name FROM users WHERE Email = '$email'");
-
-        if (mysqli_num_rows($result) > 0){
-                echo "A user with the email '" . $email . "' is already registered. Please " .
-                "select a different email!";
-                closeDBConnection($con);	// close db
-                die();
-        }
-        
-        $birthdate = $_GET['BirthDate'];
-        $birthdateRegex = '/^(19|20)\d{2}[\-](0?[1-9]|1[0-2])[\-](0?[1-9]|[12][0-9]|3[01])$/';			//YYYY-MM-DD
-        
-        if (($birthdate != '') or ($birthdate != null)){
-                if (!preg_match($birthdateRegex,$birthdate)){
-                        echo "Invalid birth date entered !";
-                        die();
-                }
-                echo '<br>it aint empty';
-        }
-        
-        
-        // insert into database
-        $sql="INSERT INTO users (name, Access, Address, City, PostalCode, Email, BirthDate) VALUES" 
-        . " ('$name','$access','$address', '$city', '$postalCode', '$email', '$birthdate')";
-
-        if (!mysqli_query($con,$sql)){
-                die('Error inserting into database.. ');
-        }
-        echo "<br> 1 record added";
-        closeDBConnection($con);			// close the database connection
-        
-        // set cookies
-        $timeForCookie = 3600;
-        setcookie("name", $name, time()+$timeForCookie);  // expire in 1 hour
-        setcookie("access", $access, time()+$timeForCookie);
-        setcookie("address", $address, time()+$timeForCookie);
-        setcookie("city", $city, time()+$timeForCookie);  
-        setcookie("postalcode", $postalCode, time()+$timeForCookie); 
-        setcookie("email", $email, time()+$timeForCookie); 
-        setcookie("birthdate", $birthdate, time()+$timeForCookie); 
-
-        //print_r($_COOKIE);
-        //echo "<br>Cookie name is .. : " . $_COOKIE["name"];
-        
-        // redirect to the menu page
-        //header( "Location: " . $GLOBALS["url_path"] . "/file1.html" );
-        //redirect("menuPage.php");
-        exit();
-    }*/
     
 ?>

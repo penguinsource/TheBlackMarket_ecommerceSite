@@ -3,7 +3,6 @@
 <?php include("functionsPHP/generalFuncs.php"); ?>
 
 <?php checkPage(); ?>
-<?php //session_destroy(); ?>
 <html>
   
 <head>
@@ -29,10 +28,10 @@
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items">Test the Rest</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
-
+<p> login: buddy@yahoo.com / pass: buddy@yahoo.com
 <hr>
 
-<?php 
+<?php // check if any user is logged in
 	if (isset($_SESSION["email"])){
 		echo "<div id='userLoggedIn'>Logged in :".$_SESSION["email"]."</div>";
 	} else {

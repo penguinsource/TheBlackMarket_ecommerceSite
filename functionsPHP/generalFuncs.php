@@ -47,16 +47,9 @@
     }
     
     function checkPage(){
-        // start session if any..
+        // start session if any user is logged in..
 		session_start();
 		
-		
-        if(isset($_SESSION['email']) && !empty($_SESSION['email'])){
-		  //session_destroy();
-          //echo "<br>USER " . $_SESSION['email'] . " is logged in !<br>";
-		  
-          // tells php session is initiated
-        }
         /*
         // if a POST request was made ..
         if ($_SERVER["REQUEST_METHOD"] == 'POST'){
