@@ -15,10 +15,15 @@
 	$database_name = "a5900628_bmarket";
 	$username = "a5900628_bmarket";
 	$password = "blackmarket5";
-	// ----------------------------------
+	// //----------------------------------
 	
 	if (isset($_POST["loginName"])){
 		loginUser();
+		if (isset($_SESSION["email"])){
+			echo $_SESSION["email"];
+		}
+	} else if (isset($_POST["registerName"])){
+		registerUser();
 		if (isset($_SESSION["email"])){
 			echo $_SESSION["email"];
 		}
@@ -61,8 +66,8 @@
        $con = connectToDB();
         
         // validate email; should no be null or have an incorrect format
-        if (isset($_POST['emailReg'])){
-            $email = $_POST['emailReg'];
+        if (isset($_POST['registerName'])){
+            $email = $_POST['registerName'];
         }
         // check if email is empty
         if (($email == '') or ($email == null)){
@@ -77,8 +82,8 @@
         }
         
         // validate password; should no be null or < 6 characters
-        if (isset($_POST['passwordReg'])){
-            $password = $_POST['passwordReg'];
+        if (isset($_POST['registerPass'])){
+            $password = $_POST['registerPass'];
         }
         if (($password == '') or ($password == null)){
             echo "Did you forget to write a password ?";

@@ -23,10 +23,10 @@
 		var url = "functionsPHP/authenticationFuncs.php";	// servlet to call..
 		if (type == "logout"){
 			var params = "logOut=1"; 
-		} else if (type == "login"){
-			var nameVal = document.getElementById("emailLogin").value;
-			var passVal = document.getElementById("passwordLogin").value;
-			var params = "loginName="+nameVal+"&loginPass="+passVal; 
+		} else if ((type == "login") || (type == "register")){
+			var nameVal = document.getElementById(type+"Email").value;
+			var passVal = document.getElementById(type+"Pass").value;
+			var params = type+"Name="+nameVal+"&"+type+"Pass="+passVal; 
 		}
 
 		xmlhttp.open("POST", url, true);

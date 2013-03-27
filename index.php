@@ -15,20 +15,15 @@
 <body>
 
 <p>Register</p>
-<!-- <form name="registerForm" action="index.php" method="POST"> -->
-    <input type="text" name="emailReg" id="emailReg">
-    <input type="text" name="passwordReg" id="passwordReg">
-    <button name='registerBtn'>Register</button>
-<!-- </form> -->
+    <input type="text" name="registerEmail" id="registerEmail">
+    <input type="text" name="registerPass" id="registerPass">
+    <button onClick="authenticate('register')" name='registerBtn'>Register</button>
 <p>Login</p>
-<!-- <form name="loginForm" action="index.php" method="POST"> -->
-
-    <input type="text" name="emailLogin" id="emailLogin">
-    <input type="password" name="passwordLogin" id="passwordLogin">
+    <input type="text" name="loginEmail" id="loginEmail">
+    <input type="password" name="loginPass" id="loginPass">
     <button onClick="authenticate('login')" name='loginBtn'>Login</button>
     <br>
 	<button onClick="authenticate('logout')" name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
-<!-- </form> -->
 
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/productPage.php">Dishwashers</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items">Test the Rest</a></p>
