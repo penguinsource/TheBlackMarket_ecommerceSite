@@ -20,7 +20,7 @@
 			}
 		}
 		
-		var url = "functionsPHP/authenticationFuncs.php";	// servlet to call..
+		var url = "functionsPHP/authenticationService.php";	// servlet to call..
 		if (type == "logout"){
 			var params = "logOut=1"; 
 		} else if ((type == "login") || (type == "register")){

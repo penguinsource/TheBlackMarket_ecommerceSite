@@ -1,18 +1,18 @@
 <?php
 	session_start();
 	// database file
-	$dbConfig = "../config.ini";
-	//$dbConfig = "../configLocal.ini";
+	//$dbConfig = "../config.ini";			// for remote db
+	$dbConfig = "../configLocal.ini";		// for local db
 	
 	if (isset($_POST["loginName"])){
 		loginUser();
 		if (isset($_SESSION["email"])){
-			echo $_SESSION["email"];
+			echo $_SESSION["email"];	// send back the email of the user logged in
 		}
 	} else if (isset($_POST["registerName"])){
 		registerUser();
 		if (isset($_SESSION["email"])){
-			echo $_SESSION["email"];
+			echo $_SESSION["email"];	// send back the email of the user logged in
 		}
 	} else if (isset($_POST["logOut"])){
 		logoutUser();
@@ -65,6 +65,15 @@
     function registerUser(){
        $con = connectToDB();
         
+		// ------------------------------------------------
+		// NEED TO CHECK IF THE USER REGISTERING IS ALREADY REGISTERED (SAME EMAIL)
+		// *****************************************************************
+		// *****************************************************************
+		// *****************************************************************
+		// *****************************************************************
+		// *****************************************************************
+		// *****************************************************************
+		
         // validate email; should no be null or have an incorrect format
         if (isset($_POST['registerName'])){
             $email = $_POST['registerName'];
