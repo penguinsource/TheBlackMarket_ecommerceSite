@@ -101,36 +101,30 @@
         $password = "";
         
         // grab the login email entered
-		if (isset($_POST["loginName"])){
+		if (isset($_POST["loginName"]) and ($_POST['loginName'] != "")){
 			$email = $_POST["loginName"];
         } else {
             echo "No username ? You need to register first !";
-            //die();
+            die();
         }
         
          // grab the login password entered
-		if (isset($_POST['loginPass'])){
+		if (isset($_POST['loginPass']) and ($_POST['loginPass'] != "")){
 			$password = $_POST['loginPass'];
-        } else if (!isset($_POST["loginPass"]) || ($_POST["loginPass"] == "")) {
+        } else {
             echo "Did you forget your password?";
-            //die();
+            die();
         }
-		//echo "pass= " . $_POST["loginPass"] . " end";
+		
         // query the email and password entered
         $loginQuery="SELECT * FROM user WHERE email = '$email' AND password = '$password'";
         
         $result = mysqli_query($con, $loginQuery);
         if (mysqli_num_rows($result) > 0){  // if true, then email and pass are correct
-            //session_start();            	// start a php session
             $_SESSION['email']=$email;  	// save the email of the user in the session
-            
-            if(isset($_SESSION['email'])){
-                //echo "<br>logging in ..<br>";
-                // tells php session is initiated
-            }
         } else{
             echo "Incorect user/pass";
-            // die();
+            die();
         }
         closeDBConnection($con);    		// close the database connection
     }

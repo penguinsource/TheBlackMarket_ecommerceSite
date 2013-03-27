@@ -24,7 +24,7 @@
 <!-- <form name="loginForm" action="index.php" method="POST"> -->
 
     <input type="text" name="emailLogin" id="emailLogin">
-    <input type="text" name="passwordLogin" id="passwordLogin">
+    <input type="password" name="passwordLogin" id="passwordLogin">
     <button onClick="authenticate('login')" name='loginBtn'>Login</button>
     <br>
 	<button onClick="authenticate('logout')" name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
