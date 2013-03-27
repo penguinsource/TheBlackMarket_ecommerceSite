@@ -4,18 +4,18 @@
 	// GLOBAL VARIABLES:
     //$url_path = "http://localhost/a3";
 	// local database vars
-    $host = "localhost";
+    /*$host = "localhost";
     $username = "root";
     $password = "";
     $database_name = "blackmarket";
+	*/
 	
-    /*
-	// remote database vars
-    $host = "mysql3.000webhost.com";
-    $username = "a4179199_blackma";
-    $password = "blackmarket5";
-    $database_name = "a4179199_blackma";
-    */
+	// NEW HOST: 
+	$host = "mysql10.000webhost.com";
+	$database_name = "a5900628_bmarket";
+	$username = "a5900628_bmarket";
+	$password = "blackmarket5";
+	// ----------------------------------
 	
 	if (isset($_POST["loginName"])){
 		loginUser();
@@ -29,6 +29,17 @@
 	}
 	
     function connectToDB(){
+	/*
+		global $host;
+		// reading database vars from file
+		$handle = fopen("../config.ini", 'r');
+		$parts = explode("  ", fgets($handle));
+		echo "line:" . $parts[1] . "\n";
+		$GLOBALS["host"] = $parts[1];
+		echo "line:" . $GLOBALS["host"] . "\n";
+		fclose($handle);
+		*/
+		
         // Create a connection to the database
         //$con = mysqli_connect("localhost","root","","410a3");
 		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
