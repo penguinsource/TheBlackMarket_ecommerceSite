@@ -1,8 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <?php include("functionsPHP/generalFuncs.php"); ?>
-<?php checkPage(); ?>
 
+<?php checkPage(); ?>
+<?php //session_destroy(); ?>
 <html>
   
 <head>
@@ -14,30 +15,35 @@
 <body>
 
 <p>Register</p>
-<form name="registerForm" action="index.php" method="POST">
+<!-- <form name="registerForm" action="index.php" method="POST"> -->
     <input type="text" name="emailReg" id="emailReg">
     <input type="text" name="passwordReg" id="passwordReg">
     <button name='registerBtn'>Register</button>
-</form>
+<!-- </form> -->
 <p>Login</p>
-<form name="loginForm" action="index.php" method="POST">
+<!-- <form name="loginForm" action="index.php" method="POST"> -->
+
     <input type="text" name="emailLogin" id="emailLogin">
     <input type="text" name="passwordLogin" id="passwordLogin">
-    <button name='loginBtn'>Login</button>
+    <button onClick="authenticate('login')" name='loginBtn'>Login</button>
     <br>
-    <button name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
-</form>
-
-<?php
-$_POST["id"]="someTest";
-?>
+	<button onClick="authenticate('logout')" name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
+<!-- </form> -->
 
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/productPage.php">Dishwashers</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items">Test the Rest</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
 
+<hr>
 
+<?php 
+	if (isset($_SESSION["email"])){
+		echo "<div id='userLoggedIn'>Logged in :".$_SESSION["email"]."</div>";
+	} else {
+		echo "<div id='userLoggedIn'>Logged in : Nobody is logged in.. </div>";
+	}
+?>
 
 <?php
 

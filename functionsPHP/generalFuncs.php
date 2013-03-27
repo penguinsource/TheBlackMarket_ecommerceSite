@@ -1,20 +1,19 @@
 <?php 
-    include 'authenticationFuncs.php';
     
     // GLOBAL VARIABLES:
-    /* $url_path = "http://localhost/a3";
+    //$url_path = "http://localhost/a3";
     $host = "localhost";
     $username = "root";
     $password = "";
-    $database_name = "410a3";
-    */
+    $database_name = "blackmarket";
     
+    /*
     // GLOBAL VARIABLES:
     $host = "mysql3.000webhost.com";
     $username = "a4179199_blackma";
     $password = "blackmarket5";
     $database_name = "a4179199_blackma";
-    
+    */
     function connectToDB(){
         // Create a connection to the database
         //$con = mysqli_connect("localhost","root","","410a3");
@@ -22,12 +21,13 @@
         // Check connection
         if (mysqli_connect_errno($con)){
                 echo "Failed to connect to MySQL: " . mysqli_connect_error();
+				
         }else{
-                //echo "Connection Successful !";
+                echo "Connection Successful !";
                 return $con;
         }
     }
-    
+	
     function closeDBConnection($con){
             mysqli_close($con);
     }
@@ -48,12 +48,16 @@
     
     function checkPage(){
         // start session if any..
-        session_start();
+		session_start();
+		
+		
         if(isset($_SESSION['email']) && !empty($_SESSION['email'])){
-          echo "<br>USER " . $_SESSION['email'] . " is logged in !<br>";
+		  //session_destroy();
+          //echo "<br>USER " . $_SESSION['email'] . " is logged in !<br>";
+		  
           // tells php session is initiated
         }
-        
+        /*
         // if a POST request was made ..
         if ($_SERVER["REQUEST_METHOD"] == 'POST'){
               if (isset($_POST["registerBtn"])){
@@ -63,7 +67,13 @@
               } else if (isset($_POST["logoutBtn"])){
                 logoutUser(); 
               }
-        }
+			  
+			  // ajax check if login is correct
+			  if (isset($_POST["loginName"])){
+				//loginUser();
+				echo ">> Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooogged in ! << ";
+			  }
+        }*/
     }
     
     

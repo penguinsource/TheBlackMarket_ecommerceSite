@@ -1,7 +1,53 @@
 <?php
-
+	session_start();
+	
+	// GLOBAL VARIABLES:
+    //$url_path = "http://localhost/a3";
+	// local database vars
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database_name = "blackmarket";
+	
+    /*
+	// remote database vars
+    $host = "mysql3.000webhost.com";
+    $username = "a4179199_blackma";
+    $password = "blackmarket5";
+    $database_name = "a4179199_blackma";
+    */
+	
+	if (isset($_POST["loginName"])){
+		loginUser();
+		if (isset($_SESSION["email"])){
+			echo $_SESSION["email"];
+		}
+	} else if (isset($_POST["logOut"])){
+		logoutUser();
+	} else {
+		echo "fail request POST";
+	}
+	
+    function connectToDB(){
+        // Create a connection to the database
+        //$con = mysqli_connect("localhost","root","","410a3");
+		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
+        // Check connection
+		
+        if (mysqli_connect_errno($con)){
+			//echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }else{
+			//echo "Connection Successful !";
+			return $con;
+        }
+    }
+	
+	function closeDBConnection($con){
+            mysqli_close($con);
+    }
+	
     function registerUser(){
-        $con = connectToDB();
+       $con = connectToDB();
         
         // validate email; should no be null or have an incorrect format
         if (isset($_POST['emailReg'])){
@@ -49,46 +95,44 @@
     }
     
     function loginUser(){
+		
         $con = connectToDB();   // connect to the database
-        
         $email = "";
         $password = "";
         
         // grab the login email entered
-        if (isset($_POST['emailLogin'])){
-            $email = $_POST['emailLogin'];
+		if (isset($_POST["loginName"])){
+			$email = $_POST["loginName"];
         } else {
             echo "No username ? You need to register first !";
-            die();
+            //die();
         }
         
          // grab the login password entered
-        if (isset($_POST['passwordLogin'])){
-            $password = $_POST['passwordLogin'];
-        } else {
+		if (isset($_POST['loginPass'])){
+			$password = $_POST['loginPass'];
+        } else if (!isset($_POST["loginPass"]) || ($_POST["loginPass"] == "")) {
             echo "Did you forget your password?";
-            die();
+            //die();
         }
-        
+		//echo "pass= " . $_POST["loginPass"] . " end";
         // query the email and password entered
         $loginQuery="SELECT * FROM user WHERE email = '$email' AND password = '$password'";
         
         $result = mysqli_query($con, $loginQuery);
         if (mysqli_num_rows($result) > 0){  // if true, then email and pass are correct
-            echo "<br> logged in !";
-            //session_start();            // start a php session
-            $_SESSION['email']=$email;  // save the email of the user in the session
+            //session_start();            	// start a php session
+            $_SESSION['email']=$email;  	// save the email of the user in the session
             
             if(isset($_SESSION['email'])){
-                echo "<br>logging in ..<br>";
+                //echo "<br>logging in ..<br>";
                 // tells php session is initiated
             }
         } else{
             echo "Incorect user/pass";
             // die();
         }
-        
-        closeDBConnection($con);    // close the database connection
+        closeDBConnection($con);    		// close the database connection
     }
     
     function logoutUser(){
