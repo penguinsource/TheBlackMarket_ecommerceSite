@@ -27,10 +27,21 @@
     <br>
     <button name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
 </form>
+
+<?php
+$_POST["id"]="someTest";
+?>
+
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/productPage.php">Dishwashers</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items">Test the Rest</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
+
 
 
 <?php
+
+
 /*$url = "http://localhost/TheBlackMarket_ecommerceSite/productPage/3322";
 $response = file_get_contents($url);
 echo $response;

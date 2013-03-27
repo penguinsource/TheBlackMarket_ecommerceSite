@@ -9,13 +9,20 @@
 
 <?php
 
+echo "id is: ". $_POST["id"] ."<br><br>";
+
 echo "Hello from Blah !";
 // this should be the page that displays products (of any category)
 
 if (isset($_GET["productsType"])){
 	// display ..
 	// call the products of type 'productsType' from database
-	
+	echo "GET productsType is: ".$_GET["productsType"] . "<br>";
+}
+if (isset($_POST["productsType"])){
+	// display ..
+	// call the products of type 'productsType' from database
+	echo "GET productsType is: ".$_POST["productsType"] . "<br>";
 }
 
 //not really tested, treat as pseudocode
