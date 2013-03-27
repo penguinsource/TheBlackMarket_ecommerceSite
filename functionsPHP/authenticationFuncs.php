@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	// database file
-	$dbFile = "../config.ini";
+	$dbConfig = "../config.ini";
 	//$dbConfig = "../configLocal.ini";
 	
 	if (isset($_POST["loginName"])){
@@ -22,12 +22,10 @@
 	
     function connectToDB(){
 		getDBvars();	// get the vars to connect to the database
-		
         // Create a connection to the database
         //$con = mysqli_connect("localhost","root","","410a3");
 		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
         // Check connection
-		
         if (mysqli_connect_errno($con)){
 			//echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }else{
