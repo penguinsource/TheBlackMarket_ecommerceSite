@@ -38,7 +38,6 @@
 		echo "<div id='userLoggedIn'>Logged in : Nobody is logged in.. </div>";
 	}
 ?>
-
 <?php
 
 
