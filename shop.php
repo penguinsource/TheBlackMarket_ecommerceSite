@@ -6,9 +6,9 @@
 <html>
 
 <head>
-	<style type="text/css">
+	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
-	</style>
+	</style>-->
 	<LINK REL=STYLESHEET HREF="design/shop.css" TYPE="text/CSS">
 </head>
 
@@ -54,20 +54,9 @@ echo "parts: " . $parts[3] . " <br>"; */
 <div class='main'>
 	<div class='sidemenu'>
         <?php printCategories($con, $category); ?>
-        <div class ='menuitem'>Dishwashers</div>
-        <div class ='selmenuitem'>Penises</div>
-        <div class ='menuitem'>Vaginas</div>
     </div>
     
     <div class='body'>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
         hi penis<br>
         hi penis<br>
         hi penis<br>

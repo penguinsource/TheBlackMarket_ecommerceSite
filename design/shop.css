@@ -2,9 +2,11 @@ body {
     background-image:url('snow.png');
     margin: 0;
     padding: 0;
+    font-family: "Open Sans",Verdana,sans-serif;
 }
 
 .main {
+    position: relative;
 	background-color: white;
 	width: 1000px;
 	margin-left: auto ;
@@ -16,23 +18,60 @@ body {
 }
 
 .sidemenu {
-    float: left;
-    width:300px;
-    height: 100%;
-    
-    display:inline;
+    width:230px;
+    top: 15px;
 }
 
+.sidemenu a:link {text-decoration:none;color:#000000;}
+.sidemenu a:visited {text-decoration:none;color:#000000;}
+.sidemenu a:hover {text-decoration:none;color:#000000;}
+.sidemenu a:active {text-decoration:none;color:#000000;}
+
 .menuitem {
-    height: 30px;
-    background-color: #FAFAFA;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 20px;
+    margin-left: 40px;    
+    
+    /* css dradient */ 
+    background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+    background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #F8F8F8));
+    background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+    background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F8F8F8 100%);
+    
+    /* border */
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-color: #E8E8E8;
+    
 }
 
 .selmenuitem {
-    height: 30px;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 20px;
+    margin-left: 40px;
     background-color: white;
+    
+    /* border */
+    border-top:1px solid;
+    border-left:1px solid;
+    border-color: #E8E8E8;
+}
+
+.menuitembottom{
+    /* border */
+    border-bottom: 1px solid;
+    border-color: #E8E8E8;
+    
 }
 
 .body {
-    width: auto;
+    position: absolute;
+    width: 650px;
+    
+    top: 10px;
+	right: 10px;
+	bottom: 10px;
 }
