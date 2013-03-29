@@ -24,10 +24,13 @@
     <br>
 	<button onClick="authenticate('logout')" name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
 
-<p><a href="http://localhost/TheBlackMarket_ecommerceSite/productPage.php">Dishwashers</a></p>
+<div name="categoryName" id="categoryName" class="hidden"></div>
+<p><a href="shop.php?category=dishwashers">Dishwashers</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/shop.php?category=dishwashers">Dishwashers local</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items">Test the Rest</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
+
 <p> login: buddy@yahoo.com / pass: buddy@yahoo.com
 <hr>
 
