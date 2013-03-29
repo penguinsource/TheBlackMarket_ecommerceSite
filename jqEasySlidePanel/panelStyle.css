@@ -3,7 +3,7 @@ outline: none;
 }
 a.trigger{
 	position: absolute;
-	background:#666 url(images/plus.png) 6% 55% no-repeat;
+	background:#000 url(images/plus.png) 6% 55% no-repeat;
 	text-decoration: none;
 	font-size: 16px;
 	letter-spacing:-1px;
@@ -11,6 +11,7 @@ a.trigger{
 	color:#fff;
 	padding:4px 12px 6px 24px;
 	font-weight: bold;
+	height: 15px;
 	
 	z-index:2;
 }
@@ -33,7 +34,7 @@ a.trigger.right {
 	-webkit-border-top-left-radius: 5px;
 }
 a.trigger:hover {
-	background-color:#59B;
+	color:#59B;
 }
 a.active.trigger {
   display: none;

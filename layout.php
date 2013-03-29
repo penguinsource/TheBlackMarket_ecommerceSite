@@ -72,7 +72,15 @@
     </div>
 
     <div id="content">
-      <div id="store">
+      <div id="store">      
+        <div id="topmenu">
+          <div id="logo">
+            <img src="BM_LOGO.png" />
+          </div>
+          <div id="nlogo">              
+            <p>mihai eats babies</p>
+          </div>
+        </div>      
 	      <p>middle content type shit</p>
       </div>
 
