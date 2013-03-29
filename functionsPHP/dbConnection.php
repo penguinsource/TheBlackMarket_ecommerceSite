@@ -1,8 +1,8 @@
 <?php
     // database file
-    $dbConfig = "../config.ini";	       // for remote db
-    //$dbConfig = "../configLocal.ini";	       // for local db
-    //$dbConfig = "../configVM.ini";	       // for VM db
+    //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/config.ini";	       // for remote db
+    //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configLocal.ini";	       // for local db
+    $dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
 		getDBvars();	// get the vars to connect to the database
@@ -11,11 +11,10 @@
 		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
         // Check connection
         if (mysqli_connect_errno($con)){
-			//echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                        echo "<script>alert(\"fail\");</script>";
+	    echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }else{
-			//echo "Connection Successful !";
-			return $con;
+	    echo "Connection Successful !";
+            return $con;
         }
     }
 	

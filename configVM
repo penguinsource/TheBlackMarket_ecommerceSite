@@ -1,4 +1,4 @@
-host = localhost
+host = localhost:41062
 username = root
 password = blackmarket
 database_name = blackmarket

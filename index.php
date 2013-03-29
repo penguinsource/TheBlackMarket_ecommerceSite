@@ -46,6 +46,8 @@
 
 <?php
 
+echo "connect to db:";
+$con = connectToDB();
 //curl -X POST -d '{"name":"Name for your market","url":"http://cs410-XX.cs.ualberta.ca/yourapipath"}'
 //http://cs410.cs.ualberta.ca:42001/registration/markets --header "Content-Type:application/json";
 
