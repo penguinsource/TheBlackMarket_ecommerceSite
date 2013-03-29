@@ -1,8 +1,8 @@
 <?php
     // database file
-    $dbConfig = "../config.ini";			// for remote db
-    //$dbConfig = "../configLocal.ini";		        // for local db
-        
+    $dbConfig = "../config.ini";		// for remote db
+    //$dbConfig = "../configLocal.ini";	       // for local db
+    
     function connectToDB(){
 		getDBvars();	// get the vars to connect to the database
         // Create a connection to the database
