@@ -5,6 +5,7 @@
     $dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
+        echo "connecting to db..";
 		getDBvars();	// get the vars to connect to the database
         // Create a connection to the database
         //$con = mysqli_connect("localhost","root","","410a3");
