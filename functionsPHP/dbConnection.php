@@ -1,20 +1,20 @@
 <?php
     // database file
-    //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/config.ini";	       // for remote db
+    $dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/config.ini";	       // for remote db
     //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configLocal.ini";	       // for local db
-    $dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configVM.ini";	       // for VM db
+    //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
-        echo "connecting to db..";
+        //echo "connecting to db..";
 		getDBvars();	// get the vars to connect to the database
         // Create a connection to the database
         //$con = mysqli_connect("localhost","root","","410a3");
-		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
+	$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
         // Check connection
         if (mysqli_connect_errno($con)){
-	    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	    //echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }else{
-	    echo "Connection Successful !";
+	    //echo "Connection Successful !";
             return $con;
         }
     }
