@@ -48,7 +48,7 @@
       <div id="title">
 	      <!--<h1>BLACK MARKET BITCHES</h1>-->
       </div>
-			<a href="#" id="trigger2" class="trigger right"> Login/Register</a>
+			<a href="#" id="trigger2" class="trigger right">Login/Register</a>
       <div id="loginPanel" class="panel right">
 			  <table>
 			    <tr>

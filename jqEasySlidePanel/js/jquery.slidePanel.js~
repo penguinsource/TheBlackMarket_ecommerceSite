@@ -42,10 +42,12 @@
 		panel.css('opacity', opts.panelOpacity);
 		
 		// triggerName mousedown event
-		trigger.attr( "href", "javascript:void(0)" ).mousedown(function() {		
+		trigger.attr( "href", "javascript:void(0)" ).mousedown(function() {
+		
 		  panel.animate({ width: '200px' }, 500);
 		  trigger.toggleClass("active");
-		  return false;		
+		  return false;
+		
 		});
 	
 		if (opts.clickOutsideToClose) {
