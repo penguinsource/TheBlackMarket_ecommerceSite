@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <?php include("functionsPHP/generalFuncs.php"); ?>
-<?php include("functionsPHP/dbConnection.php"); ?>
+<?php //include("functionsPHP/dbConnection.php"); ?>
 <?php checkPage(); ?>
 <html>
   
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<script>alert("wtf");</script>
+
 <p>Register</p>
     <input type="text" name="registerEmail" id="registerEmail">
     <input type="text" name="registerPass" id="registerPass">

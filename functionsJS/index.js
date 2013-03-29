@@ -1,6 +1,5 @@
 	
 	function authenticate(type){
-		alert("hi");/*
 		//alert("type of req:" + type + ", value:" + document.getElementById("name").value);
 		var xmlhttp;
 		if (window.XMLHttpRequest){	// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -20,7 +19,6 @@
 				}
 			}
 		}
-		
 		var url = "functionsPHP/authenticationService.php";	// servlet to call..
 		if (type == "logout"){
 			var params = "logOut=1"; 
@@ -34,7 +32,7 @@
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
 		xmlhttp.setRequestHeader("Content-length", params.length); 
 		xmlhttp.setRequestHeader("Connection", "close"); 
-		xmlhttp.send(params);*/
+		xmlhttp.send(params);
 	}
 	
 	function checkMarkets(){

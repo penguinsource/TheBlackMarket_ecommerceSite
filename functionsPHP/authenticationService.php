@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	include("functionsPHP/dbConnection.php");
-	
+	include("dbConnection.php");
+
 	if (isset($_POST["loginName"])){
 		loginUser();
 		if (isset($_SESSION["email"])){
@@ -9,7 +9,6 @@
 		}
 	} else if (isset($_POST["registerName"])){
 		registerUser();
-		echo "registering";
 		if (isset($_SESSION["email"])){
 			echo $_SESSION["email"];	// send back the email of the user logged in
 		}
@@ -18,7 +17,7 @@
 	} else {
 		echo "fail request POST! see file authenticationFuncs.php";	// incorrect POST request sent here..
 	}
-	
+
     function registerUser(){
        $con = connectToDB();
         

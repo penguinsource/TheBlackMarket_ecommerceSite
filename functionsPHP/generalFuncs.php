@@ -1,5 +1,5 @@
-<?php
-
+<?php 
+    /*    
     // NOT IMPLEMENTED PROPERLY -- :
     function checkLogin(){
         if (!isset($_COOKIE['name'])){
@@ -9,7 +9,7 @@
         }
         return true;
     }
-    
+    */
     function redirect($url){
         header("Location: " . $url);
     }
