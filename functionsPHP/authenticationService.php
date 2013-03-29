@@ -9,6 +9,7 @@
 		}
 	} else if (isset($_POST["registerName"])){
 		registerUser();
+		echo "registering";
 		if (isset($_SESSION["email"])){
 			echo $_SESSION["email"];	// send back the email of the user logged in
 		}

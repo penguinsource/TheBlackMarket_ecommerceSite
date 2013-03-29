@@ -1,5 +1,6 @@
 	
 	function authenticate(type){
+		alert("hi");/*
 		//alert("type of req:" + type + ", value:" + document.getElementById("name").value);
 		var xmlhttp;
 		if (window.XMLHttpRequest){	// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -33,7 +34,7 @@
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
 		xmlhttp.setRequestHeader("Content-length", params.length); 
 		xmlhttp.setRequestHeader("Connection", "close"); 
-		xmlhttp.send(params);
+		xmlhttp.send(params);*/
 	}
 	
 	function checkMarkets(){
@@ -71,4 +72,3 @@
 		xmlhttp.send(params);
 	}
 	
-	http://cs410.cs.ualberta.ca:42001/registration/markets

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-
+<script>alert("wtf");</script>
 <p>Register</p>
     <input type="text" name="registerEmail" id="registerEmail">
     <input type="text" name="registerPass" id="registerPass">
@@ -33,7 +33,7 @@
 
 <button onClick="checkMarkets()" name="markets" class="visible">Markets !</button>
 
-<p> login: buddy@yahoo.com / pass: buddy@yahoo.com
+<p> aaaaalogin: buddy@yahoo.com / pass: buddy@yahoo.com
 <hr>
 
 <?php // check if any user is logged in
