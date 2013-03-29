@@ -31,6 +31,8 @@
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
 
+<button onClick="checkMarkets()" name="markets" class="visible">Markets !</button>
+
 <p> login: buddy@yahoo.com / pass: buddy@yahoo.com
 <hr>
 
@@ -41,8 +43,11 @@
 		echo "<div id='userLoggedIn'>Logged in : Nobody is logged in.. </div>";
 	}
 ?>
+
 <?php
 
+//curl -X POST -d '{"name":"Name for your market","url":"http://cs410-XX.cs.ualberta.ca/yourapipath"}'
+//http://cs410.cs.ualberta.ca:42001/registration/markets --header "Content-Type:application/json";
 
 /*$url = "http://localhost/TheBlackMarket_ecommerceSite/productPage/3322";
 $response = file_get_contents($url);
