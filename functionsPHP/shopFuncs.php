@@ -10,6 +10,10 @@ function printCategories($con, $selected){
     while($row = mysqli_fetch_array($result)) {
         $name = $row['name'];
 		if ($name == $selected) break;
+		if ($selIndex == $number) {
+			$selIndex = -1;
+			break;
+		}
         $selIndex++;
     }
     
@@ -24,7 +28,7 @@ function printCategories($con, $selected){
         $imgpre = ($i == ($selIndex - 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-br.png'>" : "";
         $imgpost = ($i == ($selIndex + 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-tr.png'>" : "";
         echo "";
-        echo "<a href='shop.php?category=$name'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
+        echo "<a href='shop/$name'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
         $i++;
     }
 }

@@ -1,0 +1,11 @@
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^shop/(.+)/?$ shop.php?category=$1
+RewriteRule ^shop/.*$ - 
+RewriteRule ^api/products/([0-9]+)/?$ api/products.php?id=$1
+RewriteRule ^products/([0-9]+)/?$ products.php?id=$1
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php

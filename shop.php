@@ -2,14 +2,18 @@
 <?php include("functionsPHP/generalFuncs.php"); ?>
 <?php include("functionsPHP/shopFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
-<?php checkPage(); ?>
+<?php 
+	checkPage(); 
+	$baseURL = "http://" . $_SERVER[HTTP_HOST] . "/";
+?>
 <html>
 
 <head>
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
-	<LINK REL=STYLESHEET HREF="design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	<base href="//blackmarket5.hostei.com" />
 </head>
 
 <body>
