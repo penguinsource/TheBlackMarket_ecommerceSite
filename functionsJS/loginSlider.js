@@ -1,18 +1,4 @@
-/* jQuery slidePanel plugin
- * Examples and documentation at: http://www.jqeasy.com/
- * Version: 1.0 (22/03/2010)
- * No license. Use it however you want. Just keep this notice included.
- * Requires: jQuery v1.3+
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
+// jQuery sliding bar
 (function ($) {
   $.fn.slidePanel = function (opts) {
     opts = $.extend({
@@ -51,9 +37,9 @@
     if (opts.clickOutsideToClose) {
       // bind the 'mousedown' event to the document so we can close panel without having to click triggerName
       $(document).bind('mousedown', function () {
-        panel.css('width', '80px');   
+        panel.css('width', '80px');
         panel.hide(opts.speed);
-        trigger.removeClass('active');        
+        trigger.removeClass('active');
         document.getElementById('passconf').setAttribute("style", "display: none");
       });
 
@@ -66,14 +52,28 @@
 })(jQuery);
 
 
+// button functions and setup
 
+// pushes the login button
+$(document).ready(function () {
+  $("#blogin").click(function () {
+    // nothing yet
+  });
 
+  // pushes the register button  
+  $("#bregister").click(function () {
+    document.getElementById('passconf').setAttribute("style", "display: block");
+    $('#loginPanel').animate({ width: '230px' });
 
+    // add checks 
+  });
+});
 
-
-
-
-
-
-
-
+// set up the sliding panel
+$(document).ready(function () {
+  $('#loginPanel').slidePanel({
+    triggerName: '#trigger2',
+    triggerTopPos: '0px',
+    panelTopPos: '0px'
+  });
+});

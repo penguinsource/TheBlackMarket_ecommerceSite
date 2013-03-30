@@ -1,9 +1,9 @@
 a:focus {
-outline: none;
+  outline: none;
 }
 a.trigger{
 	position: absolute;
-	background:url(images/gun.png) 6% 55% no-repeat;
+	background:url(gun.png) 6% 55% no-repeat;
 	text-decoration: none;
 	font-size: 16px;
 	letter-spacing:-1px;

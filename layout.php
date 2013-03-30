@@ -5,38 +5,14 @@
   
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
   <link href="design.css" rel="Stylesheet" type="text/css">
-  <link href="jqEasySlidePanel/panelStyle.css" rel="Stylesheet" type="text/css">
+	<link href="design/stickybar.css" rel="Stylesheet" type="text/css">
+  <link href="design/loginSlider.css" rel="Stylesheet" type="text/css">
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="jqEasySlidePanel/js/jquery.slidePanel.js"></script>
-
-  <script language="javascript" type="text/javascript">
-  
-  // pushes the login button
-  $(document).ready(function() {
-    $("#blogin").click(function() {
-
-    });
-    
-  // pushes the register button  
-	$("#bregister").click(function() {
-	    document.getElementById('passconf').setAttribute("style", "display: block");
-			$('#loginPanel').animate({width: '230px'});
-		});
-  });  
-  
-  // set up the sliding panel
-	$(document).ready(function(){
-		$('#loginPanel').slidePanel({
-			triggerName: '#trigger2',
-			triggerTopPos: '0px',
-			panelTopPos: '0px'
-		});
-	});
-	</script>
-
+	<script type="text/javascript" src="functionsJS/loginSlider.js"></script>
 </head>
 
 <body>
@@ -49,7 +25,7 @@
 				</tr>
 			</table>
     </div>
-    <div id="nlogo">
+    <div id="nlogin">
 			<a href="#" id="trigger2" class="trigger right"> Login/Register</a>
       <div id="loginPanel" class="panel right">
 			  <table>

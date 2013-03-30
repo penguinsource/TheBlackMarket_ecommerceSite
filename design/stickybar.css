@@ -1,0 +1,37 @@
+#header {
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    background: linear-gradient(to right, white, black); 
+    width: 100%;
+    height: 30px;
+    top: 0;
+}
+
+#stickymenu 
+{
+    float: left;
+    height: 30px;
+    width: auto;  
+}
+
+#stickymenu a 
+{
+  padding: 10px 10px 9px 15px;
+  text-decoration: none;
+  font-variant: small-caps;
+  font-weight: bolder;
+  color: Black; 
+}
+
+#stickymenu a:hover
+{
+  color: white;
+  background-color: Black;
+}
+
+
+#nlogin {
+    float: auto;
+    width: auto;
+}
