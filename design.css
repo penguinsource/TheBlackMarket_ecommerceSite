@@ -19,6 +19,26 @@ h1 {
     top: 0;
 }
 
+#stickymenu 
+{
+    float: left;
+    height: 30px;
+    width: auto;  
+}
+
+#stickymenu a 
+{
+  text-decoration: none;
+  font-variant: small-caps;
+  font-weight: bolder;
+  color: Black; 
+}
+
+#stickymenu a:hover
+{
+  color: #666; 
+}
+
 #logo {
     float: left;
     height: 30px;

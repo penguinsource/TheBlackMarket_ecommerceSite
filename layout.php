@@ -41,15 +41,15 @@
 
 <body>
   <div id="header">
-    <div id="logo">
+    <div id="stickymenu">
       <table border="0">
-				<tr><td>ITEM1</td></tr>
+				<tr>
+					<td><a href="#">Home</a></td>
+					<td><a href="#">Shop</a></td>
+				</tr>
 			</table>
     </div>
     <div id="nlogo">
-      <div id="title">
-	      <!--<h1>BLACK MARKET BITCHES</h1>-->
-      </div>
 			<a href="#" id="trigger2" class="trigger right"> Login/Register</a>
       <div id="loginPanel" class="panel right">
 			  <table>
@@ -77,7 +77,7 @@
       <div id="store">      
         <div id="topmenu">
           <div id="logo">
-            <img src="BM_LOGO.png" />
+            <img src="design/BM_LOGO.png" />
           </div>
           <div id="nlogo">              
             <p>mihai eats babies</p>

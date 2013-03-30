@@ -53,9 +53,7 @@
       $(document).bind('mousedown', function () {
         panel.css('width', '80px');   
         panel.hide(opts.speed);
-        trigger.removeClass('active');
-
-        
+        trigger.removeClass('active');        
         document.getElementById('passconf').setAttribute("style", "display: none");
       });
 
