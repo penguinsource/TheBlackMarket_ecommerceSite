@@ -10,6 +10,7 @@
 	<link href="design/stickybar.css" rel="Stylesheet" type="text/css">
   <link href="design/loginSlider.css" rel="Stylesheet" type="text/css">
 	<link href="design/searchBar.css" rel="Stylesheet" type="text/css">
+	<link href="design/topMenu.css" rel="Stylesheet" type="text/css">
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -57,28 +58,28 @@
 
         <div id="topMenu">
           <div id="topMenuLogo">
-            <img src="design/BM_LOGO.png" />						
-          </div>
-
-          <div id="topMenuOpts"> 
+            <img src="design/BM_LOGO.png" />		
+					</div>				
+						
+					<div id="topMenuOpts"> 
 						<div id="topMenuSearch">
-							<div id="search"><input type="text" placeholder="Search"></input></div>
-						</div>          
-						   
+							<div id="search"><input type="text" placeholder="Search..."></input></div>
+						</div>    
+
             <table border='0'>
+							<tr><td></td></tr>
 							<tr>
-								<td><a href="#">Home</a></td>
+								<td><a href="#" class="active">Home</a></td>
 								<td><a href="#">Categories</a></td>
 								<td><a href="#">Order Products</a></td>
 								<td><a href="#">Advanced Search</a></td>
 								<td><a href="#">Contact Us</a></td>
 							</tr>
 						</table>
-          </div>
-					
-        </div>      
-
-	      <p>middle content type shit</p>
+          </div>					         
+        </div>
+					                
+	      <p>if we assume this is a home page</p>
       </div>
 
       <div id="rightcolumn">
