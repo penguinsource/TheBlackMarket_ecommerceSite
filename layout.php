@@ -9,6 +9,7 @@
   <link href="design.css" rel="Stylesheet" type="text/css">
 	<link href="design/stickybar.css" rel="Stylesheet" type="text/css">
   <link href="design/loginSlider.css" rel="Stylesheet" type="text/css">
+	<link href="design/searchBar.css" rel="Stylesheet" type="text/css">
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -45,25 +46,43 @@
   </div>
 
   <div id="page">
-    <div id="nav">      
-      <p>some random nav bar</p>
+
+    <div id="leftcolumn">      
+      <p>left side</p>
     </div>
 
-    <div id="content">
-      <div id="store">      
-        <div id="topmenu">
-          <div id="logo">
-            <img src="design/BM_LOGO.png" />
+    <div id="contentwrapper">
+
+      <div id="middlecolumn">      
+
+        <div id="topMenu">
+          <div id="topMenuLogo">
+            <img src="design/BM_LOGO.png" />						
           </div>
-          <div id="nlogo">              
-            <p>mihai eats babies</p>
+
+          <div id="topMenuOpts"> 
+						<div id="topMenuSearch">
+							<div id="search"><input type="text" placeholder="Search"></input></div>
+						</div>          
+						   
+            <table border='0'>
+							<tr>
+								<td><a href="#">Home</a></td>
+								<td><a href="#">Categories</a></td>
+								<td><a href="#">Order Products</a></td>
+								<td><a href="#">Advanced Search</a></td>
+								<td><a href="#">Contact Us</a></td>
+							</tr>
+						</table>
           </div>
+					
         </div>      
+
 	      <p>middle content type shit</p>
       </div>
 
-      <div id="userbar">
-	      <p>user bar content</p>
+      <div id="rightcolumn">
+	      <p>right side</p>
       </div>
     </div>
     
