@@ -35,11 +35,11 @@ body {
     margin-left: 40px;    
     
     /* css dradient */ 
-    background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
-    background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
-    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #F8F8F8));
-    background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
-    background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F8F8F8 100%);
+    background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #F2F2F2));
+    background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F2F2F2 100%);
     
     /* border */
     border-top: 1px solid;
