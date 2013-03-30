@@ -72,6 +72,7 @@ body {
 .body {
     position: absolute;
     width: 750px;
+	color: #919191;
     
     top: 10px;
 	right: 0px;

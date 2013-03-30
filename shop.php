@@ -57,10 +57,7 @@ echo "parts: " . $parts[3] . " <br>"; */
     </div>
     
     <div class='body'>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
-        hi penis<br>
+        Lorem Impsum Shmipsum Dipsum
 
     </div>
 </div>
