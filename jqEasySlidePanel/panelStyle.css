@@ -3,7 +3,7 @@ outline: none;
 }
 a.trigger{
 	position: absolute;
-	background:#000 url(images/plus.png) 6% 55% no-repeat;
+	background:url(images/gun.png) 6% 55% no-repeat;
 	text-decoration: none;
 	font-size: 16px;
 	letter-spacing:-1px;
@@ -34,22 +34,20 @@ a.trigger.right {
 	-webkit-border-top-left-radius: 5px;
 }
 a.trigger:hover {
-	color:#59B;
+	color:#666;
 }
 a.active.trigger {
   display: none;
-	background:#000 url(images/minus.png) 6% 55% no-repeat;
-	color: #000;
+	background:url(images/minus.png) 6% 55% no-repeat;
 	height: 15px;
 	position: relative;
-	right: -125px;
+
 }
 .panel {
 	color:#CCC;
 	position: absolute;
 	display: none;
-	background: #000000;
-	width: 0px;
+	width: 80px;
 	height: auto;
 	z-index:1;
 }

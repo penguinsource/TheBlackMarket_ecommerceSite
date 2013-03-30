@@ -23,7 +23,7 @@
   // pushes the register button  
 	$("#bregister").click(function() {
 	    document.getElementById('passconf').setAttribute("style", "display: block");
-			$('#loginPanel').animate({ width: '400px' }, 500);			
+			$('#loginPanel').animate({width: '230px'});
 		});
   });  
   
@@ -42,7 +42,9 @@
 <body>
   <div id="header">
     <div id="logo">
-      <!-- no logo that fits -->
+      <table border="0">
+				<tr><td>ITEM1</td></tr>
+			</table>
     </div>
     <div id="nlogo">
       <div id="title">
