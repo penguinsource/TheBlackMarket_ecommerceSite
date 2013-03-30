@@ -21,11 +21,18 @@ body {
 .sidemenu {
     width:230px;
     top: 15px;
+	
+	/* css dradient */ 
+    background-image: -ms-linear-gradient(left, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: -moz-linear-gradient(left, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: -webkit-gradient(linear, left, right, color-stop(0, #FFFFFF), color-stop(1, #F2F2F2));
+    background-image: -webkit-linear-gradient(left, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: linear-gradient(to right, #FFFFFF 0%, #F2F2F2 100%);
 }
 
 .sidemenu a:link {text-decoration:none;color:#919191;}
 .sidemenu a:visited {text-decoration:none;color:#919191;}
-.sidemenu a:hover {text-decoration:none;color:#057D9F;}
+.sidemenu a:hover {text-decoration:none;color:#000000;}
 .sidemenu a:active {text-decoration:none;color:#919191;}
 
 .menuitem {
@@ -35,11 +42,11 @@ body {
     margin-left: 40px;    
     
     /* css dradient */ 
-    background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
+    /*background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
     background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
     background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #F2F2F2));
     background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #F2F2F2 100%);
-    background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F2F2F2 100%);
+    background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F2F2F2 100%);*/
     
     /* border */
     border-top: 1px solid;
@@ -60,6 +67,15 @@ body {
     border-top:1px solid;
     border-left:1px solid;
     border-color: #E8E8E8;
+}
+
+.menuhover {
+	background-color: rgba(5, 125, 159, .5); #057D9F;
+	/*background-image: -ms-linear-gradient(top left, #C2E0FF 0%, #3399FF 100%);
+    background-image: -moz-linear-gradient(top left, #C2E0FF 0%, #3399FF 100%);
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #C2E0FF), color-stop(1, #3399FF));
+    background-image: -webkit-linear-gradient(top left, #C2E0FF 0%, #3399FF 100%);
+    background-image: linear-gradient(to bottom right, #C2E0FF 0%, #3399FF 100%);*/
 }
 
 .menuitembottom{
