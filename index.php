@@ -45,7 +45,7 @@
 ?>
 
 <?php
-
+echo "server " . $_SERVER['HTTP_HOST'];
 // echo "connect to db:";
 // $con = connectToDB();
 

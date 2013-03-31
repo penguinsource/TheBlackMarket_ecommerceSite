@@ -1,8 +1,8 @@
 <?php
     // database file
-    $dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/config.ini";	       // for remote db
-    //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configLocal.ini";	       // for local db
-    //$dbConfig = "http://" . $_SERVER[HTTP_HOST] . "/configVM.ini";	       // for VM db
+    $dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
+    //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/configLocal.ini";	       // for local db
+    //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
         //echo "connecting to db..";
