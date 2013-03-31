@@ -110,12 +110,16 @@ a:active {text-decoration:none;color:#919191;}
 
 .product {
 	display:inline-block;
-	border-right: 1px solid;
-    border-color: #E4E4E4;
-	
-	width: 169px;
+	vertical-align: top;
+		
+	width: 168px;
 	padding-left:7px;
 	padding-right:7px;
+}
+
+.product-rightborder{
+	border-right: 1px solid;
+    border-color: #E4E4E4;
 }
 
 .product-name {

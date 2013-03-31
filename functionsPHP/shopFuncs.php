@@ -9,7 +9,8 @@ function printCategories($con, $selected){
     
     while($row = mysqli_fetch_array($result)) {
         $name = $row['name'];
-		if ($name == $selected) break;
+		$id = $row['id'];
+		if ($id == $selected) break;
 		if ($selIndex == $number) {
 			$selIndex = -1;
 			break;
@@ -22,14 +23,15 @@ function printCategories($con, $selected){
     $i = 1;
     while($row = mysqli_fetch_array($result)) {
 		$name = $row['name'];
-        $class1 = ($name == $selected) ? "selmenuitem" : "menuitem";
+		$id = $row['id'];
+        $class1 = ($id == $selected) ? "selmenuitem" : "menuitem";
         $class2 = ($i == $number) ? " menuitembottom" : "";
 		$class3 = ($i == 1) ? "" : " menuitemtopborder";
         $class = $class1 . $class2 . $class3;
         $imgpre = ($i == ($selIndex - 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-br.png'>" : "";
         $imgpost = ($i == ($selIndex + 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-tr.png'>" : "";
         echo "";
-        echo "<a href='shop/$name'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
+        echo "<a href='shop/$id'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
         $i++;
     }
 }

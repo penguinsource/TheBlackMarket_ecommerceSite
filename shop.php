@@ -4,7 +4,7 @@
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php 
 	checkPage(); 
-	$baseURL = "http://" . $_SERVER[HTTP_HOST] . "/";
+	$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
 ?>
 <html>
 
@@ -36,7 +36,11 @@
 
 <?php
     $con = connectToDB();
-    $category = $_GET["category"];
+	if (isset($_GET["category"])){	
+		$category = $_GET["category"];
+	} else {
+		$category = null;
+	}
 ?>
 </body>
 
@@ -49,7 +53,7 @@
 		</div>
 		
 		<div class='body'>		
-			<div class='product'>
+			<div class='product product-rightborder'>
 				<img class='imgthumb' src='images/c000002.jpg'>
 				<p class='product-name'><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</b></p>
 				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000002'>[+]</a></p>
@@ -57,7 +61,7 @@
 				
 			</div>
 			
-			<div class='product'>
+			<div class='product product-rightborder'>
 				<img class='imgthumb' src='images/c000001.jpg'>
 				<p class='product-name'><b>LG Tall Tub Built-In Dishwasher</b></p>
 				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000001'>[+]</a></p>
@@ -65,7 +69,7 @@
 			</div>	
 			
 			
-			<div class='product'>
+			<div class='product product-rightborder'>
 				<img class='imgthumb' src='images/c000003.jpg'>
 				<p class='product-name'><b>GE Profile 20.2 Cu. Ft. Bottom Mount Refrigerator</b></p>
 				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000003'>[+]</a></p>
