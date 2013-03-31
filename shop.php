@@ -37,49 +37,49 @@
 <?php
     $con = connectToDB();
     $category = $_GET["category"];
-/*echo "category: ". $_GET["category"] ."<br><br>";
-
-echo "Hello from Blah !";
-// this should be the page that displays products (of any category)
-
-if (isset($_GET["productsType"])){
-	// display ..
-	// call the products of type 'productsType' from database
-	echo "GET productsType is: ".$_GET["productsType"] . "<br>";
-}
-if (isset($_POST["productsType"])){
-	// display ..
-	// call the products of type 'productsType' from database
-	echo "GET productsType is: ".$_POST["productsType"] . "<br>";
-}
-
-//not really tested, treat as pseudocode
-//doesn't remove the base url
-//$params = array();
-$parts = explode('/', $_SERVER['REQUEST_URI']);
-echo "<br> request uri is " . $_SERVER['REQUEST_URI'] . " <br>";
-echo "parts: " . $parts[3] . " <br>"; */
-//skip through the segments by 2
-//for($i = 0; $i < count($parts); $i = $i++){
-  //first segment is the param name, second is the value 
-  //$params[$parts[$i]] = $parts[$i+1];
-  //echo "a: " . $params[$parts[$i]] . " <br>";
-//}
-
-//and make it work with your exsisting code
-//$_GET = $params;
 ?>
 </body>
 
 <div class='main'>
-	<div class='sidemenu' id='sidemenu'>
-        <?php printCategories($con, $category); ?>
-    </div>
-    
-    <div class='body'>
-        Lorem Impsum Shmipsum Dipsum
-
-    </div>
+	<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
+	
+	<div style="position:relative;">
+		<div class='sidemenu' id='sidemenu'>
+			<?php printCategories($con, $category); ?>
+		</div>
+		
+		<div class='body'>		
+			<div class='product'>
+				<img class='imgthumb' src='images/c000002.jpg'>
+				<p class='product-name'><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</b></p>
+				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000002'>[+]</a></p>
+				<p class='product-price'>$5499.99 </p>
+				
+			</div>
+			
+			<div class='product'>
+				<img class='imgthumb' src='images/c000001.jpg'>
+				<p class='product-name'><b>LG Tall Tub Built-In Dishwasher</b></p>
+				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000001'>[+]</a></p>
+				<p class='product-price'>$10499.99 </p>
+			</div>	
+			
+			
+			<div class='product'>
+				<img class='imgthumb' src='images/c000003.jpg'>
+				<p class='product-name'><b>GE Profile 20.2 Cu. Ft. Bottom Mount Refrigerator</b></p>
+				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000003'>[+]</a></p>
+				<p class='product-price'>$4499.99 </p>
+			</div>
+			
+			<div class='product'>
+				<img class='imgthumb' src='images/c000004.jpg'>
+				<p class='product-name'><b>LG WaveForce 5.4 Cu. Ft. Top Load HE Washer with H...</b></p>
+				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000004'>[+]</a></p>
+				<p class='product-price'>$3499.99 </p>
+			</div>
+		</div>
+	</div>
 </div>
 
 </html>

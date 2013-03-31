@@ -24,7 +24,8 @@ function printCategories($con, $selected){
 		$name = $row['name'];
         $class1 = ($name == $selected) ? "selmenuitem" : "menuitem";
         $class2 = ($i == $number) ? " menuitembottom" : "";
-        $class = $class1 . $class2;
+		$class3 = ($i == 1) ? "" : " menuitemtopborder";
+        $class = $class1 . $class2 . $class3;
         $imgpre = ($i == ($selIndex - 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-br.png'>" : "";
         $imgpost = ($i == ($selIndex + 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-tr.png'>" : "";
         echo "";
