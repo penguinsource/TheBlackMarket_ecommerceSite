@@ -45,7 +45,7 @@
 ?>
 
 <?php
-echo "server " . $_SERVER['HTTP_HOST'];
+echo "server: " . "http://" . $_SERVER['HTTP_HOST'] . "/configLocal.ini"
 // echo "connect to db:";
 // $con = connectToDB();
 

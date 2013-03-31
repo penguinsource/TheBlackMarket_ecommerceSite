@@ -75,7 +75,6 @@
     }
     
     function loginUser(){
-		
         $con = connectToDB();   // connect to the database
         $email = "";
         $password = "";
