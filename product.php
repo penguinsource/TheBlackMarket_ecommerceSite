@@ -61,6 +61,7 @@
 			<?php printCategories($con, $category); ?>
 			<?php //printProduct($con, $productID); ?>
 		</div>
+		<!--
 		<div class="productWrapper"> 
 			<div class="productName"><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</div>
 			<div class="productContent">
@@ -88,6 +89,16 @@
 				<div id="reviewsDiv" class="visible">Show Customer Reviews </div>
 			</div>
 
+		</div>
+		-->
+		<div class="productWrapper">
+			<div class="productName">LG 6.3 Cu. Ft. Self-Clean Smooth Top Range <br> <span class="categoryText">Dishwashers</span></div>
+			<hr width='750px'>
+			<div class="productContent">
+				<div class="subtitleText">Product Description</div>
+				
+			</div>
+		
 		</div>
 		<!--
 		<div class='body'>		

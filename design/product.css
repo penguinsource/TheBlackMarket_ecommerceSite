@@ -10,8 +10,11 @@ H2{
 	background-color: red;
 	margin:0;
 	padding:0;
+	//height:1000px;
 	margin-left: 230px;
 	padding-top:10px;
+	font-family: calibri;
+	color: #000000;
 }
 
 .productContent {
@@ -44,11 +47,11 @@ img.productImage {
 }
 
 .productName {
-	font-size: 20px;
+	font-size: 24px;
 	margin:0;
 	padding:0;
 	margin-left:25px;
-	background-color:green;
+	//background-color:green;
 }
 
 .productImageInfo {
@@ -66,4 +69,17 @@ img.productImage {
 	padding:0;
 	margin-left: 25px;
 	background-color: purple;
+}
+
+span.categoryText {
+	font-size: 16px;
+	color: #666666;
+}
+
+.verticalLine {
+    border-left:thick solid #ff0000;
+}
+
+.subtitleText {
+	font-size: 20px;
 }
