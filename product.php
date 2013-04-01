@@ -60,12 +60,11 @@
 	<div style="position:relative;">
 		<div class='sidemenu' id='sidemenu'>
 			<?php printCategories($con, $category); ?>
-			<?php printProduct($con, $productID); ?>
+			<?php //printProduct($con, $productID); ?>
 		</div>
 
 		<div class="productWrapper">
 			<div class="productName">LG 6.3 Cu. Ft. Self-Clean Smooth Top Range <br> <span class="categoryText">Dishwashers</span></div>
-			<div class="underline_border"></div>
 			<div class="productContent">
 				<div class="subtitleText">Product Description</div>
 				<p class="productText">
@@ -82,17 +81,16 @@
 			</div>
 			
 			<div class="productImage">
-				<img class='productImage' src='images/c000002.jpg'><br>
-				In-stock: 10 ................................... ADD CART BUTTON
+				<img class='productImage' src='images/c000002.jpg'>
+				<div class="productImageInfo">In-stock: 10 ................................... ADD CART BUTTON</div>
 			</div>
 			
+			<div class="reviewsContent">Reviawe fawe a..</div>
 			<div class="reviewsContent">Reviews..</div>
 		</div>
 	</div> 
 	
-		<div class="footer">
 
-	</div>
 </div>
 
 

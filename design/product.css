@@ -7,56 +7,15 @@ H2{
 }
 
 .productWrapper {
-	//background-color: red;
+	/*background-color: red;*/
 	margin:0;
 	padding:0;
-	//height:1000px;
+	/*height:1000px;*/
 	margin-left: 230px;
 	padding-top:10px;
-	//font-family: "Open Sans",Verdana,sans-serif;
+	/*font-family: "Open Sans",Verdana,sans-serif;*/
 	font-family: calibri;
 	color: #000000;
-}
-
-.productContent {
-	display: inline-block;
-	//background-color:gray;
-	margin:0;
-	padding:0;
-	margin-left:25px;
-	width: 400px;
-}
-/*
-.productInfo {
-	display: inline;
-	margin-top:25px;
-	margin:0;
-	padding:0;
-	margin-left:15px;
-	width:45%;
-	background-color: gray;
-	float:left;
-}
-*/
-.productImage {
-	display: inline-block;
-	width: 330px;
-	max-width: 330px;
-	max-height: 360px;
-	padding:0;
-	margin:0;
-	//margin:15px 0 15px;
-	//padding: 8px;
-	float:right;
-	//background-color:blue;
-	border-left: 1px solid;
-    border-color: #E4E4E4;
-}
-
-.productImage img {
-	display: inline-block;
-	float:right;
-	//background-color:blue;
 }
 
 .productName {
@@ -65,16 +24,58 @@ H2{
 	margin:0;
 	padding:0;
 	margin-left:25px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
 	color: #444444;
-	//background-color:green;
+	/*background-color:green;*/
+	border-bottom: 1px solid;
+    border-color: #E4E4E4;
+}
+
+.productContent {
+	display: inline-block;
+	vertical-align: top;
+	background-color:gray;
+	margin:0;
+	padding:0;
+	margin-left:25px;
+	width: 350px;
+	border: none;
+}
+
+.productImage {
+	display: inline-block;
+	vertical-align: top;
+	width: 330px;
+	max-width: 330px;
+	height: 330px;
+	max-height: 360px;
+	padding:0;
+	margin:0;
+	padding-left: 8px;
+	border-left: 1px solid;
+    border-color: #E4E4E4;
+	/*float: right;
+	//padding-left: 5px;
+	background-color:blue;*/
+}
+
+.productImage img {
+	display: inline-block;
+	margin:0;
+	padding:0;
+	/*float:right;*/
+	/*background-color:blue;*/
 }
 
 .productImageInfo {
-	float:right;
+	display: block;
 	margin:0;
 	padding:0;
-	//background-color: blue;
-	width: 300px;
+	padding-left: 8px;
+	margin-right: 8px;
+	background-color: blue;
+	width: auto;
 }
 
 .reviewsContent {
@@ -83,49 +84,23 @@ H2{
 	margin:0;
 	padding:0;
 	margin-left: 25px;
-	//background-color: purple;
+	background-color: purple;
 }
 
 span.categoryText {
 	font-size: 16px;
-	//font-size: 14px;
+	/*font-size: 14px;*/
 	color: #666666;
-}
-
-.verticalLine {
-    border-left:thick solid #ff0000;
 }
 
 .subtitleText {
 	font-size: 20px;
-	//font-size: 18px;
-}
-
-.underline_border{
-	border-bottom: 1px solid;
-    border-color: #E4E4E4;
-	width: 700px;
-	padding:0;
-	margin:10px 0 10px;
-	margin-left: 24px;
-}
-
-.vertical_lineborder {
-	display: inline-block;
-	border-left: 1px solid;
-    border-color: #E4E4E4;
-	height: 300px;
-	max-height: 200px;
-	width: 1px;
-	padding:0;
-	margin:0;
-	//margin:10px 0 10px;
-	//margin-left: 24px;
+	/*font-size: 18px;*/
 }
 
 p.productText {
 	font-size: 14px;
-	//font-size: 12px;
+	/*font-size: 12px;*/
 }
 
 .footer {
