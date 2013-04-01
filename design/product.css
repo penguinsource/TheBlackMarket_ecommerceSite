@@ -7,25 +7,28 @@ H2{
 }
 
 .productWrapper {
-	background-color: red;
+	//background-color: red;
 	margin:0;
 	padding:0;
 	//height:1000px;
 	margin-left: 230px;
 	padding-top:10px;
+	//font-family: "Open Sans",Verdana,sans-serif;
 	font-family: calibri;
 	color: #000000;
 }
 
 .productContent {
-	background-color:gray;
+	display: inline-block;
+	//background-color:gray;
 	margin:0;
 	padding:0;
 	margin-left:25px;
+	width: 400px;
 }
-
+/*
 .productInfo {
-	display: inline-block;
+	display: inline;
 	margin-top:25px;
 	margin:0;
 	padding:0;
@@ -34,23 +37,35 @@ H2{
 	background-color: gray;
 	float:left;
 }
-
-img.productImage {
-	max-width: 300px;
-	max-height: 300px;
+*/
+.productImage {
+	display: inline-block;
+	width: 330px;
+	max-width: 330px;
+	max-height: 360px;
 	padding:0;
 	margin:0;
-	margin:15px 0 15px;
-	padding: 8px;
+	//margin:15px 0 15px;
+	//padding: 8px;
 	float:right;
-	background-color:blue;
+	//background-color:blue;
+	border-left: 1px solid;
+    border-color: #E4E4E4;
+}
+
+.productImage img {
+	display: inline-block;
+	float:right;
+	//background-color:blue;
 }
 
 .productName {
 	font-size: 24px;
+	//font-size: 22px;
 	margin:0;
 	padding:0;
 	margin-left:25px;
+	color: #444444;
 	//background-color:green;
 }
 
@@ -58,7 +73,7 @@ img.productImage {
 	float:right;
 	margin:0;
 	padding:0;
-	background-color: blue;
+	//background-color: blue;
 	width: 300px;
 }
 
@@ -68,11 +83,12 @@ img.productImage {
 	margin:0;
 	padding:0;
 	margin-left: 25px;
-	background-color: purple;
+	//background-color: purple;
 }
 
 span.categoryText {
 	font-size: 16px;
+	//font-size: 14px;
 	color: #666666;
 }
 
@@ -82,4 +98,32 @@ span.categoryText {
 
 .subtitleText {
 	font-size: 20px;
+	//font-size: 18px;
+}
+
+.underline_border{
+	border-bottom: 1px solid;
+    border-color: #E4E4E4;
+	width: 700px;
+	padding:0;
+	margin:10px 0 10px;
+	margin-left: 24px;
+}
+
+.vertical_lineborder {
+	display: inline-block;
+	border-left: 1px solid;
+    border-color: #E4E4E4;
+	height: 300px;
+	max-height: 200px;
+	width: 1px;
+	padding:0;
+	margin:0;
+	//margin:10px 0 10px;
+	//margin-left: 24px;
+}
+
+p.productText {
+	font-size: 14px;
+	//font-size: 12px;
 }
