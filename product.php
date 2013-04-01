@@ -13,10 +13,10 @@
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS">
-	<!-- <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS"> -->
+	<!--<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> -->
+	 <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">
 	<base href="//blackmarket5.hostei.com" />
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -89,6 +89,12 @@
 			<div class="reviewsContent">Reviews..</div>
 		</div>
 	</div> 
+	
+		<div class="footer">
+
+	</div>
 </div>
+
+
 
 </html>

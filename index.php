@@ -31,7 +31,7 @@
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/shop.php">Shop</a></p>
-<p><a href="http://localhost/TheBlackMarket_ecommerceSite/product.php">Product page</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/product.php/?category=Dishwashers&productID=c000001">Product page, category dishwashers and pid c000001</a></p>
 
 <button onClick="checkMarkets()" name="markets" class="visible">Markets !</button>
 

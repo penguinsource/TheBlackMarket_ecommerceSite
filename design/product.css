@@ -127,3 +127,13 @@ p.productText {
 	font-size: 14px;
 	//font-size: 12px;
 }
+
+.footer {
+    background-image:url('footerBg.png');
+    margin: 0;
+    padding: 0;
+	width: 1000px;
+	height: 220px;
+	margin-left: auto;
+	margin-right: auto;
+}
