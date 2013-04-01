@@ -16,20 +16,9 @@
 	<base href="//blackmarket5.hostei.com" />
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
-	<script  src="<?= $baseURL; ?>functionsJS/jquery.animate-colors.js"></script>
-	<script >
-		$(document).ready(function(){
-			$('.menuitem').hover(function () {
-				$(this).stop(true, true).addClass('menuhover', 100);
-				$(this).addClass('menuhover', 250);
-			},
-			function () {
-				$(this).stop(true, true).removeClass('menuhover', 100);
-				$(this).removeClass('menuhover', 100);
-			});
-		});
-	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+	<script src="<?= $baseURL; ?>functionsJS/jquery.animate-colors.js"></script>
+	<script src="<?= $baseURL; ?>functionsJS/shop.js"></script>
 </head>
 
 <body>
@@ -44,6 +33,7 @@
 ?>
 </body>
 
+<div class='test'> HI IM FLOAT TEXT NICE TO MEET U</div>
 <div class='main'>
 	<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 	
