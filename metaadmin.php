@@ -2,7 +2,7 @@
 <body>
 
 <?php
-include 'functionsPHP/generalFuncs.php';
+include 'functionsPHP/dbConnection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $con = connectToDB();

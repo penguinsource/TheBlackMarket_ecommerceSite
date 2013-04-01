@@ -53,37 +53,25 @@
 		</div>
 		
 		<div class='body'>		
-			<div class='product product-rightborder'>
-				<img class='imgthumb' src='images/c000002.jpg'>
-				<p class='product-name'><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</b></p>
+		
+			<?php printProducts($con, $category); ?>
+		
+			<!--<div class='product product-rightborder'>
+				<a href='products/c000002'> <img class='imgthumb' src='images/c000002.jpg'>
+				<p class='product-name'><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</b></p> </a>
 				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000002'>[+]</a></p>
-				<p class='product-price'>$5499.99 </p>
+				<div class='product-rating'>
+					<img src='design/star.png'><img src='design/starempty.png'><img src='design/starempty.png'><img src='design/starempty.png'><img src='design/starempty.png'>
+				</div>
+				<div class='product-price'>$5499.99 </div>
+				<div class='product-stock'>In Stock: 10 <a href='somecartlinkiunno'><div class='testbutton'> Add to Cart</div></div></a>
 				
-			</div>
+			</div>-->
 			
-			<div class='product product-rightborder'>
-				<img class='imgthumb' src='images/c000001.jpg'>
-				<p class='product-name'><b>LG Tall Tub Built-In Dishwasher</b></p>
-				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000001'>[+]</a></p>
-				<p class='product-price'>$10499.99 </p>
-			</div>	
-			
-			
-			<div class='product product-rightborder'>
-				<img class='imgthumb' src='images/c000003.jpg'>
-				<p class='product-name'><b>GE Profile 20.2 Cu. Ft. Bottom Mount Refrigerator</b></p>
-				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000003'>[+]</a></p>
-				<p class='product-price'>$4499.99 </p>
-			</div>
-			
-			<div class='product'>
-				<img class='imgthumb' src='images/c000004.jpg'>
-				<p class='product-name'><b>LG WaveForce 5.4 Cu. Ft. Top Load HE Washer with H...</b></p>
-				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000004'>[+]</a></p>
-				<p class='product-price'>$3499.99 </p>
-			</div>
 		</div>
 	</div>
 </div>
+
+<?php closeDBConnection($con);?>
 
 </html>
