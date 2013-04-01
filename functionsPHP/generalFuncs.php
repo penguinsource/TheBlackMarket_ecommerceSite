@@ -10,6 +10,7 @@
         return true;
     }
     */
+	
     function redirect($url){
         header("Location: " . $url);
     }

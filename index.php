@@ -30,6 +30,8 @@
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items">Test the Rest</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/items/1">Test the Rest 2</a></p>
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/api/hey.php">Test the Rest 2</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/shop.php">Shop</a></p>
+<p><a href="http://localhost/TheBlackMarket_ecommerceSite/product.php">Product page</a></p>
 
 <button onClick="checkMarkets()" name="markets" class="visible">Markets !</button>
 

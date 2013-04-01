@@ -1,7 +1,7 @@
 <?php
     // database file
     //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
-    $dbConfig = "../configLocal.ini";	       // for local db
+    $dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db
     //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
@@ -12,9 +12,9 @@
 		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
         // Check connection
         if (mysqli_connect_errno($con)){
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			//echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }else{
-			echo "Connection Successful !";
+			//echo "Connection Successful !";
             return $con;
         }
     }
