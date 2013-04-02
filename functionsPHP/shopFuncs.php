@@ -28,8 +28,8 @@ function printCategories($con, $selected){
         $class2 = ($i == $number) ? " menuitembottom" : "";
 		$class3 = ($i == 1) ? "" : " menuitemtopborder";
         $class = $class1 . $class2 . $class3;
-        $imgpre = ($i == ($selIndex - 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-br.png'>" : "";
-        $imgpost = ($i == ($selIndex + 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/corner-tr.png'>" : "";
+        $imgpre = ($i == ($selIndex - 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/images/corner-br.png'>" : "";
+        $imgpost = ($i == ($selIndex + 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/images/corner-tr.png'>" : "";
         echo "";
         echo "<a href='shop/$id'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
         $i++;
@@ -58,12 +58,12 @@ function printProducts($con, $category){
 			$j = 0;
 			// print full stars
 			for ($j = 0; $j < $rating; $j++){
-				$ratingString = $ratingString . "<img src='design/star.png'>";
+				$ratingString = $ratingString . "<img src='design/images/star.png'>";
 			}
 			
 			//print empty stars
 			for ($k = $j; $k < 5; $k++){
-				$ratingString = $ratingString . "<img src='design/starempty.png'>";
+				$ratingString = $ratingString . "<img src='design/images/starempty.png'>";
 			}
 		}
 		////////////////

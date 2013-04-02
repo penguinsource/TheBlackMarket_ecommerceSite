@@ -19,6 +19,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script src="<?= $baseURL; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?= $baseURL; ?>functionsJS/shop.js"></script>
+	
+	<link rel="icon" type="image/png" href="<?= $baseURL; ?>design/images/favicon.png">
 </head>
 
 <body>
@@ -33,7 +35,22 @@
 ?>
 </body>
 
-<div class='test'> HI IM FLOAT TEXT NICE TO MEET U</div>
+<div class='mainmenu'>
+	<div style='border-right:1px;border-color:#E4E4E4;display:inline-block;'>
+		<a href='/index'><img valign='center' class='menulogo' src='/design/images/logo2.png'></a>
+	</div>
+	
+	<div class='menulinks'>
+		<div class='menulink'> <a href='/index'>HOME</a> </div>
+		<div class='menulink'> <a href='/shop'>SHOP</a> </div>
+		<div class='menulink'> <a href='/about'>ABOUT</a> </div>
+		<div class='menulink'> <a href='/help'>HELP</a> </div>
+		<div class='menulink'> <a href='/faq'>FAQ</a> </div>
+	</div>
+	
+	<div class='blueline'> </div>
+</div>
+
 <div class='main'>
 	<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 	
