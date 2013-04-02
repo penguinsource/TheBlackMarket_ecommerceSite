@@ -80,13 +80,24 @@
 				</p>
 			</div>
 			
-			<div class="productImage">
-				<img class='productImage' src='images/c000002.jpg'>
-				<div class="productImageInfo">In-stock: 10 ................................... ADD CART BUTTON</div>
+			<img class='productImage' src='images/c000002.jpg'>
+			<div class="productImageInfo">
+				<span class="floatLefty">In-stock: 10</span> 
+				<span class="floatRighty"><a href='somecartlinkiunno'><div class='testbutton'> Add to Cart</div></a></span>
 			</div>
 			
 			<div class="reviewsContent">Reviawe fawe a..</div>
-			<div class="reviewsContent">Reviews..</div>
+			<div class="reviewsContent">Reviews..		</div>
+			
+			<div class="commentsContent">
+				<div class="commentLayout">
+					<img class="commentUserLogo" src="BM_LOGO">
+				</div>
+			</div>
+			
+			<br><br>
+			<p>hello</p>
+			
 		</div>
 	</div> 
 	

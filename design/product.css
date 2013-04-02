@@ -6,6 +6,38 @@ H2{
 	margin-left: 15px;
 }
 
+.floatLefty {
+	float: left;
+	margin: 0 15px 0;
+}
+
+.floatRighty {
+	float: right;
+	margin: 0 15px 0;
+}
+
+/* Fonts, texts */
+/* ------------ */
+
+span.categoryText {
+	font-size: 16px;
+	/*font-size: 14px;*/
+	color: #666666;
+}
+
+.subtitleText {
+	font-size: 20px;
+	/*font-size: 18px;*/
+}
+
+p.productText {
+	font-size: 14px;
+	/*font-size: 12px;*/
+}
+
+/* product content, wrapper, image  */
+/* -------------------------------- */
+
 .productWrapper {
 	/*background-color: red;*/
 	margin:0;
@@ -45,37 +77,33 @@ H2{
 
 .productImage {
 	display: inline-block;
-	vertical-align: top;
+	/* vertical-align: top; */
 	width: 330px;
 	max-width: 330px;
 	height: 330px;
-	max-height: 360px;
+	max-height: 330px;
 	padding:0;
 	margin:0;
-	padding-left: 8px;
+	padding-left: 2px;
 	border-left: 1px solid;
     border-color: #E4E4E4;
-	/*float: right;
-	//padding-left: 5px;
+	
+	float: right;
+	/*padding-left: 5px;
 	background-color:blue;*/
 }
 
-.productImage img {
-	display: inline-block;
-	margin:0;
-	padding:0;
-	/*float:right;*/
-	/*background-color:blue;*/
-}
-
 .productImageInfo {
+	clear:both;
+	float: right;
+	text-align: center;
+	width: 333px;
 	display: block;
 	margin:0;
 	padding:0;
-	padding-left: 8px;
-	margin-right: 8px;
-	background-color: blue;
-	width: auto;
+	margin-top: 20px;
+	font-size: 16px;
+	/* background-color: blue; */
 }
 
 .reviewsContent {
@@ -84,23 +112,29 @@ H2{
 	margin:0;
 	padding:0;
 	margin-left: 25px;
+	padding-top: 15px;
 	background-color: purple;
 }
 
-span.categoryText {
-	font-size: 16px;
-	/*font-size: 14px;*/
-	color: #666666;
+/* Comments */
+/* -------- */
+
+.commentsContent {
+	position: relative;
+	margin:0;
+	padding:0;
+	height: 55%;
+	width: 100%;
+	background-color: pink;
 }
 
-.subtitleText {
-	font-size: 20px;
-	/*font-size: 18px;*/
-}
-
-p.productText {
-	font-size: 14px;
-	/*font-size: 12px;*/
+.commentLayout {
+	position: absolute;
+	top: 4%;
+	left: 9%;
+	width: 80%;
+	height: 80px;
+	background-color: white;
 }
 
 .footer {
