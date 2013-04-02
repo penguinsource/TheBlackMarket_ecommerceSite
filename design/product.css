@@ -106,36 +106,81 @@ p.productText {
 	/* background-color: blue; */
 }
 
-.reviewsContent {
+.clearBothBlock {
 	clear:both;
 	display: block;
-	margin:0;
-	padding:0;
-	margin-left: 25px;
-	padding-top: 15px;
-	background-color: purple;
 }
 
 /* Comments */
-/* -------- */
+/* -------- trying to make it like comments @ http://cackle.me/welcome */
 
 .commentsContent {
-	position: relative;
 	margin:0;
 	padding:0;
-	height: 55%;
-	width: 100%;
-	background-color: pink;
+	height: auto;
+	width: 95%;
+	margin-left: 16px;
+	padding-bottom: 100px;
+	background-color: #EEEEEE;
+	border-top-left-radius: 6px;
+}
+
+.commentsContentHeader {
+	font-size: 22px;
+	margin-left: 5%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	/* background-color: red; */
 }
 
 .commentLayout {
-	position: absolute;
-	top: 4%;
-	left: 9%;
-	width: 80%;
-	height: 80px;
-	background-color: white;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 1%;
+	margin-left: 9%;
+	padding-bottom: 20px;
+	width: 574px;
+	height: auto;
+	background-color: #E2E2E2;
 }
+
+.commentText  {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 12px;
+	margin-top: 11px;
+	font-size: 17px;
+	height: auto;
+	max-width: 480px;
+	line-height: 25.0px;
+	color: 
+/* 	background-color: gray; */
+}
+
+span.commentTitle {
+	display: block;
+	height: 26px;
+	font-size: 16px;
+	color: #60B6FF;
+/* 	background-color: red; */
+	font-weight: bold;
+}
+
+.commentUserLogo {
+	margin-left: 15px;
+	margin-top: 15px;
+	padding: 0;
+	background-color: pink;
+/* 	border-right: 1px solid;
+    border-color: #969696; */
+}
+
+.postCommentLayout {
+	background-image: url("images/commentBox.png");
+}
+
+/* Other.. */
+/* ------- */
 
 .footer {
     background-image:url('footerBg.png');

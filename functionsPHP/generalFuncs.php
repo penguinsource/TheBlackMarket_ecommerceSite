@@ -1,4 +1,8 @@
 <?php 
+
+// GLOBAL VARIABLES
+//$localhost = 0;
+
     /*    
     // NOT IMPLEMENTED PROPERLY -- :
     function checkLogin(){

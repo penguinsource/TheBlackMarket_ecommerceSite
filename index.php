@@ -47,9 +47,13 @@
 ?>
 
 <?php
-echo "server: " . "http://" . $_SERVER['HTTP_HOST'] . "/configLocal.ini"
+echo "server: " . "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"] . "configLocal.ini";
+echo " HTTP_HOST: " . $_SERVER['HTTP_HOST'];
+echo " REQUEST_URI: " . $_SERVER['REQUEST_URI'];
 // echo "connect to db:";
 // $con = connectToDB();
+
+
 
 //curl -X POST -d '{"name":"Name for your market","url":"http://cs410-XX.cs.ualberta.ca/yourapipath"}'
 //http://cs410.cs.ualberta.ca:42001/registration/markets --header "Content-Type:application/json";

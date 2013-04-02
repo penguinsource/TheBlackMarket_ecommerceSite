@@ -1,7 +1,9 @@
 <?php
+
+	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-    //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
-    $dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db
+    $dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
+    //$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db
     //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){

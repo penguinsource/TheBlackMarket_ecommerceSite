@@ -13,10 +13,11 @@
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
-	<!--<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> -->
-	 <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> 
+	<!-- <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">-->
+
 	<base href="//blackmarket5.hostei.com" />
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -86,14 +87,39 @@
 				<span class="floatRighty"><a href='somecartlinkiunno'><div class='testbutton'> Add to Cart</div></a></span>
 			</div>
 			
-			<div class="reviewsContent">Reviawe fawe a..</div>
-			<div class="reviewsContent">Reviews..		</div>
+			<div class="clearBothBlock"></div>
+			<br><br><br><br>
+			
 			
 			<div class="commentsContent">
+				<div class="commentsContentHeader">x Comments Posted</div>
 				<div class="commentLayout">
-					<img class="commentUserLogo" src="BM_LOGO">
+					<img class="commentUserLogo" src="BM_LOGO.png" height="50" width="50">
+					<div class="commentText"><span class="commentTitle">Author Name</span> This is a comment. I am hello-worlding !</div>
+				</div>
+				<div class="commentLayout">
+					<img class="commentUserLogo" src="BM_LOGO.png" height="50" width="50">
+					<div class="commentText"><span class="commentTitle">Author Name</span> This is a comment. I am hello-wo asdf asdf sdf as dfasd f sad	
+					awefaf23 a32 32f 323a 32 fa 23f		!</div>
+				</div>
+				<div class="commentLayout">
+					<img class="commentUserLogo" src="BM_LOGO.png" height="50" width="50">
+					<div class="commentText"><span class="commentTitle">Author Name</span> This is a comment. I am hello-wo asdf asdf sdf as dfasd f sad	
+					awefaf23 a32 32f 323a 32 fa 23f		!</div>
+				</div>
+				<div class="commentLayout">
+					<img class="commentUserLogo" src="BM_LOGO.png" height="50" width="50">
+					<div class="commentText"><span class="commentTitle">Author Name</span> This is a comment. I am hello-wo asdf asdf sdf as dfasd f sad	
+					awefaf23 a32 32f 323a 32 fa 23f		!</div>
+				</div>
+				<div class="commentLayout">
+					<img class="commentUserLogo" src="BM_LOGO.png" height="50" width="50">
+					<div class="commentText"><span class="commentTitle">Author Name</span> This is a comment. I am hello-wo asdf asdf sdf as dfasd f sad	
+					awefaf23 a32 32f 323a 32 fa 23f		!</div>
 				</div>
 			</div>
+			
+
 			
 			<br><br>
 			<p>hello</p>
