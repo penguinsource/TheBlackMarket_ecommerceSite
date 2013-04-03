@@ -1,0 +1,13 @@
+all calibri except bottom
+Mark missing 18pt
+date 12 pt
+text 16pt
+
+blackmarket bottom 
+franklin gothic medium, 31pt
+
+
+blue color #3182D3
+gray color #707070
+
+leave a comment background #F2F2F2

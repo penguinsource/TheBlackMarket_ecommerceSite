@@ -13,10 +13,10 @@
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> 
-	<!-- <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">-->
+	<!--<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> -->
+	 <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">
 
 	<base href="//blackmarket5.hostei.com" />
 	
@@ -90,7 +90,7 @@
 			<div class="clearBothBlock"></div>
 			<br><br><br><br>
 			
-			
+			<!--
 			<div class="commentsContent">
 				<div class="commentsContentHeader">x Comments Posted</div>
 				<div class="commentLayout">
@@ -118,7 +118,7 @@
 					awefaf23 a32 32f 323a 32 fa 23f		!</div>
 				</div>
 			</div>
-			
+			-->
 
 			
 			<br><br>
