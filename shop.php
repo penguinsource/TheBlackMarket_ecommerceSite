@@ -8,6 +8,15 @@
 ?>
 <html>
 
+<?php
+    $con = connectToDB();
+	if (isset($_GET["category"])){	
+		$category = $_GET["category"];				
+	} else {
+		$category = null;
+	}
+?>
+
 <head>
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
@@ -22,18 +31,12 @@
 	<script src="<?= $baseURL; ?>functionsJS/shop.js"></script>
 	
 	<link rel="icon" type="image/png" href="<?= $baseURL; ?>design/images/favicon.png">
+	<title> Shop </title>
 </head>
 
 <body>
 
-<?php
-    $con = connectToDB();
-	if (isset($_GET["category"])){	
-		$category = $_GET["category"];
-	} else {
-		$category = null;
-	}
-?>
+
 </body>
 
 <div class='mainmenu'>
