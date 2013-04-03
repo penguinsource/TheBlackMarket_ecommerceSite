@@ -53,11 +53,11 @@ body {
 	background-color: #006EB8;
 	width: 1000px;
 	height:15px;
-	margin-left: auto ;
-    margin-right: auto ;
 	
     display:block;
     position:absolute;
+	left: 50%;
+	margin-left:-500px;
     top:115px;
 	
 	-webkit-border-top-left-radius: 6px;
