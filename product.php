@@ -13,11 +13,21 @@
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
+<<<<<<< HEAD
+	<!--<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> 
+	 <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">-->
+	 <LINK REL=STYLESHEET HREF="http://localhost/bm/design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="http://localhost/bm/design/product.css" TYPE="text/CSS">
+		
+=======
 	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS"> 
 	<!-- <LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/product.css" TYPE="text/CSS">-->
 
+>>>>>>> 2e20e23e3a4aa2019406fbc642476621a1ac3b33
 	<base href="//blackmarket5.hostei.com" />
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>

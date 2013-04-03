@@ -1,6 +1,5 @@
 <?php
 /*
- 
 
 // [#3] returns all the product ids that are currently in stock:
 GET /products
@@ -36,18 +35,17 @@ return = {
 
 include("../functionsPHP/dbConnection.php");
 
-if (isset($_GET["id"])){ // #1
+if (isset($_GET["id"]) && (isset($_POST["amount"]))){ // #2
     // echo "id=".$_GET["id"];
-    retProdDetails($_GET["id"]);
-} else if (isset($_POST["id"]) && isset($_POST["order"])){ // #2
+    echo "hello !";
+    purchaseProduct($_GET['id'], $_POST["amount"]);
+} else if (isset($_GET["id"])){ // #1
     //echo "ordering for id=".$_POST["id"];
-    
+    retProdDetails($_GET["id"]);
 } else { // #3
     // return json with all products
     retAllProducts();
 }
-
-echo "hello from products page";
 
 function retAllProducts(){
     $con = connectToDB();
@@ -56,13 +54,13 @@ function retAllProducts(){
     $list = array();
     
     while ($row = mysqli_fetch_array($result)){         // extract value from query
-        echo $row[0] . ", ";
         $rowArray = array("id"=>$row[0]);
         array_push($list, $rowArray);
     }
     $productsList = array("Products"=>$list);
-    $json = json_encode($productsList); // 
+    $json = json_encode($productsList, JSON_PRETTY_PRINT); // 
     echo $json;
+      print_r($json);
     
     closeDBConnection($con);
 }
@@ -75,6 +73,51 @@ function retProdDetails($pID){
    
     //$row = mysqli_fetch_array($result);
     $row = mysqli_fetch_assoc($result);
+<<<<<<< HEAD
+    // echo "pid:" . $row['pid'] . "<br>";
+    $productDetails['id'] = $row['pid'];
+    $productDetails['category'] = $row['pcategory'];
+    $productDetails['name'] = $row['pname'];
+    $productDetails['desc'] = $row['pdesc'];
+    $productDetails['img'] = $row['imageurl'];
+    $productDetails['price'] = $row['price'];
+    //$productDetails['weight'] = $row['weight'];
+    //$productDetails['dim'] = $row['dim'];
+    $productDetails['quantity'] = $row['quantity'];
+    $json = json_encode($productDetails); //
+    echo $json;
+    
+    closeDBConnection($con);
+}
+
+/*
+    array_push($productDetails, array("id"=>$row['pid']));
+    array_push($productDetails, array("category"=>$row['pcategory']));
+    array_push($productDetails, array("name"=>$row['pname']));
+    array_push($productDetails, array("desc"=>$row['pdesc']));
+    array_push($productDetails, array("img"=>$row['imageurl']));
+    array_push($productDetails, array("price"=>$row['price']));
+    //array_push($productDetails, array("weight"=>$row['weight']));
+    //array_push($productDetails, array("dim"=>$row['dim']));
+    array_push($productDetails, array("quantity"=>$row['quantity']));
+*/
+
+function purchaseProduct($pid, $amount){
+    $con = connectToDB();
+    // check if there are enough products 
+    $query = "SELECT * FROM product WHERE pid = '$pid'";
+    $result = mysqli_query($con,$query);	        // query db
+    $row = mysqli_fetch_assoc($result);
+    $stockQuantity = $row["quantity"];
+    
+    if ($amount > $stockQuantity){
+        echo "Not enough products in stock !";
+        return;
+    }
+    
+    $orderDetails = array();
+    
+=======
     echo "pid:" . $row['pid'] . "<br>";
     //$row = mysqli_fetch_assoc($result);
     echo "category:" . $row['pcategory'];
@@ -83,9 +126,8 @@ function retProdDetails($pID){
     //$row[3] . "<br>" . $row[4]. "<br>" . $row[5]. "<br>" . $row[6] . "<br>";
     //$rowArray = array("id"=>$row[0]);
     //array_push($productDetails, $rowArray);
+>>>>>>> 2e20e23e3a4aa2019406fbc642476621a1ac3b33
     
-    $json = json_encode($productsList); // 
-    closeDBConnection($con);
 }
 
 ?>
