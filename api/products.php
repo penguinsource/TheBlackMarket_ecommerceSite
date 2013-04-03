@@ -18,8 +18,7 @@ return = {
   category:"oven",
   name:"OvenMaster",
   desc:"A really good oven!",
-  img:"",
-  "price":"1999.99",
+  img:"","price":"1999.99",
   weight:"200lbs",
   dim:"10x20x30",
   quantity:"3"
@@ -76,16 +75,14 @@ function retProdDetails($pID){
    
     //$row = mysqli_fetch_array($result);
     $row = mysqli_fetch_assoc($result);
-    // echo "pid:" . $row['pid'] . "<br>";
-    array_push($productDetails, array("id"=>$row['pid']));
-    array_push($productDetails, array("category"=>$row['pcategory']));
-    array_push($productDetails, array("name"=>$row['pname']));
-    array_push($productDetails, array("desc"=>$row['pdesc']));
-    array_push($productDetails, array("img"=>$row['imageurl']));
-    array_push($productDetails, array("price"=>$row['price']));
-    array_push($productDetails, array("weight"=>$row['pweight']));
-    array_push($productDetails, array("dim"=>$row['pdim']));
-    array_push($productDetails, array("quantity"=>$row['pname']));
+    echo "pid:" . $row['pid'] . "<br>";
+    //$row = mysqli_fetch_assoc($result);
+    echo "category:" . $row['pcategory'];
+    
+    //echo $row[0] . "<br>" . $row[1] . "<br>" . $row[2] . "<br>" .
+    //$row[3] . "<br>" . $row[4]. "<br>" . $row[5]. "<br>" . $row[6] . "<br>";
+    //$rowArray = array("id"=>$row[0]);
+    //array_push($productDetails, $rowArray);
     
     $json = json_encode($productsList); // 
     closeDBConnection($con);

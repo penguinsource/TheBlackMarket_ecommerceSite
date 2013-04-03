@@ -1,3 +1,8 @@
+@font-face {
+	font-family: BebasNeue;
+	src: url("fonts/BebasNeue.otf") format("opentype");
+}
+
 body {
     background-image:url('images/snow.png');
     margin: 0;
@@ -8,20 +13,38 @@ body {
 
 .mainmenu{
 	background-image:url('images/menubg1.png');
-	height:133px;
-	position:relative;
+	height:130px;
+}
+
+#menulogo{
+	border-right:1px;
+	border-color:#E4E4E4;
+	margin-left:15px;
+    width:300px;
+    vertical-align:top;
+    display:inline-block;
+}
+
+
+#menulogo img{
+	display:none;
+}
+
+#menulogo img.activelogo{
+	display:inline-block;
 }
 
 .menulinks{
 	display:inline-block;
-	top:20px;
-	position:absolute;
+    margin-top:10px;
+    vertical-align:top;
+    font-family: 'Monda', sans-serif;
 }
 
 .menulink{
 	display:inline-block;
 	font-size: 20px;
-	font-family: ;
+	/*font-family: BebasNeue;*/
 	padding-left:10px;
 	padding-right:10px;
 }
@@ -32,6 +55,10 @@ body {
 	height:15px;
 	margin-left: auto ;
     margin-right: auto ;
+	
+    display:block;
+    position:absolute;
+    top:115px;
 	
 	-webkit-border-top-left-radius: 6px;
 	-webkit-border-top-right-radius: 6px;
@@ -113,7 +140,7 @@ a:active {text-decoration:none;color:#919191;}
 }
 
 .menuhover {
-	background-color: rgba(5, 125, 159, .5); #057D9F;
+	background-color:  #338BC6;
 	/*background-image: -ms-linear-gradient(top left, #C2E0FF 0%, #3399FF 100%);
     background-image: -moz-linear-gradient(top left, #C2E0FF 0%, #3399FF 100%);
     background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #C2E0FF), color-stop(1, #3399FF));

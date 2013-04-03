@@ -7,7 +7,7 @@
       triggerTopPos: '80px',
       panelTopPos: '50px',
       panelOpacity: 0.9,
-      speed: 'fast',
+      speed: 'normal',
       ajax: false,
       ajaxSource: null,
       clickOutsideToClose: true

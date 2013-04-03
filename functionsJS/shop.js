@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	setInterval('swapImages()', 5000);
+
 	$('.menuitem').hover(function () {
 		$(this).stop(true, true).addClass('menuhover', 100);
 		$(this).addClass('menuhover', 250);
@@ -9,23 +11,11 @@ $(document).ready(function(){
 	});
 });
 
-$(function() {
-
-	var $sidebar = $("test"),
-		$window = $(window),
-		offset = $sidebar.offset(),
-		topPadding = 20;
-
-	$window.scroll(function() {
-		if ($window.scrollTop() > offset.top) {
-			$sidebar.stop().animate({
-				marginTop: $window.scrollTop() - offset.top + topPadding
-			});
-		} else {
-			$sidebar.stop().animate({
-				marginTop: 0
-			});
-		}
-	});
-
-});
+function swapImages(){
+  var $active = $('#menulogo .activelogo');
+  var $next = ($('#menulogo .activelogo').next().length > 0) ? $('#menulogo .activelogo').next() : $('#menulogo img:first');
+  $active.fadeOut(function(){
+    $active.removeClass('activelogo');
+    $next.fadeIn().addClass('activelogo');
+  });
+}

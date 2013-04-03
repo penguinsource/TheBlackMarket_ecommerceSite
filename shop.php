@@ -13,6 +13,7 @@
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
 	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	<base href="//blackmarket5.hostei.com" />
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -36,8 +37,11 @@
 </body>
 
 <div class='mainmenu'>
-	<div style='border-right:1px;border-color:#E4E4E4;display:inline-block;'>
-		<a href='/index'><img valign='center' class='menulogo' src='/design/images/logo2.png'></a>
+	<div id='menulogo'>
+		<a href='/index'>
+			<img valign='center' class='activelogo' src='/design/images/logo1-small.png'>
+			<img valign='center' src='/design/images/logo2-small.png'>
+		</a>
 	</div>
 	
 	<div class='menulinks'>
