@@ -69,10 +69,19 @@ echo '</xmp>';
 	}
 ?>
 
+
+
+<a href="http://cs410.cs.ualberta.ca:42001/paybuddy/payment.cgi?grp=06&amt=12.00&tx=bmOrder01&ret=http://localhost/bm/blah.php"
+   target="_blank">
+    SEND TO PAYBUDDY !</a>
+
+
 <?php
 echo "server: " . "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"] . "configLocal.ini";
 echo " HTTP_HOST: " . $_SERVER['HTTP_HOST'];
 echo " REQUEST_URI: " . $_SERVER['REQUEST_URI'];
+
+
 // echo "connect to db:";
 // $con = connectToDB();
 
