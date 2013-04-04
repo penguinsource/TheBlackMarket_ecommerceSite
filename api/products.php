@@ -34,7 +34,6 @@ return = {
 */
 
 include("../functionsPHP/dbConnection.php");
-include("../functionsPHP/orderFuncs.php");
 
 echo "ORIGIN: " . $_SERVER["REMOTE_ADDR"];
 
