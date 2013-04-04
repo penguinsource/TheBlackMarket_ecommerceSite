@@ -1,0 +1,138 @@
+body {
+    background-image:url('images/snow.png');
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans",Verdana,sans-serif;
+    font-size: 12;
+}
+
+.mainmenu{
+	background-image:url('images/menubg1.png');
+	height:130px;
+}
+
+#menulogo{
+	border-right:1px;
+	border-color:#E4E4E4;
+	margin-left:15px;
+    width:300px;
+    vertical-align:top;
+    display:inline-block;
+}
+
+
+#menulogo img{
+	display:none;
+}
+
+#menulogo img.activelogo{
+	display:inline-block;
+}
+
+.menulinks{
+	display:inline-block;
+    margin-top:10px;
+    vertical-align:top;
+    font-family: 'Monda', sans-serif;
+}
+
+.menulink{
+	display:inline-block;
+	font-size: 20px;
+	/*font-family: BebasNeue;*/
+	padding-left:10px;
+	padding-right:10px;
+}
+
+#userStuff{
+	float:right;
+	display:inline-block;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+#shoppingCart{
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.blueline {
+	background-color: #006EB8;
+	width: 1000px;
+	height:15px;
+	
+    display:block;
+    position:absolute;
+	left: 50%;
+	margin-left:-500px;
+    top:115px;
+	
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-top-left-radius: 6px;
+	-moz-border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	
+	/*-moz-box-shadow:0px 0px 40px rgba(0,0,0,0.6);
+	-webkit-box-shadow:0px 0px 40px rgba(0,0,0,0.6);*/
+	box-shadow: 0px -10px 10px -10px black;
+}
+
+.main {
+    /*position: relative;*/
+	background-color: white;
+	width: 1000px;
+	margin-left: auto ;
+    margin-right: auto ;
+	
+	overflow:auto;
+	
+	-moz-box-shadow:0px 0px 40px rgba(0,0,0,0.2);
+	-webkit-box-shadow:0px 0px 40px rgba(0,0,0,0.2);
+	box-shadow:0px 0px 40px rgba(0,0,0,0.2);
+}
+
+
+a:link {text-decoration:none;color:#919191;}
+a:visited {text-decoration:none;color:#919191;}
+a:hover {text-decoration:none;color:#000000;}
+a:active {text-decoration:none;color:#919191;}
+
+
+.body {
+    /*display:inline;*/
+	float:right;
+	width:750px;
+	
+	color: #919191;
+    
+	margin-top: 20px;
+	margin-bottom: 25px;
+	margin-left: 40px;
+	margin-right:40px;
+
+}
+
+#cart-header{
+	overflow: hidden;
+	height: 26px;
+	width:100%;
+	border-top: 1px solid #d4d4d4;
+	background-color: #f0f0f0;
+	color: #4d4d4d;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 26px;
+
+}
+
+.product {
+	display:inline-block;
+	vertical-align: top;
+		
+	width: 165px;
+	padding-left:7px;
+	padding-right:7px;
+}
+

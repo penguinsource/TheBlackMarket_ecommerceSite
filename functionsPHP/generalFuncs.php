@@ -45,7 +45,7 @@
 	function checkCart(){
 		if (isset($_SESSION['cart'])){
 			$cartJSON = json_decode($_SESSION['cart'], true);
-			$total = $cartJSON['total'];
+			$total = number_format($cartJSON['total'], 2);
 			return "$$total";
 		} else {
 			return "$0.00";

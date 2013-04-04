@@ -8,13 +8,6 @@
 	$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
 
 	$con = connectToDB();
-	if (isset($_GET["category"])){	
-		$category = $_GET["category"];				
-	} else {
-		$category = null;
-	}
-	
-	ChromePhp::log("email from shop: " . $_SESSION['email']);
 ?>
 <html>
 
@@ -22,7 +15,7 @@
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/cart.css" TYPE="text/CSS">
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	<base href="//blackmarket5.hostei.com" />
 	
@@ -33,7 +26,7 @@
 	<script src="<?= $baseURL; ?>functionsJS/generalFuncs.js"></script>
 	
 	<link rel="icon" type="image/png" href="<?= $baseURL; ?>design/images/favicon.png">
-	<title> Shop </title>
+	<title> Cart </title>
 </head>
 
 <body>
@@ -70,27 +63,13 @@
 	<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 	
 	<div style="position:relative;">
-		<div class='sidemenu' id='sidemenu'>
-			<?php printCategories($con, $category); ?>
-		</div>
 		
 		<div class='body'>		
-		
-			<?php printProducts($con, $category); ?>
-		
-			<!--<div class='product product-rightborder'>
-				<a href='products/c000002'> <img class='imgthumb' src='images/c000002.jpg'>
-				<p class='product-name'><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</b></p> </a>
-				<p class='product-desc'>The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean ... <a href='products/c000002'>[+]</a></p>
-				<div class='product-rating'>
-					<img src='design/star.png'><img src='design/starempty.png'><img src='design/starempty.png'><img src='design/starempty.png'><img src='design/starempty.png'>
-				</div>
-				<div class='product-price'>$5499.99 </div>
-				<div class='product-stock'>In Stock: 10 <a href='somecartlinkiunno'><div class='testbutton'> Add to Cart</div></div></a>
-				
-			</div>-->
-			
+			<div id='cart-header'>
+				   
+			</div>
 		</div>
+		
 	</div>
 </div>
 
