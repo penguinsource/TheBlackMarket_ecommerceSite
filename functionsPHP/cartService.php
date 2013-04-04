@@ -1,12 +1,12 @@
 <?php
+session_start();
 include_once("ChromePhp.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 	$itemJSON = json_decode(stripslashes($_POST['json']), true);
     
-	ChromePhp::log("email from cart service: " . $_SESSION['email']);
+	ChromePhp::log("email from cart service: " . $_SESSION['email']);	
 	
-	session_start();
 	
     // if cart exists, update it and recalc total
     if (isset($_SESSION['cart'])){
