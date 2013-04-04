@@ -35,7 +35,7 @@ return = {
 
 include("../functionsPHP/dbConnection.php");
 
-echo "ORIGIN: " . $_SERVER["REMOTE_ADDR"];
+/* echo "ORIGIN: " . $_SERVER["REMOTE_ADDR"]; */
 
 if (isset($_GET["id"]) && (isset($_POST["amount"]))){ // #2
     // echo "id=".$_GET["id"];
@@ -59,7 +59,7 @@ function retAllProducts(){
         array_push($list, $rowArray);
     }
     $productsList = array("Products"=>$list);
-    $json = json_encode($productsList, JSON_PRETTY_PRINT); // 
+    $json = json_encode($productsList); 
     echo $json;
       print_r($json);
     
