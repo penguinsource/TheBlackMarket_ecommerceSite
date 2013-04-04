@@ -25,19 +25,24 @@ CREATE TABLE product (
 	PRIMARY KEY(pid)
 )
 
-CREATE TABLE transaction (
-	transid VARCHAR(63),
-	userid INT,
-	pid VARCHAR(63),	
-	PRIMARY KEY (transid),
-	FOREIGN KEY (userid) REFERENCES user (userid),
+CREATE TABLE productOrders(
+	orderid VARCHAR(255),
+	pid VARCHAR(255),
+	amount INT,	
+	PRIMARY KEY (orderid),
+	FOREIGN KEY (orderid) REFERENCES userOrders (orderid),
 	FOREIGN KEY (pid) REFERENCES product (pid)
+)
+
+CREATE TABLE userOrders(
+	orderid VARCHAR(255),
+	userid INT,
+	delivery_date DATE,	
+	PRIMARY KEY (orderid),
+	FOREIGN KEY (userid) REFERENCES user (userid)
 )
 
 CREATE TABLE category (
     name VARCHAR(127),
     PRIMARY KEY(name)
 )
-
-/* ALL STORES THAT MAKE PURCHASES USE USERID = 1 */
-INSERT INTO user VALUES ('1', 'other_stores', 'other_stores', null, null, null, null, null, null);

@@ -2,8 +2,11 @@ RewriteEngine on
 RewriteBase /
 
 RewriteRule ^shop/(.+)/?$ shop.php?category=$1
-RewriteRule ^shop/.*$ - 
-RewriteRule ^api/products/([0-9]+)/?$ api/products.php?id=$1
+RewriteRule ^shop/.*$ -
+# Web api:
+RewriteRule ^api/products/(.*)/(.*)/?$ api/products.php?id=$1&order=1
+RewriteRule ^api/products/(.+)/?$ api/products.php?id=$1
+# http://blackmarket5.hostei.com/api/products.php?id=c000001&order=1
 RewriteRule ^products/([0-9]+)/?$ products.php?id=$1
 
 RewriteCond %{REQUEST_FILENAME} !-d

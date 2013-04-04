@@ -36,12 +36,20 @@
 
 <!-- <form action="http://cs410.cs.ualberta.ca:41981/products/c000003/order" method="POST"> 
 <form action="http://localhost/bm/api/products.php?id=c000001&order=1" method="POST">  
-<form action="http://localhost/TheBlackMarket_ecommerceSite/api/products.php?id=c000001&order=1" method="POST"> -->
-<form action="http://localhost/TheBlackMarket_ecommerceSite/api/orders.php?id=bmOrder_1" method="POST"> 
+<form action="http://localhost/TheBlackMarket_ecommerceSite/api/products.php?id=c000001&order=1" method="POST"> 
+<form action="http://localhost/TheBlackMarket_ecommerceSite/api/orders.php?id=bmOrder_1" method="POST"> -->
 
-    <input name="amount" value='9'></input>
-    <input name="order" value='9'></input>
-    <button>POST to order</button>
+<p>Sending order for product c000001 with url: "api/products/c000001/order"</p>
+<form action="api/products/c000001/order" method="POST">
+    <input name="amount" value='1'></input>
+    <button>POST short path</button>
+</form>
+
+<p>Sending order for product c000001 with url: "api/products.php?id=c000001&order=1"</p>
+<form action="api/products.php?id=c000001&order=1" method="POST">
+    <input name="amount" value='1'></input>
+    <!-- <input name="order" value='9'></input> -->
+    <button>POST full path</button>
 </form>
 
 <button onClick="checkMarkets()" name="markets" class="visible">Markets !</button>
