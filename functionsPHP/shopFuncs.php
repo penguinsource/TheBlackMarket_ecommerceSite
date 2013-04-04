@@ -45,6 +45,7 @@ function printProducts($con, $category){
 		$id = $row['pid'];
 		$img = $row['imageurl'];
 		$name = $row['pname'];
+		$desc = $row['pdesc'];
 		$price = $row['price'];
 		$quantity = $row['quantity'];
 		$br = "";
@@ -84,7 +85,8 @@ function printProducts($con, $category){
 			echo "</div>";
 			echo "<div class='product-price'>$$price</div>";
 			//EDIT LINK FOR CART
-			echo "<div class='product-stock'>In Stock: $quantity <a href='somecartlinkiunno'><div class='testbutton'> Add to Cart</div></div></a>";
+			echo "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
+					<div onClick='addToCart(\"$id\",\"$name\",\"$desc\",$price);' class='testbutton'> Add to Cart</div></a></div>";
 		echo "</div>";
 		echo $br;
     }

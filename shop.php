@@ -29,6 +29,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script src="<?= $baseURL; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?= $baseURL; ?>functionsJS/shop.js"></script>
+	<script src="<?= $baseURL; ?>functionsJS/generalFuncs.js"></script>
 	
 	<link rel="icon" type="image/png" href="<?= $baseURL; ?>design/images/favicon.png">
 	<title> Shop </title>
@@ -53,6 +54,12 @@
 		<div class='menulink'> <a href='/about'>ABOUT</a> </div>
 		<div class='menulink'> <a href='/help'>HELP</a> </div>
 		<div class='menulink'> <a href='/faq'>FAQ</a> </div>
+	</div>
+	
+	<div id='userStuff'>
+		<div id='shoppingCart'>
+			<a href='/cart'>Shopping Cart (<?= checkCart(); ?>)</a>
+		</div>
 	</div>
 	
 	<div class='blueline'> </div>

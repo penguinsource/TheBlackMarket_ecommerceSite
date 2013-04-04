@@ -49,6 +49,18 @@ body {
 	padding-right:10px;
 }
 
+#userStuff{
+	float:right;
+	display:inline-block;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+#shoppingCart{
+	text-decoration: none;
+	font-weight: bold;
+}
+
 .blueline {
 	background-color: #006EB8;
 	width: 1000px;

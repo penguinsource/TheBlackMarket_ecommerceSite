@@ -42,5 +42,14 @@
         }*/
     }
     
+	function checkCart(){
+		if (isset($_SESSION['cart'])){
+			$cartJSON = json_decode($_SESSION['cart']);
+			$total = $cartJSON['total'];
+			return "$$subtotal";
+		} else {
+			return "$0.00";
+		}
+	}
     
 ?>
