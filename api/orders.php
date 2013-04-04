@@ -2,6 +2,7 @@
 
 /*
 A method that gets the status of an order.  It should return the old date or a new "delayed" date.
+Just need to check the id 
 
 POST /orders/:id
 return = {

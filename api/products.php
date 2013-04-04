@@ -84,7 +84,7 @@ function retProdDetails($pID){
     //$productDetails['weight'] = $row['weight'];
     //$productDetails['dim'] = $row['dim'];
     $productDetails['quantity'] = $row['quantity'];
-    $json = json_encode($productDetails); //
+    $json = json_encode($productDetails); // encode the json and send it back.
     echo $json;
     
     closeDBConnection($con);
@@ -130,10 +130,20 @@ function purchaseProduct($pid, $amount){
     
     // add this as a transaction towards another store:
     /* ALL STORES THAT MAKE PURCHASES FROM OUR STORE USE A PREDEFINED USERID = 1 */
+    
+    // delivery date = today + 1 day (86400 seconds)
     $currDate = date("Y-m-d");
-    $queryOrderIns = "INSERT INTO userOrders (orderid, userid, delivery_date) VALUES ('$orderid', '1', '$currDate');";
+    $delivery_date = date('Y-m-d', strtotime($currDate . ' + 1 day'));
+    $queryOrderIns = "INSERT INTO userOrders (orderid, userid, delivery_date) VALUES ('$orderid', '1', '$delivery_date');";
     mysqli_query($con, $queryOrderIns);
     
+    $orderDetails = array();                        // store the order details
+    $orderDetails['order_id'] = $orderid;           // save order details
+    $orderDetails['delivery_date'] = $delivery_date;
+    $json = json_encode($orderDetails);             // encode the json and send it back.
+    echo $json;
+    
+    closeDBConnection($con);
 }
 
 ?>
