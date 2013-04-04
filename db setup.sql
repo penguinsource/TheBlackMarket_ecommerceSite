@@ -38,3 +38,6 @@ CREATE TABLE category (
     name VARCHAR(127),
     PRIMARY KEY(name)
 )
+
+/* ALL STORES THAT MAKE PURCHASES USE USERID = 1 */
+INSERT INTO user VALUES ('1', 'other_stores', 'other_stores', null, null, null, null, null, null);

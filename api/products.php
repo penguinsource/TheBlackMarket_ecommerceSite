@@ -34,6 +34,7 @@ return = {
 */
 
 include("../functionsPHP/dbConnection.php");
+include("../functionsPHP/orderFuncs.php");
 
 if (isset($_GET["id"]) && (isset($_POST["amount"]))){ // #2
     // echo "id=".$_GET["id"];
@@ -103,7 +104,8 @@ function retProdDetails($pID){
 
 function purchaseProduct($pid, $amount){
     $con = connectToDB();
-    // check if there are enough products 
+    
+    // check if there are enough products (Not necessary, apparently !)
     $query = "SELECT * FROM product WHERE pid = '$pid'";
     $result = mysqli_query($con,$query);	        // query db
     $row = mysqli_fetch_assoc($result);
@@ -113,13 +115,24 @@ function purchaseProduct($pid, $amount){
         echo "Not enough products in stock ! THIS SHOULD NEVER BE CALLED !";
         return;
     }
-    $quantityRemaining = $stockQuantity - $amount;
+    $quantityRemaining = $stockQuantity - $amount;  // check the # of in stock products
+                                                    // and update it to database
+    
     // substract amount from the current stock quantity and update database
     $queryInsert = "UPDATE product SET quantity = '$quantityRemaining' WHERE pid = '$pid'";
     mysqli_query($con, $queryInsert);
     
-    $orderDetails = array();
+    // get current count of orders
+    $queryCount = "SELECT COUNT(*) FROM userOrders";
+    $resCount = mysqli_query($con, $queryCount);
+    $orderCount = mysqli_fetch_row($resCount);
+    $orderid = "bmOrder_".($orderCount[0]+1);
     
+    // add this as a transaction towards another store:
+    /* ALL STORES THAT MAKE PURCHASES FROM OUR STORE USE A PREDEFINED USERID = 1 */
+    $currDate = date("Y-m-d");
+    $queryOrderIns = "INSERT INTO userOrders (orderid, userid, delivery_date) VALUES ('$orderid', '1', '$currDate');";
+    mysqli_query($con, $queryOrderIns);
     
 }
 
