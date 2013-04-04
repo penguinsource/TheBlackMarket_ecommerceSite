@@ -37,7 +37,6 @@ include("../functionsPHP/dbConnection.php");
 
 if (isset($_GET["id"]) && (isset($_POST["amount"]))){ // #2
     // echo "id=".$_GET["id"];
-    echo "hello !";
     purchaseProduct($_GET['id'], $_POST["amount"]);
 } else if (isset($_GET["id"])){ // #1
     //echo "ordering for id=".$_POST["id"];
@@ -73,7 +72,7 @@ function retProdDetails($pID){
    
     //$row = mysqli_fetch_array($result);
     $row = mysqli_fetch_assoc($result);
-<<<<<<< HEAD
+
     // echo "pid:" . $row['pid'] . "<br>";
     $productDetails['id'] = $row['pid'];
     $productDetails['category'] = $row['pcategory'];
@@ -111,22 +110,16 @@ function purchaseProduct($pid, $amount){
     $stockQuantity = $row["quantity"];
     
     if ($amount > $stockQuantity){
-        echo "Not enough products in stock !";
+        echo "Not enough products in stock ! THIS SHOULD NEVER BE CALLED !";
         return;
     }
+    $quantityRemaining = $stockQuantity - $amount;
+    // substract amount from the current stock quantity and update database
+    $queryInsert = "UPDATE product SET quantity = '$quantityRemaining' WHERE pid = '$pid'";
+    mysqli_query($con, $queryInsert);
     
     $orderDetails = array();
     
-=======
-    echo "pid:" . $row['pid'] . "<br>";
-    //$row = mysqli_fetch_assoc($result);
-    echo "category:" . $row['pcategory'];
-    
-    //echo $row[0] . "<br>" . $row[1] . "<br>" . $row[2] . "<br>" .
-    //$row[3] . "<br>" . $row[4]. "<br>" . $row[5]. "<br>" . $row[6] . "<br>";
-    //$rowArray = array("id"=>$row[0]);
-    //array_push($productDetails, $rowArray);
->>>>>>> 2e20e23e3a4aa2019406fbc642476621a1ac3b33
     
 }
 

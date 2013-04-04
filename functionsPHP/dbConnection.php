@@ -2,14 +2,9 @@
 
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-<<<<<<< HEAD
     //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
     //$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db home
     $dbConfig = "http://localhost/bm/configLocal.ini";	       // for local db mac
-=======
-    $dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
-    //$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db
->>>>>>> 2e20e23e3a4aa2019406fbc642476621a1ac3b33
     //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
