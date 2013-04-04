@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<?php include("functionsPHP/generalFuncs.php"); ?>
-<?php include("functionsPHP/shopFuncs.php"); ?>
-<?php include("functionsPHP/dbConnection.php"); ?>
+<?php include_once("functionsPHP/generalFuncs.php"); ?>
+<?php include_once("functionsPHP/shopFuncs.php"); ?>
+<?php include_once("functionsPHP/dbConnection.php"); ?>
+<?php include_once("functionsPHP/ChromePhp.php"); ?>
 <?php 
 	checkPage(); 
 	$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
@@ -15,6 +16,8 @@
 	} else {
 		$category = null;
 	}
+	
+	ChromePhp::log("email from shop: " . $_SESSION['email']);
 ?>
 
 <head>

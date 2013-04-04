@@ -44,9 +44,9 @@
     
 	function checkCart(){
 		if (isset($_SESSION['cart'])){
-			$cartJSON = json_decode($_SESSION['cart']);
+			$cartJSON = json_decode($_SESSION['cart'], true);
 			$total = $cartJSON['total'];
-			return "$$subtotal";
+			return "$$total";
 		} else {
 			return "$0.00";
 		}
