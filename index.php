@@ -34,8 +34,9 @@
 <p><a href="http://localhost/TheBlackMarket_ecommerceSite/product.php/?category=Dishwashers&productID=c000001">Product page, category dishwashers and pid c000001</a></p>
 <p><a href="product.php/?category=Dishwashers&productID=c000001">Product page, category dishwashers and pid c000001</a></p>
 
-<!-- <form action="http://cs410.cs.ualberta.ca:41981/products/c000003/order" method="POST"> -->
-<form action="http://localhost/bm/api/products.php?id=c000001&order=1" method="POST">
+<!-- <form action="http://cs410.cs.ualberta.ca:41981/products/c000003/order" method="POST"> 
+<form action="http://localhost/bm/api/products.php?id=c000001&order=1" method="POST">  -->
+<form action="http://localhost/TheBlackMarket_ecommerceSite/api/products.php?id=c000001&order=1" method="POST">
     <input name="amount" value='9'></input>
     <input name="order" value='9'></input>
     <button>POST to order</button>

@@ -36,6 +36,8 @@ return = {
 include("../functionsPHP/dbConnection.php");
 include("../functionsPHP/orderFuncs.php");
 
+echo "ORIGIN: " . $_SERVER["REMOTE_ADDR"];
+
 if (isset($_GET["id"]) && (isset($_POST["amount"]))){ // #2
     // echo "id=".$_GET["id"];
     purchaseProduct($_GET['id'], $_POST["amount"]);
@@ -105,18 +107,45 @@ function retProdDetails($pID){
 function purchaseProduct($pid, $amount){
     $con = connectToDB();
     
-    // check if there are enough products (Not necessary, apparently !)
+	// all other stores will use ONE userid ( with email: $otherStoresUserid) when storing their orders in our db
+	$otherStoresUserid = '';
+	// userid for ALL the other stores
+	$other_stores_useremail = "OTHER_STORES";
+	// check if it exists in the db already;
+	$queryCheckUser = "SELECT userid FROM user WHERE email = '$other_stores_useremail'";
+	$resultUserid = mysqli_query($con, $queryCheckUser);
+	$rowUserid =  mysqli_fetch_row($resultUserid);
+	// if it does, take its userid (using it to record the purchases of other stores in our db)
+	// saving the userid in var $otherStoresUserid (if it exists)
+	$otherStoresUserid = $rowUserid[0];
+	// if it doesn't, create a new user with email and pass $other_stores_useremail
+	// and grab it's (auto incremented) userid stored in the user table
+	if (($rowUserid == null) || ($rowUserid == "")){
+		$addUseridQuery = "INSERT INTO user VALUES (null, '$other_stores_useremail', '$other_stores_useremail', null, null,".
+		" null, null, null, null);";
+		// create new user with email $other_stores_useremail ("OTHER_STORES")
+		mysqli_query($con, $addUseridQuery);
+		$queryCheckUser2 = "SELECT userid FROM user WHERE email = '$other_stores_useremail'";
+		$resultUserid2 = mysqli_query($con, $queryCheckUser2);
+		$rowUserid2 =  mysqli_fetch_row($resultUserid2);
+		// saving the userid in var $otherStoresUserid
+		$otherStoresUserid = $rowUserid2[0];
+	}
+	
+	// Using '$rowUserid' as userid for all other stores. will add orders in table userOrders using it as userid.
+	// For now, can't differentiate which store bought products from us, except that it's a different store.
+	
+    // check if there are enough products (fail-safe)
     $query = "SELECT * FROM product WHERE pid = '$pid'";
     $result = mysqli_query($con,$query);	        // query db
     $row = mysqli_fetch_assoc($result);
     $stockQuantity = $row["quantity"];
     
     if ($amount > $stockQuantity){
-        echo "Not enough products in stock ! THIS SHOULD NEVER BE CALLED !";
+        echo "ERROR! Not enough products in stock ! THIS SHOULD NEVER BE CALLED !";
         return;
     }
     $quantityRemaining = $stockQuantity - $amount;  // check the # of in stock products
-                                                    // and update it to database
     
     // substract amount from the current stock quantity and update database
     $queryInsert = "UPDATE product SET quantity = '$quantityRemaining' WHERE pid = '$pid'";
@@ -128,20 +157,26 @@ function purchaseProduct($pid, $amount){
     $orderCount = mysqli_fetch_row($resCount);
     $orderid = "bmOrder_".($orderCount[0]+1);
     
-    // add this as a transaction towards another store:
-    /* ALL STORES THAT MAKE PURCHASES FROM OUR STORE USE A PREDEFINED USERID = 1 */
-    
+    // --------------------------------------------
+    // Add the user/transaction in table 'userOrders'
+	
     // delivery date = today + 1 day (86400 seconds)
     $currDate = date("Y-m-d");
     $delivery_date = date('Y-m-d', strtotime($currDate . ' + 1 day'));
-    $queryOrderIns = "INSERT INTO userOrders (orderid, userid, delivery_date) VALUES ('$orderid', '1', '$delivery_date');";
+    $queryOrderIns = "INSERT INTO userOrders (orderid, userid, delivery_date) VALUES ('$orderid', '$otherStoresUserid', '$delivery_date');";
     mysqli_query($con, $queryOrderIns);
     
+    // --------------------------------------------
+    // Add the orderid/productid/amount in table 'productOrders'
+    $queryOrderProducts = "INSERT INTO productOrders (orderid, pid, amount) VALUES ('$orderid', '$pid', '$amount');";
+    mysqli_query($con, $queryOrderProducts);
+	
+	// Returning the json object with the order id and the delivery date
     $orderDetails = array();                        // store the order details
     $orderDetails['order_id'] = $orderid;           // save order details
     $orderDetails['delivery_date'] = $delivery_date;
     $json = json_encode($orderDetails);             // encode the json and send it back.
-    echo $json;
+    echo $json;										// return json
     
     closeDBConnection($con);
 }

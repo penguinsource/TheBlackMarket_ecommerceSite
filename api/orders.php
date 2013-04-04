@@ -10,7 +10,7 @@ return = {
 }
 */
 
-if (isset($_GET["id"])){
+if (isset($_POST["id"])){
     echo "id=".$_GET["id"];
 } else{
     // wrong call / 404 page..
