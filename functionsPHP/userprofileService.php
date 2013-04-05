@@ -3,30 +3,32 @@ session_start();
 include("dbConnection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
-	$con = connectToDB();
+	$con = connectToDB();	// connect to db
 	
+	/* get all the vars from POST */
 	if (isset($_POST['fname'])){
 		$fname = $_POST['fname'];
 	}
-	echo "AGAIN: " . $fname . " END";
 	if (isset($_POST['lname'])){
-		$fname = $_POST['lname'];
+		$lname = $_POST['lname'];
 	}
 	if (isset($_POST['city'])){
-		$fname = $_POST['city'];
+		$city = $_POST['city'];
 	}
 	if (isset($_POST['postal'])){
-		$fname = $_POST['postal'];
+		$postal = $_POST['postal'];
 	}
 	if (isset($_POST['address'])){
-		$fname = $_POST['address'];
+		$address = $_POST['address'];
 	}
 	if (isset($_POST['phone'])){
-		$fname = $_POST['phone'];
+		$phone = $_POST['phone'];
 	}
-	echo "UPDATING: fname=" . $fname . ", " . $lname;
-	$email = $_SESSION['email'];
-	$queryInsert = "UPDATE user SET firstname = '$fname', lastname = '$lname', city = '$city', postal = '$postal', address = '$address', phone = '$address' WHERE email = '$email';";
+	
+	$email = $_SESSION['email'];		// save email of the user logged in
+	
+	// update database record
+	$queryInsert = "UPDATE user SET firstname = '$fname', lastname = '$lname', city = '$city', postal = '$postal', address = '$address', phone = '$phone' WHERE email = '$email';";
     mysqli_query($con, $queryInsert);
 	
     closeDBConnection($con);    // close the database connection
