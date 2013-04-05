@@ -48,4 +48,20 @@ function formatPrice(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-
+function updateUserProfile(){
+	var fnameInp = document.getElementById('fname').value;
+	var lnameInp = document.getElementById('lname').value;
+	var cityInp = document.getElementById('city').value;
+	var postalInp = document.getElementById('postalcode').value;
+	var addressInp = document.getElementById('address').value;
+	var phoneInp = document.getElementById('phonenumber').value;
+	
+	$.ajax({url: '/functionsPHP/userprofileService',
+        type: 'POST', 
+        data: { fname: fnameInp, lname: lnameInp, city: cityInp, postal: postalInp, address: addressInp, phone: phoneInp},
+        success: function(response) {
+        	alert("Updated Profile !" + response);
+        }
+    })
+	
+}
