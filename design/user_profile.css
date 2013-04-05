@@ -1,0 +1,121 @@
+
+H2{
+	margin:0;
+	padding:0;
+	margin:15px 0 15px;
+	margin-left: 15px;
+}
+
+.floatLefty {
+	float: left;
+	margin: 0 15px 0;
+}
+
+.floatRighty {
+	float: right;
+	margin:0;
+	margin-right:45px;
+}
+
+/*  --------------- */
+/*	Left side menu  */
+
+.leftMenu {
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+	height: auto;
+	/* background-color: red; */
+	padding-bottom: 20px;
+	margin-bottom: 25px;
+}
+
+.profileTitle {
+	text-align: center;
+	width: auto;
+	font-size: 25px;
+	color: gray;
+	/* background-color: blue; */
+}
+
+.profileMenu {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid;
+    border-color: #CCCCCC;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	width:90%;
+	height: 150px;
+	background-color: #EFEFEF;
+}
+
+.profileMenuTab {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	width: 100%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	opacity:0.8;
+	text-align: center;
+	font-size: 22px;
+}
+
+.profileMenuTabSel {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	width: 100%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #3182D3;
+	opacity:0.8;
+	text-align: center;
+	font-size: 22px;
+}
+
+.profileMenuTabSel a:hover {
+	color: #DDDDDD;
+}
+
+.profileTab {
+	position: relative;
+	top: 11px;
+}
+
+/*  --------------- */
+/*	Content  */
+
+.profileSettings {
+	display: inline-block;
+	vertical-align: top;
+	height: 500px;
+	width: 200px;
+	margin:0;
+	padding:0;
+	padding-left: 35px;
+	margin-left: 0px;
+	margin-top: 10px;
+	border-left: 1px solid;
+    border-color: #E4E4E4;
+	/* background-color: red; */
+}
+
+a:link {
+	color: red; /*The color of the link*/
+}
+
+/*
+a:visited {
+	color: #800080;
+}
+*/
+
+a:hover {
+	color: #3182D3; /*The color of the mouseover or 'hover' link*/
+}
