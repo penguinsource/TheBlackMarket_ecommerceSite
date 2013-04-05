@@ -20,15 +20,6 @@
 
     function registerUser(){
        $con = connectToDB();
-        
-		// ------------------------------------------------
-		// NEED TO CHECK IF THE USER REGISTERING IS ALREADY REGISTERED (SAME EMAIL)
-		// *****************************************************************
-		// *****************************************************************
-		// *****************************************************************
-		// *****************************************************************
-		// *****************************************************************
-		// *****************************************************************
 		
         // validate email; should no be null or have an incorrect format
         if (isset($_POST['registerName'])){
@@ -45,8 +36,18 @@
                 echo "That's not an email. Please retry !";
                 die();
         }
+		
+		// Check for duplicate emails ------
+		$queryCheckEmail = "SELECT COUNT(*) FROM user WHERE email = '$email';";
+		$resultEmailCheck = mysqli_query($con, $queryCheckEmail) or die("Query failed checking user's email in db.");
+		$emailValidity = mysqli_fetch_array($resultEmailCheck);
+		echo "valid: ".$emailValidity[0];
+		// if there is another one.. then registration cannot continue as $email is already used by another user
+		if ($emailValidity[0] > 0){
+			die("This email is already used !");
+		}
         
-        // validate password; should no be null or < 6 characters
+        // validate password; should no be null or < 6 characters ------
         if (isset($_POST['registerPass'])){
             $password = $_POST['registerPass'];
         }

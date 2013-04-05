@@ -1,8 +1,8 @@
 <?php
-	include_once('/functionsPHP/generalFuncs.php');
+	//include_once('/functionsPHP/generalFuncs.php');
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-	
+	$localhostON = 1;
 	if ($GLOBALS['localhostON'] == 0){
 		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
 	} else if ($GLOBALS['localhostON'] == 1){
