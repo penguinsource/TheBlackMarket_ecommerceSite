@@ -5,15 +5,10 @@ include("dbConnection.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
 	$con = connectToDB();
 	
-	$fname = '';
-	$lname = '';
-	$city = '';
-	$postal = '';
-	$address = '';
-	$phone = '';
 	if (isset($_POST['fname'])){
 		$fname = $_POST['fname'];
 	}
+	echo "AGAIN: " . $fname . " END";
 	if (isset($_POST['lname'])){
 		$fname = $_POST['lname'];
 	}
