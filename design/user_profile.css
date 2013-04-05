@@ -39,17 +39,17 @@ H2{
 }
 
 .profileMenu {
-	-webkit-border-radius: 4px;
+/* 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	border: 1px solid;
-    border-color: #CCCCCC;
+    border-color: #CCCCCC; */
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 60px;
 	width:80%;
 	height: 150px;
-	background-color: #EFEFEF;
+	/* background-color: #EFEFEF; */
 }
 
 .profileMenuTab {
@@ -60,9 +60,12 @@ H2{
 	height: 50px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 5px;
 	opacity:0.8;
 	text-align: center;
 	font-size: 18px;
+	border-bottom: 1px solid;
+    border-color: #E4E4E4;
 }
 
 .profileMenuTabSel {
@@ -73,14 +76,14 @@ H2{
 	height: 50px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #3182D3;
+	margin-bottom: 5px;
 	opacity:0.8;
 	text-align: center;
 	font-size: 18px;
-}
-
-.profileMenuTabSel a:hover {
-	color: #DDDDDD;
+	border-bottom: 1px solid;
+    border-color: #E4E4E4;
+	border-left: 2px solid;
+	border-color: #E4E4E4;
 }
 
 .profileTab {
@@ -91,7 +94,7 @@ H2{
 /*  --------------- */
 /*	Content  */
 
-.profileSettings {
+.smallColumn {
 	display: inline-block;
 	vertical-align: top;
 	height: 500px;
@@ -107,14 +110,14 @@ H2{
 }
 
 a:link {
-	color: red; /*The color of the link*/
+	color: #E4E4E4; /*The color of the link*/
 }
 
-/*
+
 a:visited {
-	color: #800080;
+	color: #515151;
 }
-*/
+
 
 a:hover {
 	color: #3182D3; /*The color of the mouseover or 'hover' link*/

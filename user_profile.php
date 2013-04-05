@@ -6,24 +6,26 @@
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php 
 	checkPage(); 
-	//$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
 ?>
 <html>
 
 <head>
-	<!--<style type="text/css">
-		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
-	</style>-->
-
+	<base href="//blackmarket5.hostei.com" />
+	<!-- CSS imports -->
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
-	
-	<base href="//blackmarket5.hostei.com" />
-	<!-- <script type="text/javascript" src="functionsJS/generalFuncs.js"></script> -->
-	<script type="text/javascript" src="http://localhost/TheBlackMarket_ecommerceSite/functionsJS/generalFuncs.js"></script>
-	
-	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<script>
+		function showProfile(page){
+			alert("page:" + page);
+			if (page == 'orders'){
+				alert("HELLO !");
+			}
+		}
+	</script>
+	<!-- script imports -->
+	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
+	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script >
@@ -38,15 +40,16 @@
 			});
 		});
 	</script>
+	
 </head>
 
 <body>
-
+	<!-- body start -->
 <?php 
 if (isset($_SESSION['email'])){ 
 	$user = getUserInfo($_SESSION['email']);
 }else{
-	echo "USER NOT LOGGED IN !";
+	echo 'USER NOT LOGGED IN !';
 };
 ?>
 
@@ -58,21 +61,18 @@ if (isset($_SESSION['email'])){
 		<div class="profileTitle"> Your Profile </div>
 		<div class="profileMenu">
 			<?php if (isset($_GET['profileOrders'])){
-				/*echo "<div class='profileMenuTab'><span class='profileTab'> <a href='user_profile.php'> Settings </a> </span></div> ";
-				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='user_profile.php?profileOrders'> Orders </a> </span></div> "; */
-				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='http://localhost/TheBlackMarket_ecommerceSite/user_profile.php'> Settings </a> </span></div> ";
-				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='http://localhost/TheBlackMarket_ecommerceSite/user_profile.php?profileOrders'> Orders </a> </span></div> ";
+				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='".$GLOBALS['baseURL']."user_profile.php'> Settings </a> </span></div> ";
+				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='".$GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
 			} else {
-				/*echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='user_profile.php'> Settings </a> </span></div> ";		// FOR REMOTE HOST!
-				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='user_profile.php?profileOrders'> Orders </a> </span></div> "; */
-				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='http://localhost/TheBlackMarket_ecommerceSite/user_profile.php'> Settings </a> </span></div> ";
-				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='http://localhost/TheBlackMarket_ecommerceSite/user_profile.php?profileOrders'> Orders </a> </span></div> ";
+				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php'> Settings </a> </span></div> ";
+				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
+				// onClick='showProfile('orders');'
 			}
 			?>
 		</div>
 	</div>
 	
-	<div class="profileSettings">
+	<div class='smallColumn' id='profileSettings'>
 		
 			<p> First Name </p>
 			<input type='text' name='fname' id='fname' value='<?php echo $user['firstname']; ?>'></input>
@@ -91,7 +91,7 @@ if (isset($_SESSION['email'])){
 		
 	</div>
 	
-	<div class="profileSettings">
+	<div class='smallColumn' id='profileSettings'>
 		<p>Email </p>
 		<input type='text' name='email' id='email' value='<?php echo $user['email'] ?>' disabled></input>
 	</div>
