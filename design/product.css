@@ -13,7 +13,8 @@ H2{
 
 .floatRighty {
 	float: right;
-	margin: 0 15px 0;
+	margin:0;
+	margin-right:45px;
 }
 
 /* Fonts, texts */
@@ -67,12 +68,29 @@ p.productText {
 .productContent {
 	display: inline-block;
 	vertical-align: top;
-	background-color:gray;
+	/* background-color:gray; */
+	font-family: "Open Sans",Verdana,sans-serif;
+	font-size: 13px;
 	margin:0;
 	padding:0;
 	margin-left:25px;
 	width: 350px;
 	border: none;
+}
+
+.imageWrapper {
+	display: inline-block;
+	/* vertical-align: top; */
+	width: 330px;
+	max-width: 330px;
+	height: 330px;
+	max-height: 330px;
+	padding:0;
+	margin:0;
+	padding-left: 2px;
+	border-left: 1px solid;
+    border-color: #E4E4E4;
+	float: right;
 }
 
 .productImage {
@@ -85,9 +103,6 @@ p.productText {
 	padding:0;
 	margin:0;
 	padding-left: 2px;
-	border-left: 1px solid;
-    border-color: #E4E4E4;
-	
 	float: right;
 	/*padding-left: 5px;
 	background-color:blue;*/
@@ -101,12 +116,56 @@ p.productText {
 	display: block;
 	margin:0;
 	padding:0;
-	margin-top: 20px;
+	margin-top: 5px;
 	font-size: 16px;
 	/* background-color: blue; */
 }
 
-.clearBothBlock {
+span.productRatingPrice {
+	float: right;
+	width: auto;
+	margin-right: 15px;
+	/* background-color: red; */
+}
+
+span.rating {
+	display: inline;
+	vertical-align: bottom;
+	width: 500px;
+	height:20px;
+	color: #C9C9C9;
+	margin-right: 10px;
+	/* background-color: blue; */
+}
+
+span.price {
+	font-size: 29px;
+	width: 350px;
+	/* background-color: purple; */
+}
+
+span.quantity {
+	margin:0;
+	padding:0;
+	margin-right: 5px;
+	font-size: 16px;
+	
+}
+
+.addCartButton {
+	display: inline-block;
+	color: white;
+	background-color: #585858;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-align: center;
+	width:75px;
+	margin-top: 2px;
+	margin-right: 10px;
+}
+
+.clear {
 	clear:both;
 	display: block;
 }
@@ -118,11 +177,13 @@ p.productText {
 	margin:0;
 	padding:0;
 	height: auto;
-	width: 95%;
+	width: 75%;
 	margin-left: 16px;
 	padding-bottom: 100px;
 	background-color: #EEEEEE;
 	border-top-left-radius: 6px;
+	margin-left: 200px;
+	/* background-color: red; */
 }
 
 .commentsContentHeader {
