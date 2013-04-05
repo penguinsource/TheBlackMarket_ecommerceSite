@@ -3,7 +3,7 @@
 <?php include("functionsPHP/shopFuncs.php"); ?>
 <?php include("functionsPHP/productFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
-<?php include ("functionsPHP/user_profileFuncs.php"); ?>
+<?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php 
 	checkPage(); 
 	$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
