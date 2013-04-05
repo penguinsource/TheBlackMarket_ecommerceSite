@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 
 				// increase total price, and add cart to session var
 				$cartJSON['total'] += $itemJSON['price'];
-				$_SESSION['cart'] = json_encode($cartJSON);
 				
 				ChromePhp::log("added item $id to cart");
 		
@@ -47,10 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				
 				// if items exists, update its quantity
 				if (isset($index)){
-					$oldQ = $cartJSON['products'][$index]['quantity'];							//grab old quantity
-					$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
+					//$oldQ = $cartJSON['products'][$index]['quantity'];						//grab old quantity
+					//$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					$cartJSON['products'][$index]['quantity'] = $quantity;						//set new quantity
-					$cartJSON['total'] += $quantity * $cartJSON['products'][$index]['price'];	//add price of new quantity
+					//$cartJSON['total'] += $quantity * $cartJSON['products'][$index]['price'];	//add price of new quantity
+					$cartJSON['total'] = getTotal($cartJSON['products']);						// recalculate total to avoid innacuracies
 					
 					if($quantity == 0){
 						ChromePhp::log("quantity is 0, unsetting");
@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 					}
 				}	
 
-				$_SESSION['cart'] = json_encode($cartJSON);
 				ChromePhp::log("updated item $id quantity to $quantity");
 		
 				break;
@@ -73,9 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				
 				// if items exists, remove it 
 				if (isset($index)){
-					$oldQ = $cartJSON['products'][$index]['quantity'];							//grab old quantity
-					$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
+					//$oldQ = $cartJSON['products'][$index]['quantity'];							//grab old quantity
+					//$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					unset($cartJSON['products'][$index]);
+					$cartJSON['total'] = getTotal($cartJSON['products']);						// recalculate total to avoid innacuracies
 					
 					$cartStr = json_encode($cartJSON);
 					ChromePhp::log("cartjson var : $cartStr");
@@ -87,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 
 				// increase total price, and add cart to session var
 				$cartJSON['total'] += $itemJSON['price'];
-				$_SESSION['cart'] = json_encode($cartJSON);
 
 				ChromePhp::log("removed item $id from cart");
 				
@@ -105,12 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 		$cartJSON['products'] = array();
 		array_push($cartJSON['products'], $itemJSON);
 		$cartJSON['total'] = $itemJSON['price'];
-		$_SESSION['cart'] = json_encode($cartJSON);
+		
 		
 		ChromePhp::log("creating new cart session var");
 		ChromePhp::log($_SESSION['cart']);
 	}
     
+	$_SESSION['cart'] = json_encode($cartJSON);
 	echo $_SESSION['cart'];
 }
 
@@ -124,5 +124,15 @@ function exists($id, $jsonArray){
 	} 
 
 	return null;
+}
+
+function getTotal($jsonArray){
+	$total = 0;
+	
+	foreach ($jsonArray as $item){
+		$total += $item['price'] * $item['quantity'];
+	} 
+	
+	return $total;
 }
 ?>

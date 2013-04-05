@@ -44,6 +44,7 @@ function removeFromCart(id, name){
 
 function updateCart(id,quantity,name,price){
 	if (!(/^\d+$/.test(quantity))) return;
+	if (quantity > 999) return;
 	$.ajax({url: '/functionsPHP/cartService',
         type: 'POST', 
         data: { id: id, quantity : quantity, type: "update" },
