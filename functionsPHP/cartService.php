@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				// increase total price, and add cart to session var
 				$cartJSON['total'] += $itemJSON['price'];
 				$_SESSION['cart'] = json_encode($cartJSON);
+				
+				ChromePhp::log("added item $id to cart");
 		
 				break;
 			// update item's quantity (used from shopping cart page if user wants to change quantity of item)
@@ -45,9 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 					$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					$cartJSON['products'][$index]['quantity'] = $quantity;						//set new quantity
 					$cartJSON['total'] += $quantity * $cartJSON['products'][$index]['price'];	//add price of new quantity
+					
+					if($quantity == 0){
+						unset($cartJSON['products'][$index]);
+						$cartJSON['products'] = array_values($cartJSON['products']);
+					}
 				}	
 
 				$_SESSION['cart'] = json_encode($cartJSON);
+				ChromePhp::log("updated item $id quantity");
 		
 				break;
 			// removes all quantities of that item (used from shopping cart page if users presses "x")
@@ -56,22 +64,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				
 				// if items exists, remove it 
 				if ($index != null){
+					$oldQ = $cartJSON['products'][$index]['quantity'];							//grab old quantity
+					$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					unset($cartJSON['products'][$index]);
 					$cartJSON['products'] = array_values($cartJSON['products']);
-					array_push($cartJSON['products'], $itemJSON);
 				}
 
 				// increase total price, and add cart to session var
 				$cartJSON['total'] += $itemJSON['price'];
 				$_SESSION['cart'] = json_encode($cartJSON);
 
+				ChromePhp::log("removed item $id from cart");
+				
 				break;
 			
 			default:
 				break;
 		}
 		
-		ChromePhp::log("updating cart session var");
 		ChromePhp::log($_SESSION['cart']);
 		
     // else create new cart object and set total

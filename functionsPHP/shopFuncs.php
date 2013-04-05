@@ -78,7 +78,7 @@ function printProducts($con, $category){
 		$i++;
 		
 		echo "<div class='product$border'> \n";
-			echo "<a href='products/$category/$id'> <img class='imgthumb' src='images/$img'> \n";
+			echo "<a href='product/$category/$id'> <img class='imgthumb' src='images/$img'> \n";
 			echo "<p class='product-name'>$name</p> </a> \n";
 			echo "<div class='product-rating'>";
 				echo $ratingString;
@@ -86,7 +86,7 @@ function printProducts($con, $category){
 			echo "<div class='product-price'>$$price</div>";
 			//EDIT LINK FOR CART
 			echo "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
-					<div onClick='addToCart(\"$id\",\"$name\",\"$desc\",$price);' class='testbutton'> Add to Cart</div></a></div>";
+					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\");' class='cart-button'> Add to Cart</div></a></div>";
 		echo "</div>";
 		echo $br;
     }
