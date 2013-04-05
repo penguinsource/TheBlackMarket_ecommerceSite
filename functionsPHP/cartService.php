@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				$index = exists($itemJSON['id'], $cartJSON['products']);
 
 				// if items exists, update its quantity
-				if ($index != null){
+				if (isset($index)){
 					$cartJSON['products'][$index]['quantity']++;
 				} else {	 //else, add the item to the cart
 					array_push($cartJSON['products'], $itemJSON);

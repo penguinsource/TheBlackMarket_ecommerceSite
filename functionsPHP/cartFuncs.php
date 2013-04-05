@@ -7,8 +7,10 @@ function printCartItems(){
 	
 	// if cart doesn't exist or is empty, print message
 	if (!isset($_SESSION['cart']) or empty($cartJSON['products'])){
-		echo "<div class='cart-no-items'> Your cart is currently empty</div>\n";
+		echo "<div id='cart-no-items' class='cart-no-items' style='height: 85px;'> Your cart is currently empty</div>\n";
 	} else {	//else print all items in cart
+		echo "<div id='cart-no-items' class='cart-no-items' style='height: 0px;'> Your cart is currently empty</div>\n";
+		
 		foreach($cartJSON['products'] as $item){
 			$id = $item['id'];
 			$name = $item['name'];
@@ -16,16 +18,15 @@ function printCartItems(){
 			$quantity = $item['quantity'];
 			$img = $item['img'];
 			
-			$priceToShow = $price * $quantity;
+			$priceToShow = $price * $quantity;		
 			
-			echo "<div id='cart-item-$id' class='cart-item'>\n";
+			echo "<div id='cart-item-$id' class='cart-item'>\n";				
 				echo "<div class='cart-item-product'>\n";
 					echo "<a href='/product/dishwashers/$id'> <img src='images/$img'></img> <div style='margin-left:20px;display:inline-block;'>$name</div> </a>\n";
 				echo "</div> </a>";
 				
 				echo "<div align='center' class='cart-item-quantity'>\n";
-					echo "<input type='text' id='quantity-$id' value='$quantity' onChange='updateCart(\"$id\", document.getElementById(\"quantity-$id\").value, \"$name\");' 
-							onkeypress='this.onchange();' onpaste='this.onchange();' oninput='this.onchange();'></input>\n";
+					echo "<input type='text' id='quantity-$id' value='$quantity' oninput='updateCart(\"$id\", document.getElementById(\"quantity-$id\").value, \"$name\", $price);'></input>\n";
 				echo "</div>\n";
 				
 				echo "<div align='center' id='price-$id' class='cart-item-price'> $$priceToShow </div>\n";					
@@ -37,7 +38,7 @@ function printCartItems(){
 	}
 	
 	
-	echo "<div id='cart-total'> Total: <span id='cart-total-price'>$$total</span> </div>";
+	echo "<div id='cart-total'> Total: <div id='cart-total-price'>$$total</div> </div>";
 }
 
 ?>

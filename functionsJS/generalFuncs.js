@@ -12,7 +12,7 @@ function addToCart(id,name,price,img){
         type: 'POST', 
         data: { data: jsonStr, type: "add" },
         success: function(response) {
-        		var cart = JSON.parse(response);
+        	var cart = JSON.parse(response);
             document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
 			document.getElementById("alert").innerHTML="Item '" + item.name + "' successfully added to shopping cart.";	
         }
@@ -24,20 +24,45 @@ function removeFromCart(id, name){
         type: 'POST', 
         data: { id: id, type: "remove" },
         success: function(response) {
-        		var cart = JSON.parse(response);
-            document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
+			var cart = JSON.parse(response);
+			$("#cart-item-"+id).animate({height:'0px'}, 500, "linear",function()
+					{	
+						if(cart.products.length == 0){
+							$("#cart-no-items").animate({height:'85px'}, 500);
+						}
+						$(this).remove();
+					});
+					
+			
+			
+			document.getElementById("cart-total-price").innerHTML = "$" + formatPrice(cart.total);
+			document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
 			document.getElementById("alert").innerHTML="Item '" + name + "' successfully removed from cart.";	
         }
     })
 }
 
-function updateCart(id,quantity,name){
+function updateCart(id,quantity,name,price){
+	if (!(/^\d+$/.test(quantity))) return;
 	$.ajax({url: '/functionsPHP/cartService',
         type: 'POST', 
         data: { id: id, quantity : quantity, type: "update" },
         success: function(response) {
-        		var cart = JSON.parse(response);
-            document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
+			var cart = JSON.parse(response);
+			if (quantity == 0) {
+				$("#cart-item-"+id).animate({height:'0px'}, 500, "linear",function()
+					{	
+						if(cart.products.length == 0){
+							$("#cart-no-items").animate({height:'85px'}, 500);
+						}
+						$(this).remove();
+					});
+				
+			} else {
+				document.getElementById("price-" + id).innerHTML = "$" + formatPrice(quantity * price);
+			}
+			document.getElementById("cart-total-price").innerHTML = "$" + formatPrice(cart.total);
+			document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
 			document.getElementById("alert").innerHTML="Updated quantity for '" + name + "'.";	
         }
     })
@@ -45,7 +70,7 @@ function updateCart(id,quantity,name){
 
 function formatPrice(x) {
 	if (x == 0) return "0.00";
-	x - parseFloat(Math.round(x * 100) / 100).toFixed(2);
+	x = parseFloat(Math.round(x * 100) / 100).toFixed(2);
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
