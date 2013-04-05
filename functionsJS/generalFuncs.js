@@ -55,7 +55,7 @@ function updateUserProfile(){
 	var postalInp = document.getElementById('postalcode').value;
 	var addressInp = document.getElementById('address').value;
 	var phoneInp = document.getElementById('phonenumber').value;
-	
+	alert("fname:"+fnameInp);
 	$.ajax({url: '/functionsPHP/userprofileService',
         type: 'POST', 
         data: { fname: fnameInp, lname: lnameInp, city: cityInp, postal: postalInp, address: addressInp, phone: phoneInp},

@@ -1,7 +1,10 @@
 <?php
 session_start();
+include("dbConnection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
+	$con = connectToDB();
+	
 	$fname = '';
 	$lname = '';
 	$city = '';
@@ -26,9 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
 	if (isset($_POST['phone'])){
 		$fname = $_POST['phone'];
 	}
-	
-	$queryInsert = "UPDATE user SET firstname = '$fname', lastname = '$lname', city = '$city', postal = '$postal', address = '$address', phone = '$address' WHERE email = '$_SESSION['email']'";
+	echo "UPDATING: fname=" . $fname . ", " . $lname;
+	$email = $_SESSION['email'];
+	$queryInsert = "UPDATE user SET firstname = '$fname', lastname = '$lname', city = '$city', postal = '$postal', address = '$address', phone = '$address' WHERE email = '$email';";
     mysqli_query($con, $queryInsert);
+	
+    closeDBConnection($con);    // close the database connection
 }
 
 ?>
