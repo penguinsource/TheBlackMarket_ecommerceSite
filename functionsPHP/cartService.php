@@ -39,35 +39,50 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				break;
 			// update item's quantity (used from shopping cart page if user wants to change quantity of item)
 			case 'update':
-				$index = exists($itemJSON['id'], $cartJSON['products']);
+				$index = exists($id, $cartJSON['products']);
 
+				ChromePhp::log("index of item $id is $index");
+				$tempname = $cartJSON['products'][$index]['name'];
+				ChromePhp::log("item at $index is $tempname");
+				
 				// if items exists, update its quantity
-				if ($index != null){
+				if (isset($index)){
 					$oldQ = $cartJSON['products'][$index]['quantity'];							//grab old quantity
 					$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					$cartJSON['products'][$index]['quantity'] = $quantity;						//set new quantity
 					$cartJSON['total'] += $quantity * $cartJSON['products'][$index]['price'];	//add price of new quantity
 					
 					if($quantity == 0){
+						ChromePhp::log("quantity is 0, unsetting");
 						unset($cartJSON['products'][$index]);
 						$cartJSON['products'] = array_values($cartJSON['products']);
 					}
 				}	
 
 				$_SESSION['cart'] = json_encode($cartJSON);
-				ChromePhp::log("updated item $id quantity");
+				ChromePhp::log("updated item $id quantity to $quantity");
 		
 				break;
 			// removes all quantities of that item (used from shopping cart page if users presses "x")
 			case 'remove':
 				$index = exists($id, $cartJSON['products']);
 				
+				ChromePhp::log("index of item $id is $index");
+				$tempname = $cartJSON['products'][$index]['name'];
+				ChromePhp::log("item at $index is $tempname");
+				
 				// if items exists, remove it 
-				if ($index != null){
+				if (isset($index)){
 					$oldQ = $cartJSON['products'][$index]['quantity'];							//grab old quantity
 					$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					unset($cartJSON['products'][$index]);
+					
+					$cartStr = json_encode($cartJSON);
+					ChromePhp::log("cartjson var : $cartStr");
+					
 					$cartJSON['products'] = array_values($cartJSON['products']);
+				} else {
+					ChromePhp::log("index is null");
 				}
 
 				// increase total price, and add cart to session var
