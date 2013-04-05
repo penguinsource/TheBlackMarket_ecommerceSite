@@ -70,22 +70,6 @@
 				
 				<?php printCartItems(); ?>
 				
-				<!--<div id='cart-item-c0000001' class='cart-item'>
-					<div class='cart-item-product'>
-						<a href='/product/dishwashers/c000001'> <img src='images/c000001.jpg'></img> <div style='margin-left:20px;display:inline-block;'>Breville Cafe Roma Espresso Machine</div> </a>
-					</div> </a>
-					
-					<div align='center' class='cart-item-quantity'>
-						<input type='text' id='quantity-c000001'></input>
-					</div>
-					
-					<div align='center' class='cart-item-price'> $599.99 </div>
-					
-					<div align='center' class='cart-item-remove' > <input type='image' src='/design/images/redx.png' onClick='removeFromCart("c000001");' width='20px'>	</div>
-				</div>
-				
-				<div id='cart-total'> Total: <span id='cart-total-price'>$1099.99</span> </div>-->
-				
 				<br><br><br><br><br><div style="float:right"><a href='/shop'><button> Continue Shopping </button></a> <a href='/order'><button> Checkout Cart </button></a></div><br><br><br>
 				
 			</div>
