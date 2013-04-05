@@ -3,6 +3,7 @@
 <?php include("functionsPHP/shopFuncs.php"); ?>
 <?php include("functionsPHP/productFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
+<?php include ("functionsPHP/user_profileFuncs.php"); ?>
 <?php 
 	checkPage(); 
 	$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
@@ -22,6 +23,8 @@
 	<LINK REL=STYLESHEET HREF="http://localhost/bm/design/product.css" TYPE="text/CSS">-->
 	
 	<base href="//blackmarket5.hostei.com" />
+	<!-- <script type="text/javascript" src="functionsJS/generalFuncs.js"></script> -->
+	<script type="text/javascript" src="http://localhost/TheBlackMarket_ecommerceSite/functionsJS/generalFuncs.js"></script>
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
@@ -42,17 +45,13 @@
 
 <body>
 
-<?php
-    $con = connectToDB();
-	if (isset($_GET["userid"])){
-		//$productID = $_GET["productID"];
-		//$product = getProductInfo($con, $productID);
-	}else {
-		echo "No user id sent";
-	}
+<?php 
+if (isset($_SESSION['email'])){ 
+	$user = getUserInfo($_SESSION['email']);
+}else{
+	echo "USER NOT LOGGED IN !";
+};
 ?>
-
-</body>
 
 <div class='main'>
 
@@ -77,27 +76,27 @@
 	</div>
 	
 	<div class="profileSettings">
-		<form name='userProfile'>
+		
 			<p> First Name </p>
-			<input type='text' name='fname' id='fname'></input>
+			<input type='text' name='fname' id='fname' value='<?php echo $user['firstname']; ?>'></input>
 			<p> Last Name </p>
-			<input type='text' name='lname' id='lname'></input>
+			<input type='text' name='lname' id='lname' value='<?php echo $user['lastname']; ?>'></input>
 			<p> City </p>
-			<input type='text' name='city' id='city'></input>
+			<input type='text' name='city' id='city' value='<?php echo $user['city']; ?>'></input>
 			<p> Postal Code </p>
-			<input type='text' name='postalcode' id='postalcode'></input>
+			<input type='text' name='postalcode' id='postalcode' value='<?php echo $user['postal']; ?>'></input>
 			<p> Address </p>
-			<input type='text' name='address' id='address'></input>
+			<input type='text' name='address' id='address' value='<?php echo $user['address']; ?>'></input>
 			<p> Phone Number </p>
-			<input type='text' name='phonenumber' id='phonenumber'></input>
+			<input type='text' name='phonenumber' id='phonenumber' value='<?php echo $user['phone']; ?>'></input>
 			<br><br>
-			<button>Save Profile</button>
-		</form>
+			<button onClick="updateUserProfile()">Save Profile</button>
+		
 	</div>
 	
 	<div class="profileSettings">
 		<p>Email </p>
-		<input type='text' name='email' id='email' value='test @yahoo.com' disabled></input>
+		<input type='text' name='email' id='email' value='<?php echo $user['email'] ?>' disabled></input>
 	</div>
 	
 	<!-- FILLING REST OF WIDTH: 
@@ -111,6 +110,6 @@ Starts in the middle, and goes all the way to the right edge.
 	
 </div>
 
-
+</body>
 
 </html>

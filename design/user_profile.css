@@ -47,7 +47,7 @@ H2{
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 60px;
-	width:90%;
+	width:80%;
 	height: 150px;
 	background-color: #EFEFEF;
 }
@@ -62,7 +62,7 @@ H2{
 	margin-right: auto;
 	opacity:0.8;
 	text-align: center;
-	font-size: 22px;
+	font-size: 18px;
 }
 
 .profileMenuTabSel {
@@ -76,7 +76,7 @@ H2{
 	background-color: #3182D3;
 	opacity:0.8;
 	text-align: center;
-	font-size: 22px;
+	font-size: 18px;
 }
 
 .profileMenuTabSel a:hover {
@@ -119,3 +119,4 @@ a:visited {
 a:hover {
 	color: #3182D3; /*The color of the mouseover or 'hover' link*/
 }
+

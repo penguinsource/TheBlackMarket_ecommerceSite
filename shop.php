@@ -23,6 +23,7 @@
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
 	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
+	
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	<base href="//blackmarket5.hostei.com" />
 	
@@ -74,7 +75,7 @@
 			<?php printCategories($con, $category); ?>
 		</div>
 		
-		<div class='body'>		
+		<div class='body'>
 		
 			<?php printProducts($con, $category); ?>
 		

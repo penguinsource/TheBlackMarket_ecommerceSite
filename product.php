@@ -57,8 +57,6 @@
 	}
 ?>
 
-</body>
-
 <div class='main'>
 	<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 	
@@ -141,6 +139,6 @@
 
 </div>
 
-
+</body>
 
 </html>

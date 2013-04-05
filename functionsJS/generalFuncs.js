@@ -47,3 +47,5 @@ function formatPrice(x) {
 	x - parseFloat(Math.round(x * 100) / 100).toFixed(2);
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
