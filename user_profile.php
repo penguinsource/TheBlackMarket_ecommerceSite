@@ -6,7 +6,7 @@
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php 
 	checkPage(); 
-	$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
+	//$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";
 ?>
 <html>
 
@@ -15,12 +15,9 @@
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
 
-	<!-- <LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $baseURL; ?>design/product.css" TYPE="text/CSS">-->
-	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="http://localhost/TheBlackMarket_ecommerceSite/design/user_profile.css" TYPE="text/CSS">
-	<!--<LINK REL=STYLESHEET HREF="http://localhost/bm/design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="http://localhost/bm/design/product.css" TYPE="text/CSS">-->
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
 	
 	<base href="//blackmarket5.hostei.com" />
 	<!-- <script type="text/javascript" src="functionsJS/generalFuncs.js"></script> -->
@@ -28,7 +25,7 @@
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
-	<script  src="<?= $baseURL; ?>functionsJS/jquery.animate-colors.js"></script>
+	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script >
 		$(document).ready(function(){
 			$('.menuitem').hover(function () {

@@ -1,10 +1,20 @@
 <?php
-
+	include_once('/functionsPHP/generalFuncs.php');
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-    $dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
-    //$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db home
-    //$dbConfig = "http://localhost/bm/configLocal.ini";	       // for local db mac
+	
+	if ($GLOBALS['localhostON'] == 0){
+		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
+	} else if ($GLOBALS['localhostON'] == 1){
+		$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db home
+	} else if ($GLOBALS['localhostON'] == 2){
+		$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db home
+	} else if ($GLOBALS['localhostON'] == 3){
+		$dbConfig = "http://localhost/bm/configLocal.ini";	       							   // for local db mac
+	}
+    //
+    
+    //$dbConfig = "http://localhost/bm/configLocal.ini";	       				// for local db mac
     //$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/configVM.ini";	       // for VM db
     
     function connectToDB(){
