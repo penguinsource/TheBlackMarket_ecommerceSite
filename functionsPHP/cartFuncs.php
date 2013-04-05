@@ -24,7 +24,8 @@ function printCartItems(){
 				echo "</div> </a>";
 				
 				echo "<div align='center' class='cart-item-quantity'>\n";
-					echo "<input type='text' id='quantity-$id' value='$quantity' onChange='updateCart(\"$id\", document.getElementById(\"quantity-$id\").value, \"$name\");'></input>\n";
+					echo "<input type='text' id='quantity-$id' value='$quantity' onChange='updateCart(\"$id\", document.getElementById(\"quantity-$id\").value, \"$name\");' 
+							onkeypress='this.onchange();' onpaste='this.onchange();' oninput='this.onchange();'></input>\n";
 				echo "</div>\n";
 				
 				echo "<div align='center' id='price-$id' class='cart-item-price'> $$priceToShow </div>\n";					
