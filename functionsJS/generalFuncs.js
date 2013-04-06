@@ -49,6 +49,7 @@ function updateCart(id,quantity,name,price){
         type: 'POST', 
         data: { id: id, quantity : quantity, type: "update" },
         success: function(response) {
+			console.log(response);
 			var cart = JSON.parse(response);
 			if (quantity == 0) {
 				$("#cart-item-"+id).animate({height:'0px'}, 500, "linear",function()

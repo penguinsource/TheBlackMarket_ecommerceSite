@@ -4,10 +4,10 @@
 
 	if (isset($_POST['type'])){
 		if ($_POST['type'] == 'login'){
-			loginUser();
+			$carttotal = loginUser();
 			if (isset($_SESSION["email"])){
 				// send back the email of the user logged in
-				echo json_encode(array('type'=>'success', 'value'=>$_SESSION["email"]));
+				echo json_encode(array('type'=>'success', 'value'=>$_SESSION["email"], 'cartTotal'=>$carttotal));
 			}
 		} else if ($_POST['type'] == 'register'){
 			registerUser();
@@ -75,11 +75,18 @@
         
         // insert user into database
         $registerQuery="INSERT INTO user VALUES" 
-        . " (null,'$email','$password', null, null, null, null, null, null)";
+        . " (null,'$email','$password', null, null, null, null, null, null, null)";
 
         if (!mysqli_query($con,$registerQuery)){
                 die('Error inserting into database.. ');
         }
+		
+		// if a cart exists, save it to the user
+		if (isset($_SESSION['cart'])){
+			$query = "UPDATE user SET cart = '" . $_SESSION['cart'] . "' WHERE email = '$email'";
+			mysqli_query($con, $query);
+		}
+
         
         closeDBConnection($con);    // close the database connection
         
@@ -118,7 +125,31 @@
 			echo json_encode(array('type'=>'error', 'value'=>'Incorrect user or password'));
             die();
         }
+			
+		//load cart from db
+		$query="SELECT * FROM user WHERE email = '$email'";
+		$result = mysqli_query($con, $loginQuery);
+		
+		$cartTotal = "";
+        if($row = mysqli_fetch_array($result)) {
+			$cart = $row['cart'];
+			if (isset($cart) && !($cart == "")){
+				$_SESSION['cart'] = $cart;
+				$cartJSON = json_decode(stripslashes($cart), true);
+				$cartTotal = $cartJSON['total'];
+			//if cart doesn't exist, try to save current cart to db
+			} else {
+				if (isset($_SESSION['cart'])){
+					$cartJSON = json_decode(stripslashes($_SESSION['cart']), true);
+					$cartTotal = $cartJSON['total'];
+					$query = "UPDATE user SET cart = '" . $_SESSION['cart'] . "' WHERE email = '$email'";
+					mysqli_query($con, $query);
+				}
+			}
+		}
         closeDBConnection($con);    		// close the database connection
+		
+		return $cartTotal;
     }
     
     function logoutUser(){

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("ChromePhp.php");
+include("dbConnection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
     $type = $_POST['type'];
@@ -110,7 +111,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 		ChromePhp::log($_SESSION['cart']);
 	}
     
+	// save cart to session
 	$_SESSION['cart'] = json_encode($cartJSON);
+	
+	//save cart to db if user is logged in
+	if (isset($_SESSION['email'])){
+		$con = connectToDB();
+		
+		$query = "UPDATE user SET cart = '" . $_SESSION['cart'] . "' WHERE email = '" . $_SESSION['email'] . "'";
+		mysqli_query($con, $query);
+		
+		closeDBConnection($con);
+	}
 	echo $_SESSION['cart'];
 }
 

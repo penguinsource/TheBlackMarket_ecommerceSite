@@ -3,7 +3,7 @@ var registercount = 0;
 var btoggleWidth;
 
 $(document).ready(function(){
-	$('#login-reg-form').hide();
+	//$('#login-reg-form').hide();
 	$('#input-pass2').hide();
 	$('#auth-alert').hide();
 	
@@ -32,6 +32,7 @@ $(document).ready(function(){
 				type: 'POST', 
 				data: { type : "register",  email : $('#input-email').val(), password : $('#input-pass').val(), password2 : $('#input-pass2').val()},
 				success: function(json) {
+					console.log(json);
 					var response = JSON.parse(json);
 					
 					if (response.type == "success") {
@@ -72,6 +73,7 @@ $(document).ready(function(){
 				type: 'POST', 
 				data: { type : "login",  email : $('#input-email').val(), password : $('#input-pass').val()},
 				success: function(json) {
+					console.log(json);
 					var response = JSON.parse(json);
 					
 					if (response.type == "success") {
@@ -95,6 +97,19 @@ $(document).ready(function(){
 						registercount = 0;
 						togglecount = 0;
 						
+						//set cart total
+						if (response.cartTotal != "") {
+							document.getElementById("shoppingCart").innerHTML = "<a href='/cart'> Cart ($" + formatPrice(response.cartTotal) + ")</a>";
+							
+							var url = window.location.href;
+							url = url.split('#').pop().split('?').pop();
+							var page = url.substring(url.lastIndexOf('/') + 1);
+							
+							//if on cart page, refresh to build cart
+							if (page == "cart"){
+								location.reload();
+							}
+						}
 					} else {
 						$('#auth-alert').html = response.value;	
 					}
@@ -110,6 +125,8 @@ $(document).ready(function(){
 				type: 'POST', 
 				data: { type : "logout"},
 				success: function(response) {
+					document.getElementById("shoppingCart").innerHTML = "<a href='/cart'> Cart ($0.00)</a>";
+					
 					$('#profile-link').stop().animate({
 							width: 'toggle', paddingRight : 'toggle'
 						}, 500);
@@ -120,6 +137,15 @@ $(document).ready(function(){
 					$('#btoggle').stop().animate({					// show login toggle button text
 						width: btoggleWidth
 					}, 500);
+					
+					var url = window.location.href;
+							url = url.split('#').pop().split('?').pop();
+							var page = url.substring(url.lastIndexOf('/') + 1);
+							
+							//if on cart page, refresh to build cart
+							if (page == "cart"){
+								location.reload();
+							}
 				}
 			})
 

@@ -83,7 +83,7 @@
 					echo "<a href='/cart'> Cart ($carttotal)</a>\n";
 				echo "</div>\n";
 				
-				echo "<div id='login-reg-form'>\n";
+				echo "<div id='login-reg-form' style='display:none;'>\n";
 					echo "<input type='text' id='input-email' class='nowrap' size='20' placeholder='Email'></input>\n";
 					echo "<input id='input-pass' type='password' class='nowrap' size='12' placeholder='Password'></input>\n";
 					echo "<input id='input-pass2' type='password' class='nowrap' size='12' placeholder='Confirm Pass'></input>\n";
