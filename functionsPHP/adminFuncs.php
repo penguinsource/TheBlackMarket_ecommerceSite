@@ -200,7 +200,7 @@ function displayProductSales($con, $from, $to) {
 		die(" Product Query Failed ");
 
 	// find all sales
-	$salesQuery = "SELECT SUM(amount) FROM productOrders WHERE productOrders.pid=";
+	$salesQuery = "SELECT SUM(amount) FROM productOrders WHERE productOrders.pid='";
 	
 	// init table
 	$columns = array("ID", "Product", "Category", "Quantity Purchased", "Gross Income");
@@ -212,8 +212,11 @@ function displayProductSales($con, $from, $to) {
 		$pid = $prodRow['pid'];
 
 		// get total sales	
-		$sales = mysqli_query($con, $salesQuery.$pid);
-		$qty = $sales[0];
+		$sales = mysqli_query($con, $salesQuery.$pid."'") or 
+			die(" Sales Query Fail ");
+
+		$qa = mysqli_fetch_array($sales);
+		$qty = empty($qa[0]) ? 0 : $qa[0];
 
 		// get gross income
 		$total = $prodRow['price'] * $qty;
