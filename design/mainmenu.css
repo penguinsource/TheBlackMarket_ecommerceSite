@@ -64,8 +64,10 @@
 	vertical-align:middle;
 }
 
-#profile-link{
-	padding-right:15px;
+#profile-link, #logout{
+	display:inline-block;
+	font-weight: bold;
+	vertical-align:middle;
 }
 
 #btoggle{

@@ -31,42 +31,7 @@
 
 <body>
 
-	<div class='mainmenu'>
-		<div id='menulogo'>
-			<a href='/index'>
-				<img valign='center' class='activelogo' src='/design/images/logo1-small.png'>
-				<img valign='center' src='/design/images/logo2-small.png'>
-			</a>
-		</div>
-		
-		<div class='menulinks'>
-			<div class='menulink'> <a href='/index'>HOME</a> </div>
-			<div class='menulink'> <a href='/shop'>SHOP</a> </div>
-			<div class='menulink'> <a href='/about'>ABOUT</a> </div>
-			<div class='menulink'> <a href='/help'>HELP</a> </div>
-			<div class='menulink'> <a href='/faq'>FAQ</a> </div>
-		</div>
-		
-		<div id='userStuff'>
-			<div id='shoppingCart'>
-				<a href='/cart'> Cart (<?= checkCart(); ?>)</a>
-			</div>
-			
-			<div id='login-reg-form'>
-				<input type='text' id='input-email' class='nowrap' size='20' placeholder='Search'></input>
-				<input type='text' id='input-pass' class='nowrap' size='12' placeholder='Password'></input>
-				<input type='text' id='input-pass2' class='nowrap' size='12' placeholder='Confirm Pass'></input>
-				<div id='blogindiv' style='display:inline-block;'><button id='blogin'>Login</button></div>
-				<button id='bregister'>Register</button>
-			</div>
-			
-			<div id='profile-link'></div>
-			
-			<a href='javascript:void(0)'><div id='btoggle'>[+] Login/Register</div></a>
-		</div>
-		
-		<div class='blueline'> </div>
-	</div>
+	<?php printMenu(); ?>
 
 	<div class='main'>		
 		<div style="position:relative;">
