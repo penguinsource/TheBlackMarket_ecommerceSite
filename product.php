@@ -67,7 +67,7 @@
 				<span class="productRatingPrice">
 					<span class="rating"><img src='design/images/star.png'> <img src='design/images/star.png'> <img src='design/images/star.png'> <img src='design/images/star.png'> <img src='design/images/star.png'> </span>
 					
-					<span class="price">$150.00</span>
+					<span class="price"><?php echo $product['price']; ?></span>
 				</span>
 			</div>
 			<div class="productContent">
@@ -84,7 +84,7 @@
 			</div>
 			
 			<div class="imageWrapper">
-				<img class='productImage' src='images/c000002.jpg'>
+				<img class='productImage' src='<?php echo $baseURL.'images/'.$product['imageurl']; ?>'>
 				<div class="productImageInfo">
 					<span class='floatRighty'><span class='quantity'>Qty:<input size="1" type='text'></input></span><span class='addCartButton'> Add to Cart</div></span>
 					<span class='floatRighty' style='margin-right: 50px;'><span class='quantity' style='color: green;'>In-stock: 10 items</span></span>

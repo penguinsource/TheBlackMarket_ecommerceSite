@@ -15,15 +15,17 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
+	
+	<!-- script imports -->
 	<script>
 		function showProfile(page){
 			alert("page:" + page);
 			if (page == 'orders'){
 				alert("HELLO !");
+				document.getElementById('profileSettings').className = 'hidden';
 			}
 		}
 	</script>
-	<!-- script imports -->
 	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
@@ -65,15 +67,68 @@ if (isset($_SESSION['email'])){
 				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='".$GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
 			} else {
 				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php'> Settings </a> </span></div> ";
-				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
-				// onClick='showProfile('orders');'
+				echo "<div onClick=\"showProfile('orders');\" class='profileMenuTab'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
+				// 
 			}
 			?>
 		</div>
 	</div>
+	<?php
+		if (isset($_GET['profileOrders'])){		// ORDERS PAGE OF USER PROFILE
+			echo "";
+		} else {	// SETTINGS PAGE OF USER PROFILE
+			echo "<div class='smallColumn' id='profileSettings'>";
+			echo "<p> First Name </p>";
+			echo "<input type='text' name='fname' id='fname' value='". $user['firstname'] . "'></input>";
+			echo "<p> Last Name </p>";
+			echo "<input type='text' name='lname' id='lname' value='". $user['lastname'] . "'></input>";
+			echo "<p> City </p>";
+			echo "<input type='text' name='city' id='city' value='". $user['city'] . "'></input>";
+			echo "<p> Postal Code </p>";
+			echo "<input type='text' name='postalcode' id='postalcode' value='". $user['postal'] . "'></input>";
+			echo "<p> Address </p>";
+			echo "<input type='text' name='address' id='address' value='". $user['address'] . "'></input>";
+			echo "<p> Phone Number </p>";
+			echo "<input type='text' name='phonenumber' id='phonenumber' value='". $user['phone'] . "'></input>";
+			echo "<br><br>";
+			echo "<button onClick='updateUserProfile()'>Save Profile</button>";
+			echo "</div>";
+			
+			echo "<div class='smallColumn' id='profileSettings'>";
+			echo "<p>Email </p>";
+			echo "<input type='text' name='email' id='email' value='". $user['email']. "' disabled></input>";
+			echo "</div>";
+		}
+	?>
 	
-	<div class='smallColumn' id='profileSettings'>
+	<div class='mediumColumn' id='profileOrders'>
+		<p> Current Orders </p>
+		<div class="maxBorder"></div>
 		
+		<div class="maxBorder"></div>
+		<p> Past Orders </p>
+		<div class="maxBorder"></div>
+	</div>
+	
+	<!-- FILLING REST OF WIDTH: 
+<div name="test1" id="test1" style="position:absolute; left:0px; top:95px; width:50%; height:300px; z-index:5; background: #7BCDC9;">
+This starts at the left edge, and goes all the way to the middle of the screen.
+</div>
+<div name="test2" id="test2" style="position:absolute; left:50%; top:95px; width:50%; height:300px; z-index:5; background: #4D3627;">
+Starts in the middle, and goes all the way to the right edge.
+</div>
+	-->
+	
+</div>
+
+</body>
+
+</html>
+
+
+
+	<!--
+	<div class='smallColumn' id='profileSettings'>
 			<p> First Name </p>
 			<input type='text' name='fname' id='fname' value='<?php echo $user['firstname']; ?>'></input>
 			<p> Last Name </p>
@@ -95,18 +150,6 @@ if (isset($_SESSION['email'])){
 		<p>Email </p>
 		<input type='text' name='email' id='email' value='<?php echo $user['email'] ?>' disabled></input>
 	</div>
-	
-	<!-- FILLING REST OF WIDTH: 
-<div name="test1" id="test1" style="position:absolute; left:0px; top:95px; width:50%; height:300px; z-index:5; background: #7BCDC9;">
-This starts at the left edge, and goes all the way to the middle of the screen.
-</div>
-<div name="test2" id="test2" style="position:absolute; left:50%; top:95px; width:50%; height:300px; z-index:5; background: #4D3627;">
-Starts in the middle, and goes all the way to the right edge.
-</div>
 	-->
 	
-</div>
-
-</body>
-
-</html>
+	

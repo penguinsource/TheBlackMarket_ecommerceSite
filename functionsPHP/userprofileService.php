@@ -30,8 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
 	// update database record
 	$queryInsert = "UPDATE user SET firstname = '$fname', lastname = '$lname', city = '$city', postal = '$postal', address = '$address', phone = '$phone' WHERE email = '$email';";
     mysqli_query($con, $queryInsert);
-	
+	echo "done";
     closeDBConnection($con);    // close the database connection
+} else if  ($_SERVER['REQUEST_METHOD'] == 'GET'){
+	
 }
+
+
 
 ?>
