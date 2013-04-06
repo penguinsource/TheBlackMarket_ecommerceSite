@@ -170,14 +170,22 @@ $(function() {
 			<div class='border80'></div>
 		</div>
 		<!-- Search Results (Wrapper) -->
+		
 		<div class='searchContent'>
-			<!-- Search Results Header -->
+		<?php $con = connectToDB(); ?>
+		<?php $category = 'Freezers'; ?>
+		<?php printProducts($con, $category); ?>
+		<?php printProducts($con, $category); ?>
+		<?php closeDBConnection($con); ?>
+		<!--
 			<div class='searchResultHeader'>
 				<span class='headerGen'>General</span> <span class='headerDesc'>Desc</span> <span class='headerQuantity'>Desc</span> 
 				<span class='headerWeight'>Availability</span> <span class='headerDim'>Availability</span> <span class='headerPrice'>Price</span>
 			</div>
-			<!-- Search Results.. -->
+			
+		-->
 		</div>
+		
 	</div>
 </div>
 <button onclick='checkSlider()'>aaa</button>
