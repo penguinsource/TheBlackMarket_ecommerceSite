@@ -60,6 +60,8 @@
 				<button id='bregister'>Register</button>
 			</div>
 			
+			<div id='profile-link'></div>
+			
 			<a href='javascript:void(0)'><div id='btoggle'>[+] Login/Register</div></a>
 		</div>
 		

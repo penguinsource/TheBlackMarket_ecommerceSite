@@ -5,6 +5,8 @@ var btoggleWidth;
 $(document).ready(function(){
 	$('#login-reg-form').hide();
 	$('#input-pass2').hide();
+	$('#auth-alert').hide();
+	
 	btoggleWidth = $('#btoggle').outerWidth(true) + 5;
 	
 	$('#btoggle').click(function() {
@@ -23,8 +25,16 @@ $(document).ready(function(){
 				{ width: 'toggle',
 			}, 500);
 		} else {
-		
-			// REGISTRATION FUNCTION HERE
+			//REGISTER AJAX
+			$.ajax({url: '/functionsPHP/authenticationService',
+				type: 'POST', 
+				data: { type : "register",  email : $('#input-email').val(), password : $('#input-pass').val(), password2 : $('#input-pass2').val()},
+				success: function(json) {
+					var response = JSON.parse(json);
+					//$('#auth-alert').html = response.value;	
+					alert("response value: " + response.value);
+				}
+			})
 		
 		}
 		
@@ -32,9 +42,16 @@ $(document).ready(function(){
 	});
 	
 	$('#blogin').click(function() {
-
-		
-		// LOGIn FUNCTION HERE
+		//LOGIN AJAX
+		$.ajax({url: '/functionsPHP/authenticationService',
+				type: 'POST', 
+				data: { type : "login",  email : $('#input-email').val(), password : $('#input-pass').val()},
+				success: function(json) {
+					var response = JSON.parse(json);
+					//$('#auth-alert').html = response.value;	
+					alert("response value: " + response.value);
+				}
+			})
 
 	});
 });
