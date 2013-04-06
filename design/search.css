@@ -1,6 +1,6 @@
 
 .searchWrapper {
-	width: 700px;
+	width: 850px;
 	height: auto;
 	background-color: red;
 	margin:0;
@@ -14,18 +14,22 @@
 	margin:0;
 	padding:0;
 	background-color: blue;
-	margin-right: auto;
-	margin-left: auto;
+	margin-left: 200px;
 }
 
+/* Search Filter Menu */
 .searchFilters {
 	display: inline-block;
 	vertical-align: top;
 	margin:0;
 	padding:0;
+	margin-bottom: 15px;
+	padding-bottom: 10px;
 	width: 180px;
-	height: 300px;
+	height: auto;
 	background-color: gray;
+	border-right: 1px solid;
+    border-color: #E4E4E4;
 }
 
 .searchContent {
@@ -33,9 +37,9 @@
 	vertical-align: top;
 	margin:0;
 	padding:0;
-	width: 500px;
+	width: 650px;
 	height: 300px;
-	/* background-color: green; */
+	background-color: green;
 }
 
 .filterTab {
@@ -43,21 +47,12 @@
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 15px;
 }
 
 .filterResult {
 	margin-top: 10px;
 	width: auto;
-}
-
-.border80 {
-	width: 85%;
-	margin:0;
-	padding:0;
-	border-bottom: 1px solid;
-    border-color: #E4E4E4;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .inputBox {
@@ -68,3 +63,56 @@
 	margin-left: 5px;
 }
 
+.pFilter {
+	margin:0;
+	padding:0;
+	margin-top: 10px;
+	color: #f6931f;
+	font-weight: bold;
+}
+
+/* Search Content header */
+.searchContent .searchResultHeader {
+	width: 100%;
+	height: auto;
+	background-color: white;
+	margin-top: 20px;
+	border-bottom: 1px solid;
+    border-color: #E4E4E4;
+	margin-bottom: 6px;
+	padding-bottom: 7px;
+}
+
+.searchContent .searchResultHeader .headerGen {
+	width: 120px;
+	background-color: gray;
+	margin-left: 5%;
+	padding:0;
+}
+
+.searchContent .searchResultHeader .headerDesc {
+	width: 120px;
+	background-color: gray;
+	margin-left: 8%;
+	padding:0;
+}
+
+/* General */
+
+.border80 {
+	width: 85%;
+	margin:0;
+	padding:0;
+	border-bottom: 1px solid;
+    border-color: #E4E4E4;
+	margin-left: auto;
+	margin-right: auto;
+}
+/*
+.searchResultHeader {
+
+}*/
+
+/*.searchResult {
+	
+}*/

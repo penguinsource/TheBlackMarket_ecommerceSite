@@ -52,13 +52,13 @@
 		max: 500,
 		values: [ 75, 300 ],
 		slide: function( event, ui ) {
-			$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-				document.getElementById('amount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
-	" - $" + $( "#slider-range" ).slider( "values", 1 );
+			//$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+			document.getElementById('priceAmount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
+				" - $" + $( "#slider-range" ).slider( "values", 1 );
 		}
 	});
-	document.getElementById('amount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
-	" - $" + $( "#slider-range" ).slider( "values", 1 );
+	document.getElementById('priceAmount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
+		" - $" + $( "#slider-range" ).slider( "values", 1 );
 	
 	/*
 	$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
@@ -67,22 +67,38 @@
 	
 	});
 	
-	// CATEGORY SLIDER:
+	// AVAILABILITY SLIDER:
 	
 $(function() {
-    var select = $( "#minbeds" );
-    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
-      min: 1,
-      max: 6,
+    $( "#slider-range-min" ).slider({
       range: "min",
-      value: select[ 0 ].selectedIndex + 1,
+      value: 37,
+      min: 1,
+      max: 700,
       slide: function( event, ui ) {
-        select[ 0 ].selectedIndex = ui.value - 1;
+        //$( "#amount3" ).val( "$" + ui.value );
+		document.getElementById('availAmount').innerHTML = "$" + $( "#slider-range-min" ).slider( "value" );
       }
     });
-    $( "#minbeds" ).change(function() {
-      slider.slider( "value", this.selectedIndex + 1 );
+    //$( "#amount3" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+	document.getElementById('availAmount').innerHTML = "$" + $( "#slider-range-min" ).slider( "value" );
+  });
+  
+	// WEIGHT SLIDER:
+	
+$(function() {
+    $( "#weightSlider" ).slider({
+      range: "min",
+      value: 37,
+      min: 1,
+      max: 400,
+      slide: function( event, ui ) {
+        //$( "#amount3" ).val( "$" + ui.value );
+		document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "value" ) + " lbs";
+      }
     });
+    //$( "#amount3" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "value" ) + " lbs";
   });
 	</script>
   <!------- END JQUERY SLIDER IMPORTS --> 
@@ -118,11 +134,14 @@ $(function() {
 			</span>
 		</div>
 		<div class='searchFilters'>
+			<!-- Price Filter -->
 			<div class='filterTab'>
 				<p> Price Range </p>
 				<div id="slider-range"></div>
-				<p align='center' name='amount' id='amount'></p>
+				<p class='pFilter' align='center' name='priceAmount' id='priceAmount'></p>
+				<input type='checkbox'>Strict</input>
 			</div>
+			<!-- Categories Filter -->
 			<div class='border80'></div>
 			<div class='filterTab'>
 				<p> Categories </p>
@@ -135,9 +154,29 @@ $(function() {
 				  <input class='inputBox' type="checkbox" id="category" value="washers_dryers"></input><label class='inputBox' for='category'>Washers/Dryers</label><br>
 			</div>
 			<div class='border80'></div>
+			<!-- Availability Filter -->
+			<div class='filterTab'>
+				  <p> Availability </p>
+				  <div id="slider-range-min"></div>
+				  <p class='pFilter' align='center' name='availAmount' id='availAmount'></p>
+			</div>
+			<div class='border80'></div>
+			<!-- Weights Filter -->
+			<div class='filterTab'>
+				  <p> Weight</p>
+				  <div id="weightSlider"></div>
+				  <p class='pFilter' align='center' name='weightAmount' id='weightAmount'></p>
+			</div>
+			<div class='border80'></div>
 		</div>
+		<!-- Search Results (Wrapper) -->
 		<div class='searchContent'>
-		
+			<!-- Search Results Header -->
+			<div class='searchResultHeader'>
+				<span class='headerGen'>General</span> <span class='headerDesc'>Desc</span> <span class='headerQuantity'>Desc</span> 
+				<span class='headerWeight'>Availability</span> <span class='headerDim'>Availability</span> <span class='headerPrice'>Price</span>
+			</div>
+			<!-- Search Results.. -->
 		</div>
 	</div>
 </div>
