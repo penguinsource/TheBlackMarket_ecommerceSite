@@ -2,11 +2,8 @@
 	session_start();
 	include("dbConnection.php");
 	include("ChromePhp.php");
-
-	ChromePhp::log("auth service reporting in");
 	
 	if (isset($_POST['type'])){
-		ChromePhp::log("type is set");
 		if ($_POST['type'] == 'login'){
 			$carttotal = loginUser();
 			if (isset($_SESSION["email"])){
@@ -22,6 +19,8 @@
 		} else if ($_POST['type'] == 'logout'){
 			logoutUser();
 			echo json_encode(array('type'=>'success', 'value'=>'logged out'));
+		} else if ($_POST['type'] == 'checklogin'){
+			echo isset($_SESSION["email"]);
 		}
 	} else {
 		echo json_encode(array('type'=>'success', 'value'=>'Error ! No type sent.. see file authenticationFuncs.php'));

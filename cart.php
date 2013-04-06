@@ -32,7 +32,7 @@
 <body>
 
 	<?php printMenu(); ?>
-
+	<div id='page-alert' style='height:30px; width:1000px; margin-left:auto; margin-right:auto; background-image:url('images/alertbg.png');'> cannot place an order with an empty cart</div>
 	<div class='main'>		
 		<div style="position:relative;">
 			
@@ -46,7 +46,7 @@
 				
 				<?php printCartItems(); ?>
 				
-				<br><br><br><br><br><div style="float:right"><a href='/shop'><button> Continue Shopping </button></a> <a href='/order'><button> Checkout Cart </button></a></div><br><br><br>
+				<br><br><br><br><br><div style="float:right"><a href='<?php echo $_SERVER['HTTP_REFERER']; ?>'><button> Continue Shopping </button></a> <button onClick='goToOrder();'> Checkout Cart </button></a></div><br><br><br>
 				
 			</div>
 			

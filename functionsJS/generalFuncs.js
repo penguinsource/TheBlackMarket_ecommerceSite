@@ -94,6 +94,27 @@ function updateUserProfile(){
         success: function(response) {
         	alert("Updated Profile !" + response);
         }
-    })
-	
+    })	
+}
+
+function goToOrder(){
+	$.ajax({url: '/functionsPHP/authenticationService',
+        type: 'POST', 
+        data: { type : 'checklogin'},
+        success: function(response) {
+			console.log(response);
+        	if (response == '1') {
+				window.location.href = "/order";
+			} else if (response == '0'){
+				toggleDiv();
+				$('#input-email').focus();
+				$('#auth-alert').css('marginLeft', $('#shoppingCart').outerWidth(true) + 5);
+				$('#auth-alert').stop().hide();
+				$('#auth-alert').text('Please login or register before placing an order');
+				$('#auth-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
+					$('#auth-alert').delay(5000).animate({height: 'toggle'}, 250);
+				});
+			}
+        }
+    })	
 }
