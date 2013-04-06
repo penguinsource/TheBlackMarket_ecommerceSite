@@ -1,8 +1,12 @@
 <?php
 	session_start();
 	include("dbConnection.php");
+	include("ChromePhp.php");
 
+	ChromePhp:log("auth service reporting in");
+	
 	if (isset($_POST['type'])){
+		ChromePhp:log("type is set");
 		if ($_POST['type'] == 'login'){
 			$carttotal = loginUser();
 			if (isset($_SESSION["email"])){
@@ -165,7 +169,7 @@
     }
     
     function logoutUser(){
-		ChromePHP:log("logging out");
+		ChromePhp:log("logging out");
         unset($_SESSION['email']);
 		session_destroy();
     }
@@ -176,7 +180,7 @@
 		if (isset($cart) && !($cart == "")){
 			//if both are set, merge them
 			if (isset($_SESSION['cart'])){
-				ChromePHP:log("both are set, merging");
+				ChromePhp:log("both are set, merging");
 			
 				$dbCart = json_decode($cart, true);
 				$sessionCart = json_decode($_SESSION['cart'], true);
@@ -199,16 +203,16 @@
 				return json_encode($dbCart);
 				
 			} else {	// else return just the session cart
-				ChromePHP:log("only db cart set, returning db cart");
+				ChromePhp:log("only db cart set, returning db cart");
 				return $cart;
 			}
 		} else {	//server cart is null
 			// if session cart is set, return it
 			if (isset($_SESSION['cart'])){
-				ChromePHP:log("only session cart set, returning session cart");
+				ChromePhp:log("only session cart set, returning session cart");
 				return $_SESSION['cart'];
 			} else {	//if neither is set, return null
-				ChromePHP:log("neither set, returning null");
+				ChromePhp:log("neither set, returning null");
 				return null;
 			}
 		}
