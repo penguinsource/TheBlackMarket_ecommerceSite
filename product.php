@@ -15,12 +15,16 @@
 
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
 	
 	<base href="//blackmarket5.hostei.com" /> 
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
+	
 	<script >
 		$(document).ready(function(){
 			$('.menuitem').hover(function () {
@@ -50,6 +54,8 @@
 	}else {
 		echo "No category sent";
 	}
+	
+	printMenu();
 ?>
 
 <div class='main'>
