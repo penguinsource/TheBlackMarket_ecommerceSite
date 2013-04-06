@@ -1,8 +1,5 @@
 <?php
 
-$h = "h";
-$d = "d";
-
 function printAdminList($con, $selected){
     $query =   "SELECT * FROM admin";								
 	$result = mysqli_query($con, $query) or die(" Query failed ");
@@ -46,7 +43,8 @@ function printStats($con, $opt) {
 		displayTransactionHistory($con, null, null);
 		displayDateRange();
 	} else if ($opt == "customers") {
-		echo "<p>custy tracking</p>";
+		displayCustomerStats($con, null, null);
+		displayDateRange();		
 	} else if ($opt == "products") {
 		echo "<p>graphable?</p>";
 	} else if ($opt == "imports") {
@@ -71,24 +69,19 @@ function displayDateRange() {
 function displayTransactionHistory($con, $from, $to) {	
 	$output = "";
 
-	$select = "*";
 	$view = "userOrders, user, productOrders, product";
 
-	$condition = "userOrders.userid=user.userid";
-	$condition .= " AND productOrders.orderid=userOrders.orderid";
-	$condition .= " AND productOrders.pid=product.pid";
+	$condition = "userOrders.userid=user.userid"
+		." AND productOrders.orderid=userOrders.orderid"
+		." AND productOrders.pid=product.pid";
 	// check dates here for condition
 
-	//$ordering = "userOrders.delivery_date DESC";
-	$ordering = null;
-
-	$query = "SELECT $select FROM $view";
+	$query = "SELECT * FROM $view";
 	$query .= ($condition == null) ? "" : " WHERE ".$condition;
-	$query .= ($ordering == null) ? "" : " ORDER BY ".$ordering;
 
 	//echo "<p>$query</p><br />";
 
-	$result = mysqli_query($con, $query) or die(" Query failed ");
+	$result = mysqli_query($con, $query) or die(" Transaction History Query Failed ");
 
 	// init table
 	$tablein = "<table id='historyTable' class='tablesorter'>"
@@ -121,13 +114,82 @@ function displayTransactionHistory($con, $from, $to) {
 		$output .= $rowVals;
 	}
 
+	$output .= $tableout;
+	echo "$output";
+}
+
+
+// display customer stats as a table
+function displayCustomerStats($con, $from, $to) {
+	$output = "";
+
+	// find all users
+	$queryUsers = "SELECT * FROM user";			
+
+	// find total transactions
+	$queryNumTrans = "SELECT COUNT(*) FROM userOrders WHERE userOrders.userid=";
+
+	// find total purchases
+	$view = "userOrders, productOrders, product";
+	$cond = " WHERE userOrders.orderid=productOrders.orderid"
+		." AND productOrders.pid=product.pid"
+		." AND userOrders.userid=";
+	// add date check here
+	$queryPurchases = "SELECT SUM(price) FROM ".$view.$cond;
+
+	$allUsers = mysqli_query($con, $queryUsers) or die(" User Query Failed ");
+
+	// init table
+	$tablein = "<table id='customerTable' class='tablesorter'>"
+		."<caption>Customer Statistics</caption>";
+	$tableout = "</tbody></table>";
+	$header = "<thead><tr>"
+		.w("Email",0)
+		.w("Name",0)
+		.w("# Transactions",0)
+		.w("Total Purchases",0)
+		."</tr></thead><tbody>";
+
+	$output .= $tablein.$header;
+
+	// find stats for each user
+	while ($userRow = mysqli_fetch_array($allUsers)) {		
+		// customer identification
+		$email = $userRow['email'];
+		$first = $userRow['firstname'];
+		$last = $userRow['lastname'];
+		$name = "";
+		$name .= ($first != null) ? $first : "";
+		$name .= ($last != null) ? " ".$last : "";
+		$name = ($name == "") ? "unspecified" : $name;		
+
+		$uid = $userRow['userid'];
+
+		// number of transactions
+		$numTrans = mysqli_query($con, $queryNumTrans.$uid) or 
+			die(" Query Failed: Transaction Count - ".$email." ");
+		$count = mysqli_fetch_array($numTrans);
+
+		// total purchases
+		$purchases = mysqli_query($con, $queryPurchases.$uid) or
+			die(" Query Failed: Purchase Sum - ".$email." ");
+		$total = mysqli_fetch_array($purchases);
+
+		// output table values
+		$rowVals = "<tr>"
+			.w($email).w($name).w($count[0]).w(round($total[0], 2))
+			."</tr>";
+
+		$output .= $rowVals;
+	}
 
 	$output .= $tableout;
 	echo "$output";
 }
 
 
-// table items wrapping
+
+// table items wrapping, use type=0 for <th> elem.s
 function w($val, $type = 1) {
 	$tag = ($type > 0) ? "td" : "th";
 	return "<$tag>$val</$tag>";

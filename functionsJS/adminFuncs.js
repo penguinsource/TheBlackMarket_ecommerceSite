@@ -3,6 +3,7 @@
 $(document).ready(
   function () {
     $("#historyTable").tablesorter({ sortList: [[0, 1]] });
+    $("#customerTable").tablesorter({ sortList: [[3, 1]] });
 
     $("#from").datepicker({
       defaultDate: "+1w",
@@ -20,5 +21,5 @@ $(document).ready(
         $("#from").datepicker("option", "maxDate", selectedDate);
       }
     });
-	}
+  }
 );
