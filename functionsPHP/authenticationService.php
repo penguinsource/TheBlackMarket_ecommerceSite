@@ -1,23 +1,7 @@
 <?php
 	session_start();
 	include("dbConnection.php");
-	/*
-	if (isset($_POST["loginName"])){
-		loginUser();
-		if (isset($_SESSION["email"])){
-			echo $_SESSION["email"];	// send back the email of the user logged in
-		}
-	} else if (isset($_POST["registerName"])){
-		registerUser();
-		if (isset($_SESSION["email"])){
-			echo $_SESSION["email"];	// send back the email of the user logged in
-		}
-	} else if (isset($_POST["logOut"])){
-		logoutUser();
-	} else {
-		echo "fail request POST! see file authenticationFuncs.php";	// incorrect POST request sent here..
-	}
-	*/
+
 	if (isset($_POST['type'])){
 		if ($_POST['type'] == 'login'){
 			loginUser();
@@ -69,6 +53,12 @@
 			die();
 		}
         
+		// check password to password written again
+		if ($_POST['password'] != $_POST['password2']){
+			echo json_encode(array('type'=>'error', 'value'=>'Password don\'t match'));
+            die();
+		}
+		
         // validate password; should no be null or < 6 characters ------
         if (isset($_POST['password'])){
             $password = $_POST['password'];
