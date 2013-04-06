@@ -17,15 +17,6 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
 	
 	<!-- script imports -->
-	<script>
-		function showProfile(page){
-			alert("page:" + page);
-			if (page == 'orders'){
-				alert("HELLO !");
-				document.getElementById('profileSettings').className = 'hidden';
-			}
-		}
-	</script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
@@ -67,15 +58,20 @@ if (isset($_SESSION['email'])){
 				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='".$GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
 			} else {
 				echo "<div class='profileMenuTabSel'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php'> Settings </a> </span></div> ";
-				echo "<div onClick=\"showProfile('orders');\" class='profileMenuTab'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
-				// 
+				echo "<div class='profileMenuTab'><span class='profileTab'> <a href='". $GLOBALS['baseURL']."user_profile.php?profileOrders'> Orders </a> </span></div> ";
+				// onClick=\"showProfile('orders');\"
 			}
 			?>
 		</div>
 	</div>
 	<?php
 		if (isset($_GET['profileOrders'])){		// ORDERS PAGE OF USER PROFILE
-			echo "";
+			echo "<div class='mediumColumn' id='profileOrders'>";
+			echo "<p> Current Orders </p>";
+			echo "<div class='maxBorder'></div>";
+			echo "<p> Past Orders </p>";
+			echo "<div class='maxBorder'></div>";
+			echo "</div>";
 		} else {	// SETTINGS PAGE OF USER PROFILE
 			echo "<div class='smallColumn' id='profileSettings'>";
 			echo "<p> First Name </p>";
@@ -101,14 +97,17 @@ if (isset($_SESSION['email'])){
 		}
 	?>
 	
+	<!-- ORDERS page:
 	<div class='mediumColumn' id='profileOrders'>
 		<p> Current Orders </p>
 		<div class="maxBorder"></div>
 		
 		<div class="maxBorder"></div>
+		
 		<p> Past Orders </p>
 		<div class="maxBorder"></div>
 	</div>
+	-->
 	
 	<!-- FILLING REST OF WIDTH: 
 <div name="test1" id="test1" style="position:absolute; left:0px; top:95px; width:50%; height:300px; z-index:5; background: #7BCDC9;">

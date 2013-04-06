@@ -1,0 +1,50 @@
+
+.searchWrapper {
+	width: 700px;
+	height: auto;
+	background-color: red;
+	margin:0;
+	padding:0;
+	margin-bottom: 50px;
+}
+
+.searchInput {
+	width: 60%;
+	height: 60px;
+	margin:0;
+	padding:0;
+	background-color: blue;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.searchFilters {
+	display: inline-block;
+	vertical-align: top;
+	margin:0;
+	padding:0;
+	width: 150px;
+	height: 300px;
+	background-color: gray;
+}
+
+.searchContent {
+	display: inline-block;
+	vertical-align: top;
+	margin:0;
+	padding:0;
+	width: 500px;
+	height: 300px;
+	/* background-color: green; */
+}
+
+.filterTab {
+	width: 80%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.filterResult {
+	margin-top: 10px;
+}
