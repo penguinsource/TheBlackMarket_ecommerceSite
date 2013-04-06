@@ -118,3 +118,21 @@ function goToOrder(){
         }
     })	
 }
+
+// apply search filters and get new filtered search results
+function filterSearch(){
+	var priceLow = $( "#priceRangeSlider" ).slider( "values", 0 );
+	var priceHigh = $( "#priceRangeSlider" ).slider( "values", 1 ); // in between price high and low
+	var quantity =  $( "#quantitySlider" ).slider( "value" );	// quantity or MORE
+	var weightLow = $( "#weightSlider" ).slider( "values", 0 ); // in between price high and low
+	var weightHigh = $( "#weightSlider" ).slider( "values", 1 ); // in between price high and low
+	alert('low price: '+priceLow+' high:'+priceHigh+' q:'+quantity+' weight:'+weightLow);
+	//var dish= null;
+	$.ajax({url: '/functionsPHP/searchService',
+        type: 'POST',
+        data: { priceLow: fnameInp, priceHigh: lnameInp, quantity: cityInp, weightLow: postalInp, weightHigh: addressInp, dishwashers: ''},
+        success: function(response) {
+        	alert("response: " + response);
+        }
+    })
+}

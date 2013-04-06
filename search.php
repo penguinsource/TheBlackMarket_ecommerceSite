@@ -4,6 +4,7 @@
 <?php include("functionsPHP/productFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
+<?php include ("functionsPHP/searchFuncs.php"); ?>
 <?php 
 	checkPage(); 
 ?>
@@ -13,7 +14,7 @@
 <head>
 	<base href="//blackmarket5.hostei.com" />
 	<!-- CSS imports -->
-	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
+	
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/search.css" TYPE="text/CSS">
@@ -46,64 +47,74 @@
 	<script>
 	// PRICE SLIDER
 	$(function() {
-	$( "#slider-range" ).slider({
+	$( "#priceRangeSlider" ).slider({
 		range: true,
 		min: 0,
-		max: 500,
-		values: [ 75, 300 ],
+		max: 5000,
+		values: [ 0, 5000 ],
 		slide: function( event, ui ) {
 			//$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-			document.getElementById('priceAmount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
-				" - $" + $( "#slider-range" ).slider( "values", 1 );
+			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
+				" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
+		},
+		stop: function(event, ui){
+			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
+			" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
 		}
+		
 	});
-	document.getElementById('priceAmount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
-		" - $" + $( "#slider-range" ).slider( "values", 1 );
-	
-	/*
-	$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-	" - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	*/
-	
+	document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
+		" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
 	});
 	
-	// AVAILABILITY SLIDER:
-	
+	// QUANTITY SLIDER:
 $(function() {
-    $( "#slider-range-min" ).slider({
+    $( "#quantitySlider" ).slider({
       range: "min",
       value: 37,
-      min: 1,
-      max: 700,
+      min: 0,
+      max: 22,
       slide: function( event, ui ) {
-        //$( "#amount3" ).val( "$" + ui.value );
-		document.getElementById('availAmount').innerHTML = "$" + $( "#slider-range-min" ).slider( "value" );
-      }
+		document.getElementById('availAmount').innerHTML = $( "#quantitySlider" ).slider( "value" ) + " or more in-stock";
+      },
+	  stop: function(event, ui){
+		document.getElementById('availAmount').innerHTML = $( "#quantitySlider" ).slider( "value" ) + " or more in-stock";
+	  }
     });
     //$( "#amount3" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
-	document.getElementById('availAmount').innerHTML = "$" + $( "#slider-range-min" ).slider( "value" );
+	document.getElementById('availAmount').innerHTML = $( "#quantitySlider" ).slider( "value" ) + " or more in-stock";
   });
   
 	// WEIGHT SLIDER:
-	
-$(function() {
-    $( "#weightSlider" ).slider({
-      range: "min",
-      value: 37,
-      min: 1,
-      max: 400,
-      slide: function( event, ui ) {
-        //$( "#amount3" ).val( "$" + ui.value );
-		document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "value" ) + " lbs";
-      }
-    });
-    //$( "#amount3" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
-	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "value" ) + " lbs";
-  });
+	$(function() {
+	$( "#weightSlider" ).slider({
+		range: true,
+		min: 0,
+		max: 1000,
+		values: [ 0, 5000 ],
+		slide: function( event, ui ) {
+			document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
+				" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
+		},
+		stop: function(event, ui){
+			document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
+				" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
+		}
+		
+	});
+	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
+		" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
+	});
 	</script>
-  <!------- END JQUERY SLIDER IMPORTS --> 
+  <!------- END JQUERY SLIDER IMPORTS -->
   
+  <!-- Filter search scripts -->
   <script>
+  function updateAvail(){
+	alert("ha");
+	document.getElementById('availAmount').innerHTML = $( "#slider-range-min" ).slider( "value" ) + " or more items";
+  }
+  
   function checkSlider(){
 	//var value = $( ".selector" ).slider( "values", 0 );
 	var value = $( ".selector" ).slider( "slider-range", "value" );
@@ -113,6 +124,8 @@ $(function() {
 	//$( ".selector" ).slider( "values", [ 55, 105 ] );
 	$( "#slider-range" ).slider( "values", [0, 100] )
   }
+
+  <!-- END Filter search scripts -->
   </script>
 </head>
 
@@ -137,7 +150,7 @@ $(function() {
 			<!-- Price Filter -->
 			<div class='filterTab'>
 				<p> Price Range </p>
-				<div id="slider-range"></div>
+				<div id="priceRangeSlider"></div>
 				<p class='pFilter' align='center' name='priceAmount' id='priceAmount'></p>
 				<input type='checkbox'>Strict</input>
 			</div>
@@ -146,18 +159,18 @@ $(function() {
 			<div class='filterTab'>
 				<p> Categories </p>
 				  <input class='inputBox' type="checkbox" id="category" value="dishwashers"></input><label class='inputBox' for='category'>Dishwashers</label><br>
-				  <input class='inputBox' type="checkbox" id="category" value="freezers"></input><label class='inputBox' for='category'>Freezers</label><br>
-				  <input class='inputBox' type="checkbox" id="category" value="kitches_appliances"></input><label class='inputBox' for='category'>Kitches Appliances</label><br>
-				  <input class='inputBox' type="checkbox" id="category" value="microwaves"></input><label class='inputBox' for='category'>Microwaves</label><br>
-				  <input class='inputBox' type="checkbox" id="category" value="refrigerators"></input><label class='inputBox' for='category'>Refrigerators</label><br>
-				  <input class='inputBox' type="checkbox" id="category" value="stoves_ranges"></input><label class='inputBox' for='category'>Stoves/Ranges</label><br>
-				  <input class='inputBox' type="checkbox" id="category" value="washers_dryers"></input><label class='inputBox' for='category'>Washers/Dryers</label><br>
+				  <input class='inputBox' type="checkbox" id="freezers" value="freezers"></input><label class='inputBox' for='freezers'>Freezers</label><br>
+				  <input class='inputBox' type="checkbox" id="kitches_appliances" value="kitches_appliances"></input><label class='inputBox' for='kitches_appliances'>Kitches Appliances</label><br>
+				  <input class='inputBox' type="checkbox" id="microwaves" value="microwaves"></input><label class='inputBox' for='microwaves'>Microwaves</label><br>
+				  <input class='inputBox' type="checkbox" id="refrigerators" value="refrigerators"></input><label class='inputBox' for='refrigerators'>Refrigerators</label><br>
+				  <input class='inputBox' type="checkbox" id="stoves_ranges" value="stoves_ranges"></input><label class='inputBox' for='stoves_ranges'>Stoves/Ranges</label><br>
+				  <input class='inputBox' type="checkbox" id="washers_dryers" value="washers_dryers"></input><label class='inputBox' for='washers_dryers'>Washers/Dryers</label><br>
 			</div>
 			<div class='border80'></div>
 			<!-- Availability Filter -->
 			<div class='filterTab'>
-				  <p> Availability </p>
-				  <div id="slider-range-min"></div>
+				  <p> Quantity </p>
+				  <div id="quantitySlider"></div>
 				  <p class='pFilter' align='center' name='availAmount' id='availAmount'></p>
 			</div>
 			<div class='border80'></div>
@@ -172,25 +185,35 @@ $(function() {
 		<!-- Search Results (Wrapper) -->
 		
 		<div class='searchContent'>
-		<?php $con = connectToDB(); ?>
-		<?php $category = 'Freezers'; ?>
-		<?php printProducts($con, $category); ?>
-		<?php printProducts($con, $category); ?>
-		<?php closeDBConnection($con); ?>
-		<!--
-			<div class='searchResultHeader'>
-				<span class='headerGen'>General</span> <span class='headerDesc'>Desc</span> <span class='headerQuantity'>Desc</span> 
-				<span class='headerWeight'>Availability</span> <span class='headerDim'>Availability</span> <span class='headerPrice'>Price</span>
+		
+			<?php $con = connectToDB(); ?>
+			<?php $category = 'Freezers'; ?>
+			<?php printSearchResults($con, $category); ?>
+			<?php printSearchResults($con, $category); ?>
+			<?php printSearchResults($con, $category); ?>
+			<?php closeDBConnection($con); ?>
+			<!--
+				<div class='searchResultHeader'>
+					<span class='headerGen'>General</span> <span class='headerDesc'>Desc</span> <span class='headerQuantity'>Desc</span> 
+					<span class='headerWeight'>Availability</span> <span class='headerDim'>Availability</span> <span class='headerPrice'>Price</span>
+				</div>
+				
+			-->
+			<div style='clear'></div>
+			<br>
+			<div class='border80'></div>
+			<!-- Search Results Recommendations -->
+			<div class='searchRecommendations'>
+				<p>searchRecommendations</p>
 			</div>
-			
-		-->
-		</div>
+		
+		</div>	
 		
 	</div>
 </div>
 <button onclick='checkSlider()'>aaa</button>
-<div id="slider"></div>
- 
+<button onclick='filterSearch()'>Filter !</button>
+
 </body>
 
 </html>

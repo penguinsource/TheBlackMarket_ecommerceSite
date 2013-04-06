@@ -636,10 +636,10 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-slider-horizontal {
-	height: .8em;
+	height: .5em;
 }
 .ui-slider-horizontal .ui-slider-handle {
-	top: -.3em;
+	top: -.4em;
 	margin-left: -.6em;
 }
 .ui-slider-horizontal .ui-slider-range {
