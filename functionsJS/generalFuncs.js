@@ -13,7 +13,7 @@ function addToCart(id,name,price,img){
         data: { data: jsonStr, type: "add" },
         success: function(response) {
         	var cart = JSON.parse(response);
-            document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
+            document.getElementById("shoppingCart").innerHTML = "<a href='/cart'> Cart ($" + formatPrice(cart.total) + ")</a>";
 			document.getElementById("alert").innerHTML="Item '" + item.name + "' successfully added to shopping cart.";	
         }
     })
@@ -36,7 +36,7 @@ function removeFromCart(id, name){
 			
 			
 			document.getElementById("cart-total-price").innerHTML = "$" + formatPrice(cart.total);
-			document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
+			document.getElementById("shoppingCart").innerHTML = "<a href='/cart'> Cart ($" + formatPrice(cart.total) + ")</a>";
 			document.getElementById("alert").innerHTML="Item '" + name + "' successfully removed from cart.";	
         }
     })
@@ -63,7 +63,7 @@ function updateCart(id,quantity,name,price){
 				document.getElementById("price-" + id).innerHTML = "$" + formatPrice(quantity * price);
 			}
 			document.getElementById("cart-total-price").innerHTML = "$" + formatPrice(cart.total);
-			document.getElementById("shoppingCart").innerHTML = "<a href='/cart'>Shopping Cart ($" + formatPrice(cart.total) + ")</a>";
+			document.getElementById("shoppingCart").innerHTML = "<a href='/cart'> Cart ($" + formatPrice(cart.total) + ")</a>";
 			document.getElementById("alert").innerHTML="Updated quantity for '" + name + "'.";	
         }
     })

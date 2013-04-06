@@ -3,10 +3,10 @@
 	height:130px;
 }
 
-.mainmenu a:link {text-decoration:none;color:#919191;}
-.mainmenu a:visited {text-decoration:none;color:#919191;}
+.mainmenu a:link {text-decoration:none;color:#BDBDBD;}
+.mainmenu a:visited {text-decoration:none;color:#BDBDBD;}
 .mainmenu a:hover {text-decoration:none;color:#006EB8;}
-.mainmenu a:active {text-decoration:none;color:#919191;}
+.mainmenu a:active {text-decoration:none;color:#BDBDBD;}
 
 #menulogo{
 	border-right:1px;
@@ -42,15 +42,38 @@
 }
 
 #userStuff{
-	float:right;
+	position:absolute;
+	top: 12px;
+	right: 12px;
+	line-height:22px;
+}
+
+#login-reg-form{
 	display:inline-block;
-	margin-top:10px;
-	margin-right:10px;
+	overflow:hidden;
+	width:auto;
+	max-height:25px;
+	vertical-align:middle;
 }
 
 #shoppingCart{
+	display:inline-block;
 	text-decoration: none;
 	font-weight: bold;
+	padding-right:15px;
+	vertical-align:middle;
+}
+
+#btoggle{
+	display:inline-block;
+	vertical-align:middle;
+	white-space: nowrap;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.nowrap{
+	white-space: nowrap;
 }
 
 .blueline {

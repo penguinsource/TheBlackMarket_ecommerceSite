@@ -23,6 +23,7 @@
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/shop.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
 	
 	<link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png">
 	<title> Cart </title>
@@ -48,8 +49,18 @@
 		
 		<div id='userStuff'>
 			<div id='shoppingCart'>
-				<a href='/cart'>Shopping Cart (<?= checkCart(); ?>)</a>
+				<a href='/cart'> Cart (<?= checkCart(); ?>)</a>
 			</div>
+			
+			<div id='login-reg-form'>
+				<input type='text' id='input-email' class='nowrap' size='20' placeholder='Search'></input>
+				<input type='text' id='input-pass' class='nowrap' size='12' placeholder='Password'></input>
+				<input type='text' id='input-pass2' class='nowrap' size='12' placeholder='Confirm Pass'></input>
+				<div id='blogindiv' style='display:inline-block;'><button id='blogin'>Login</button></div>
+				<button id='bregister'>Register</button>
+			</div>
+			
+			<a href='javascript:void(0)'><div id='btoggle'>[+] Login/Register</div></a>
 		</div>
 		
 		<div class='blueline'> </div>
