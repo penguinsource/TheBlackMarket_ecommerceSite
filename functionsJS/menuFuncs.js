@@ -8,6 +8,7 @@ $(document).ready(function(){
 	$('#auth-alert').hide();
 	
 	btoggleWidth = $('#btoggle').outerWidth(true) + 5;
+	$('#auth-alert').css('marginLeft', $('#shoppingCart').outerWidth(true) + 5);
 	
 	$('#btoggle').click(function() {
 		toggleDiv();
@@ -36,6 +37,7 @@ $(document).ready(function(){
 					var response = JSON.parse(json);
 					
 					if (response.type == "success") {
+						$('#auth-alert').stop().hide();					//hide alert if its visible
 						$('#profile-link').text(response.value);		// set email link
 						$('#profile-link').stop().animate({				// show email link
 							width: 'toggle', paddingRight : '15px'
@@ -56,7 +58,13 @@ $(document).ready(function(){
 						registercount = 0;
 						togglecount = 0;
 					} else {
-						$('#auth-alert').html = response.value;	
+						//error alert
+						$('#auth-alert').css('marginLeft', $('#shoppingCart').outerWidth(true) + 5);
+						$('#auth-alert').stop().hide();
+						$('#auth-alert').text(response.value);
+						$('#auth-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
+							$('#auth-alert').delay(5000).animate({height: 'toggle'}, 250);
+						});
 					}
 				}
 			})
@@ -77,6 +85,7 @@ $(document).ready(function(){
 					var response = JSON.parse(json);
 					
 					if (response.type == "success") {
+						$('#auth-alert').stop().hide();					//hide alert if its visible
 						$('#profile-link').text(response.value);		// set email link
 						$('#profile-link').stop().animate({				// show email link
 							width: 'toggle', paddingRight : '15px'
@@ -111,7 +120,13 @@ $(document).ready(function(){
 							}
 						}
 					} else {
-						$('#auth-alert').html = response.value;	
+						//error alert
+						$('#auth-alert').css('marginLeft', $('#shoppingCart').outerWidth(true) + 5);
+						$('#auth-alert').stop().hide();
+						$('#auth-alert').text(response.value);
+						$('#auth-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
+							$('#auth-alert').delay(5000).animate({height: 'toggle'}, 250);
+						});
 					}
 				}
 			})
@@ -125,6 +140,8 @@ $(document).ready(function(){
 				type: 'POST', 
 				data: { type : "logout"},
 				success: function(response) {
+					console.log(response);
+					
 					document.getElementById("shoppingCart").innerHTML = "<a href='/cart'> Cart ($0.00)</a>";
 					
 					$('#profile-link').stop().animate({
@@ -192,6 +209,8 @@ function toggleDiv(){
 			{ width: btoggleWidth} , 500);
 			
 		$('#btoggle').html('[+] Login / Register');
+		
+		$('#auth-alert').stop().hide();
 			
 		registercount = 0;
 	}

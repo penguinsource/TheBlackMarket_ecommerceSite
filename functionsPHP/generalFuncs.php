@@ -1,7 +1,7 @@
 <?php 
 
 	// GLOBAL VARIABLES --------------------------------------------------
-	$localhostON = 1;		// 0 for 000webhost server
+	$localhostON = 0;		// 0 for 000webhost server
 							// 1 for localhost mihai pc
 							// 2 for vm consort (not setup; to add, just add another if below and the url)
 							
@@ -97,6 +97,7 @@
 				echo "<a href='javascript:void(0)'><div id='logout'>Logout</div></a>\n";
 				
 				echo "<a href='javascript:void(0)'><div id='btoggle'>[+] Login / Register</div></a>\n";
+				echo "<br><div id='auth-alert'> </div>\n";
 			echo "</div>\n";
 			
 			echo "<div class='blueline'> </div>\n";

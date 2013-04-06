@@ -86,7 +86,7 @@ function printProducts($con, $category){
 			echo "<div class='product-price'>$$price</div>";
 			//EDIT LINK FOR CART
 			echo "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
-					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\");' class='cart-button'> Add to Cart</div></a></div>";
+					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\", 1);' class='cart-button'> Add to Cart</div></a></div>";
 		echo "</div>";
 		echo $br;
     }

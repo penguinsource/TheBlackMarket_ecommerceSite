@@ -16,6 +16,7 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
+	<link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	
 	<base href="//blackmarket5.hostei.com" /> 
 	
@@ -92,9 +93,13 @@
 			<div class="imageWrapper">
 				<img class='productImage' src='<?php echo $baseURL.'images/'.$product['imageurl']; ?>'>
 				<div class="productImageInfo">
-					<span class='floatRighty'><span class='quantity'>Qty:<input size="1" type='text'></input></span><span class='addCartButton'> Add to Cart</div></span>
+					<span class='floatRighty'><span class='quantity'>Qty:<input id='input-quantity' size="1" type='text'></input></span>
+					<a href='javascript:void(0)'>
+						<span class='addCartButton' onClick='addToCart("<?= $product['pid'];?>" , "<?= $product['pname'];?>", <?= $product['price'];?>, "<?= $product['imageurl'];?>", getElementById("input-quantity").value);'>  Add to Cart  </span>
+					</a>
 					<span class='floatRighty' style='margin-right: 50px;'><span class='quantity' style='color: green;'>In-stock: 10 items</span></span>
 				</div>
+			</div>
 		</div>
 			
 			<div class="clear"></div>

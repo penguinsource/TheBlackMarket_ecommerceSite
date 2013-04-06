@@ -1,11 +1,15 @@
-function addToCart(id,name,price,img){
+function addToCart(id,name,price,img,quantity){
+	if (!(/^\d+$/.test(quantity))) return;
+	if (quantity > 999) return;
+	
+	console.log("quantity: " + quantity);
     //grab html values and stringify into JSON
 	var item = {};
     item.id = id;
 	item.name = name;
 	item.price = price;
 	item.img = img;
-	item.quantity = 1;
+	item.quantity = quantity;
 	var jsonStr = JSON.stringify(item);
     
     $.ajax({url: '/functionsPHP/cartService',

@@ -26,14 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 
 				// if items exists, update its quantity
 				if (isset($index)){
-					$cartJSON['products'][$index]['quantity']++;
+					$cartJSON['products'][$index]['quantity'] += $itemJSON['quantity'];
+					if ($cartJSON['products'][$index]['quantity'] > 999) $cartJSON['products'][$index]['quantity'] = 999;
 				} else {	 //else, add the item to the cart
 					array_push($cartJSON['products'], $itemJSON);
 				}
-
-				// increase total price, and add cart to session var
-				$cartJSON['total'] += $itemJSON['price'];
 				
+				$cartJSON['total'] = getTotal($cartJSON['products']);
 				ChromePhp::log("added item $id to cart");
 		
 				break;
@@ -47,10 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				
 				// if items exists, update its quantity
 				if (isset($index)){
-					//$oldQ = $cartJSON['products'][$index]['quantity'];						//grab old quantity
-					//$cartJSON['total'] -= $oldQ * $cartJSON['products'][$index]['price'];		//subtract price of old quantity
 					$cartJSON['products'][$index]['quantity'] = $quantity;						//set new quantity
-					//$cartJSON['total'] += $quantity * $cartJSON['products'][$index]['price'];	//add price of new quantity
+					if ($cartJSON['products'][$index]['quantity'] > 999) $cartJSON['products'][$index]['quantity'] = 999;
 					$cartJSON['total'] = getTotal($cartJSON['products']);						// recalculate total to avoid innacuracies
 					
 					if($quantity == 0){
@@ -85,9 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 				} else {
 					ChromePhp::log("index is null");
 				}
-
-				// increase total price, and add cart to session var
-				$cartJSON['total'] += $itemJSON['price'];
 
 				ChromePhp::log("removed item $id from cart");
 				
