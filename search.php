@@ -53,16 +53,23 @@
 		values: [ 75, 300 ],
 		slide: function( event, ui ) {
 			$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+				document.getElementById('amount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
+	" - $" + $( "#slider-range" ).slider( "values", 1 );
 		}
 	});
+	document.getElementById('amount').innerHTML = "$" + $( "#slider-range" ).slider( "values", 0 ) +
+	" - $" + $( "#slider-range" ).slider( "values", 1 );
 	
+	/*
 	$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
 	" - $" + $( "#slider-range" ).slider( "values", 1 ) );
+	*/
+	
 	});
 	
 	// CATEGORY SLIDER:
-	/*
- $(function() {
+	
+$(function() {
     var select = $( "#minbeds" );
     var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
       min: 1,
@@ -76,7 +83,7 @@
     $( "#minbeds" ).change(function() {
       slider.slider( "value", this.selectedIndex + 1 );
     });
-  });*/
+  });
 	</script>
   <!------- END JQUERY SLIDER IMPORTS --> 
   
@@ -114,13 +121,20 @@
 			<div class='filterTab'>
 				<p> Price Range </p>
 				<div id="slider-range"></div>
-				<input type='text' id='amount' class='filterResult' size="14" disabled/>
+				<p align='center' name='amount' id='amount'></p>
 			</div>
+			<div class='border80'></div>
 			<div class='filterTab'>
-				<p> Category </p>
-				<div id="slider-range2"></div>
-				<input type='text' id='amount2' class='filterResult' size="14" disabled/>
+				<p> Categories </p>
+				  <input class='inputBox' type="checkbox" id="category" value="dishwashers"></input><label class='inputBox' for='category'>Dishwashers</label><br>
+				  <input class='inputBox' type="checkbox" id="category" value="freezers"></input><label class='inputBox' for='category'>Freezers</label><br>
+				  <input class='inputBox' type="checkbox" id="category" value="kitches_appliances"></input><label class='inputBox' for='category'>Kitches Appliances</label><br>
+				  <input class='inputBox' type="checkbox" id="category" value="microwaves"></input><label class='inputBox' for='category'>Microwaves</label><br>
+				  <input class='inputBox' type="checkbox" id="category" value="refrigerators"></input><label class='inputBox' for='category'>Refrigerators</label><br>
+				  <input class='inputBox' type="checkbox" id="category" value="stoves_ranges"></input><label class='inputBox' for='category'>Stoves/Ranges</label><br>
+				  <input class='inputBox' type="checkbox" id="category" value="washers_dryers"></input><label class='inputBox' for='category'>Washers/Dryers</label><br>
 			</div>
+			<div class='border80'></div>
 		</div>
 		<div class='searchContent'>
 		
@@ -130,10 +144,11 @@
 <button onclick='checkSlider()'>aaa</button>
 <div id="slider"></div>
  
-
 </body>
 
 </html>
+
+
 
 <!--
 <script>

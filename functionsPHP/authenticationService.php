@@ -124,11 +124,5 @@
     function logoutUser(){
         session_destroy();
     }
-    /*
-	function sendResponse($type, $value){
-		$reponse = array();
-	$response['type'] = $type;
-	$response['value'] = $value:
-	echo json_encode($response);
-	}*/
+
 ?>
