@@ -130,9 +130,21 @@
 		$query="SELECT * FROM user WHERE email = '$email'";
 		$result = mysqli_query($con, $loginQuery);
 		
-		$cartTotal = "";
+		$cartTotal = "0.00";
         if($row = mysqli_fetch_array($result)) {
 			$cart = $row['cart'];
+			
+			$mergedcart = mergeCarts($cart);
+			
+			if (isset($mergedcart)){
+				$_SESSION['cart'] = $mergedcart;
+				$query = "UPDATE user SET cart = '$mergedcart' WHERE email = '$email'";
+				mysqli_query($con, $query);
+				$cartJSON = json_decode($mergedcart, true);
+				$cartTotal = $cartJSON['total']; 
+			}
+			/*
+			// if cart exists in db, merge the session and db cart
 			if (isset($cart) && !($cart == "")){
 				$_SESSION['cart'] = $cart;
 				$cartJSON = json_decode(stripslashes($cart), true);
@@ -145,7 +157,7 @@
 					$query = "UPDATE user SET cart = '" . $_SESSION['cart'] . "' WHERE email = '$email'";
 					mysqli_query($con, $query);
 				}
-			}
+			}*/
 		}
         closeDBConnection($con);    		// close the database connection
 		
@@ -153,7 +165,65 @@
     }
     
     function logoutUser(){
-        session_destroy();
+		ChromePHP:log("logging out");
+        unset($_SESSION['email']);
+		session_destroy();
     }
+	
+	//takes json string $cart as param, merges with session cart, returns json string mergedcart
+	function mergeCarts($cart){
+		//if server cart isnt null
+		if (isset($cart) && !($cart == "")){
+			//if both are set, merge them
+			if (isset($_SESSION['cart'])){
+				ChromePHP:log("both are set, merging");
+			
+				$dbCart = json_decode($cart, true);
+				$sessionCart = json_decode($_SESSION['cart'], true);
+				
+				// merge each item
+				foreach($sessionCart['products'] as $sessionItem){
+					//if item exits in dbcart, sum up the quantities
+					$index = exists($sessionItem['id'], $dbCart['products']);
+					if (isset($index)){
+						$dbCart['products'][$index]['quantity'] += $sessionItem['quantity'];
+					} else {		// else insert the item into the dbCart
+						array_push($dbCart['products'], $sessionItem);
+					}					
+				}
+				
+				//sum up the totals
+				$dbCart['total'] += $sessionCart['total'];
+				
+				//encode back to json 
+				return json_encode($dbCart);
+				
+			} else {	// else return just the session cart
+				ChromePHP:log("only db cart set, returning db cart");
+				return $cart;
+			}
+		} else {	//server cart is null
+			// if session cart is set, return it
+			if (isset($_SESSION['cart'])){
+				ChromePHP:log("only session cart set, returning session cart");
+				return $_SESSION['cart'];
+			} else {	//if neither is set, return null
+				ChromePHP:log("neither set, returning null");
+				return null;
+			}
+		}
+	}
+	
+	function exists($id, $jsonArray){
+		$i = 0;
+		foreach ($jsonArray as $item){
+			if ($item['id'] == $id){
+				return $i;
+			}
+			$i++;
+		} 
+
+		return null;
+	}
 
 ?>

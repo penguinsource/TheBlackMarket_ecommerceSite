@@ -1,6 +1,8 @@
 DROP TABLE user;
 DROP TABLE product;
-DROP TABLE transaction;
+DROP TABLE productOrders;
+DROP TABLE category;
+DROP TABLE userOrders;
 
 CREATE TABLE user (
 	userid INT AUTO_INCREMENT,
@@ -12,6 +14,7 @@ CREATE TABLE user (
 	postal VARCHAR(15),
 	address VARCHAR(255),
 	phone VARCHAR(15),
+	cart VARCHAR(60000),
 	PRIMARY KEY(userid)
 )
 
