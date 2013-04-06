@@ -35,7 +35,8 @@
 			logoutUser();
 		}
 	} else {
-		die('Error ! No type sent.. see file authenticationFuncs.php');
+		echo json_encode(array('type'=>'success', 'value'=>'Error ! No type sent.. see file authenticationFuncs.php'));
+		die();
 	}
 
     function registerUser(){
