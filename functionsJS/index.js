@@ -25,6 +25,7 @@
 		} else if ((type == "login") || (type == "register")){
 			var nameVal = document.getElementById(type+"Email").value;
 			var passVal = document.getElementById(type+"Pass").value;
+			var passValCheck = document.getElementById(type+"Pass").value;
 			var params = type+"Name="+nameVal+"&"+type+"Pass="+passVal; 
 		}
 
