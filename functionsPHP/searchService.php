@@ -45,11 +45,14 @@
 	$con = connectToDB();		// open db connection
 	$basicQuery = "SELECT * FROM product WHERE ";
 	
-	/* APPEND THE TYPE OF SEARCH */
+	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
+	
 	// search types are: by code, by name, by category
-	if (isset($_POST['searchQuery'])){
-		echo "SEARCH QUERY IS: " . $_POST['searchQuery'];
-		//$basicQuery .= "$_POST['searchType'] = '%%'"
+	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
+		//echo "SEARCH QUERY IS: " . $_POST['searchQuery'] . " and " . $_POST['searchType'];
+		$searchType = $_POST['searchType'];
+		$searchQuery = $_POST['searchQuery'];
+		$basicQuery .= "$searchType LIKE '%$searchQuery%' ";
 	}
 	
 	/* PARSE AND ANALYZE CATEGORIES SELECTED */
@@ -63,21 +66,24 @@
 			if (!$value){$allCategories = 0;}else{$categoriesSelected++;}
 		}
 	}	
-
+	
 	/* APPENDING CATEGORIES TO QUERY */
 	if (!$allCategories){			// if not all categories are included in the query.. then go through each and see which is selected
-		foreach ($categoriesArray as $key => $value) {
-			if ($value){			// if category '$key' is selected
-				if ($categoriesSelected > 1){
-					$basicQuery .= "pcategory = '$key' OR ";	// append to Query the selected category
-					--$categoriesSelected;
-				}else {				// append selected category 
-					$basicQuery .= "pcategory = '$key' ";	// this is the last category selected, don't add 'OR' at the end of the query
-					--$categoriesSelected;
+		if ($categoriesSelected){
+		$basicQuery .= "AND ( ";		// if some categories are selected, append 'AND' as there are categories conditions to append
+			foreach ($categoriesArray as $key => $value) {
+				if ($value){			// if category '$key' is selected
+					if ($categoriesSelected > 1){
+						$basicQuery .= "pcategory = '$key' OR ";	// append to Query the selected category
+						--$categoriesSelected;
+					}else {				// append selected category 
+						$basicQuery .= "pcategory = '$key' ) ";	// this is the last category selected, don't add 'OR' at the end of the query
+						--$categoriesSelected;
+					}
 				}
 			}
-		}
-	}	// else if all categories are included in the query, do not append anything to query
+		}	// else no categories are selected at all
+	}	// else all categories are selected and included in the query, do not append anything to query
 	
 	// APPENDING PRICES to the query
 	
@@ -85,9 +91,10 @@
 	//SELECT * FROM product WHERE pcategory = 'dishwashers' OR pcategory = 'freezers'
 	
 
-	//echo "QUERY: ".$basicQuery." :END";
+	echo "QUERY: ".$basicQuery." :END";
 	echo stringOfQuery($con, $basicQuery);
 	closeDBConnection($con);    // close the database connection
+	
 	
 	/*
 	
