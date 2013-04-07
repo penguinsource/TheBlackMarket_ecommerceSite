@@ -40,16 +40,21 @@
 	}else{
 		//echo "its not !";
 	}
-		
+	
+	$allCategories = 1;
 	if (isset($_POST['categories'])){
 		//$blah = json_decode($_POST['categories']);
 		$categoriesArray = json_decode(stripslashes($_POST['categories']));
-		print_r(stripslashes($_POST['categories']));
-		if ($categoriesArray->{'dishwashers'}){
+		/*print_r(stripslashes($_POST['categories']));
+		if ($categoriesArray->{'dishwashers'} && $categoriesArray->{'dishwashers'}){
 			echo "dish: " . $categoriesArray->{'dishwashers'} . ", ";
-		}
+		}*/
+		//echo "freezers: " . $categoriesArray->{'freezers'} . ", ";
 		
-		echo "freezers: " . $categoriesArray->{'freezers'} . ", ";
+		foreach ($categoriesArray as $key => $value) {
+			echo "val: $key -> $value \n";
+			if (!$value){$allCategories = 0;}
+		}
 	}
 	
 	$con = connectToDB();		// open db connection
