@@ -49,7 +49,6 @@
 	
 	// search types are: by code, by name, by category
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
-		//echo "SEARCH QUERY IS: " . $_POST['searchQuery'] . " and " . $_POST['searchType'];
 		$searchType = $_POST['searchType'];
 		$searchQuery = $_POST['searchQuery'];
 		$basicQuery .= "$searchType LIKE '%$searchQuery%' ";
@@ -67,7 +66,7 @@
 		}
 	}	
 	
-	/* APPENDING CATEGORIES TO QUERY */
+	/* APPENDING CATEGORIES TO THE QUERY */
 	if (!$allCategories){			// if not all categories are included in the query.. then go through each and see which is selected
 		if ($categoriesSelected){
 		$basicQuery .= "AND ( ";		// if some categories are selected, append 'AND' as there are categories conditions to append
@@ -86,7 +85,24 @@
 	}	// else all categories are selected and included in the query, do not append anything to query
 	
 	// APPENDING PRICES to the query
+	if (isset($_POST['priceLowArg']) && isset($_POST['priceHighArg'])){
+		$priceLow = $_POST['priceLowArg'];
+		$priceHigh = $_POST['priceHighArg'];
+		$basicQuery .= "AND (price > '$priceLow' AND price < '$priceHigh' ) ";
+	}
 	
+	// APPENDING QUANTITY to the query
+	if (isset($_POST['minQuantity'])){
+		$minQuantity = $_POST['minQuantity'];
+		$basicQuery .= "AND (quantity > '$minQuantity') ";
+	}
+	
+	// APPENDING WEIGHT to the query
+	if (isset($_POST['weightLowArg']) && isset($_POST['weightHighArg'])){
+		$weightLow = $_POST['weightLowArg'];
+		$weightHigh = $_POST['weightHighArg'];
+		$basicQuery .= "AND (weight > '$weightLow' AND weight < '$weightHigh' ) ";
+	}
 	
 	//SELECT * FROM product WHERE pcategory = 'dishwashers' OR pcategory = 'freezers'
 	

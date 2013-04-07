@@ -170,7 +170,7 @@ function checkAddressComplete(){
 function filterSearch(){
 	var priceLow = $( "#priceRangeSlider" ).slider( "values", 0 );
 	var priceHigh = $( "#priceRangeSlider" ).slider( "values", 1 ); // in between price high and low
-	var quantity =  $( "#quantitySlider" ).slider( "value" );	// quantity or MORE
+	var minimum_quantity =  $( "#quantitySlider" ).slider( "value" );	// quantity or MORE
 	var weightLow = $( "#weightSlider" ).slider( "values", 0 ); // in between price high and low
 	var weightHigh = $( "#weightSlider" ).slider( "values", 1 ); // in between price high and low
 	alert('low price: '+priceLow+' high:'+priceHigh+' q:'+quantity+' weight:'+weightLow);
@@ -207,7 +207,7 @@ function filterSearch(){
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
-        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
+        data: { priceLowArg: priceLow, priceHighArg: priceHigh, minQuantity: minimum_quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
         success: function(response) {
         	alert("response: " + response);
 			document.getElementById('searchContent').innerHTML = response;
