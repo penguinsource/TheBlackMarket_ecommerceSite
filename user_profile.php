@@ -11,7 +11,9 @@
 
 <head>
 	<base href="//blackmarket5.hostei.com" />
+	<title>Profile</title>
 	<!-- CSS imports -->
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
@@ -37,6 +39,9 @@
 </head>
 
 <body>
+
+	<?php printMenu(); ?>
+
 	<!-- body start -->
 <?php 
 if (isset($_SESSION['email'])){ 
@@ -68,8 +73,10 @@ if (isset($_SESSION['email'])){
 		if (isset($_GET['profileOrders'])){		// ORDERS PAGE OF USER PROFILE
 			echo "<div class='mediumColumn' id='profileOrders'>";
 			echo "<p> Current Orders </p>";
+			echo getUserCurrentOrders($user['userid']);
 			echo "<div class='maxBorder'></div>";
 			echo "<p> Past Orders </p>";
+			echo getUserPastOrders($user['userid']);
 			echo "<div class='maxBorder'></div>";
 			echo "</div>";
 		} else {	// SETTINGS PAGE OF USER PROFILE
