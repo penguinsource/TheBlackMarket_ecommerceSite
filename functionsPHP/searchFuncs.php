@@ -68,6 +68,8 @@ function stringOfQuery($con, $query){
 		$desc = $row['pdesc'];
 		$price = $row['price'];
 		$quantity = $row['quantity'];
+		$category = $row['pcategory'];
+
 		$br = "";
 		
 		//GET RATING HERE

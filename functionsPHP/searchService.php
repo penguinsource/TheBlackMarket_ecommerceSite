@@ -13,7 +13,7 @@
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
 		$searchType = $_POST['searchType'];
 		$searchQuery = $_POST['searchQuery'];
-		$basicQuery .= "$searchType LIKE '%$searchQuery%' ";
+		$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
 	}
 	
 	/* PARSE AND ANALYZE CATEGORIES SELECTED */

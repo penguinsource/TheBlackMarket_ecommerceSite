@@ -56,7 +56,7 @@
 			//$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
 				" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
-			//filterSearch();		// Filter the search
+			filterSearch();		// Filter the search
 			
 		},
 		stop: function(event, ui){
@@ -146,13 +146,12 @@ $(function() {
 	<div class='searchWrapper'>
 		<div class='searchInput'>
 			<span> Search: 
-				<input onkeydown='filterSearch()' type='text' id='searchQuery'> </input>
+				<input onkeyup='filterSearch()' type='text' id='searchQuery'> </input>
 				<button onclick='filterSearch()'>Go </button>
-				<select id='searchType'>
-					<option id='pid' name='code' value='Code'>Code</option>
+				<select onchange='filterSearch()' id='searchType'>
 					<option id='pname' name='name' value='Name'>Name</option>
 					<option id='pcategory' name='category' value='Category'>Category</option>
-					<option id='pcategory' name='category' value='Category'>Category</option>
+					<option id='pid' name='code' value='Code'>Code</option>
 				</select>
 			</span>
 		</div>

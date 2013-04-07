@@ -203,6 +203,9 @@ function filterSearch(){
 	var cateJSON = JSON.stringify(category);
 	//alert("json:" + cateJSON);
 	
+	// loading screen
+	//document.getElementById('searchContent').innerHTML = "<img style='position: relative; left: 50%; top: 150px;' src='design/images/loadingScreen.gif' /><h3>Loading</h3>";
+	document.getElementById('searchContent').innerHTML = "<img style='position: relative; left: 50%; top: 150px;' src='design/images/ajax-loader2.gif' /><p style='position: relative; left: 49%; top: 150px; font-weight: bold;'>Loading</h3>";
 	// grab the search type and the search query
 	var searche = document.getElementById('searchType');
 	var typeOfSearch = searche.options[searche.selectedIndex].id;		// GET the search type
@@ -214,6 +217,7 @@ function filterSearch(){
         data: { priceLowArg: priceLow, priceHighArg: priceHigh, minQuantity: minimum_quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
         success: function(response) {
         	//alert("response: " + response);
+			
 			document.getElementById('searchContent').innerHTML = response;
         }
     })
