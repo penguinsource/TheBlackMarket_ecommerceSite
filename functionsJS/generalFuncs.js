@@ -201,9 +201,9 @@ function filterSearch(){
 	var cateJSON = JSON.stringify(category);
 	//alert("json:" + cateJSON);
 	var e = document.getElementById('searchType');
-	var strUser = e.options[e.selectedIndex].value;
+	var type = e.options[e.selectedIndex].id;
 	
-	alert("search type:" + strUser);
+	alert("search type:"+type);
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',

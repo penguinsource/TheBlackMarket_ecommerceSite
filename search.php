@@ -142,10 +142,10 @@ $(function() {
 				<input type='text'> </input>
 				<button>Go </button>
 				<select id='searchType'>
-					<option value='Code'>Code</option>
-					<option value='Name'>Name</option>
-					<option value='Category'>Category</option>
-					<option value='Category'>Category</option>
+					<option id='code' name='code' value='Code'>Code</option>
+					<option id='name' name='name' value='Name'>Name</option>
+					<option id='category' name='category' value='Category'>Category</option>
+					<option id='category' name='category' value='Category'>Category</option>
 				</select>
 			</span>
 		</div>
