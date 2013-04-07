@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <?php include("functionsPHP/generalFuncs.php"); ?>
-<?php include("functionsPHP/shopFuncs.php"); ?>
+<?php //include("functionsPHP/shopFuncs.php"); ?>
 <?php include("functionsPHP/productFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
@@ -60,6 +60,7 @@
 		stop: function(event, ui){
 			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
 			" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
+			filterSearch();
 		}
 		
 	});

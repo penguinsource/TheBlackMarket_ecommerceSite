@@ -92,7 +92,7 @@ function stringOfQuery($con, $query){
 		$border = " product-rightborder";
         if ($i == 4){
 			$i = 1;
-			$border = "";
+			//$border = "";
 			$br = "<br><br><br><br>";
 		}
 		$i++;
@@ -120,7 +120,7 @@ function stringOfQuery($con, $query){
 		$returnString .= "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
 					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\");' class='cart-button'> Add to Cart</div></a></div>";
 		$returnString .= "</div>";
-		$returnString .= $br;
+		//$returnString .= $br;
     }
 	echo $returnString;
 }

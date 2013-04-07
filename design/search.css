@@ -5,7 +5,7 @@
 	margin:0;
 	padding:0;
 	margin-bottom: 50px;
-	/* background-color: red; */
+	background-color: red;
 	/* background-color: #DADDE4; */
 }
 
@@ -15,7 +15,7 @@
 	margin:0;
 	padding:0;
 	margin-left: 200px;
-	/* background-color: blue; */
+	background-color: blue;
 }
 
 /* Search Filter Menu */
@@ -32,7 +32,7 @@
 	border-right: 1px solid;
     border-color: #E4E4E4;
 	float: left;
-	/* background-color: gray; */
+	background-color: gray;
 }
 
 .filterTab {
@@ -76,12 +76,10 @@
 	margin-right: 20px;
 	padding-bottom: 10px;
 	margin-bottom: 25px;
-	width: 74%;
+	width: 75%;
 	height: auto;
 	float: left;
-	background-color: #DADDE4;
-
-	/* background-color: green; */
+	background-color: gray;
 }
 /*
 .searchContent .searchResultHeader {
@@ -113,7 +111,7 @@
 
 .main {
     /*position: relative;*/
-	background-color: white;
+	/* background-color: white; */
 	width: 1000px;
 	margin-left: auto ;
     margin-right: auto ;
