@@ -5,14 +5,12 @@
 <?php include_once("functionsPHP/ChromePhp.php"); ?>
 <?php 
 	checkPage(); 
-
 	$con = connectToDB();
-	if (isset($_GET["opt"])){	
-		$opt = $_GET["opt"];			
-	} else {
-		$opt = null;
-	}
-	
+
+	$opt = isset($_GET["opt"]) ? $_GET["opt"] : null;	
+	$from = isset($_GET["from"]) ? $_GET["from"] : null;
+	$to = isset($_GET["to"]) ? $_GET["to"] : null;
+
 	ChromePhp::log("email from shop: " . $_SESSION['email']);
 ?>
 <html>
@@ -21,6 +19,7 @@
 
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
+	<link rel="stylesheet" href="<?= $GLOBALS['baseURL']; ?>design/admin.css" type="text/css">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>tablesorter/themes/blue/style.css" TYPE="text/CSS">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
@@ -52,8 +51,22 @@
 				<?php printAdminList($con, $opt); ?>
 			</div>
 			
-			<div class='body'>		
-				<?php printStats($con, $opt); ?>
+			<div class='body'>
+				<input type="hidden" id="hf" />
+				<input type="hidden" id="ht" />
+
+				<div id='tableView'><?php printStats($con, $opt, $from, $to); ?></div>
+
+				<div id='dateWrapper'>
+					<div id='dateGate'>
+						<label>Refine</label>
+						<input type="checkbox" name="dateToggle" onClick="toggleDate()" />						
+					</div>
+					<div id='dateSelect'>
+						<?php displayDateRange($opt); ?>
+						<a href="" onClick='return reloadPage("<?= $opt; ?>")'>Use These Values</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

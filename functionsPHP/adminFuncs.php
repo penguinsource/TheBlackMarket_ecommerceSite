@@ -39,29 +39,46 @@ function printAdminList($con, $selected){
 
 // print stats
 // ============= PASS DATES HERE =============
-function printStats($con, $opt) {
+function printStats($con, $opt, $from, $to) {
+  //echo "<p><font color='green'>FROM: </font>$from <font color='red'>TO: </font>$to</p>";
+
 	// show appropriate data
 	if ($opt == "recent") {
-		displayTransactionHistory($con, null, null);
+		displayTransactionHistory($con, $from, $to);
+
 	} else if ($opt == "customers") {
 		displayCustomerStats($con, null, null);	
 	} else if ($opt == "products") {
 		displayProductSales($con, null, null);
 	} else if ($opt == "imports") {
-		echo "<p>foreign aid</p>";
+		echo "<p>foreign aid</p>"; return;
+	} else if ($opt == null) {
+		return;
 	}
 
-	// allow date range selection
-	displayDateRange();
 }
 
+// get datepicker mindate
+function getMinDate() {
+	//return isset($_REQUEST["from"]) ? $_REQUEST["from"] : null;
+	return null;
+}
+
+// get datepicker maxdate
+function getMaxDate() {
+	//return isset($_REQUEST["to"]) ? $_REQUEST["to"] : null;
+	return null;
+}
+
+
 // allow date range selection
-function displayDateRange() {
-	$range = "<div style='text-align:center'>"
-		."<p>Select Date Range</p>"
+function displayDateRange($opt) {
+  // only display when necessary
+  if ($opt == null || $opt == "imports") { return; }
+
+	$range = "<p>Select Date Range</p>"
 		."<input type='text' id='from' name='from' placeholder='From' />"
-		."<input type='text' id='to' name='to' placeholder='To' />"
-		."</div>";
+		."<input type='text' id='to' name='to' placeholder='To' />";
 
 	echo "$range";
 }
@@ -103,7 +120,9 @@ function displayTransactionHistory($con, $from, $to) {
 	$view = "userOrders, user, productOrders, product";
 	$condition = "userOrders.userid=user.userid"
 		." AND productOrders.orderid=userOrders.orderid"
-		." AND productOrders.pid=product.pid";
+		." AND productOrders.pid=product.pid"
+		.' AND userOrders.delivery_date>=STR_TO_DATE("'.$from.'","yy-mm-dd")';
+
 	// check dates here for condition
 	$query = "SELECT * FROM $view";
 	$query .= ($condition == null) ? "" : " WHERE ".$condition;
@@ -113,7 +132,10 @@ function displayTransactionHistory($con, $from, $to) {
 	// init table
 	$columns = array("Date", "Order ID", "User Email", 
 		"Product", "Quantity Sold", "Total Cost");
-	$output .= createTableHeader($columns, "historyTable", "Transaction History");
+    
+  $cap = "Transaction History";
+  $cap .= ($from == null && $to == null) ? "" : " <font color='green'>FROM: </font>$from <font color='red'>TO: </font>$to";
+	$output .= createTableHeader($columns, "historyTable", $cap);
 
 	// fill table
 	while ($row = mysqli_fetch_array($result)) {		
