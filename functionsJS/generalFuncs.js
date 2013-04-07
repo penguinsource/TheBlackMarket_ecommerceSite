@@ -98,7 +98,8 @@ function updateUserProfile(){
     })	
 }
 
-function goToOrder(){
+
+function checkUserLoggedIn(){
 	$.ajax({url: '/functionsPHP/authenticationService',
         type: 'POST', 
         data: { type : 'checklogin'},
@@ -129,16 +130,38 @@ function checkEmptyCart(){
         success: function(response) {
 			console.log(response);
         	if (response == '0'){
-				$('#page-alert').stop().hide();
-				$('#page-alert').text("<span style='padding-left:15px;'> Cannot place an order with an empty cart </span>");
+				$(this).scrollTop(0);
+				$('#page-alert').clearQueue().hide();
+				$('#page-alert').html('<span style="padding-left:15px;"> Cannot place an order with an empty cart </span>');
+				$('#page-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
+					$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);
+				});
+			} else {
+				checkAddressComplete();
+			}				
+        }
+		
+		
+    })	
+}
+
+function checkAddressComplete(){
+	$.ajax({url: '/functionsPHP/authenticationService',
+        type: 'POST', 
+        data: { type : 'checkaddress'},
+        success: function(response) {
+			console.log(response);
+        	if (response != ""){
+				$(this).scrollTop(0);
+				$('#page-alert').clearQueue().hide();
+				$('#page-alert').html('<span style="padding-left:15px;"> Please fill out your $response in your profile (located in top right) </span>');
 				$('#page-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
 					$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);
 				});
 			} else {
 				alert("yay");/*window.location.href = "#";*/
 			}				
-        }
-		
+        }		
 		
     })	
 }

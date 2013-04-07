@@ -46,7 +46,7 @@
 				
 				<?php printCartItems(); ?>
 				
-				<br><br><br><br><br><div style="float:right"><a href='<?php echo $_SERVER['HTTP_REFERER']; ?>'><button> Continue Shopping </button></a> <button onClick='goToOrder();'> Checkout Cart </button></a></div><br><br><br>
+				<br><br><br><br><br><div style="float:right"><a href='<?php echo $_SERVER['HTTP_REFERER']; ?>'><button> Continue Shopping </button></a> <button onClick='checkUserLoggedIn();'> Checkout Cart </button></a></div><br><br><br>
 				
 			</div>
 			

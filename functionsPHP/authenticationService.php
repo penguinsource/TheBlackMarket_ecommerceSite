@@ -19,6 +19,7 @@
 		} else if ($_POST['type'] == 'logout'){
 			logoutUser();
 			echo json_encode(array('type'=>'success', 'value'=>'logged out'));
+		// return 1 if user is logged in
 		} else if ($_POST['type'] == 'checklogin'){
 			if (isset($_SESSION["email"])){
 				echo "1";
@@ -26,7 +27,34 @@
 				echo "0";
 			}
 			die();
+		//return string of all incomplete address fields
+		} else if ($_POST['type'] == 'checkaddress'){
+			ChromePhp::log("got here");	
+			$con = connectToDB();
+			
+			$query = "SELECT * FROM user WHERE email = '$email'";        
+			$result = mysqli_query($con, $query);
+			
+			$returnstr = "";
+			
+			if($row = mysqli_fetch_array($result)) {
+				$firstname = $row['firstname'];
+				$city = $row['city'];
+				$postal = $row['postal'];
+				$address = $row['address'];
+				
+				if (!isset($firstname) || ($firstname == ""))	$returnstr  = "name";	ChromePhp::log($firstname);	
+				if (!isset($city) || ($city == ""))				$returnstr  .= ($returnstr == "") ? "city" : ", city";	ChromePhp::log($city);
+				if (!isset($postal) || ($postal == ""))			$returnstr  .= ($returnstr == "") ? "postal code" : ", postal code";	ChromePhp::log($postal);
+				if (!isset($address) || ($address == ""))		$returnstr  .= ($returnstr == "") ? "address" : "and address";	ChromePhp::log($address);
+				
+			}			
+			
+			echo $returnstr;
+			closeDBConnection($con);
+			die();
 		}
+		
 	} else {
 		echo json_encode(array('type'=>'success', 'value'=>'Error ! No type sent.. see file authenticationFuncs.php'));
 		die();
