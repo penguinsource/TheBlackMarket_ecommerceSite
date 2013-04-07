@@ -41,21 +41,29 @@
 		//echo "its not !";
 	}
 	
-	$allCategories = 1;
-	if (isset($_POST['categories'])){
-		$categoriesArray = json_decode(stripslashes($_POST['categories']));
-		// print_r(stripslashes($_POST['categories']));
-		$categoriesSelected = 0;
-		foreach ($categoriesArray as $key => $value) {
-			//echo "val: $key -> $value \n";
-			if (!$value){$allCategories = 0;}else{$categoriesSelected++;}
-		}
-	}
-	
+	/* INIT BASIC QUERY */
 	$con = connectToDB();		// open db connection
 	$basicQuery = "SELECT * FROM product WHERE ";
 	
-	// APPENDING CATEGORIES to query
+	/* APPEND THE TYPE OF SEARCH */
+	// search types are: by code, by name, by category
+	if (isset($_POST['searchType'])){
+		
+	}
+	
+	/* PARSE AND ANALYZE CATEGORIES SELECTED */
+	$allCategories = 1;														// SELECTED category counter
+	if (isset($_POST['categories'])){
+		$categoriesArray = json_decode(stripslashes($_POST['categories']));	// decode the categories json
+		// print_r(stripslashes($_POST['categories']));
+		$categoriesSelected = 0;
+		foreach ($categoriesArray as $key => $value) {						// check if all the categories are selected
+			//echo "val: $key -> $value \n";								// count the # of categories that are selected
+			if (!$value){$allCategories = 0;}else{$categoriesSelected++;}
+		}
+	}	
+
+	/* APPENDING CATEGORIES TO QUERY */
 	if (!$allCategories){			// if not all categories are included in the query.. then go through each and see which is selected
 		foreach ($categoriesArray as $key => $value) {
 			if ($value){			// if category '$key' is selected
@@ -70,9 +78,12 @@
 		}
 	}	// else if all categories are included in the query, do not append anything to query
 	
+	// APPENDING PRICES to the query
+	
+	
 	//SELECT * FROM product WHERE pcategory = 'dishwashers' OR pcategory = 'freezers'
 	
-	//$basicQuery .= "price > '1000'";
+
 	//echo "QUERY: ".$basicQuery." :END";
 	echo stringOfQuery($con, $basicQuery);
 	closeDBConnection($con);    // close the database connection
@@ -81,10 +92,11 @@
 	
 	search queries
 	
+		//SELECT * FROM product WHERE pname LIKE '%%'
 	SELECT * FROM product WHERE price > '1000'
 	SELECT * FROM product WHERE price > '1000' AND price < '1100'
 	SELECT * FROM product WHERE price > '1000' AND price < '1100' AND pcategory = 'stoves_ranges'
-	
-	
+		//$basicQuery .= "price > '1000'";
+		
 	*/
 ?>
