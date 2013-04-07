@@ -20,7 +20,12 @@
 			logoutUser();
 			echo json_encode(array('type'=>'success', 'value'=>'logged out'));
 		} else if ($_POST['type'] == 'checklogin'){
-			echo isset($_SESSION["email"]);
+			if (isset($_SESSION["email"])){
+				echo "1";
+			} else {
+				echo "0";
+			}
+			die();
 		}
 	} else {
 		echo json_encode(array('type'=>'success', 'value'=>'Error ! No type sent.. see file authenticationFuncs.php'));

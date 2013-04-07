@@ -130,7 +130,7 @@ function checkEmptyCart(){
 			console.log(response);
         	if (response == '0'){
 				$('#page-alert').stop().hide();
-				$('#page-alert').text('Cannot place an order with an empty cart');
+				$('#page-alert').text("<span style='padding-left:15px;'> Cannot place an order with an empty cart </span>");
 				$('#page-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
 					$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);
 				});
