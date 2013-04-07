@@ -157,7 +157,7 @@ function filterSearch(){
         data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, dishwashers: ''},
         success: function(response) {
         	alert("response: " + response);
-			
+			document.getElementById('searchContent').innerHTML = response;
         }
     })
 }

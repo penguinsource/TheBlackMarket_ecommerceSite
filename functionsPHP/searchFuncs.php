@@ -110,19 +110,19 @@ function stringOfQuery($con, $query){
 		echo "</div>";
 		echo $br;
 		*/
-		$returnString += "<div class='product$border'>";
-		$returnString += "<a href='product/$category/$id'> <img class='imgthumb' src='images/$img'> ";
-		$returnString += "<p class='product-name'>$name</p> </a> ";
-		$returnString += "<div class='product-rating'>";
-		$returnString += $ratingString;
-		$returnString += "</div>";
-		$returnString += "<div class='product-price'>$$price</div>";
-		$returnString += "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
+		$returnString .= "<div class='product$border'>";
+		$returnString .= "<a href='product/$category/$id'> <img class='imgthumb' src='images/$img'> ";
+		$returnString .= "<p class='product-name'>$name</p> </a> ";
+		$returnString .= "<div class='product-rating'>";
+		$returnString .= $ratingString;
+		$returnString .= "</div>";
+		$returnString .= "<div class='product-price'>$$price</div>";
+		$returnString .= "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
 					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\");' class='cart-button'> Add to Cart</div></a></div>";
-		$returnString += "</div>";
-		$returnString += $br;
-		echo $returnString;
+		$returnString .= "</div>";
+		$returnString .= $br;
     }
+	echo $returnString;
 }
 
 ?>

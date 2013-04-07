@@ -187,14 +187,15 @@ $(function() {
 		</div>
 		<!-- Search Results (Wrapper) -->
 		
-		<div class='searchContent'>
+		<div id='searchContent' class='searchContent'>
 		
-			<?php $con = connectToDB(); ?>
-			<?php $category = 'Freezers'; ?>
-			<?php printSearchResults($con, $category); ?>
-			<?php printSearchResults($con, $category); ?>
-			<?php printSearchResults($con, $category); ?>
-			<?php closeDBConnection($con); ?>
+			<?php /*$con = connectToDB();
+			 $category = 'Freezers';
+			printSearchResults($con, $category);
+			printSearchResults($con, $category);
+			printSearchResults($con, $category);
+			closeDBConnection($con); */?>
+			
 			<!--
 				<div class='searchResultHeader'>
 					<span class='headerGen'>General</span> <span class='headerDesc'>Desc</span> <span class='headerQuantity'>Desc</span> 

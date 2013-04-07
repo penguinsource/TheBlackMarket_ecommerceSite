@@ -26,9 +26,9 @@
 	//echo "hello";
 	$con = connectToDB();		// open db connection
 	$basicQuery = "SELECT * FROM product WHERE ";
-	$basicQuery += "price > '1000'";
-	echo "QUERY:  :END";
-	//echo stringOfQuery($con, $basicQuery);
+	$basicQuery .= "price > '1000'";
+	//echo "QUERY: ".$basicQuery." :END";
+	echo stringOfQuery($con, $basicQuery);
 	closeDBConnection($con);    // close the database connection
 	/*
 	if (isset($_POST['priceFilterLow'])){
