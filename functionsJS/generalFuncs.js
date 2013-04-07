@@ -151,10 +151,36 @@ function filterSearch(){
 	var weightLow = $( "#weightSlider" ).slider( "values", 0 ); // in between price high and low
 	var weightHigh = $( "#weightSlider" ).slider( "values", 1 ); // in between price high and low
 	alert('low price: '+priceLow+' high:'+priceHigh+' q:'+quantity+' weight:'+weightLow);
+	
+	// seeing which categories to look in
+	var allSelected = true;
+	
+	categoriesArr = new Array();
+	
+	categoriesArr[0] = (document.getElementById('dishwashers').checked) ? 1 : 0;
+	categoriesArr[1] = (document.getElementById('freezers').checked) ? 1 : 0;
+	categoriesArr[2] = (document.getElementById('kitchen_appliances').checked) ? 1 : 0;
+	categoriesArr[3] = (document.getElementById('microwaves').checked) ? 1 : 0;
+	categoriesArr[4] = (document.getElementById('refrigerators').checked) ? 1 : 0;
+	categoriesArr[5] = (document.getElementById('stoves_ranges').checked) ? 1 : 0;
+	categoriesArr[6] = (document.getElementById('washers_dryers').checked) ? 1 : 0;
+
+	var category= {
+		"dishwashers":categoriesArr[0],
+		"freezers":categoriesArr[1],
+		"kitchen_appliances":categoriesArr[2],
+		"microwaves":categoriesArr[3],
+		"refrigerators":categoriesArr[4],
+		"stoves_ranges":categoriesArr[5],
+		"washers_dryers":categoriesArr[6]
+	}
+	
+	var cateJSON = JSON.stringify(category);
+	alert("json:" + cateJSON);
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
-        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, dishwashers: ''},
+        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, categories: cateJSON},
         success: function(response) {
         	alert("response: " + response);
 			document.getElementById('searchContent').innerHTML = response;

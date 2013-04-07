@@ -24,13 +24,8 @@
 	}
 	*/
 	//echo "hello";
-	$con = connectToDB();		// open db connection
-	$basicQuery = "SELECT * FROM product WHERE ";
-	$basicQuery .= "price > '1000'";
-	//echo "QUERY: ".$basicQuery." :END";
-	echo stringOfQuery($con, $basicQuery);
-	closeDBConnection($con);    // close the database connection
-	/*
+
+	
 	if (isset($_POST['priceFilterLow'])){
 		
 	}
@@ -41,9 +36,32 @@
 		
 	}
 	if (isset($_POST['dishwashers'])){
-		echo "it is set.. to smthing:";
-	}*/
+		//echo "it is set.. to smthing:";
+	}else{
+		//echo "its not !";
+	}
+		
+	if (isset($_POST['categories'])){
+		//$blah = json_decode($_POST['categories']);
+		$categoriesArray = json_decode(stripslashes($_POST['categories']));
+		print_r(stripslashes($_POST['categories']));
+		if ($categoriesArray->{'dishwashers'}){
+			echo "dish: " . $categoriesArray->{'dishwashers'} . ", ";
+		}
+		
+		echo "freezers: " . $categoriesArray->{'freezers'} . ", ";
+	}
+	
+	$con = connectToDB();		// open db connection
+	$basicQuery = "SELECT * FROM product WHERE ";
+	
+	$basicQuery .= "price > '1000'";
+	//echo "QUERY: ".$basicQuery." :END";
+	//echo stringOfQuery($con, $basicQuery);
+	closeDBConnection($con);    // close the database connection
+	
 	/*
+	
 	search queries
 	
 	SELECT * FROM product WHERE price > '1000'

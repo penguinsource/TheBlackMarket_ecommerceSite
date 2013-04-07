@@ -161,9 +161,9 @@ $(function() {
 			<div class='border80'></div>
 			<div class='filterTab'>
 				<p> Categories </p>
-				  <input class='inputBox' type="checkbox" id="category" value="dishwashers"></input><label class='inputBox' for='category'>Dishwashers</label><br>
+				  <input class='inputBox' type="checkbox" id="dishwashers" value="dishwashers"></input><label class='inputBox' for='dishwashers'>Dishwashers</label><br>
 				  <input class='inputBox' type="checkbox" id="freezers" value="freezers"></input><label class='inputBox' for='freezers'>Freezers</label><br>
-				  <input class='inputBox' type="checkbox" id="kitches_appliances" value="kitches_appliances"></input><label class='inputBox' for='kitches_appliances'>Kitches Appliances</label><br>
+				  <input class='inputBox' type="checkbox" id="kitchen_appliances" value="kitchen_appliances"></input><label class='inputBox' for='kitchen_appliances'>Kitches Appliances</label><br>
 				  <input class='inputBox' type="checkbox" id="microwaves" value="microwaves"></input><label class='inputBox' for='microwaves'>Microwaves</label><br>
 				  <input class='inputBox' type="checkbox" id="refrigerators" value="refrigerators"></input><label class='inputBox' for='refrigerators'>Refrigerators</label><br>
 				  <input class='inputBox' type="checkbox" id="stoves_ranges" value="stoves_ranges"></input><label class='inputBox' for='stoves_ranges'>Stoves/Ranges</label><br>
