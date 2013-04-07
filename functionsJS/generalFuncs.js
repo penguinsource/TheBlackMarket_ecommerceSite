@@ -92,7 +92,7 @@ function updateUserProfile(){
         type: 'POST', 
         data: { fname: fnameInp, lname: lnameInp, city: cityInp, postal: postalInp, address: addressInp, phone: phoneInp},
         success: function(response) {
-        	alert("Updated Profile !" + response);
+        	alert("Profile Updated Successfully!");
         }
     })	
 }
@@ -213,7 +213,7 @@ function filterSearch(){
         type: 'POST',
         data: { priceLowArg: priceLow, priceHighArg: priceHigh, minQuantity: minimum_quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
         success: function(response) {
-        	alert("response: " + response);
+        	//alert("response: " + response);
 			document.getElementById('searchContent').innerHTML = response;
         }
     })

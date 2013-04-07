@@ -56,11 +56,13 @@
 			//$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
 				" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
+			//filterSearch();		// Filter the search
+			
 		},
 		stop: function(event, ui){
 			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
 			" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
-			filterSearch();
+			filterSearch();		// Filter the search
 		}
 		
 	});
@@ -77,10 +79,11 @@ $(function() {
       max: 22,
       slide: function( event, ui ) {
 		document.getElementById('availAmount').innerHTML = $( "#quantitySlider" ).slider( "value" ) + " or more in-stock";
+		//filterSearch();		// Filter the search
       },
 	  stop: function(event, ui){
 		document.getElementById('availAmount').innerHTML = $( "#quantitySlider" ).slider( "value" ) + " or more in-stock";
-		filterSearch();
+		filterSearch();		// Filter the search
 	  }
     });
     //$( "#amount3" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
@@ -97,11 +100,12 @@ $(function() {
 		slide: function( event, ui ) {
 			document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
 				" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
+			//filterSearch();		// Filter the search
 		},
 		stop: function(event, ui){
 			document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
 				" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
-			filterSearch();
+			filterSearch();		// Filter the search
 		}
 		
 	});
@@ -142,7 +146,7 @@ $(function() {
 	<div class='searchWrapper'>
 		<div class='searchInput'>
 			<span> Search: 
-				<input type='text' id='searchQuery'> </input>
+				<input onkeydown='filterSearch()' type='text' id='searchQuery'> </input>
 				<button onclick='filterSearch()'>Go </button>
 				<select id='searchType'>
 					<option id='pid' name='code' value='Code'>Code</option>
@@ -164,13 +168,13 @@ $(function() {
 			<div class='border80'></div>
 			<div class='filterTab'>
 				<p> Categories </p>
-				  <input class='inputBox' type="checkbox" id="dishwashers" value="dishwashers"></input><label class='inputBox' for='dishwashers'>Dishwashers</label><br>
-				  <input class='inputBox' type="checkbox" id="freezers" value="freezers"></input><label class='inputBox' for='freezers'>Freezers</label><br>
-				  <input class='inputBox' type="checkbox" id="kitchen_appliances" value="kitchen_appliances"></input><label class='inputBox' for='kitchen_appliances'>Kitches Appliances</label><br>
-				  <input class='inputBox' type="checkbox" id="microwaves" value="microwaves"></input><label class='inputBox' for='microwaves'>Microwaves</label><br>
-				  <input class='inputBox' type="checkbox" id="refrigerators" value="refrigerators"></input><label class='inputBox' for='refrigerators'>Refrigerators</label><br>
-				  <input class='inputBox' type="checkbox" id="stoves_ranges" value="stoves_ranges"></input><label class='inputBox' for='stoves_ranges'>Stoves/Ranges</label><br>
-				  <input class='inputBox' type="checkbox" id="washers_dryers" value="washers_dryers"></input><label class='inputBox' for='washers_dryers'>Washers/Dryers</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="dishwashers" value="dishwashers" checked></input><label class='inputBox' for='dishwashers'>Dishwashers</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="freezers" value="freezers" checked></input><label class='inputBox' for='freezers'>Freezers</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="kitchen_appliances" value="kitchen_appliances" checked></input><label class='inputBox' for='kitchen_appliances'>Kitches Appliances</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="microwaves" value="microwaves" checked></input><label class='inputBox' for='microwaves'>Microwaves</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="refrigerators" value="refrigerators" checked></input><label class='inputBox' for='refrigerators'>Refrigerators</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="stoves_ranges" value="stoves_ranges" checked></input><label class='inputBox' for='stoves_ranges'>Stoves/Ranges</label><br>
+				  <input onchange='filterSearch()' class='inputBox' type="checkbox" id="washers_dryers" value="washers_dryers" checked></input><label class='inputBox' for='washers_dryers'>Washers/Dryers</label><br>
 			</div>
 			<div class='border80'></div>
 			<!-- Availability Filter -->
