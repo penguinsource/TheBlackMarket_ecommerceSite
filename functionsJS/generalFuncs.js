@@ -28,6 +28,7 @@ function removeFromCart(id, name){
         type: 'POST', 
         data: { id: id, type: "remove" },
         success: function(response) {
+			console.log(response);
 			var cart = JSON.parse(response);
 			$("#cart-item-"+id).animate({height:'0px'}, 500, "linear",function()
 					{	
@@ -103,9 +104,7 @@ function goToOrder(){
         data: { type : 'checklogin'},
         success: function(response) {
 			console.log(response);
-        	if (response == '1') {
-				window.location.href = "/order";
-			} else if (response == '0'){
+			if (response == '0'){
 				toggleDiv();
 				$('#input-email').focus();
 				$('#auth-alert').css('marginLeft', $('#shoppingCart').outerWidth(true) + 5);
@@ -114,8 +113,33 @@ function goToOrder(){
 				$('#auth-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
 					$('#auth-alert').delay(5000).animate({height: 'toggle'}, 250);
 				});
+			} else {
+				checkEmptyCart();
 			}
         }
+		
+		
+    })		
+}
+
+function checkEmptyCart(){
+	$.ajax({url: '/functionsPHP/cartService',
+        type: 'POST', 
+        data: { type : 'checkcart'},
+        success: function(response) {
+			console.log(response);
+        	if (response == '0'){
+				$('#page-alert').stop().hide();
+				$('#page-alert').text('Cannot place an order with an empty cart');
+				$('#page-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){
+					$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);
+				});
+			} else {
+				alert("yay");/*window.location.href = "#";*/
+			}				
+        }
+		
+		
     })	
 }
 

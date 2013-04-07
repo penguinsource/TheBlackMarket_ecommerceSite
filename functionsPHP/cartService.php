@@ -10,9 +10,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){	//hande POST
 		$quantity = $_POST['quantity'];
 	} else if ($type == 'add') {
 		$itemJSON = json_decode(stripslashes($_POST['data']), true);
-	} else {
+	} else if ($type == 'remove'){
 		$id = $_POST['id'];
+	} else if ($type == 'checkcart'){
+		if (isset($_SESSION['cart'])){
+			$cartJSON = json_decode($_SESSION['cart'], true);
+			if ($cartJSON['total'] > 0){
+				echo "1";
+			} else {
+				echo "0";
+			}
+		} else {
+			echo "0";
+		}
+		
+		die();
 	}
+	
 		
     // if cart exists, update it and recalc total
     if (isset($_SESSION['cart'])){

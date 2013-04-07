@@ -119,3 +119,11 @@
 	padding-right: 5px;
 
 }
+
+#page-alert{
+	height:30px;
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	background-image:url('images/alertbg.png');
+}

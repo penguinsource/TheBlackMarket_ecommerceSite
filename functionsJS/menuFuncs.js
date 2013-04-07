@@ -6,6 +6,7 @@ $(document).ready(function(){
 	//$('#login-reg-form').hide();
 	$('#input-pass2').hide();
 	$('#auth-alert').hide();
+	$('#page-alert').hide();
 	
 	btoggleWidth = $('#btoggle').outerWidth(true) + 5;
 	$('#auth-alert').css('marginLeft', $('#shoppingCart').outerWidth(true) + 5);
