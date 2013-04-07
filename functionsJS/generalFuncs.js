@@ -159,7 +159,7 @@ function checkAddressComplete(){
 					$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);
 				});
 			} else {
-				window.location.href = "order";
+				alert("yay");/*window.location.href = "#";*/
 			}				
         }		
 		
@@ -202,12 +202,12 @@ function filterSearch(){
 	//alert("json:" + cateJSON);
 	var searche = document.getElementById('searchType');
 	var typeOfSearch = searche.options[searche.selectedIndex].id;		// GET the search type
-	
+	var searchQueryValue = document.getElementById('searchQuery').value;
 	alert("search type:"+typeOfSearch);
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
-        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , categories: cateJSON},
+        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
         success: function(response) {
         	alert("response: " + response);
 			document.getElementById('searchContent').innerHTML = response;

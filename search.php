@@ -139,7 +139,7 @@ $(function() {
 	<div class='searchWrapper'>
 		<div class='searchInput'>
 			<span> Search: 
-				<input type='text'> </input>
+				<input type='text' id='searchQuery'> </input>
 				<button>Go </button>
 				<select id='searchType'>
 					<option id='pid' name='code' value='Code'>Code</option>
