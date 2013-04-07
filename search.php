@@ -80,6 +80,7 @@ $(function() {
       },
 	  stop: function(event, ui){
 		document.getElementById('availAmount').innerHTML = $( "#quantitySlider" ).slider( "value" ) + " or more in-stock";
+		filterSearch();
 	  }
     });
     //$( "#amount3" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
@@ -100,6 +101,7 @@ $(function() {
 		stop: function(event, ui){
 			document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
 				" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
+			filterSearch();
 		}
 		
 	});
