@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	include("dbConnection.php");
-
+	include('dbConnection.php');
+	include('searchFuncs.php');
 	/*if (isset($_POST['type'])){
 		if ($_POST['type'] == 'login'){
 			$carttotal = loginUser();
@@ -24,6 +24,9 @@
 	}
 	*/
 	echo "hello";
+	
+	//echo stringOfQuery();
+	
 	/*
 	if (isset($_POST['priceFilterLow'])){
 		

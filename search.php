@@ -102,6 +102,9 @@ $(function() {
 		}
 		
 	});
+	
+	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
+		" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
 	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
 		" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
 	});
