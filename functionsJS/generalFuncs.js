@@ -154,9 +154,10 @@ function filterSearch(){
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
-        data: { priceLow: fnameInp, priceHigh: lnameInp, quantity: cityInp, weightLow: postalInp, weightHigh: addressInp, dishwashers: ''},
+        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, dishwashers: ''},
         success: function(response) {
         	alert("response: " + response);
+			
         }
     })
 }
