@@ -73,6 +73,12 @@ if (isset($_SESSION['email'])){
 		if (isset($_GET['profileOrders'])){		// ORDERS PAGE OF USER PROFILE
 			echo "<div class='mediumColumn' id='profileOrders'>";
 			echo "<p> Current Orders </p>";
+			echo "<div id='orders-header'>
+				<span style='display:inline-block;width:68%;'> </span>   
+				<span style='display:inline-block;width:8%;text-align:center;'>Qty</span>   
+				<span style='display:inline-block;width:14%;text-align:center;'>Price</span>   
+				<span style='display:inline-block;width:8%;text-align:center;'>Arrival Date</span>
+			</div>";
 			echo getUserCurrentOrders($user['userid']);
 			echo "<div class='maxBorder'></div>";
 			echo "<p> Past Orders </p>";

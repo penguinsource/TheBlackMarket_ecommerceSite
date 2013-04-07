@@ -20,7 +20,7 @@ function getUserPastOrders($userid) {
 function getUserOrders($userid, $queryEnd) {
 	$con = connectToDB();		// open db connection
 	$query = "
-		SELECT product.pname, product.price
+		SELECT product.pname, product.imageurl, productOrders.amount, product.price, userOrders.delivery_date, product.pid, product.pcategory
 		FROM userOrders, productOrders, product 
 		WHERE 
 			userOrders.userid = '$userid' AND
@@ -33,8 +33,12 @@ function getUserOrders($userid, $queryEnd) {
 	if ($row == NULL) return "None";
 	while ($row != NULL) {
 		$output .= "<tr>";
-		$output .= "<td>'$row[0]'</td>";
-		$output .= "<td>'$row[1]'</td>";
+		//echo "<a href='/product/dishwashers/$id'> <img src='images/$row[1]'></img> <div style='margin-left:20px;display:inline-block;'>$row[0]</div> </a>\n";
+		$output .= "<td><a href='/product/$row[6]/$row[5]'>'$row[0]'</td>";
+		//$output .= "<td><img src='images/$row[1]'></td>";
+		$output .= "<td>'$row[2]'</td>";
+		$output .= "<td>'$row[3]'</td>";
+		$output .= "<td>'$row[4]'</td>";
 		$output .= "</tr>";
 		$row = mysqli_fetch_row($result);
 	}
