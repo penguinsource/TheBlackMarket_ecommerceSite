@@ -159,7 +159,7 @@ function checkAddressComplete(){
 					$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);
 				});
 			} else {
-				alert("yay");/*window.location.href = "#";*/
+				window.location.href = "/order";
 			}				
         }		
 		
