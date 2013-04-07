@@ -116,7 +116,7 @@ $(document).ready(function(){
 							var page = url.substring(url.lastIndexOf('/') + 1);
 							
 							//if on cart page, refresh to build cart
-							if (page == "cart"){
+							if (page == "cart" || page == "order"){
 								location.reload();
 							}
 						}
