@@ -47,8 +47,9 @@
 	
 	/* APPEND THE TYPE OF SEARCH */
 	// search types are: by code, by name, by category
-	if (isset($_POST['searchType'])){
-		
+	if (isset($_POST['searchType'] && isset($_POST['searchQuery']))){
+		echo "SEARCH QUERY IS: " . $_POST['searchQuery'];
+		$basicQuery .= "$_POST['searchType'] = '%%'"
 	}
 	
 	/* PARSE AND ANALYZE CATEGORIES SELECTED */

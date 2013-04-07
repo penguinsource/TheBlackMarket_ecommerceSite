@@ -200,14 +200,14 @@ function filterSearch(){
 	
 	var cateJSON = JSON.stringify(category);
 	//alert("json:" + cateJSON);
-	var e = document.getElementById('searchType');
-	var type = e.options[e.selectedIndex].id;
+	var searche = document.getElementById('searchType');
+	var typeOfSearch = searche.options[searche.selectedIndex].id;		// GET the search type
 	
-	alert("search type:"+type);
+	alert("search type:"+typeOfSearch);
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
-        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, categories: cateJSON},
+        data: { priceLowArg: priceLow, priceHighArg: priceHigh, quantityArg: quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , categories: cateJSON},
         success: function(response) {
         	alert("response: " + response);
 			document.getElementById('searchContent').innerHTML = response;
