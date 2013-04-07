@@ -88,7 +88,6 @@ function updateUserProfile(){
 	var postalInp = document.getElementById('postalcode').value;
 	var addressInp = document.getElementById('address').value;
 	var phoneInp = document.getElementById('phonenumber').value;
-	alert("fname:"+fnameInp);
 	$.ajax({url: '/functionsPHP/userprofileService',
         type: 'POST', 
         data: { fname: fnameInp, lname: lnameInp, city: cityInp, postal: postalInp, address: addressInp, phone: phoneInp},
@@ -168,18 +167,19 @@ function checkAddressComplete(){
 
 // apply search filters and get new filtered search results
 function filterSearch(){
+	// grab the filter values
 	var priceLow = $( "#priceRangeSlider" ).slider( "values", 0 );
 	var priceHigh = $( "#priceRangeSlider" ).slider( "values", 1 ); // in between price high and low
 	var minimum_quantity =  $( "#quantitySlider" ).slider( "value" );	// quantity or MORE
 	var weightLow = $( "#weightSlider" ).slider( "values", 0 ); // in between price high and low
 	var weightHigh = $( "#weightSlider" ).slider( "values", 1 ); // in between price high and low
-	alert('low price: '+priceLow+' high:'+priceHigh+' q:'+quantity+' weight:'+weightLow);
+	//alert('low price: '+priceLow+' high:'+priceHigh+' q:'+minimum_quantity+' weight:'+weightLow);
 	
 	// seeing which categories to look in
 	var allSelected = true;
 	
 	categoriesArr = new Array();
-	
+	// grab the categories selected
 	categoriesArr[0] = (document.getElementById('dishwashers').checked) ? 1 : 0;
 	categoriesArr[1] = (document.getElementById('freezers').checked) ? 1 : 0;
 	categoriesArr[2] = (document.getElementById('kitchen_appliances').checked) ? 1 : 0;
@@ -187,7 +187,8 @@ function filterSearch(){
 	categoriesArr[4] = (document.getElementById('refrigerators').checked) ? 1 : 0;
 	categoriesArr[5] = (document.getElementById('stoves_ranges').checked) ? 1 : 0;
 	categoriesArr[6] = (document.getElementById('washers_dryers').checked) ? 1 : 0;
-
+	
+	// create json with all the categories selected
 	var category= {
 		"dishwashers":categoriesArr[0],
 		"freezers":categoriesArr[1],
@@ -198,12 +199,15 @@ function filterSearch(){
 		"washers_dryers":categoriesArr[6]
 	}
 	
+	// stringify the array
 	var cateJSON = JSON.stringify(category);
 	//alert("json:" + cateJSON);
+	
+	// grab the search type and the search query
 	var searche = document.getElementById('searchType');
 	var typeOfSearch = searche.options[searche.selectedIndex].id;		// GET the search type
 	var searchQueryValue = document.getElementById('searchQuery').value;
-	alert("search type:"+typeOfSearch);
+	//alert("search type:"+typeOfSearch);
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
