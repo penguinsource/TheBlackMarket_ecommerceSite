@@ -72,7 +72,7 @@
 $(function() {
     $( "#quantitySlider" ).slider({
       range: "min",
-      value: 37,
+      value: 0,
       min: 0,
       max: 22,
       slide: function( event, ui ) {
@@ -143,7 +143,7 @@ $(function() {
 		<div class='searchInput'>
 			<span> Search: 
 				<input type='text' id='searchQuery'> </input>
-				<button>Go </button>
+				<button onclick='filterSearch()'>Go </button>
 				<select id='searchType'>
 					<option id='pid' name='code' value='Code'>Code</option>
 					<option id='pname' name='name' value='Name'>Name</option>
@@ -219,7 +219,7 @@ $(function() {
 	</div>
 </div>
 <button onclick='checkSlider()'>aaa</button>
-<button onclick='filterSearch()'>Filter !</button>
+
 
 </body>
 
