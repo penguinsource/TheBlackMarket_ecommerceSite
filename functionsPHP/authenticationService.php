@@ -32,7 +32,7 @@
 			ChromePhp::log("got here");	
 			$con = connectToDB();
 			
-			$query = "SELECT * FROM user WHERE email = '$email'";        
+			$query = "SELECT * FROM user WHERE email = '" . $_SESSION["email"] . "'";        
 			$result = mysqli_query($con, $query);
 			
 			$returnstr = "";
