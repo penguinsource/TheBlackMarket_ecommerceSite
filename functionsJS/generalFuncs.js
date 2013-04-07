@@ -199,7 +199,11 @@ function filterSearch(){
 	}
 	
 	var cateJSON = JSON.stringify(category);
-	alert("json:" + cateJSON);
+	//alert("json:" + cateJSON);
+	var e = document.getElementById('searchType');
+	var strUser = e.options[e.selectedIndex].value;
+	
+	alert("search type:" + strUser);
 	//var dish= null;
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',

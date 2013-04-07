@@ -141,7 +141,7 @@ $(function() {
 			<span> Search: 
 				<input type='text'> </input>
 				<button>Go </button>
-				<select>
+				<select id='searchType'>
 					<option value='Code'>Code</option>
 					<option value='Name'>Name</option>
 					<option value='Category'>Category</option>
