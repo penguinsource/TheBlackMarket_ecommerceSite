@@ -112,7 +112,10 @@ echo '</xmp>';
 		})
 	}
 	-->
-	<form target="_blank" method="POST" action="http://cs410.cs.ualberta.ca:42001/registration/markets">
+	
+	curl -X POST -d '{"name":"The Black Market","url":"http://cs410-06.cs.ualberta.ca/api"}' http://cs410.cs.ualberta.ca:42001/registration/markets --header "Content-Type:application/json"
+	
+	<form target="/blah.php" method="POST" action="http://cs410.cs.ualberta.ca:42001/registration/markets">
 		<input name='url' id='url' value="http://cs410-06.cs.ualberta.ca/api">
 		<input name='name' id='name' value='The Black Market'>
 		<button>Just click me..</button>
