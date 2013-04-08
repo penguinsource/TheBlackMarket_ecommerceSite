@@ -25,8 +25,8 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
-	<base href="//blackmarket5.hostei.com" />
-	
+	<!-- <base href="//blackmarket5.hostei.com" /> -->
+	<?php echo 'base url:' . $baseURL;?>
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
@@ -34,7 +34,7 @@
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
 	
-	<link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png">
+	<!-- <link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png"> -->
 	<title> Shop </title>
 </head>
 
