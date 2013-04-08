@@ -8,7 +8,8 @@
 
 	$con = connectToDB();
 	if (isset($_GET["category"])){	
-		$category = $_GET["category"];				
+		$category = $_GET["category"];
+		echo "CATEGORY IS: " . $category;
 	} else {
 		$category = null;
 	}
