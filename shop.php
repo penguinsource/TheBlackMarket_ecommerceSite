@@ -34,7 +34,7 @@
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
 	
-	<!-- <link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png"> -->
+	<link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png">
 	<title> Shop </title>
 </head>
 
