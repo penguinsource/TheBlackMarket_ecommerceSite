@@ -12,8 +12,9 @@
 	} else {
 		$category = null;
 	}
-	
-	ChromePhp::log("email from shop: " . $_SESSION['email']);
+	if (isset($_SESSION['email'])){
+		ChromePhp::log("email from shop: " . $_SESSION['email']);
+	}
 ?>
 <html>
 
