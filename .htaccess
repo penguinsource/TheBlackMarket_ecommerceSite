@@ -9,6 +9,7 @@ RewriteRule ^api/products/(.*)/(.*)/?$ api/products.php?id=$1&order=1
 RewriteRule ^api/products/(.+)/?$ api/products.php?id=$1
 # http://blackmarket5.hostei.com/api/products.php?id=c000001&order=1
 
+RewriteRule cs410.cs.ualberta.ca:41061/shop/(.+)/?$ cs410.cs.ualberta.ca:41061/shop.php?category=$1
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
