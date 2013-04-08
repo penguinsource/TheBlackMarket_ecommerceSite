@@ -1,7 +1,7 @@
 <?php
 
 function printCategories($con, $selected){
-    $query =   "SELECT * FROM category";								
+    $query =   "SELECT * FROM category;";								
 	$result = mysqli_query($con, $query) or die("Shop Query getting categories failed");
     
     $number = mysqli_num_rows($result);
