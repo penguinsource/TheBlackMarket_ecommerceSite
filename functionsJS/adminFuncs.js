@@ -4,6 +4,7 @@ $(document).ready(
     $("#historyTable").tablesorter({ sortList: [[0, 1]] });
     $("#customerTable").tablesorter({ sortList: [[3, 1]] });
     $("#productTable").tablesorter({ sortList: [[4, 1]] });
+    $("#storeTable").tablesorter({ sortList: [[0, 1]] });
 
     $("#from").datepicker({
       changeMonth: true,
@@ -35,6 +36,7 @@ $(document).ajaxStop(function () {
   $("#historyTable").tablesorter({ sortList: [[0, 1]] });
   $("#customerTable").tablesorter({ sortList: [[3, 1]] });
   $("#productTable").tablesorter({ sortList: [[4, 1]] });
+  $("#storeTable").tablesorter({ sortList: [[0, 1]] });
 
   $("#tableView").fadeIn();
 });

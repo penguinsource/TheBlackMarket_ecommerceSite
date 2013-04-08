@@ -5,18 +5,17 @@
 <?php include_once("functionsPHP/ChromePhp.php"); ?>
 <?php 
 	checkPage(); 
-	$con = connectToDB();
-
+	
 	if (!isset($_SESSION['email']) || $_SESSION['email'] != "admin") {
 		header("Location: shop.php");
 		exit;
 	}
 
+	$con = connectToDB();
+
 	$opt = isset($_GET["opt"]) ? $_GET["opt"] : null;	
 	$from = isset($_POST["from"]) ? $_POST["from"] : null;
 	$to = isset($_POST["to"]) ? $_POST["to"] : null;
-
-
 
 	ChromePhp::log("email from shop: " . $_SESSION['email']);
 ?>

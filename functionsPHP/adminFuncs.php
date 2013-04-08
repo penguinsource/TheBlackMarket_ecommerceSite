@@ -38,7 +38,6 @@ function printAdminList($con, $selected){
 }
 
 // print stats
-// ============= PASS DATES HERE =============
 function printStats($con, $opt, $from, $to) {
 	// show appropriate data
 	if ($opt == "recent") {
@@ -48,7 +47,7 @@ function printStats($con, $opt, $from, $to) {
 	} else if ($opt == "products") {
 		displayProductSales($con, $from, $to);
 	} else if ($opt == "imports") {
-		echo "<p>foreign aid</p>"; return;
+		displayOtherStores($con, $from, $to);
 	} else if ($opt == null) {
 		return;
 	}
@@ -57,7 +56,7 @@ function printStats($con, $opt, $from, $to) {
 // allow date range selection
 function displayDateRange($opt) {
   // only display when necessary
-  if ($opt == null || $opt == "imports") { return; }
+  if ($opt == null) { return; }
   
   $range = "<p>Select Date Range</p>"
 		."<input type='text' id='from' name='from' placeholder='From' />"
@@ -70,6 +69,19 @@ function displayDateRange($opt) {
 function w($val, $type = 1) {
 	$tag = ($type > 0) ? "td" : "th";
 	return "<$tag>$val</$tag>";
+}
+
+// add date check to sql query - REPLACE INPUT
+// REQUIRES USE OF USERORDERS TABLE!!
+function addDateCheck($curQuery, $from, $to) {
+  $res = $curQuery;
+  
+  $res .= ($from == null) ? "" : 
+    " AND userOrders.delivery_date>=STR_TO_DATE('$from','%Y-%m-%d')";
+	$res .= ($to == null) ? "" : 
+    " AND userOrders.delivery_date<=STR_TO_DATE('$to', '%Y-%m-%d')";
+  
+  return $res;
 }
 
 // create a table header
@@ -102,6 +114,7 @@ function addTableRow($values) {
 // return transaction history as a table
 function displayTransactionHistory($con, $from, $to) {	
 	$output = "";
+  $displaying = 25;   // number of reports to display...until the table does it for me
 
 	// query all transactions
 	$view = "userOrders, user, productOrders, product";
@@ -115,29 +128,33 @@ function displayTransactionHistory($con, $from, $to) {
   
   $query = addDateCheck($query, $from, $to);
   
+  $query .= " ORDER BY userOrders.delivery_date DESC";
+  
 	$result = mysqli_query($con, $query) or 
 		die(" Transaction History Query Failed ");
 
 	// init table
-	$columns = array("Date", "Order ID", "User Email", 
-		"Product", "Quantity Sold", "Total Cost");
+	$columns = array("Date", "User Email", 
+		"Products", "Total Cost");
 	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table
   $i = 0;
-	while ($row = mysqli_fetch_array($result)) {		
+	while (($row = mysqli_fetch_array($result))   && $i < $displaying) {		
 		// get numbers
 		$quantity = $row['amount'];
 		$cost = $quantity * $row['price'];
+    $product = $row['pname']." [x$quantity]";
+    
+    // get purchaser
 
 		// add row to table
-		$values = array($row['delivery_date'], $row['orderid'], 
-			$row['email'], $row['pname'], $quantity, $cost);
+		$values = array($row['delivery_date'], $row['email'], $product, $cost);
 		$output .= addTableRow($values);
     $i++;
 	}
   
-  if ($i == null) { 
+  if ($i == 0) { 
     echo "<p style='text-align: center'><font color='red'>No transactions found between given dates.</font></p>";
     return;
   }
@@ -171,7 +188,7 @@ function displayCustomerStats($con, $from, $to) {
 	// init table
 	$columns = array("Email", "Name", "# Transactions", "Total Purchases");
 	$output .= createTableHeader($columns, "customerTable", "Customer Statistics", $from, $to);
-	
+
 	// fill table
 	while ($userRow = mysqli_fetch_array($allUsers)) {		
 		// customer name		
@@ -247,22 +264,77 @@ function displayProductSales($con, $from, $to) {
 		$values = array($pid, $prodRow['pname'], $prodRow['pcategory'], $qty, $total);
 		$output .= addTableRow($values);
 	}
-
+  
 	$output .= "</tbody></table>";
 	echo "$output";
 }
 
-// add date check to sql query - REPLACE INPUT
-// REQUIRES USE OF USERORDERS TABLE!!
-function addDateCheck($curQuery, $from, $to) {
-  $res = $curQuery;
+// partner retailer information
+function displayOtherStores($con, $from, $to) {
+  $output = "";
+
+  // get other store orders
+  $select = "SELECT * FROM orderSources, userOrders";
+  $group = " GROUP BY orderSources.storeurl";
+  $condition = " WHERE orderSources.orderid=userOrders.orderid";
   
-  $res .= ($from == null) ? "" : 
-    " AND userOrders.delivery_date>=STR_TO_DATE('$from','%Y-%m-%d')";
-	$res .= ($to == null) ? "" : 
-    " AND userOrders.delivery_date<=STR_TO_DATE('$to', '%Y-%m-%d')";
+  $query = $select.$condition;  
+  $query = addDateCheck($query, $from, $to);
+  $query .= $group;
   
-  return $res;
+  $sources = mysqli_query($con, $query) or 
+    die(" Order Sources Query Failed ");
+    
+  // product query
+  $prodQuery = "SELECT * FROM product WHERE product.pid='";
+  
+  // user query
+  $userQuery = "SELECT * FROM user WHERE user.userid='";
+  
+  // init table
+  $columns = array("Store", "User Email", "Products", "Total Cost");
+  $output .= createTableHeader($columns, "storeTable", "Partner Retailer Orders", $from, $to);
+  
+  $i = 0;
+  while ($row = mysqli_fetch_array($sources)) {
+    // get store
+    $store = $row['storename'];
+    
+    // get user
+    $uid = $row['userid'];
+    $uq = $userQuery.$uid."'";
+    $u_res = mysqli_query($con, $uq) or die(" User Query Failed ");
+    $userRow = mysqli_fetch_array($u_res);
+    $email = $userRow['email'];
+    
+    // get product
+    $pid = $row['productid'];        
+    $qty = $row['quantity'];
+    
+    $pq = $prodQuery.$pid."'";
+    $p_res = mysqli_query($con, $pq) or die(" Product Query Failed ");
+    $prodRow = mysqli_fetch_array($p_res);
+    $pname = $prodRow['pname'];
+    $price = $prodRow['price'];
+    
+    $items = $pname." [x$qty]";
+    
+    $cost = $qty * $price;
+    
+    $values = array($store, $email, $items, $cost);
+    $output .= addTableRow($values);
+    
+    $i++;
+  }
+  
+  if ($i == 0) { 
+    echo "<p style='text-align: center'><font color='red'>No transactions found between given dates.</font></p>";
+    return;
+  }
+  
+  $output .= "</tbody></table>";
+  echo $output;
 }
+
 
 ?>
