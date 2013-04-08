@@ -77,6 +77,8 @@
 					echo "<img valign='center' src='/design/images/logo2-small.png'>\n";
 				echo "</a>\n";
 			echo "</div>\n";
+      
+      $str = (isset($_SESSION['email'])) ? $_SESSION['email'] : "";
 			
 			echo "<div class='menulinks'>\n";
 				echo "<div class='menulink'> <a href='/index'>HOME</a> </div>\n";
@@ -84,9 +86,14 @@
 				echo "<div class='menulink'> <a href='/about'>ABOUT</a> </div>\n";
 				echo "<div class='menulink'> <a href='/help'>HELP</a> </div>\n";
 				echo "<div class='menulink'> <a href='/faq'>FAQ</a> </div>\n";
+        
+        if ($str == "admin") {
+          echo "<div class='menulink'> <a href='/admin'>ADMIN</a> </div>\n";
+        }
+        
 			echo "</div>\n";
 			
-			$carttotal = checkCart();
+			$carttotal = checkCart();            
 			
 			echo "<div id='userStuff'>\n";
 				echo "<div id='shoppingCart'>\n";
@@ -101,8 +108,7 @@
 					echo "<button id='bregister'>Register</button>\n";
 				echo "</div>\n";
 				
-				$str = (isset($_SESSION['email'])) ? $_SESSION['email'] : "";
-				
+								
 				echo "<a href='/user_profile'><div id='profile-link'>$str</div></a>\n";
 				echo "<a href='javascript:void(0)'><div id='logout'>Logout</div></a>\n";
 				

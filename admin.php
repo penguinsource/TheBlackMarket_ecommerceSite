@@ -7,9 +7,16 @@
 	checkPage(); 
 	$con = connectToDB();
 
+	if (!isset($_SESSION['email']) || $_SESSION['email'] != "admin") {
+		header("Location: shop.php");
+		exit;
+	}
+
 	$opt = isset($_GET["opt"]) ? $_GET["opt"] : null;	
 	$from = isset($_POST["from"]) ? $_POST["from"] : null;
 	$to = isset($_POST["to"]) ? $_POST["to"] : null;
+
+
 
 	ChromePhp::log("email from shop: " . $_SESSION['email']);
 ?>
