@@ -2,7 +2,7 @@
 	//include_once('/functionsPHP/generalFuncs.php');
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-	$localhostON2 = 4;
+	$localhostON2 = 1;
 	if ($GLOBALS['localhostON2'] == 0){
 		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
 	} else if ($GLOBALS['localhostON2'] == 1){
@@ -27,9 +27,9 @@
 		$con = mysqli_connect($GLOBALS["host"], $GLOBALS["username"], $GLOBALS["password"], $GLOBALS["database_name"]);
         // Check connection
         if (mysqli_connect_errno($con)){
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			//echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }else{
-			echo "Connection Successful !";
+			//echo "Connection Successful !";
             return $con;
         }
     }
