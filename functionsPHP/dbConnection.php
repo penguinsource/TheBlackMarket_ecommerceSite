@@ -2,7 +2,7 @@
 	//include_once('/functionsPHP/generalFuncs.php');
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-	$localhostON2 = 1;
+	$localhostON2 = 4;
 	if ($GLOBALS['localhostON2'] == 0){
 		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
 	} else if ($GLOBALS['localhostON2'] == 1){

@@ -1,7 +1,7 @@
 <?php 
 
 	// GLOBAL VARIABLES --------------------------------------------------
-	$localhostON = 1;		// 0 for 000webhost server
+	$localhostON = 2;		// 0 for 000webhost server
 							// 1 for localhost mihai pc
 							// 2 for vm consort (not setup; to add, just add another if below and the url)
 							
@@ -10,7 +10,7 @@
 	} else if ($localhostON == 1){
 		$baseURL = "http://localhost/TheBlackMarket_ecommerceSite/";	// localhost mihai
 	} else if ($localhostON == 2){
-		$baseURL = "cs410-06.srv.ualberta.ca/";
+		$baseURL = "cs410-06.cs.ualberta.ca/";
 		
 	}
     /*    
