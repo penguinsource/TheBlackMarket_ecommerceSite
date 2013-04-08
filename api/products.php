@@ -58,7 +58,7 @@ function retAllProducts(){
         $rowArray = array("id"=>$row[0]);
         array_push($list, $rowArray);
     }
-    $productsList = array("Products"=>$list);
+    $productsList = array("products"=>$list);
     $json = json_encode($productsList); 
     echo $json;
     //print_r($json);
