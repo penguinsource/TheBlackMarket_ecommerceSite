@@ -1,5 +1,4 @@
 RewriteEngine on
-RewriteBase /
 
 RewriteRule ^shop/(.+)/?$ shop.php?category=$1
 RewriteRule ^shop/.*$ -
