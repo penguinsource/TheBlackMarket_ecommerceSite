@@ -8,7 +8,7 @@
 	/*	<!-- <base href="//blackmarket5.hostei.com" />  KEEP THIS ONE IN MIND IF SMTHING DOESNT LOAD PROPERLY ( 2 // in front of base href)-->
 	<base href="//cs410.cs.ualberta.ca:41061" />*/
 	
-	if ($localhostON == 2){
+	if ($localhostON == 0){
 		$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";				// 000webhost:  blackmarket5.hostei.com
 		$basehref = "<base href='//blackmarket5.hostei.com' \/>";
 	} else if ($localhostON == 1){
