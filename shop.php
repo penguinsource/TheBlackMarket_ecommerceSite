@@ -48,7 +48,7 @@
 		
 		<div style="position:relative;">
 			<div class='sidemenu' id='sidemenu'>
-				<?php //printCategories($con, $category); ?>
+				<?php printCategories($con, $category); ?>
 			</div>
 			
 			<div class='body'>		

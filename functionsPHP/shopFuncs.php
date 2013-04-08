@@ -25,6 +25,7 @@ function printCategories($con, $selected){
     while($row = mysqli_fetch_array($result)) {
 		$name = $row['name'];
 		$id = $row['id'];
+		echo 'cate name:'.$name;
         $class1 = ($id == $selected) ? "selmenuitem" : "menuitem";
         $class2 = ($i == $number) ? " menuitembottom" : "";
 		$class3 = ($i == 1) ? "" : " menuitemtopborder";
@@ -38,7 +39,7 @@ function printCategories($con, $selected){
 }
 
 function printProducts($con, $category){
-	$query =   "SELECT * FROM product WHERE pcategory='$category'";								
+	$query =   "SELECT * FROM product WHERE pcategory='$category';";								
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	
 	$i = 1;
