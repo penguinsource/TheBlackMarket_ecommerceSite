@@ -117,21 +117,22 @@ function displayTransactionHistory($con, $from, $to) {
   $displaying = 25;   // number of reports to display...until the table does it for me
 
 	// query all transactions
-	$view = "userOrders, user, productOrders, product";
-	$condition = "userOrders.userid=user.userid"
-		." AND productOrders.orderid=userOrders.orderid"
-		." AND productOrders.pid=product.pid";
+	$select = "SELECT * FROM userOrders, user";
+	$condition = " WHERE userOrders.userid=user.userid";
 
-	// check dates here for condition
-	$query = "SELECT * FROM $view";
-	$query .= ($condition == null) ? "" : " WHERE ".$condition;  
-  
+	$query = $select.$condition;  
   $query = addDateCheck($query, $from, $to);
   
-  $query .= " ORDER BY userOrders.delivery_date DESC";
+  $query .= " ORDER BY userOrders.delivery_date DESC";  
   
 	$result = mysqli_query($con, $query) or 
 		die(" Transaction History Query Failed ");
+    
+  // transaction query
+  $orderSelect = "SELECT * FROM productOrders, product";
+  $orderCondition = " WHERE productOrders.pid=product.pid"
+    ." AND productOrders.orderid='";
+  $orderQuery = $orderSelect.$orderCondition;
 
 	// init table
 	$columns = array("Date", "User Email", 
@@ -141,15 +142,30 @@ function displayTransactionHistory($con, $from, $to) {
 	// fill table
   $i = 0;
 	while (($row = mysqli_fetch_array($result))   && $i < $displaying) {		
-		// get numbers
-		$quantity = $row['amount'];
-		$cost = $quantity * $row['price'];
-    $product = $row['pname']." [x$quantity]";
+    // get all products in the order
+    $oid = $row['orderid'];
+    $oq = $orderQuery.$oid."'";
+    $oq = addDateCheck($oq, $from, $to);
     
+    $o_res = mysqli_query($con, $oq) or die(" Order Query Failed ");
+       
+    $products = "";
+    $cost = 0;
+    while ($orow = mysqli_fetch_array($o_res)) {
+      $prod = $orow['pname'];
+      $qty = $orow['amount'];
+      $tag = $orow['price'];
+      
+      $products .= ($products == "") ? "" : ", ";
+      $products .= $prod." [x$qty]";
+      
+      $cost += $qty * $tag;
+    }
+        
     // get purchaser
 
 		// add row to table
-		$values = array($row['delivery_date'], $row['email'], $product, $cost);
+		$values = array($row['delivery_date'], $row['email'], $products, $cost);
 		$output .= addTableRow($values);
     $i++;
 	}
@@ -274,53 +290,68 @@ function displayOtherStores($con, $from, $to) {
   $output = "";
 
   // get other store orders
-  $select = "SELECT * FROM orderSources, userOrders";
-  $group = " GROUP BY orderSources.storeurl";
-  $condition = " WHERE orderSources.orderid=userOrders.orderid";
-  
-  $query = $select.$condition;  
-  $query = addDateCheck($query, $from, $to);
-  $query .= $group;
+  $select = "SELECT * FROM userOrders";
+  $condition = " WHERE EXISTS "
+    ."(SELECT * FROM orderSources WHERE userOrders.orderid=orderSources.orderid)";
+    
+  $query = $select.$condition;    
+  $query = addDateCheck($query, $from, $to);        
   
   $sources = mysqli_query($con, $query) or 
     die(" Order Sources Query Failed ");
-    
+        
+  // order query
+  $orderQuery = "SELECT * FROM productOrders WHERE productOrders.orderid='";
   // product query
-  $prodQuery = "SELECT * FROM product WHERE product.pid='";
-  
+  $prodQuery = "SELECT * FROM product WHERE product.pid='";  
   // user query
-  $userQuery = "SELECT * FROM user WHERE user.userid='";
+  $userQuery = "SELECT * FROM user WHERE user.userid='";  
+  // store query
+  $storeQuery = "SELECT * FROM orderSources WHERE orderSources.orderid='";
   
   // init table
-  $columns = array("Store", "User Email", "Products", "Total Cost");
+  $columns = array("Partner", "User Email", "Products", "Total Cost");
   $output .= createTableHeader($columns, "storeTable", "Partner Retailer Orders", $from, $to);
   
   $i = 0;
   while ($row = mysqli_fetch_array($sources)) {
-    // get store
-    $store = $row['storename'];
-    
-    // get user
     $uid = $row['userid'];
+    $oid = $row['orderid'];
+  
+    // get store
+    $sq = $storeQuery.$oid."'";
+    $s_res = mysqli_query($con, $sq) or die(" Store Query Failed ");
+    $storeRow = mysqli_fetch_array($s_res);
+    $store = $storeRow['storename'];
+    
+    // get user    
     $uq = $userQuery.$uid."'";
     $u_res = mysqli_query($con, $uq) or die(" User Query Failed ");
     $userRow = mysqli_fetch_array($u_res);
     $email = $userRow['email'];
     
-    // get product
-    $pid = $row['productid'];        
-    $qty = $row['quantity'];
+    // get products
+    $oq = $orderQuery.$oid."'";
+    $o_res = mysqli_query($con, $oq) or die(" Order Query Failed ");    
     
-    $pq = $prodQuery.$pid."'";
-    $p_res = mysqli_query($con, $pq) or die(" Product Query Failed ");
-    $prodRow = mysqli_fetch_array($p_res);
-    $pname = $prodRow['pname'];
-    $price = $prodRow['price'];
-    
-    $items = $pname." [x$qty]";
-    
-    $cost = $qty * $price;
-    
+    $items = "";
+    $cost = 0;
+    while ($orderRow = mysqli_fetch_array($o_res)) {
+      $pid = $orderRow['pid'];
+      $qty = $orderRow['amount'];
+      
+      $pq = $prodQuery.$pid."'";
+      $p_res = mysqli_query($con, $pq) or die(" Product Query Failed ");
+      $prodRow = mysqli_fetch_array($p_res);
+      $pname = $prodRow['pname'];
+      $price = $prodRow['price'];
+      
+      $items .= ($items == "") ? "" : ", ";
+      $items .= $pname." [x$qty]";
+      
+      $cost += $qty * $price;      
+    }
+
     $values = array($store, $email, $items, $cost);
     $output .= addTableRow($values);
     
