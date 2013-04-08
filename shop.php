@@ -22,11 +22,8 @@
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
-	<!--<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">-->
-	
-	<LINK REL=STYLESHEET HREF="http://cs410-06.cs.ualberta.ca/design/shop.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="http://cs410-06.cs.ualberta.ca/design/mainmenu.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	<!-- <base href="//blackmarket5.hostei.com" /> -->
 	<base href="//cs410-06.cs.ualberta.ca" />
