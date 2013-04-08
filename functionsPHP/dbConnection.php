@@ -2,16 +2,14 @@
 	//include_once('/functionsPHP/generalFuncs.php');
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-	$localhostON2 = 4;
+	$localhostON2 = 3;
 	if ($GLOBALS['localhostON2'] == 0){
-		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	       // for remote db
+		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	      				 // for any REMOTE (like webhost000) db
 	} else if ($GLOBALS['localhostON2'] == 1){
-		$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db home
+		$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db mihai home
 	} else if ($GLOBALS['localhostON2'] == 2){
-		$dbConfig = "http://localhost/TheBlackMarket_ecommerceSite/configLocal.ini";	       // for local db home
-	} else if ($GLOBALS['localhostON2'] == 3){
 		$dbConfig = "http://localhost/bm/configLocal.ini";	       							   // for local db mac
-	} else if ($GLOBALS['localhostON2'] == 4){
+	} else if ($GLOBALS['localhostON2'] == 3){													// for VM
 		$dbConfig = "http://cs410-06.cs.ualberta.ca/configVM.ini";
 	}
     //
