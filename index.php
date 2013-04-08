@@ -12,6 +12,20 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <link href="design.css" rel="Stylesheet" type="text/css">
   <script type="text/javascript" src="functionsJS/index.js"></script>
+  <script>
+	function registerMarket(){
+		urlArg = 'http://cs410-06.cs.ualberta.ca/api';
+		nameArg = 'The Black Market';
+		$.ajax({url: 'http://cs410.cs.ualberta.ca:42001/registration/markets',
+			type: 'POST', 
+			data: { url : urlArg, name: nameArg},
+			success: function(response) {
+			alert("response:"+response);			
+		}		
+
+		})
+	}
+  </script>
 </head>
 
 <body>
@@ -82,11 +96,14 @@ echo '</xmp>';
    target="_blank">
     SEND TO PAYBUDDY !</a>
 
+<button onClick='registerMarket()'>Register Market</button>
 
 <?php
 echo "server: " . "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"] . "configLocal.ini";
 echo " HTTP_HOST: " . $_SERVER['HTTP_HOST'];
 echo " REQUEST_URI: " . $_SERVER['REQUEST_URI'];
+
+
 
 
 // echo "connect to db:";

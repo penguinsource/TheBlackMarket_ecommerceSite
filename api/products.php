@@ -61,7 +61,7 @@ function retAllProducts(){
     $productsList = array("Products"=>$list);
     $json = json_encode($productsList); 
     echo $json;
-      print_r($json);
+    //print_r($json);
     
     closeDBConnection($con);
 }

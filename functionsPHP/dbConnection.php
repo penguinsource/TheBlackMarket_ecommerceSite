@@ -2,7 +2,8 @@
 	//include_once('/functionsPHP/generalFuncs.php');
 	//include_once($_SERVER["DOCUMENT_ROOT"]."functionsPHP/globals.php");
     // database file
-	$localhostON2 = 0;
+	// 0 for remote, 1 for local, 2 for mac, 3 for VM
+	$localhostON2 = 3;
 	if ($GLOBALS['localhostON2'] == 0){
 		$dbConfig = "http://" . $_SERVER['HTTP_HOST'] . "/config.ini";	      				 // for any REMOTE (like webhost000) db
 	} else if ($GLOBALS['localhostON2'] == 1){
