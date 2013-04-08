@@ -18,7 +18,8 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
 	<link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	
-	<base href="//blackmarket5.hostei.com" /> 
+	<!-- <base href="//blackmarket5.hostei.com" /> -->
+	<base href="//cs410.cs.ualberta.ca:41061" />
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
