@@ -10,6 +10,7 @@ function printCategories($con, $selected){
     while($row = mysqli_fetch_array($result)) {
         $name = $row['name'];
 		$id = $row['id'];
+		echo 'name: $name';
 		if ($id == $selected) break;
 		if ($selIndex == $number) {
 			$selIndex = -1;
