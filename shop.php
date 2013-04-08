@@ -11,6 +11,7 @@
 		$category = $_GET["category"];
 		echo "CATEGORY IS: " . $category;
 	} else {
+		echo "NO CATEGORY GETTING HERE";
 		$category = null;
 	}
 	if (isset($_SESSION['email'])){
