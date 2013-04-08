@@ -10,7 +10,7 @@ function printCategories($con, $selected){
     while($row = mysqli_fetch_array($result)) {
         $name = $row['name'];
 		$id = $row['id'];
-		echo 'name: $name';
+		//echo 'name: $name';
 		if ($id == $selected) break;
 		if ($selIndex == $number) {
 			$selIndex = -1;
@@ -25,7 +25,7 @@ function printCategories($con, $selected){
     while($row = mysqli_fetch_array($result)) {
 		$name = $row['name'];
 		$id = $row['id'];
-		echo 'cate name:'.$name;
+		//echo 'cate name:'.$name;
         $class1 = ($id == $selected) ? "selmenuitem" : "menuitem";
         $class2 = ($i == $number) ? " menuitembottom" : "";
 		$class3 = ($i == 1) ? "" : " menuitemtopborder";

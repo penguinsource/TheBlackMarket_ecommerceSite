@@ -9,9 +9,9 @@
 	$con = connectToDB();
 	if (isset($_GET["category"])){	
 		$category = $_GET["category"];
-		echo "CATEGORY IS: " . $category;
+		//echo "CATEGORY IS: " . $category;
 	} else {
-		echo "NO CATEGORY GETTING HERE";
+		//echo "NO CATEGORY GETTING HERE";
 		$category = null;
 	}
 	if (isset($_SESSION['email'])){
