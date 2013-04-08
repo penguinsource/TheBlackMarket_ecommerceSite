@@ -13,6 +13,7 @@ $(document).ready(
       onClose: function (selectedDate) {
         $("#to").datepicker("option", "minDate", selectedDate);
         $("#hf").val($("#from").val());
+        refreshTable();
       }
     });
     $("#to").datepicker({
@@ -23,39 +24,37 @@ $(document).ready(
       onClose: function (selectedDate) {
         $("#from").datepicker("option", "maxDate", selectedDate);
         $("#ht").val($("#to").val());
+        refreshTable();
       }
     });
   }
 );
 
+// reinit tables after ajax
+$(document).ajaxStop(function () {
+  $("#historyTable").tablesorter({ sortList: [[0, 1]] });
+  $("#customerTable").tablesorter({ sortList: [[3, 1]] });
+  $("#productTable").tablesorter({ sortList: [[4, 1]] });
 
-function refreshTable(from, to) {
-  var func = '<?php printStats($con, $opt, ';
-  func += (from != null) ? '"' + from + '", ' : "null, ";
-  func += (to != null) ? '"' + to + '"' : "null";
-  func += '); ?>';
+  $("#tableView").fadeIn();
+});
 
-  alert(func);
-
-  document.getElementById('tableView').innerHTML = func;
+// table refresh
+function refreshTable() {
+  $("#tableView").fadeOut();
+  reloadHistory($("#o").val());
+  // table fades in at ajax completion
 }
 
-
-// toggle the date range selection
-function toggleDate() {
-  $("#dateSelect").slideToggle();
-}
-
-// redirect
-function reloadPage(opt) {
+// grab history with new dates
+function reloadHistory(opt) {
+  var link = "/functionsPHP/historyService";
   var f = $("#hf").val();
   var t = $("#ht").val();
 
-  var link = "admin?opt=" + opt;
-  link += (f != null) ? "&from=" + f : "";
-  link += (t != null) ? "&to=" + f : "";
-
-  location.replace(link);
-
-  return false;
+  $.post(link, { opt: opt, from: f, to: t },
+    function (data) {
+      $("#tableView").html(data);
+    }
+  );
 }

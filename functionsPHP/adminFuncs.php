@@ -75,10 +75,10 @@ function getMaxDate() {
 function displayDateRange($opt) {
   // only display when necessary
   if ($opt == null || $opt == "imports") { return; }
-
-	$range = "<p>Select Date Range</p>"
+  
+  $range = "<p>Select Date Range</p>"
 		."<input type='text' id='from' name='from' placeholder='From' />"
-		."<input type='text' id='to' name='to' placeholder='To' />";
+		."<input type='text' id='to' name='to' placeholder='To' />";//</div>";
 
 	echo "$range";
 }
@@ -91,7 +91,7 @@ function w($val, $type = 1) {
 
 // create a table header
 function createTableHeader($columns, $id, $caption) {
-	$table = "<table id='$id' class='tablesorter'>"
+	$table = "<table id='$id' name='$id' class='tablesorter'>"
 		."<caption>$caption</caption><thead><tr>";
 
 	foreach($columns as $val) {
@@ -120,8 +120,8 @@ function displayTransactionHistory($con, $from, $to) {
 	$view = "userOrders, user, productOrders, product";
 	$condition = "userOrders.userid=user.userid"
 		." AND productOrders.orderid=userOrders.orderid"
-		." AND productOrders.pid=product.pid"
-		.' AND userOrders.delivery_date>=STR_TO_DATE("'.$from.'","yy-mm-dd")';
+		." AND productOrders.pid=product.pid";
+		//.' AND userOrders.delivery_date>=STR_TO_DATE("'.$from.'","yy-mm-dd")';
 
 	// check dates here for condition
 	$query = "SELECT * FROM $view";
@@ -134,7 +134,8 @@ function displayTransactionHistory($con, $from, $to) {
 		"Product", "Quantity Sold", "Total Cost");
     
   $cap = "Transaction History";
-  $cap .= ($from == null && $to == null) ? "" : " <font color='green'>FROM: </font>$from <font color='red'>TO: </font>$to";
+  $cap .= ($from == null) ? "" : "<font color='green'> FROM: </font>$from";
+  $cap .= ($to == null) ? "" : "<font color='red'> TO: </font>$to";
 	$output .= createTableHeader($columns, "historyTable", $cap);
 
 	// fill table

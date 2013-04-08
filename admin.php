@@ -8,8 +8,8 @@
 	$con = connectToDB();
 
 	$opt = isset($_GET["opt"]) ? $_GET["opt"] : null;	
-	$from = isset($_GET["from"]) ? $_GET["from"] : null;
-	$to = isset($_GET["to"]) ? $_GET["to"] : null;
+	$from = isset($_POST["from"]) ? $_POST["from"] : null;
+	$to = isset($_POST["to"]) ? $_POST["to"] : null;
 
 	ChromePhp::log("email from shop: " . $_SESSION['email']);
 ?>
@@ -50,20 +50,16 @@
 			</div>
 			
 			<div class='body'>
+				<input type="hidden" id="o" value="<?= $opt; ?>" />
 				<input type="hidden" id="hf" />
 				<input type="hidden" id="ht" />
 
-				<div id='tableView'><?php printStats($con, $opt, $from, $to); ?></div>
+				<div id='tableView'>
+					<?php printStats($con, $opt, $from, $to); ?>
+				</div>
 
 				<div id='dateWrapper'>
-					<div id='dateGate'>
-						<label>Refine</label>
-						<input type="checkbox" name="dateToggle" onClick="toggleDate()" />						
-					</div>
-					<div id='dateSelect'>
-						<?php displayDateRange($opt); ?>
-						<a href="" onClick='return reloadPage("<?= $opt; ?>")'>Use These Values</a>
-					</div>
+					<?php displayDateRange($opt); ?>
 				</div>
 			</div>
 		</div>
