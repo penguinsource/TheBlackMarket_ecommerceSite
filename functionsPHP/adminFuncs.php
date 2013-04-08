@@ -40,36 +40,19 @@ function printAdminList($con, $selected){
 // print stats
 // ============= PASS DATES HERE =============
 function printStats($con, $opt, $from, $to) {
-  //echo "<p><font color='green'>FROM: </font>$from <font color='red'>TO: </font>$to</p>";
-
 	// show appropriate data
 	if ($opt == "recent") {
 		displayTransactionHistory($con, $from, $to);
-
 	} else if ($opt == "customers") {
-		displayCustomerStats($con, null, null);	
+		displayCustomerStats($con, $from, $to);	
 	} else if ($opt == "products") {
-		displayProductSales($con, null, null);
+		displayProductSales($con, $from, $to);
 	} else if ($opt == "imports") {
 		echo "<p>foreign aid</p>"; return;
 	} else if ($opt == null) {
 		return;
 	}
-
 }
-
-// get datepicker mindate
-function getMinDate() {
-	//return isset($_REQUEST["from"]) ? $_REQUEST["from"] : null;
-	return null;
-}
-
-// get datepicker maxdate
-function getMaxDate() {
-	//return isset($_REQUEST["to"]) ? $_REQUEST["to"] : null;
-	return null;
-}
-
 
 // allow date range selection
 function displayDateRange($opt) {
@@ -90,9 +73,13 @@ function w($val, $type = 1) {
 }
 
 // create a table header
-function createTableHeader($columns, $id, $caption) {
+function createTableHeader($columns, $id, $caption, $from, $to) {
+  $cap = $caption;
+  $cap .= ($from == null) ? "" : "<font color='green'> FROM: </font>$from";
+  $cap .= ($to == null) ? "" : "<font color='red'> TO: </font>$to";
+
 	$table = "<table id='$id' name='$id' class='tablesorter'>"
-		."<caption>$caption</caption><thead><tr>";
+		."<caption>$cap</caption><thead><tr>";
 
 	foreach($columns as $val) {
 		$table .= w($val,0);
@@ -121,24 +108,23 @@ function displayTransactionHistory($con, $from, $to) {
 	$condition = "userOrders.userid=user.userid"
 		." AND productOrders.orderid=userOrders.orderid"
 		." AND productOrders.pid=product.pid";
-		//.' AND userOrders.delivery_date>=STR_TO_DATE("'.$from.'","yy-mm-dd")';
 
 	// check dates here for condition
 	$query = "SELECT * FROM $view";
-	$query .= ($condition == null) ? "" : " WHERE ".$condition;
+	$query .= ($condition == null) ? "" : " WHERE ".$condition;  
+  
+  $query = addDateCheck($query, $from, $to);
+  
 	$result = mysqli_query($con, $query) or 
 		die(" Transaction History Query Failed ");
 
 	// init table
 	$columns = array("Date", "Order ID", "User Email", 
 		"Product", "Quantity Sold", "Total Cost");
-    
-  $cap = "Transaction History";
-  $cap .= ($from == null) ? "" : "<font color='green'> FROM: </font>$from";
-  $cap .= ($to == null) ? "" : "<font color='red'> TO: </font>$to";
-	$output .= createTableHeader($columns, "historyTable", $cap);
+	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table
+  $i = 0;
 	while ($row = mysqli_fetch_array($result)) {		
 		// get numbers
 		$quantity = $row['amount'];
@@ -148,7 +134,13 @@ function displayTransactionHistory($con, $from, $to) {
 		$values = array($row['delivery_date'], $row['orderid'], 
 			$row['email'], $row['pname'], $quantity, $cost);
 		$output .= addTableRow($values);
+    $i++;
 	}
+  
+  if ($i == null) { 
+    echo "<p style='text-align: center'><font color='red'>No transactions found between given dates.</font></p>";
+    return;
+  }
 
 	// close table
 	$output .= "</tbody></table>";
@@ -173,12 +165,12 @@ function displayCustomerStats($con, $from, $to) {
 	$cond = " WHERE userOrders.orderid=productOrders.orderid"
 		." AND productOrders.pid=product.pid"
 		." AND userOrders.userid=";
-	// add date check here
+
 	$queryPurchases = "SELECT SUM(price) FROM ".$view.$cond;	
 
 	// init table
 	$columns = array("Email", "Name", "# Transactions", "Total Purchases");
-	$output .= createTableHeader($columns, "customerTable", "Customer Statistics");
+	$output .= createTableHeader($columns, "customerTable", "Customer Statistics", $from, $to);
 	
 	// fill table
 	while ($userRow = mysqli_fetch_array($allUsers)) {		
@@ -194,12 +186,14 @@ function displayCustomerStats($con, $from, $to) {
 		$uid = $userRow['userid'];
 
 		// number of transactions
-		$numTrans = mysqli_query($con, $queryNumTrans.$uid) or 
+    $ntFinalQuery = addDateCheck($queryNumTrans.$uid, $from, $to);    
+		$numTrans = mysqli_query($con, $ntFinalQuery) or 
 			die(" Query Failed: Transaction Count - ".$email." ");
 		$count = mysqli_fetch_array($numTrans);
 
 		// total purchases
-		$purchases = mysqli_query($con, $queryPurchases.$uid) or
+    $pFinalQuery = addDateCheck($queryPurchases.$uid, $from, $to);
+		$purchases = mysqli_query($con, $pFinalQuery) or
 			die(" Query Failed: Purchase Sum - ".$email." ");
 		$total = mysqli_fetch_array($purchases);
 
@@ -223,11 +217,14 @@ function displayProductSales($con, $from, $to) {
 		die(" Product Query Failed ");
 
 	// find all sales
-	$salesQuery = "SELECT SUM(amount) FROM productOrders WHERE productOrders.pid='";
+  $salesSelect = "SELECT SUM(amount) FROM productOrders, userOrders";
+  $salesCondition = 
+    " WHERE productOrders.orderid=userOrders.orderid AND productOrders.pid=\"";  
+	$salesQuery = $salesSelect.$salesCondition;
 	
 	// init table
 	$columns = array("ID", "Product", "Category", "Quantity Purchased", "Gross Income");
-	$output .= createTableHeader($columns, "productTable", "Overall Product Sales");
+	$output .= createTableHeader($columns, "productTable", "Overall Product Sales", $from, $to);
 
 	// fill the table
 	while ($prodRow = mysqli_fetch_array($allProducts)) {
@@ -235,7 +232,9 @@ function displayProductSales($con, $from, $to) {
 		$pid = $prodRow['pid'];
 
 		// get total sales	
-		$sales = mysqli_query($con, $salesQuery.$pid."'") or 
+    $query = $salesQuery.$pid."\"";
+    $query = addDateCheck($query, $from, $to);    
+		$sales = mysqli_query($con, $query) or 
 			die(" Sales Query Fail ");
 
 		$qa = mysqli_fetch_array($sales);
@@ -251,6 +250,19 @@ function displayProductSales($con, $from, $to) {
 
 	$output .= "</tbody></table>";
 	echo "$output";
+}
+
+// add date check to sql query - REPLACE INPUT
+// REQUIRES USE OF USERORDERS TABLE!!
+function addDateCheck($curQuery, $from, $to) {
+  $res = $curQuery;
+  
+  $res .= ($from == null) ? "" : 
+    " AND userOrders.delivery_date>=STR_TO_DATE('$from','%Y-%m-%d')";
+	$res .= ($to == null) ? "" : 
+    " AND userOrders.delivery_date<=STR_TO_DATE('$to', '%Y-%m-%d')";
+  
+  return $res;
 }
 
 ?>
