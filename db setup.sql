@@ -49,3 +49,11 @@ CREATE TABLE category (
     name VARCHAR(127),
     PRIMARY KEY(name)
 )
+
+/* this one was spit out by phpMyAdmin thats why it looks different */
+CREATE TABLE `pendingOrders` (
+	`orderid` VARCHAR( 255 ) NOT NULL ,
+	`userid` VARCHAR( 255 ) NOT NULL ,
+	`data` VARCHAR( 60000 ) NOT NULL ,
+	UNIQUE (`orderid`)
+) ENGINE = MYISAM
