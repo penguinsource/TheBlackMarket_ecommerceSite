@@ -11,8 +11,8 @@
 		$baseURL = "http://localhost/TheBlackMarket_ecommerceSite/";	// localhost mihai
 	} else if ($localhostON == 2){
 		//$baseURL = "http://cs410-06.cs.ualberta.ca/";
-		$baseURL = "http://cs410.cs.ualberta.ca:41061/";
-		//$baseURL = "localhost/";
+		//$baseURL = "http://cs410.cs.ualberta.ca:41061/";
+		$baseURL = "localhost/";
 		
 	}
     /*    
