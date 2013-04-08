@@ -217,8 +217,25 @@ function filterSearch(){
         data: { priceLowArg: priceLow, priceHighArg: priceHigh, minQuantity: minimum_quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
         success: function(response) {
         	//alert("response: " + response);
+			obj = JSON.parse(response);
 			
-			document.getElementById('searchContent').innerHTML = response;
+			// grab all the variables
+			resultType = obj['type'];
+			originalResults = obj['originalResults'];
+			origResultCount = obj['originalResultCount'];
+			modResults = obj['modifiedResults'];
+			//modResultsCount = obj['modifiedResultsCount'];
+			alert("mod:"+modResults);
+			if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
+				document.getElementById('searchResultsCount').innerHTML = origResultCount;	//	
+				document.getElementById('searchContent').innerHTML = originalResults;
+			} else if (resultType == 'few'){
+				
+			} else if (resultType == 'extra'){	// if there are too many, show recommended ones and a button to show more
+				
+			}
+			
+			
         }
     })
 }

@@ -56,7 +56,7 @@
 			//$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 			document.getElementById('priceAmount').innerHTML = "$" + $( "#priceRangeSlider" ).slider( "values", 0 ) +
 				" - $" + $( "#priceRangeSlider" ).slider( "values", 1 );
-			filterSearch();		// Filter the search
+			//filterSearch();		// Filter the search
 			
 		},
 		stop: function(event, ui){
@@ -110,8 +110,6 @@ $(function() {
 		
 	});
 	
-	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
-		" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
 	document.getElementById('weightAmount').innerHTML = $( "#weightSlider" ).slider( "values", 0 ) +
 		" - " + $( "#weightSlider" ).slider( "values", 1 ) + " lbs";
 	});
@@ -192,7 +190,7 @@ $(function() {
 			<div class='border80'></div>
 		</div>
 		<!-- Search Results (Wrapper) -->
-		
+		<div id='searchResultsCount' class='searchResultsCount'> 15 results found </div>
 		<div id='searchContent' class='searchContent'>
 		
 			<?php /*$con = connectToDB();
