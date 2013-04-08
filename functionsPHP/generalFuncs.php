@@ -10,7 +10,7 @@
 	
 	if ($localhostON == 0){
 		$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";				// 000webhost:  blackmarket5.hostei.com
-		$basehref = "<base href='blackmarket5.hostei.com' \/>";
+		$basehref = "<base href='//blackmarket5.hostei.com' \/>";
 	} else if ($localhostON == 1){
 		$baseURL = "http://localhost/TheBlackMarket_ecommerceSite/";	// localhost mihai
 		$basehref = "<base href=\"http://localhost/TheBlackMarket_ecommerceSite/\" />";
