@@ -14,14 +14,15 @@
   <script type="text/javascript" src="functionsJS/index.js"></script>
   <script>
 	function registerMarket(){
+		alert('registering market..');
 		urlArg = 'http://cs410-06.cs.ualberta.ca/api';
 		nameArg = 'The Black Market';
 		$.ajax({url: 'http://cs410.cs.ualberta.ca:42001/registration/markets',
 			type: 'POST', 
 			data: { url : urlArg, name: nameArg},
 			success: function(response) {
-			alert("response:"+response);			
-		}		
+				alert("response:"+response);			
+			}		
 
 		})
 	}
@@ -96,6 +97,26 @@ echo '</xmp>';
    target="_blank">
     SEND TO PAYBUDDY !</a>
 
+	<!-- 
+		function registerMarket(){
+		alert('registering market..');
+		urlArg = 'http://cs410-06.cs.ualberta.ca/api';
+		nameArg = 'The Black Market';
+		$.ajax({url: 'http://cs410.cs.ualberta.ca:42001/registration/markets',
+			type: 'POST', 
+			data: { url : urlArg, name: nameArg},
+			success: function(response) {
+				alert("response:"+response);			
+			}		
+
+		})
+	}
+	-->
+	<form target="_blank" method="POST" action="http://cs410.cs.ualberta.ca:42001/registration/markets">
+		<input name='url' id='url' value="http://cs410-06.cs.ualberta.ca/api">
+		<input name='name' id='name' value='The Black Market'>
+		<button>Just click me..</button>
+	</form>
 <button onClick='registerMarket()'>Register Market</button>
 
 <?php
