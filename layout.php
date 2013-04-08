@@ -4,16 +4,17 @@
 <html>
   
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<?php echo $GLOBALS['basehref']; // print the site's base href?>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <link href="design.css" rel="Stylesheet" type="text/css">
+	<link href="design.css" rel="Stylesheet" type="text/css">
 	<link href="design/stickybar.css" rel="Stylesheet" type="text/css">
-  <link href="design/loginSlider.css" rel="Stylesheet" type="text/css">
+	<link href="design/loginSlider.css" rel="Stylesheet" type="text/css">
 	<link href="design/searchBar.css" rel="Stylesheet" type="text/css">
 	<link href="design/topMenu.css" rel="Stylesheet" type="text/css">
 
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript" src="functionsJS/loginSlider.js"></script>
 </head>
 

@@ -6,6 +6,8 @@
 <html>
   
 <head>
+  <?php echo $GLOBALS['basehref']; // print the site's base href?>
+  
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <link href="design.css" rel="Stylesheet" type="text/css">
   <script type="text/javascript" src="functionsJS/index.js"></script>
@@ -23,7 +25,7 @@
     <button onClick="authenticate('login')" name='loginBtn'>Login</button>
     <br>
 	<button onClick="authenticate('logout')" name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
-	<?php phpinfo(); ?>
+	<?php //phpinfo(); ?>
 <?php //echo "PREVIOUS PAGE: ".$_SERVER['HTTP_REFERER'];?>
 
 <div name="categoryName" id="categoryName" class="hidden"></div>

@@ -16,15 +16,13 @@
 <html>
 
 <head>
-
+	<?php echo $GLOBALS['basehref']; // print the site's base href?>
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
 	<link rel="stylesheet" href="<?= $GLOBALS['baseURL']; ?>design/admin.css" type="text/css">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>tablesorter/themes/blue/style.css" TYPE="text/CSS">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
-
-	<base href="//blackmarket5.hostei.com" />
 	
 	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>

@@ -12,7 +12,7 @@
 <html>
 
 <head>
-	<base href="//blackmarket5.hostei.com" />
+	<?php echo $GLOBALS['basehref']; // print the site's base href?>
 	<!-- CSS imports -->
 	
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">

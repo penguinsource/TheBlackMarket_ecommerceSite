@@ -4,16 +4,20 @@
 	$localhostON = 2;		// 0 for 000webhost server
 							// 1 for localhost mihai pc
 							// 2 for vm consort (not setup; to add, just add another if below and the url)
-							
+	/*	<!-- <base href="//blackmarket5.hostei.com" /> -->
+	<base href="//cs410.cs.ualberta.ca:41061" />*/
+	
 	if ($localhostON == 0){
 		$baseURL = "http://" . $_SERVER['HTTP_HOST'] . "/";				// 000webhost:  blackmarket5.hostei.com
+		$basehref = "<base href='//blackmarket5.hostei.com' \/>";
 	} else if ($localhostON == 1){
 		$baseURL = "http://localhost/TheBlackMarket_ecommerceSite/";	// localhost mihai
+		$basehref = "<base href=\"//http://localhost/TheBlackMarket_ecommerceSite/\" \/>";
 	} else if ($localhostON == 2){
 		//$baseURL = "http://cs410-06.cs.ualberta.ca/";
 		//$baseURL = "http://cs410.cs.ualberta.ca:41061/";
 		$baseURL = "/";
-		
+		$basehref = "<base href='//cs410.cs.ualberta.ca:41061' />";
 	}
     /*    
     // NOT IMPLEMENTED PROPERLY -- :

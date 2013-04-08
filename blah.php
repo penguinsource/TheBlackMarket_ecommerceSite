@@ -2,6 +2,7 @@
  
 <html lang="en">
 <head>
+  <?php echo $GLOBALS['basehref']; // print the site's base href?>
   <meta charset="utf-8" />
   <title>jQuery UI Slider - Range slider</title>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />

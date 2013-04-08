@@ -21,15 +21,14 @@
 <html>
 
 <head>
+	<?php echo $GLOBALS['basehref']; // print the site's base href?>
 	<!--<style type="text/css">
 		body{font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;}
 	</style>-->
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
-	<!-- <base href="//blackmarket5.hostei.com" /> -->
-	<base href="//cs410.cs.ualberta.ca:41061" />
-	<?php echo 'base url:' . $baseURL;?>
+	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
@@ -44,7 +43,7 @@
 <body>
 
 	<?php printMenu(); ?>
-
+	<?php //echo 'base url:' . $baseURL;?>
 	<div class='main'>
 		<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 		
