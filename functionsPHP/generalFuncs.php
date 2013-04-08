@@ -15,8 +15,8 @@
 		$baseURL = "http://localhost/TheBlackMarket_ecommerceSite/";	// localhost mihai
 		$basehref = "<base href=\"http://localhost/TheBlackMarket_ecommerceSite/\" />";
 	} else if ($localhostON == 2){
-		$baseURL = "http://cs410-06.cs.ualberta.ca/";
-		//$baseURL = "http://cs410.cs.ualberta.ca:41061/";
+		//$baseURL = "http://cs410-06.cs.ualberta.ca/";
+		$baseURL = "http://cs410.cs.ualberta.ca:41061/";
 		//$baseURL = "/";
 		$basehref = "<base href=\"cs410.cs.ualberta.ca:41061\" />";
 	}
