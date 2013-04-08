@@ -23,7 +23,7 @@
     <button onClick="authenticate('login')" name='loginBtn'>Login</button>
     <br>
 	<button onClick="authenticate('logout')" name='logoutBtn' id='logoutBtn' class='visible'>Logout</button>
-	
+	<?php phpinfo(); ?>
 <?php //echo "PREVIOUS PAGE: ".$_SERVER['HTTP_REFERER'];?>
 
 <div name="categoryName" id="categoryName" class="hidden"></div>
