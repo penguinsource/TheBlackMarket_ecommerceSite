@@ -150,6 +150,7 @@ function filterSearch(){
         success: function(response) {
         	//alert("response: " + response);
 			
+			console.log(response);
 			obj = JSON.parse(response);
 			
 			// grab all the variables
@@ -163,7 +164,8 @@ function filterSearch(){
 			
 			originalFiltersText = obj['origFilters'];
 			modFiltersText = obj['modFilters'];
-			//modQuery = obj['modifQuery'];
+			
+			recList = obj['recomQueryList'];
 			
 			//mod
 			//if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
@@ -171,7 +173,7 @@ function filterSearch(){
 				document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
 				
 				document.getElementById('searchContentRecom').innerHTML = modResults;
-				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText;
+				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
 				
 			//} else if (resultType == 'few'){
 				

@@ -1,8 +1,9 @@
 <?php
+	include("ChromePhp.php");
 	session_start();
 	include('dbConnection.php');
 	//include('searchFuncs.php');
-	//include_once("ChromePhp.php");
+	
 	
 	/* INIT BASIC QUERY */
 	$con = connectToDB();		// open db connection
@@ -29,6 +30,10 @@
 	$original_filters = '';
 	$modified_filters = '';
 	
+	global $pids_in_original_query;
+	$pids_in_original_query = array();
+	
+	$recommendationQueryList = array();
 	
 	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
@@ -142,12 +147,16 @@
 		//$returnObject['type'] = 'extra';		// set type to 'few'
 	}*/
 	
-	if ($origResultCount < 4){
+	if ($origResultCount < 5){
 		recommendProducts('more');
-		//$GLOBALS['modResultCount'] = $priceHigh * 5/100%;
-		//$priceHigh
 	} else if ($origResultCount > 10){
 		recommendProducts('fewer');
+	}
+	
+	$recList = '';
+	// print out the recommendation in text, so it can be sent as text directly
+	foreach ($recommendationQueryList as $value) {
+		$recList .= $value . "<br>";
 	}
 	
 	//ChromePhP::log("value: " . $modifiedQuery);
@@ -166,6 +175,7 @@
 	$returnObject['origFilters'] = $original_filters;
 	$returnObject['modFilters'] = $modified_filters;
 	
+	$returnObject['recomQueryList'] = $recList;
 	
 	//$returnObject['modifQuery'] = 'BLAH !';
 
@@ -173,30 +183,179 @@
 	
 	closeDBConnection($con);    // close the database connection
 	
-	/*function recommendProducts($type_arg){
+	function recommendProducts($type_arg){
 		$p_index = 0;
 		if ($type_arg == 'more'){
-			$moddedPriceHigh = $GLOBALS['priceHigh'];
-			$n = 0;
-			while ($GLOBALS['origResultCount'] >= $GLOBALS['modResultCount']){
-				++$n;
-				if ($n == 15){					// potentially increase price by $50 * 14.. if nothing extra is found
-					//$GLOBALS['modified_results'] = '';		// then reset the results as no recommendation can be made based on price
-					
-					break;
-				}
-				$GLOBALS['modified_filters'] = '';
-				$GLOBALS['modResultCount'] = 0;
-				//$GLOBALS['modResultCount'] = 0;
-				$moddedPriceHigh += 50;
-				// first: increasing the price high limit (if it's not strict - not implemented yet)
-				$GLOBALS['modified_results'] = buildModQuery($con, $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $GLOBALS['priceLow'], $moddedPriceHigh, $GLOBALS['minQuantity'],
-					$GLOBALS['weightLow'], $GLOBALS['weightHigh']);
+			if (relaxRange(3, 1)){		// CHECK rangeType below for more info
+				return;						//maximum 5% of range (high and low), return these products as a recommendation
+			} else if (relaxRange(3, 2)){
+				return;
+			} else if (relaxRange(3, 3)){
+				return;
+			} else if (relaxRange(5, 1)){
+				return;
+			} else if (relaxRange(5, 2)){
+				return;
+			} else if (relaxRange(5, 3)){
+				return;
+			}
+		} else if ($type_arg == 'fewer'){
+			if (narrowRange(3, 1)){		// CHECK rangeType below for more info
+				return;						//maximum 5% of range (high and low), return these products as a recommendation
+			} else if (narrowRange(3, 2)){
+				return;
+			} else if (narrowRange(3, 3)){
+				return;
+			} else if (narrowRange(5, 1)){
+				return;
+			} else if (narrowRange(5, 2)){
+				return;
+			} else if (narrowRange(5, 3)){
+				return;
 			}
 		}
-	}*/
+	}
 	
+	// rangeType => 1) price range exponentially increases by 1.1 * depthLevel. 
+	//				2) price range exponentially + weight range by percentage
+	//				3) price range exponentially + weight range by percentage + quantity in stock decrease
+	function relaxRange($depthLevel, $rangeType){
+		$n = 0;												
+		$modPriceHigh = $GLOBALS['priceHigh'];				
+		$modPriceLow = $GLOBALS['priceLow'];
+		
+		$modWeightHigh = $GLOBALS['weightHigh'];				
+		$modWeightLow = $GLOBALS['weightLow'];
+		
+		while ($GLOBALS['origResultCount'] >= $GLOBALS['modResultCount']){
+			++$n;
+			if ($n == $depthLevel){							// potentially increase price by $50 * 14.. if nothing extra is found
+				return 0;
+			}
+			// calculate range 5% of price * $n
+			
+			//	$modPriceHigh = $GLOBALS['priceHigh'] + ((15*$n)/100) * $GLOBALS['priceHigh'];
+			//	$modPriceLow  = $GLOBALS['priceLow'] - ((15*$n)/100) * $GLOBALS['priceLow'];
+			
+			if ($rangeType == 1){	// #1 = price range exponential increase (1.1,$depthLevel times)
+				$modPriceHigh = $modPriceHigh * 1.1;												// Exponential range increase and decrease
+				$modPriceLow = $modPriceLow * 0.9;
+			} else if ($rangeType == 2){	// #1 + weight range percentage increase (by +20% every depth level)
+				$modPriceHigh = $modPriceHigh * 1.1;												// Exponential range increase and decrease
+				$modPriceLow = $modPriceLow * 0.9;
+				
+				$modWeightHigh = $GLOBALS['weightHigh'] + ((20*$n)/100) * $GLOBALS['weightHigh'];
+				$modWeightLow  = $GLOBALS['weightLow'] - ((20*$n)/100) * $GLOBALS['weightLow'];
+			} else if ($rangeType == 3){	// #1 + weight range percentage increase (by +20% every depth level) + quantity needed instock - 10%
+				$modPriceHigh = $modPriceHigh * 1.1;												// Exponential range increase and decrease
+				$modPriceLow = $modPriceLow * 0.9;
+				
+				$modWeightHigh = $GLOBALS['weightHigh'] + ((20*$n)/100) * $GLOBALS['weightHigh'];
+				$modWeightLow  = $GLOBALS['weightLow'] - ((20*$n)/100) * $GLOBALS['weightLow'];
+				
+				$modMinQuantity  = floor($GLOBALS['minQuantity'] - ((20*$n)/100) * $GLOBALS['minQuantity']);
+			}
+			
+			// if ranges are smaller than 0.. set them to 0.
+			if ($modPriceLow < 0){
+				$modPriceLow =  0;
+			}
+			if ($modWeightLow < 0){
+				$modWeightLow =  0;
+			}
+			
+			$GLOBALS['modified_filters'] = '';
+			$GLOBALS['modResultCount'] = 0;
+			//$GLOBALS['modResultCount'] = 0;
+			$moddedPriceHigh += 50;
+			
+			if ($rangeType == 1){
+				$GLOBALS['modified_results'] = buildModQuery($GLOBALS['con'], $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $modPriceLow, $modPriceHigh, $GLOBALS['minQuantity'],
+				$GLOBALS['weightLow'], $GLOBALS['weightHigh']);
+			} else if ($rangeType == 2){
+				$GLOBALS['modified_results'] = buildModQuery($GLOBALS['con'], $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $modPriceLow, $modPriceHigh, $GLOBALS['minQuantity'],
+				$modWeightLow, $modWeightHigh);
+			} else if ($rangeType == 3){
+				$GLOBALS['modified_results'] = buildModQuery($GLOBALS['con'], $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $modPriceLow, $modPriceHigh, $modMinQuantity,
+				$modWeightLow, $modWeightHigh);
+			}
+			
+			
+		}
+		return 1;
+	}
 	
+	// rangeType => 1) price range exponentially decreases by 1.1 * depthLevel. 
+	//				2) price range exponentially + weight range by percentage
+	//				3) price range exponentially + weight range by percentage + quantity in stock decrease
+	function narrowRange($depthLevel, $rangeType){			
+		$n = 0;												
+		$modPriceHigh = $GLOBALS['priceHigh'];				
+		$modPriceLow = $GLOBALS['priceLow'];
+		
+		$modWeightHigh = $GLOBALS['weightHigh'];				
+		$modWeightLow = $GLOBALS['weightLow'];
+		
+		// if it has between 30% and 70% (count) of original.. it's good
+		
+		$highC = floor($GLOBALS['origResultCount'] * 0.65);
+		while ($highC > $GLOBALS['modResultCount']){
+			++$n;
+			// calculate range 5% of price * $n
+			
+			//	$modPriceHigh = $GLOBALS['priceHigh'] + ((15*$n)/100) * $GLOBALS['priceHigh'];
+			//	$modPriceLow  = $GLOBALS['priceLow'] - ((15*$n)/100) * $GLOBALS['priceLow'];
+			
+			if ($rangeType == 1){	// #1 = price range exponential increase (1.1,$depthLevel times)
+				$modPriceHigh = $modPriceHigh * 0.9;												// Exponential range increase and decrease
+				$modPriceLow = $modPriceLow * 1.1;
+			} else if ($rangeType == 2){	// #1 + weight range percentage increase (by +20% every depth level)
+				$modPriceHigh = $modPriceHigh * 0.9;												// Exponential range increase and decrease
+				$modPriceLow = $modPriceLow * 1.1;
+				
+				$modWeightHigh = $GLOBALS['weightHigh'] - ((20*$n)/100) * $GLOBALS['weightHigh'];
+				$modWeightLow  = $GLOBALS['weightLow'] + ((20*$n)/100) * $GLOBALS['weightLow'];
+			} else if ($rangeType == 3){	// #1 + weight range percentage increase (by +20% every depth level) + quantity needed instock - 10%
+				$modPriceHigh = $modPriceHigh * 0.9;												// Exponential range increase and decrease
+				$modPriceLow = $modPriceLow * 1.1;
+				
+				$modWeightHigh = $GLOBALS['weightHigh'] - ((20*$n)/100) * $GLOBALS['weightHigh'];
+				$modWeightLow  = $GLOBALS['weightLow'] + ((20*$n)/100) * $GLOBALS['weightLow'];
+				
+				$modMinQuantity  = floor($GLOBALS['minQuantity'] + ((20*$n)/100) * $GLOBALS['minQuantity']);
+			}
+			
+			// if ranges are smaller than 0.. set them to 0.
+			if ($modPriceLow < 0){
+				$modPriceLow =  0;
+			}
+			if ($modWeightLow < 0){
+				$modWeightLow =  0;
+			}
+			
+			if ($n == $depthLevel){							// potentially increase price by $50 * 14.. if nothing extra is found
+				//$GLOBALS['modified_results'] = '';		// then reset the results as no recommendation can be made based on price
+				//echo "im here.";
+				return 0;
+			}
+			$GLOBALS['modified_filters'] = '';
+			$GLOBALS['modResultCount'] = 0;
+			//$GLOBALS['modResultCount'] = 0;
+			$moddedPriceHigh += 50;
+			
+			if ($rangeType == 1){
+				$GLOBALS['modified_results'] = buildModQuery($GLOBALS['con'], $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $modPriceLow, $modPriceHigh, $GLOBALS['minQuantity'],
+				$GLOBALS['weightLow'], $GLOBALS['weightHigh']);
+			} else if ($rangeType == 2){
+				$GLOBALS['modified_results'] = buildModQuery($GLOBALS['con'], $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $modPriceLow, $modPriceHigh, $GLOBALS['minQuantity'],
+				$modWeightLow, $modWeightHigh);
+			} else if ($rangeType == 3){
+				$GLOBALS['modified_results'] = buildModQuery($GLOBALS['con'], $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $modPriceLow, $modPriceHigh, $modMinQuantity,
+				$modWeightLow, $modWeightHigh);
+			}
+		}
+		return 1;
+	}
 	
 	/* BUILDING A QUERY GIVEN ALL PARAMETERS (currently used only for modified queries/recommendations)*/
 	function buildModQuery($con, $qSearchType, $qSearchQuery, $qCategorieSelectedList, $qPriceLow, $qPriceHigh, $qMinQuantity, $qWeightLow, $qWeightHigh){
@@ -231,6 +390,7 @@
 		$GLOBALS['modified_filters'] .= "Weight > '$qWeightLow' and Weight < '$qWeightHigh', ";					// save filters for printing
 		$qinit .= "AND ( weight > '$qWeightLow' AND weight < '$qWeightHigh' ) ";
 		
+		array_push($GLOBALS['recommendationQueryList'], $qinit);
 		$GLOBALS['modifiedQuery'] = $qinit;
 		//return $qinit;
 		return searchProducts($con, $qinit, 'mod');
@@ -259,16 +419,21 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		$price = $row['price'];
 		$quantity = $row['quantity'];
 		$category = $row['pcategory'];
-
+		
 		$br = "";
 		
 		// increase the resultCount
 		if ($countSel == "original"){
 			$GLOBALS['origResultCount']++;
-		} else {
+			array_push($GLOBALS['pids_in_original_query'], $id);
+			//echo "In Orig..: $id.<br>";
+		} else if ($countSel == 'mod'){
 			$GLOBALS['modResultCount']++;
+			if (in_array($id, $GLOBALS['pids_in_original_query'])){
+				continue;
+			}
 		}
-		
+
 		//GET RATING HERE
 		$rating = rand(0,5);
 		$ratingString = "";
@@ -320,12 +485,12 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		$returnString .= "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
 					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\");' class='cart-button'> Add to Cart</div></a></div>";
 		$returnString .= "</div>";
-		//$returnString .= $br;
-    }
+		
+//$returnString .= $br;
+		}
+    
 	return $returnString;
 }
-
-
 
 	/* TYPES INFO: types: 'normal' ( no recommendations needed )
 	 		  'extra' ( too many results - constrained search results in 'modifiedResults' )
