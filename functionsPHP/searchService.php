@@ -7,13 +7,23 @@
 	$con = connectToDB();		// open db connection
 	$basicQuery = "SELECT * FROM product WHERE ";
 	
-	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
+	// GLOBALS NEEDED TO BUILD MODIFIED QUERY LATER:
+	$searchType = '';														// search types are: by code, by name, by category
+	$searchQuery = '';
+	$priceLow = 0;
+	$priceHigh = 0;
+	$minQuantity = 0;
+	$weightLow = 0;
+	$weightHigh = 0;
+	$savedCategoriesSelected = array();
 	
-	// search types are: by code, by name, by category
+	
+	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
-		$searchType = $_POST['searchType'];
-		$searchQuery = $_POST['searchQuery'];
+		$searchType = $_POST['searchType'];									// assign and save a value for this global
+		$searchQuery = $_POST['searchQuery'];								// assign and save a value for this global
 		$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
+		//addQueryType($_POST['searchType'], $_POST['searchQuery']);
 	}
 	
 	/* PARSE AND ANALYZE CATEGORIES SELECTED */
@@ -37,8 +47,10 @@
 					if ($categoriesSelected > 1){
 						$basicQuery .= "pcategory = '$key' OR ";	// append to Query the selected category
 						--$categoriesSelected;
+						array_push($savedCategoriesSelected, $key);
 					}else {				// append selected category 
 						$basicQuery .= "pcategory = '$key' ) ";	// this is the last category selected, don't add 'OR' at the end of the query
+						array_push($savedCategoriesSelected, $key);
 						--$categoriesSelected;
 					}
 				}
@@ -70,20 +82,32 @@
 	$modResultCount = 0;	// global counter
 	$modified_results = '';
 	//echo "QUERY>>>".$basicQuery."<<<END";
-	$original_results =  stringOfQuery($con, $basicQuery);
+	//$original_results =  stringOfQuery($con, $basicQuery);
+	$original_results = searchProducts($con, $basicQuery);
 	closeDBConnection($con);    // close the database connection
 	
+	/*	BUILDING JSON ARRAY TO SEND AS RESPONSE */
 	$returnObject = array();
 	// types: 'normal' ( no recommendations needed )
 	// 		  'extra' ( too many results - constrained search results in 'modifiedResults' )
 	//		  'few' ( too few results - broadened search results in 'modifiedResults' )
 	
-	$returnObject['type'] = 'normal';
 	$returnObject['originalResults'] = $original_results;
+	/* Recommendation conditions */
+	if ($GLOBALS['origResultCount'] < 4){	// if < 4 products found, try and broaden search
+		$returnObject['type'] = 'few';		// set type to 'few'
+		// first: lowering the price (if it's not strict - not implemented yet)
+		
+		
+	}
+	
+	$returnObject['type'] = 'normal';
 	$returnObject['originalResultCount'] = $GLOBALS['origResultCount'];
 	$returnObject['modifiedResults'] = $GLOBALS['modified_results'];
-	//$returnObject['modifiedResultsCount'] = $GLOBALS['modResultCount'];
-	echo (json_encode($returnObject));
+	$returnObject['modifiedResultsCount'] = $GLOBALS['modResultCount'];
+	//echo (json_encode($returnObject));
+	print_r($savedCategoriesSelected);
+	
 	/*
 	search queries
 	
@@ -95,12 +119,14 @@
 		
 	*/
 	
-	function searchQuery($con, $query){
-		$resultCount;
-		stringOfQuery($con, $query);
+	/*	START BUILDING QUERY FUNCTIONS  */
+	function addQueryType($qSearchType, $qSearchQuery){
+		$GLOBALS['basicQuery'] .= "($qSearchType LIKE '%$qSearchQuery%') ";
 	}
-
-function stringOfQuery($con, $query){						
+	
+	/*	END BUILDING QUERY FUNCTIONS  */
+	
+function searchProducts($con, $query){						
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
 	$returnString .= $query . "<br>";

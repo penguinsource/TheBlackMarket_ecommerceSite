@@ -224,8 +224,8 @@ function filterSearch(){
 			originalResults = obj['originalResults'];
 			origResultCount = obj['originalResultCount'];
 			modResults = obj['modifiedResults'];
-			//modResultsCount = obj['modifiedResultsCount'];
-			alert("mod:"+modResults);
+			modResultsCount = obj['modifiedResultsCount'];
+			
 			if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
 				document.getElementById('searchResultsCount').innerHTML = origResultCount;	//	
 				document.getElementById('searchContent').innerHTML = originalResults;
