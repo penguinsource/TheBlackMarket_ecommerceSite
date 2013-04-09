@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2013 at 04:15 AM
+-- Generation Time: Apr 09, 2013 at 09:53 AM
 -- Server version: 5.1.57
 -- PHP Version: 5.2.17
 
@@ -70,6 +70,9 @@ CREATE TABLE `orderSources` (
   `orderid` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `storeorderid` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `storeurl` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `productid` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `quantity` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `storename` varchar(255) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`orderid`,`storeorderid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -77,6 +80,7 @@ CREATE TABLE `orderSources` (
 -- Dumping data for table `orderSources`
 --
 
+INSERT INTO `orderSources` (`orderid`, `storeorderid`, `storeurl`, `productid`, `quantity`, `storename`) VALUES('bmOrder_3', '1', 'www.fakestore.com', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -89,7 +93,7 @@ CREATE TABLE `pendingOrders` (
   `orderid` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `userid` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `data` varchar(60000) COLLATE latin1_general_ci NOT NULL,
-  UNIQUE KEY `orderid` (`orderid`)
+  PRIMARY KEY (`orderid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -196,7 +200,7 @@ CREATE TABLE `user` (
   `phone` varchar(15) COLLATE latin1_general_ci DEFAULT NULL,
   `cart` varchar(60000) COLLATE latin1_general_ci DEFAULT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=667 ;
 
 --
 -- Dumping data for table `user`
@@ -208,7 +212,7 @@ INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `cit
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(4, 'asd@as.ass', 'asdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(5, 'asd@as.ass', 'asdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(6, 'buddy@yahoo.com', 'buddy@yahoo.com', 'SomeDude', 'His Last Name', 'His bloody city', 'postal friggin ', 'dum dum''s address', '78.. never call', NULL);
-INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(7, 'batman@bat.man', 'joker666', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(7, 'batman@bat.man', 'joker666', 'Batman', 'Alias', 'Gotham City', 'working?', 'The Bat Cave', '', '{"products":[{"id":"c000009","name":"Frigidaire 16.6 Cu.Ft. Upright Freezer","price":799.99,"img":"c000009.jpg","quantity":1},{"id":"c000010","name":"Haier 5.0 Cu. Ft. Chest Freezer","price":179.99,"img":"c000010.jpg","quantity":1}],"total":979.98}');
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(8, 'hey@yahoo.com', 'hey@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(9, 'heyhey@yahoo.com', 'heyhey@yahoo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(12, 'randomName@aaa.com', 'randomName@aaa.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -226,6 +230,7 @@ INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `cit
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(24, 'guy@guy.ca', 'guyguy', NULL, NULL, NULL, NULL, NULL, NULL, '{"products":[{"id":"c000001","name":"LG Tall Tub Built-In Dishwasher","price":1099.99,"img":"c000001.jpg","quantity":"2"},{"id":"c000005","name":"GE Profile 20.2 Cu. Ft. Bottom Mount Refrigerator ","price":1599.99,"img":"c000005.jpg","quantity":1}],"total":3799.97}');
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(25, 'testemail@email.com', 'password', 'Mark', 'Tupala', 'Calgary', 'A1A1A1', 'blah', '111-111-1111', '{"products":[{"id":"c000013","name":"Panasonic 1.6 Cu. Ft. Microwave","price":279.99,"img":"c000013.jpg","quantity":4},{"id":"c000006","name":"LG WaveForce 5.4 Cu. Ft. Top Load HE Washer with Heater","price":1199.99,"img":"c000006.jpg","quantity":2},{"id":"c000001","name":"LG Tall Tub Built-In Dishwasher","price":1099.99,"img":"c000001.jpg","quantity":14}],"total":18919.8}');
 INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(26, 'a@a.aa', 'asdasd', NULL, NULL, NULL, NULL, NULL, NULL, '{"products":[{"id":"c000020","name":"Breville Cafe Roma Espresso Machine ","price":149.99,"img":"c000020.jpg","quantity":"1"}],"total":149.99}');
+INSERT INTO `user` (`userid`, `email`, `password`, `firstname`, `lastname`, `city`, `postal`, `address`, `phone`, `cart`) VALUES(666, 'admin', 'blackmarket5', 'The', 'Man', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

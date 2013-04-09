@@ -46,14 +46,14 @@
 			
 			// if we have the needed quantity, dont order from other stores
 			if ($qHave >= $qNeed){
-				array_push($wtoItem['sources'], array('url'=>'home', 'quantity' => $qNeed, 'price' => $price));
+				array_push($wtoItem['sources'], array('url'=>'home', 'quantity' => $qNeed, 'price' => $price, 'name' => 'The Black Market'));
 				array_push($whereToOrder, $wtoItem);
 			//else compile a list of stores and how much quantity to buy from them
 			} else {
 				//add our store as the first if we have any quantity
 				$myStore = null;
 				if ($qHave != 0){
-					$myStore = array('url'=>'home', 'quantity' => $qHave, 'price' => $price);
+					$myStore = array('url'=>'home', 'quantity' => $qHave, 'price' => $price, 'name' => 'The Black Market');
 				}
 				
 				//get list of all stores that have the item with quantity greater than 0
@@ -88,7 +88,7 @@
 							}
 						// else only add howevr much you need left
 						} else {
-							array_push($wtoItem['sources'], array('url' => $store['url'], 'quantity' => $remainingQneed, 'price' => $store['price']));
+							array_push($wtoItem['sources'], array('url' => $store['url'], 'quantity' => $remainingQneed, 'price' => $store['price'], 'name' => $store['name']));
 							break;
 						}
 					}
@@ -136,12 +136,7 @@
 		$data = json_encode($data);
 		
 		$query = "INSERT INTO pendingOrders VALUES ('$orderId', '$userId', '$data')";	
-		Fb::log($query, "inserting to db");
-		$result = mysqli_query($con, $query);
-		
-		Fb::log($result, "result");
-		
-		
+		$result = mysqli_query($con, $query);		
 		
 		echo "http://cs410.cs.ualberta.ca:42001/paybuddy/payment.cgi?grp=6&amt=$price&tx=$orderId&ret=http://cs410.cs.ualberta.ca:41061/receipt.php";
 		
@@ -177,7 +172,7 @@
 			if (!isset($mproduct) || !isset($mproduct['quantity']) || $mproduct == "") continue;
 			
 			if ($mproduct['quantity'] > 0) {
-				array_push($stores, array('url' => $murl, 'quantity' => $mproduct['quantity'], 'price' => $mproduct['price']));
+				array_push($stores, array('url' => $murl, 'quantity' => $mproduct['quantity'], 'price' => $mproduct['price'], 'name' => $mname));
 			}
 		}
 		
@@ -228,7 +223,7 @@
         $row = mysqli_fetch_assoc($result);
 		$count = $row['count1'] + $row['count2'] + 1;
 
-		return 'bmOrder_' . $count;
+		return 'bmorder' . $count;
 	}
 	
 	function getUserId($email, $con){
