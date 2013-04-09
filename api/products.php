@@ -154,7 +154,7 @@ function purchaseProduct($pid, $amount){
     $queryCount = "SELECT COUNT(*) FROM userOrders";
     $resCount = mysqli_query($con, $queryCount);
     $orderCount = mysqli_fetch_row($resCount);
-    $orderid = "bmOrder_".($orderCount[0]+1);
+    $orderid = "bmorder".($orderCount[0]+1);
     
     // --------------------------------------------
     // Add the user/transaction in table 'userOrders'
