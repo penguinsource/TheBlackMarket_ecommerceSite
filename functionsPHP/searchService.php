@@ -426,14 +426,19 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		if ($countSel == "original"){
 			$GLOBALS['origResultCount']++;
 			array_push($GLOBALS['pids_in_original_query'], $id);
+			//$GLOBALS['pids_in_original_query'][$i] = $id;
 			//echo "In Orig..: $id.<br>";
 		} else if ($countSel == 'mod'){
 			$GLOBALS['modResultCount']++;
+			
 			if (in_array($id, $GLOBALS['pids_in_original_query'])){
+				//echo "id sel: $id";
 				continue;
 			}
 		}
-
+		
+		//print_r($GLOBALS['pids_in_original_query']);
+		
 		//GET RATING HERE
 		$rating = rand(0,5);
 		$ratingString = "";
