@@ -57,25 +57,18 @@
 	
 	//returns a list of all stores that have the item and how much quantity they have of the item
 	function getPossibleStores($id){
-		$markets =  file_get_contents("http://cs410-ta.cs.ualberta.ca/registration/markets");
-		//getCurl("http://cs410-ta.cs.ualberta.ca/registration/markets");
+		$markets = getCurl("http://cs410-ta.cs.ualberta.ca/registration/markets");
 		FB::log($market, "markets");
 	}
 	
 	function getCurl($url){
-		//open connection
-		$ch = curl_init();
-
-		//set the url, number of POST vars, POST data
-		curl_setopt($ch,CURLOPT_URL, $url);
-
-		//execute post
-		$result = curl_exec($ch);
-
-		//close connection
-		curl_close($ch);
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		$data = curl_exec($ch);
+		curl_close($ch)
 		
-		return json_decode($result, true);
+		return json_decode($data, true);
 	}
 	
 ?>
