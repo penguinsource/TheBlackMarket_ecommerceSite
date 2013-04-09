@@ -158,15 +158,20 @@ function filterSearch(){
 			origResultCount = obj['originalResultCount'];
 			modResults = obj['modifiedResults'];
 			modResultsCount = obj['modifiedResultsCount'];
+			modQuery = obj['modifQuery'];
 			
-			if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
+			//mod
+			//if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
 				document.getElementById('searchResultsCount').innerHTML = origResultCount;	//	
 				document.getElementById('searchContent').innerHTML = originalResults;
-			} else if (resultType == 'few'){
+				document.getElementById('searchRecommendations').innerHTML = modResults;
+				document.getElementById('recomQuery').innerHTML = modQuery;
 				
-			} else if (resultType == 'extra'){	// if there are too many, show recommended ones and a button to show more
+			//} else if (resultType == 'few'){
 				
-			}
+			//} else if (resultType == 'extra'){	// if there are too many, show recommended ones and a button to show more
+				
+			//}
 			
 			
         }

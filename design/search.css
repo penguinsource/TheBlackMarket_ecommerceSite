@@ -94,6 +94,22 @@
 	margin-top: 10px;
 }
 
+.searchRecommendations {
+	background-color: red;
+	width: 100px;
+	height:50px;
+	
+}
+
+.recomQuery {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 50px;
+	background-color: green;
+	width: 150px;
+	height: 50px;
+}
+
 /*
 .searchContent .searchResultHeader {
 	width: 100%;

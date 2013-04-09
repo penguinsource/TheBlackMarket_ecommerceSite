@@ -3,6 +3,7 @@
 	include('dbConnection.php');
 	//include('searchFuncs.php');
 	
+	
 	/* INIT BASIC QUERY */
 	$con = connectToDB();		// open db connection
 	$basicQuery = "SELECT * FROM product WHERE ";
@@ -22,6 +23,8 @@
 	$modResultCount = 0;	// global counter
 	$modified_results = '';
 	$original_results = '';
+	$originalQuery = '';
+	$modifiedQuery = '';
 	
 	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
@@ -35,7 +38,6 @@
 	$allCategories = 1;														// SELECTED category counter
 	if (isset($_POST['categories'])){
 		$categoriesArray = json_decode(stripslashes($_POST['categories']));	// decode the categories json
-		// print_r(stripslashes($_POST['categories']));
 		$categoriesSelected = 0;
 		foreach ($categoriesArray as $key => $value) {						// check if all the categories are selected
 			//echo "val: $key -> $value \n";								// count the # of categories that are selected
@@ -89,35 +91,67 @@
 	}	
 	
 	/* SEARCH USING THE FILTERS PROVIDED*/
-	$original_results = searchProducts($con, $basicQuery);
+	$original_results = searchProducts($con, $basicQuery, 'original');
+	$originalQuery = $basicQuery;
+	
+	$returnObject = array();								// array to store everything to be returned
 	$returnObject['originalResults'] = $original_results;	// save the results, to return later
 	
-	/*	BUILDING JSON ARRAY TO SEND AS RESPONSE */
-	/*  --------------------------------------  */
-	/* TYPES INFO: types: 'normal' ( no recommendations needed )
-	 		  'extra' ( too many results - constrained search results in 'modifiedResults' )
-			  'few' ( too few results - broadened search results in 'modifiedResults' ) */
-			  
-	$returnObject = array();
-	
+	/* -------------------------- */
 	/* Recommendation conditions */
+	
+	//$modified_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $priceHigh, $minQuantity, $weightLow, $weightHigh);
 	if ($origResultCount < 4){	// if < 4 products found, try and relax search
-		$returnObject['type'] = 'few';		// set type to 'few'
-		// first: lowering the price (if it's not strict - not implemented yet)
-		
-		
+		//$returnObject['type'] = 'few';		// set type to 'few'
+		$moddedPriceHigh = $priceHigh;
+		/*while ($origResultCount < $GLOBALS['modResultCount']){
+			$GLOBALS['modResultCount'] = 0;
+			$moddedPriceHigh += 50;
+			// first: increasing the price high limit (if it's not strict - not implemented yet)
+			$original_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $moddedPriceHigh, $minQuantity, $weightLow, $weightHigh);
+		}*/
 	} else if ($origResultCount > 9) {	// if > 9 products found, try and narrow search
-		$returnObject['type'] = 'extra';		// set type to 'few'
+		//$returnObject['type'] = 'extra';		// set type to 'few'
 	}
 	
+	//ChromePhP::log("value: " . $modifiedQuery);
+	
+	/*  --------------------------------------  */
+	/*	BUILDING JSON ARRAY TO SEND AS RESPONSE */
 	$returnObject['type'] = 'normal';
 	$returnObject['originalResultCount'] = $GLOBALS['origResultCount'];
-	$returnObject['modifiedResults'] = $GLOBALS['modified_results'];
+	$returnObject['modifiedResults'] = $modified_results;
 	$returnObject['modifiedResultsCount'] = $GLOBALS['modResultCount'];
+	$returnObject['modifQuery'] = 'BLAH !';
+
 	echo (json_encode($returnObject));
 	
 	closeDBConnection($con);    // close the database connection
-	
+		
+	/* BUILDING A QUERY GIVEN ALL PARAMETERS (currently used only for modified queries/recommendations)*/
+	function buildModQuery($con, $qSearchType, $qSearchQuery, $qCategorieSelectedList, $qPriceLow, $qPriceHigh, $qMinQuantity, $qWeightLow, $qWeightHigh){
+		$qinit = "SELECT * FROM product WHERE ";
+		$qinit .= "($qSearchType LIKE '%$qSearchQuery%') ";
+		if (!$GLOBALS['allCategories']){										// if not all the categories are included in the array..
+			$n = 0;
+			$qinit .= "AND ( ";
+			foreach ($qCategorieSelectedList as $key => $value) {
+				if ($n == 0){
+					$qinit .= "pcategory = '$value' ";
+				}else{
+					$qinit .= "OR pcategory = '$value' ";
+				}
+				++$n;
+			}
+			$qinit .= ") ";
+		}
+		$qinit .= "AND (price > '$qPriceLow' AND price < '$qPriceHigh' ) ";
+		$qinit .= "AND (quantity > '$qMinQuantity') ";
+		$qinit .= "AND ( weight > '$qWeightLow' AND weight < '$qWeightHigh' ) ";
+		$GLOBALS['modifiedQuery'] = $qinit;
+		//return $qinit;
+		return searchProducts($con, $qinit, 'mod');
+	}
 	/*
 	search queries
 	
@@ -129,7 +163,7 @@
 		
 	*/
 	
-function searchProducts($con, $query){						
+function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of			
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
 	$returnString .= $query . "<br>";
@@ -146,7 +180,11 @@ function searchProducts($con, $query){
 		$br = "";
 		
 		// increase the resultCount
-		$GLOBALS['origResultCount']++;
+		if ($countSel == "original"){
+			$GLOBALS['origResultCount']++;
+		} else {
+			$GLOBALS['modResultCount']++;
+		}
 		
 		//GET RATING HERE
 		$rating = rand(0,5);
@@ -202,4 +240,13 @@ function searchProducts($con, $query){
     }
 	return $returnString;
 }
+
+
+
+	/* TYPES INFO: types: 'normal' ( no recommendations needed )
+	 		  'extra' ( too many results - constrained search results in 'modifiedResults' )
+			  'few' ( too few results - broadened search results in 'modifiedResults' ) */
+	
+	
+	
 ?>

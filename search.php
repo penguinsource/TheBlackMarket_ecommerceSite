@@ -5,6 +5,8 @@
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php include ("functionsPHP/searchFuncs.php"); ?>
+<?php //include_once("functionsPHP/ChromePhp.php"); ?>
+
 <?php 
 	checkPage(); 
 ?>
@@ -210,12 +212,14 @@ $(function() {
 			<div style='clear'></div>
 			<br>
 			<div class='border80'></div>
-			<!-- Search Results Recommendations -->
-			<div class='searchRecommendations'>
-				<p>searchRecommendations</p>
-			</div>
-		
+
 		</div>	
+		
+		<!-- Search Results Recommendations -->
+		<div id='searchRecommendations' class='searchRecommendations'>
+		<p>searchRecommendations</p>
+		</div>
+		<div id='recomQuery' class='recomQuery'>HELLOOO</div>
 		
 	</div>
 </div>
