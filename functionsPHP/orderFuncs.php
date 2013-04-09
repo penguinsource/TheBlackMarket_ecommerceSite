@@ -101,7 +101,7 @@ function printPage(){
 		
 	echo "</div>\n";
 	
-	echo "<a href='javascript:void(0);'><div id='#bplaceorder' class='button'> Place Order </div></a>\n";
+	echo "<a href='javascript:void(0);'><div onClick='orderFunc();' class='button'> Place Order </div></a>\n";
 }
 
 function createOrder($user, $productArray){

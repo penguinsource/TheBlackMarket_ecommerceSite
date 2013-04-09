@@ -1,11 +1,16 @@
-$(document).ready(function(){
+function orderFunc(){
 
-	$('#bplaceorder').click(function() {
-		$.ajax({url: '/functionsPHP/orderService',
-			type: 'POST'		
-		})		
-	});
+	console.log("click");
 	
+	$.ajax({url: '/functionsPHP/orderService',
+		type: 'POST',
+		data: { nothing : 'nothing'},
+		success: function(response) {
+			console.log(response);
+			window.location.href = response;
+		}
+	})		
+
 }
 
 function checkUserLoggedIn(){

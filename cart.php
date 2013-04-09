@@ -25,6 +25,23 @@
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/order.js"></script>
 	
+	<!-- if orderfailed, show javascript messge -->
+	<?php
+		if (isset($_GET['orderFailed'])){
+			echo "<script type='text/javascript'>\n";
+				echo "$(document).ready(function(){\n";
+					echo "$('#page-alert').clearQueue().hide();\n";
+					echo "$('#page-alert').html(\"<span style='padding-left:15px;'> Some of the items in your order are out of stock and have been removed from your cart </span>\");\n";
+					echo "$('#page-alert').stop().animate({height: 'toggle'}, 250, 'linear', function(){\n";
+						echo "$('#page-alert').delay(5000).animate({height: 'toggle'}, 250);\n";
+					echo "});\n";
+				echo "});\n";
+			echo "</script>\n";
+		}	
+	?>
+	
+	
+	
 	<link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png">
 	<title> Cart </title>
 </head>
