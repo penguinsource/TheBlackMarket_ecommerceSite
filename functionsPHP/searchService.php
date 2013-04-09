@@ -26,11 +26,17 @@
 	$originalQuery = '';
 	$modifiedQuery = '';
 	
+	$original_filters = '';
+	$modified_filters = '';
+	
+	
 	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
 		$searchType = $_POST['searchType'];									// assign and save a value for this global
 		$searchQuery = $_POST['searchQuery'];								// assign and save a value for this global
 		$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
+		// save the current filters	in printing state
+		$original_filters .= "Searching for: '".$searchQuery."', ";			// save filters for printing
 		//addQueryType($_POST['searchType'], $_POST['searchQuery']);
 	}
 	
@@ -53,6 +59,7 @@
 	/* APPENDING CATEGORIES TO THE QUERY */
 	if (!$allCategories){			// if not all categories are included in the query.. then go through each and see which is selected
 		if ($categoriesSelected){
+		$original_filters = "Categories: ";
 		$basicQuery .= "AND ( ";		// if some categories are selected, append 'AND' as there are categories conditions to append
 			foreach ($categoriesArray as $key => $value) {
 				if ($value){			// if category '$key' is selected
@@ -60,27 +67,37 @@
 						$basicQuery .= "pcategory = '$key' OR ";	// append to Query the selected category
 						--$categoriesSelected;
 						//array_push($savedCategoriesSelected, $key);
+						
+						// save the current filters	in printing state
+						$original_filters .= "'$key', ";										// save filters for printing
 					}else {				// append selected category 
 						$basicQuery .= "pcategory = '$key' ) ";	// this is the last category selected, don't add 'OR' at the end of the query
 						//array_push($savedCategoriesSelected, $key);
 						--$categoriesSelected;
+						// save the current filters	in printing state
+						$original_filters .= "'$key', ";										// save filters for printing
 					}
 				}
 			}
 		}	// else no categories are selected at all
-	}	// else all categories are selected and included in the query, do not append anything to query
+	} else {	// else all categories are selected and included in the query, do not append anything to query
+		// save the current filters	in printing state
+		$original_filters .= "Categories: all, ";												// save filters for printing
+	}
 	
 	// APPENDING PRICES to the query
 	if (isset($_POST['priceLowArg']) && isset($_POST['priceHighArg'])){
 		$priceLow = $_POST['priceLowArg'];
 		$priceHigh = $_POST['priceHighArg'];
 		$basicQuery .= "AND (price > '$priceLow' AND price < '$priceHigh' ) ";
+		$original_filters .= "Price Range: price > '$priceLow' and price < '$priceHigh', ";		// save filters for printing
 	}
 	
 	// APPENDING QUANTITY to the query
 	if (isset($_POST['minQuantity'])){
 		$minQuantity = $_POST['minQuantity'];
 		$basicQuery .= "AND (quantity > '$minQuantity') ";
+		$original_filters .= "Min. quantity in-stock: '$minQuantity', ";						// save filters for printing
 	}
 	
 	// APPENDING WEIGHT to the query
@@ -88,6 +105,7 @@
 		$weightLow = $_POST['weightLowArg'];
 		$weightHigh = $_POST['weightHighArg'];
 		$basicQuery .= "AND (weight > '$weightLow' AND weight < '$weightHigh' ) ";
+		$original_filters = "Weight > '$weightLow' and Weight < '$weightHigh', ";				// save filters for printing
 	}	
 	
 	/* SEARCH USING THE FILTERS PROVIDED*/
@@ -95,21 +113,29 @@
 	$originalQuery = $basicQuery;
 	
 	$returnObject = array();								// array to store everything to be returned
-	$returnObject['originalResults'] = $original_results;	// save the results, to return later
 	
 	/* -------------------------- */
 	/* Recommendation conditions */
 	
 	//$modified_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $priceHigh, $minQuantity, $weightLow, $weightHigh);
 	if ($origResultCount < 4){	// if < 4 products found, try and relax search
-		//$returnObject['type'] = 'few';		// set type to 'few'
+		// $origResultCount =99;
+		// $modResultCount = 50;
+		// $returnObject['type'] = 'few';		// set type to 'few'
 		$moddedPriceHigh = $priceHigh;
-		/*while ($origResultCount < $GLOBALS['modResultCount']){
-			$GLOBALS['modResultCount'] = 0;
+		$n = 0;
+		while ($origResultCount >= $modResultCount){
+			++$n;
+			if ($n == 10){
+				//$modResultCount = 99;
+				break;
+			}
+			$modResultCount = 0;
+			//$GLOBALS['modResultCount'] = 0;
 			$moddedPriceHigh += 50;
 			// first: increasing the price high limit (if it's not strict - not implemented yet)
-			$original_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $moddedPriceHigh, $minQuantity, $weightLow, $weightHigh);
-		}*/
+			$modified_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $moddedPriceHigh, $minQuantity, $weightLow, $weightHigh);
+		}
 	} else if ($origResultCount > 9) {	// if > 9 products found, try and narrow search
 		//$returnObject['type'] = 'extra';		// set type to 'few'
 	}
@@ -119,10 +145,18 @@
 	/*  --------------------------------------  */
 	/*	BUILDING JSON ARRAY TO SEND AS RESPONSE */
 	$returnObject['type'] = 'normal';
-	$returnObject['originalResultCount'] = $GLOBALS['origResultCount'];
+	
+	$returnObject['originalResults'] = $original_results;
+	$returnObject['originalResultCount'] = $origResultCount;
+	
 	$returnObject['modifiedResults'] = $modified_results;
-	$returnObject['modifiedResultsCount'] = $GLOBALS['modResultCount'];
-	$returnObject['modifQuery'] = 'BLAH !';
+	$returnObject['modifiedResultsCount'] = $modResultCount;
+	
+	
+	$returnObject['currFilters'] = $original_filters;
+	
+	
+	//$returnObject['modifQuery'] = 'BLAH !';
 
 	echo (json_encode($returnObject));
 	
@@ -203,7 +237,6 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 				$ratingString = $ratingString . "<img src='design/images/starempty.png'>";
 			}
 		}
-		////////////////
 		
 		$border = " product-rightborder";
         if ($i == 4){

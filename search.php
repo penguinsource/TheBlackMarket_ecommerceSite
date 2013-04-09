@@ -213,18 +213,18 @@ $(function() {
 			<br>
 			<div class='border80'></div>
 
-		</div>	
-		
-		<!-- Search Results Recommendations -->
-		<div id='searchRecommendations' class='searchRecommendations'>
-		<p>searchRecommendations</p>
 		</div>
-		<div id='recomQuery' class='recomQuery'>HELLOOO</div>
+		
+		<div class='clear'></div>
+		<div id='searchResultsCountRecom' class='searchRecomHeader'> Recommendations: 15 results found </div>
+		<div id='searchContentRecom' class='searchRecom'>
+		 asga asd fasd asd fsd asga asd fasd asd fsdasga asd fasd asd fsdasga asd fasd asd fsdasga asd fasd asd fsdasga asd fasd asd fsdasga asd fasd asd fsdasga asd fasd asd fsd
+		</div>
+		<!-- Search Results Recommendations -->
+		
 		
 	</div>
 </div>
-<button onclick='checkSlider()'>aaa</button>
-
 
 </body>
 

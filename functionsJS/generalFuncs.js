@@ -154,18 +154,23 @@ function filterSearch(){
 			
 			// grab all the variables
 			resultType = obj['type'];
+			
 			originalResults = obj['originalResults'];
 			origResultCount = obj['originalResultCount'];
+			
 			modResults = obj['modifiedResults'];
 			modResultsCount = obj['modifiedResultsCount'];
-			modQuery = obj['modifQuery'];
+			
+			filtersApplied = obj['currFilters'];
+			//modQuery = obj['modifQuery'];
 			
 			//mod
 			//if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
-				document.getElementById('searchResultsCount').innerHTML = origResultCount;	//	
 				document.getElementById('searchContent').innerHTML = originalResults;
-				document.getElementById('searchRecommendations').innerHTML = modResults;
-				document.getElementById('recomQuery').innerHTML = modQuery;
+				document.getElementById('searchResultsCount').innerHTML = origResultCount;
+				
+				document.getElementById('searchContentRecom').innerHTML = modResults;
+				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount;
 				
 			//} else if (resultType == 'few'){
 				
