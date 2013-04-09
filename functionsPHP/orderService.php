@@ -136,7 +136,9 @@
 		$data = json_encode($data);
 		
 		$query = "INSERT INTO pendingOrders VALUES ('$orderId', '$userId', '$data')";	
-		$result = mysqli_query($con, $query);		
+		$result = mysqli_query($con, $query);
+        
+        $price = number_format($price, 2, ".", "");
 		
 		echo "http://cs410.cs.ualberta.ca:42001/paybuddy/payment.cgi?grp=6&amt=$price&tx=$orderId&ret=http://cs410.cs.ualberta.ca:41061/receipt.php";
 		
@@ -165,7 +167,7 @@
 			$mname = $market['name'];
 			$murl = $market['url'];
 
-			if ($mname == 'The Black Market' || $mname == 'TA Market') continue;		//dont buy from yourself
+			if ($mname == 'The Black Market' || $mname == 'TA Market' || $mname == 'TETH Store') continue;		//dont buy from yourself
 
 			$mproduct = getCurl($murl . '/products/' . $id);
 			

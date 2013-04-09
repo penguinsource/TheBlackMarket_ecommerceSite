@@ -1,9 +1,23 @@
 <?php
 
-include("ChromePhp.php");
+require_once('lib/fb.php');
+
+	ob_start();
+	
+	function my_error_handler ($e_number, $e_message, $e_file, $e_line, $e_vars){
+		$debug = true;
+		$message = "An error occurred in script '$e_file' on line $e_line: \n<BR />$e_message\n<br />";
+		$message .= "Date/Time: " . date('n-j-Y H:i:s') . "\n<br />";
+		$message .= "<pre>" . print_r ($e_vars, 1) . "</pre>\n<BR />";
+		if ($debug){
+			echo '<p class="error">'.$message.'</p>';
+		}
+
+	}
+	set_error_handler('my_error_handler');
 
 function printPage($con){
-    
+    ChromePhp::log("start");
 	// redirect if not logged in or no get params
 	if (!isset($_SESSION['email'])){
 		//header('Location: shop');
@@ -73,13 +87,14 @@ function printPage($con){
 		$pid = $product['pid'];
 		$pquantity = 0;
         $pname = getProductName($pid, $con);
-		
+        
+		$ptotalprice = 0;
+        
 		$counter = 0;
         echo "<div style='border-bottom: 1px solid #ECECEC;'>";
         
 		//process each source of the product
 		foreach($product['sources'] as $source){
-            ChromePhp::log("got here");
 			echo "<div class='item' style='width:100%;'>";
 			
 			$url = $source['url'];
@@ -87,15 +102,19 @@ function printPage($con){
 			$price = $source['price'];
 			$name = $source['name'];
 			$pquantity += $quantity;
+            
+            $ptotalprice += $quantity * $price;
 			if ($counter == 0){
 				echo "<span style='display:inline-block;padding-left:10px;width:50%'> $pname </span>";
 			} else {
                 echo "<span style='display:inline-block;padding-left:10px;width:50%'>  </span>";
             }
-
+            
+            $totalprice = $price * $quantity;
+            
             echo "<span style='display:inline-block;width:23%'> $name </span>\n";
-			echo "<span style='display:inline-block;width:12%'> x$quantity </span>\n";
-			echo "<span style='display:inline-block;width:12%'> $$price </span>\n";
+			echo "<span style='display:inline-block;width:10%'> x$quantity </span>\n";
+			echo "<span style='display:inline-block;width:14%'> $$totalprice ($$price ea.) </span>\n";
 			
 			//if store is black market, subtract quantity
 			if ($name == "The Black Market"){
@@ -105,22 +124,23 @@ function printPage($con){
 				$currentQuantity = $row['quantity'];
 				$newQuantity = $currentQuantity - $quantity;
 				
-				$query = "UPDATE product SET quantity = '$newQuantity' WHERE pid = '$sqluserid'";
+				$query = "UPDATE product SET quantity='$newQuantity' WHERE pid='$pid'";
 				$result = mysqli_query($con, $query);
-                echo $result;
+
 			//else must order from other store(s)
 			} else {
 				$response = curlPost($url . "/products/" . $pid . "/order", $quantity);
-				$storeDate = $response['delivey_date'];
-				$storeId = $response['order_id'];
+                $response = json_decode($response, true);
+				$storeDate = $response['delivery_date'];
+                echo $storeDate . "\n";
+                $storeId = $response['order_id'];
 				
 				//add date to arrauy
 				array_push($deliveryArray, $storeDate);
 				
 				//log product source
-				$query = "INSERT INTO orderSources VALUES ('$sqlorderid', '$storeId, '$url', '$pid', '$quantity', '$name')";	
+				$query = "INSERT INTO orderSources VALUES ('$sqlorderid', '$storeId', '$url', '$pid', '$quantity', '$name')";	
 				$result = mysqli_query($con, $query);
-                echo $result;
 			}
 
 			echo "</div>\n";
@@ -130,9 +150,8 @@ function printPage($con){
         echo "</div>\n";
         
 		//log quantity in productOrders
-		$query = "INSERT INTO productOrders VALUES ('$sqlorderid', '$pid, '$quantity')";	
+		$query = "INSERT INTO productOrders VALUES ('$sqlorderid', '$pid', '$quantity', '$ptotalprice')";	
 		$result = mysqli_query($con, $query);
-		
 	}
 	
 	echo "</div></div>\n";
@@ -140,11 +159,10 @@ function printPage($con){
 	$deliveryDate = getMaxDate($deliveryArray);
 	$query = "INSERT INTO userOrders VALUES ('$sqlorderid', '$sqluserid', '$deliveryDate')";	
 	$result = mysqli_query($con, $query);
-	
+    
 	//delete from pending orders
 	$query = "DELETE FROM pendingOrders WHERE orderid='$sqlorderid'";	
 	$result = mysqli_query($con, $query);
-	
 	
 }
 
