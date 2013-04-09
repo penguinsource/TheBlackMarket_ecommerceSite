@@ -21,9 +21,9 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
-	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/shop.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/order.js"></script>
 	
 	<link rel="icon" type="image/png" href="<?= $GLOBALS['baseURL']; ?>design/images/favicon.png">
 	<title> Cart </title>
