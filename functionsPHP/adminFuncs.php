@@ -86,6 +86,14 @@ function addDateCheck($curQuery, $from, $to) {
   return $res;
 }
 
+// get category name with id
+function getCategory($con, $id) {
+  $query = "SELECT name FROM category WHERE category.id='".$id."'";
+  $res = mysqli_query($con, $query) or die(" Category Name Query Failed ");
+  $row = mysqli_fetch_array($res);
+  return $row['name'];
+}
+
 // create a table header
 function createTableHeader($columns, $id, $caption, $from, $to) {
   $cap = $caption;
@@ -257,10 +265,7 @@ function displayCategorySummary($con, $from, $to) {
     ." AND productOrders.pid=product.pid"
     ." AND product.pcategory='";
   $salesQuery = $salesSelect.$salesCondition;
-  
-  // cname query
-  $nameQuery = "SELECT * FROM category WHERE id='";
-  
+
   // init table
 	$columns = array("Category", "# Products Sold", "Overall Income");
 	$output .= createTableHeader($columns, "categoryTable", "Category Summary", $from, $to);
@@ -268,11 +273,7 @@ function displayCategorySummary($con, $from, $to) {
 	while ($catRow = mysqli_fetch_array($categories)) {
 	  // get category name
 	  $cid = $catRow['pcategory'];
-	  $nq = $nameQuery.$cid."'";
-	  $n_res = mysqli_query($con, $nq) or die(" Name Query Failed ");
-	  $nrow = mysqli_fetch_array($n_res);
-	  $cname = $nrow['name'];
-	  
+    
 	  // get total sales
 	  $sq = $salesQuery.$cid."'";
 	  $sq = addDateCheck($sq, $from, $to);
@@ -288,7 +289,7 @@ function displayCategorySummary($con, $from, $to) {
 	    $count += $amt;
 	  }
 	  
-	  $values = array($cname, $count, $cost);
+	  $values = array(getCategory($con, $cid), $count, $cost);
 	  $output .= addTableRow($values);	  	  
 	}
 	
@@ -321,8 +322,9 @@ function displayProductSales($con, $from, $to) {
 
 	// fill the table
 	while ($prodRow = mysqli_fetch_array($allProducts)) {
-		// product id
+		// product and category
 		$pid = $prodRow['pid'];
+    $cid = $prodRow['pcategory'];
 
 		// get total sales	
     $query = $salesQuery.$pid."'";
@@ -340,9 +342,9 @@ function displayProductSales($con, $from, $to) {
 		while ($crow = mysqli_fetch_array($costs)) {
 		  $total += $crow['totalprice'];
 		}
-
-		// add row to table
-		$values = array($prodRow['pname'], $prodRow['pcategory'], $qty, $total);
+        
+		// add row to table     
+		$values = array($prodRow['pname'], getCategory($con, $cid), $qty, $total);
 		$output .= addTableRow($values);
 	}
   
