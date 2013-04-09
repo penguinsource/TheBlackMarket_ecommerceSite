@@ -57,7 +57,8 @@
 	
 	//returns a list of all stores that have the item and how much quantity they have of the item
 	function getPossibleStores($id){
-		$markets = getCurl("http://cs410-ta.cs.ualberta.ca/registration/markets");
+		$markets =  file_get_contents("http://cs410-ta.cs.ualberta.ca/registration/markets");
+		//getCurl("http://cs410-ta.cs.ualberta.ca/registration/markets");
 		FB::log($market, "markets");
 	}
 	
