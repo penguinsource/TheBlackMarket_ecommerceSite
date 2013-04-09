@@ -199,7 +199,7 @@ function displayCustomerStats($con, $from, $to) {
 		." AND productOrders.pid=product.pid"
 		." AND userOrders.userid=";
 
-	$queryPurchases = "SELECT SUM(price) FROM ".$view.$cond;	
+	$queryPurchases = "SELECT * FROM ".$view.$cond;	
 
 	// init table
 	$columns = array("Email", "Name", "# Transactions", "Total Purchases");
@@ -228,10 +228,17 @@ function displayCustomerStats($con, $from, $to) {
     $pFinalQuery = addDateCheck($queryPurchases.$uid, $from, $to);
 		$purchases = mysqli_query($con, $pFinalQuery) or
 			die(" Query Failed: Purchase Sum - ".$email." ");
-		$total = mysqli_fetch_array($purchases);
-
+			
+	  $cost = 0;
+		while ($prows = mysqli_fetch_array($purchases)) {
+		  $qty = $prows['amount'];
+		  $price = $prows['price'];
+		  
+		  $cost += ($qty * $price);
+		}
+    		
 		// add row to table
-		$values = array($userRow['email'], $name, $count[0], round($total[0], 2));
+		$values = array($userRow['email'], $name, $count[0], $cost);
 		$output .= addTableRow($values);
 	}
 
