@@ -116,7 +116,7 @@ function addTableRow($values) {
 // return transaction history as a table
 function displayTransactionHistory($con, $from, $to) {	
 	$output = "";
-  $displaying = 25;   // number of reports to display...until the table does it for me
+  $displaying = 100;   // number of reports to display...until the table does it for me
 
 	// query all transactions
 	$select = "SELECT * FROM userOrders, user";
@@ -137,17 +137,17 @@ function displayTransactionHistory($con, $from, $to) {
   $orderQuery = $orderSelect.$orderCondition;
 
 	// init table
-	$columns = array("Date", "User Email", 
-		"Products", "Total Cost");
+	$columns = array("Date", "User Email", "Products", "Total Cost");
 	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table
   $i = 0;
-	while (($row = mysqli_fetch_array($result))   && $i < $displaying) {		
+	while (($row = mysqli_fetch_array($result))   && $i < $displaying) {	
+	  $date = $row['delivery_date'];
+		
     // get all products in the order
     $oid = $row['orderid'];
     $oq = $orderQuery.$oid."'";
-    //$oq = addDateCheck($oq, $from, $to);
     
     $o_res = mysqli_query($con, $oq) or die(" Order Query Failed ");
        
@@ -161,13 +161,11 @@ function displayTransactionHistory($con, $from, $to) {
       $products .= ($products == "") ? "" : ", ";
       $products .= $prod." [x$qty]";
       
-      $cost += $qty * $tag;
-    }
-        
-    // get purchaser
+      $cost += ($qty * $tag);
+    }       
 
 		// add row to table
-		$values = array($row['delivery_date'], $row['email'], $products, $cost);
+		$values = array($date, $row['email'], $products, $cost);
 		$output .= addTableRow($values);
     $i++;
 	}
@@ -201,7 +199,7 @@ function displayCustomerStats($con, $from, $to) {
 		." AND productOrders.pid=product.pid"
 		." AND userOrders.userid=";
 
-	$queryPurchases = "SELECT SUM(price) FROM ".$view.$cond;	
+	$queryPurchases = "SELECT * FROM ".$view.$cond;	
 
 	// init table
 	$columns = array("Email", "Name", "# Transactions", "Total Purchases");
@@ -230,10 +228,17 @@ function displayCustomerStats($con, $from, $to) {
     $pFinalQuery = addDateCheck($queryPurchases.$uid, $from, $to);
 		$purchases = mysqli_query($con, $pFinalQuery) or
 			die(" Query Failed: Purchase Sum - ".$email." ");
-		$total = mysqli_fetch_array($purchases);
-
+			
+	  $cost = 0;
+		while ($prows = mysqli_fetch_array($purchases)) {
+		  $qty = $prows['amount'];
+		  $price = $prows['price'];
+		  
+		  $cost += ($qty * $price);
+		}
+    		
 		// add row to table
-		$values = array($userRow['email'], $name, $count[0], round($total[0], 2));
+		$values = array($userRow['email'], $name, $count[0], $cost);
 		$output .= addTableRow($values);
 	}
 
@@ -257,25 +262,37 @@ function displayCategorySummary($con, $from, $to) {
     ." AND product.pcategory='";
   $salesQuery = $salesSelect.$salesCondition;
   
+  // cname query
+  $nameQuery = "SELECT * FROM category WHERE id='";
+  
   // init table
 	$columns = array("Category", "# Products Sold", "Overall Income");
 	$output .= createTableHeader($columns, "categoryTable", "Category Summary", $from, $to);
 	
 	while ($catRow = mysqli_fetch_array($categories)) {
-	  $cname = $catRow['pcategory'];
+	  // get category name
+	  $cid = $catRow['pcategory'];
+	  $nq = $nameQuery.$cid."'";
+	  $n_res = mysqli_query($con, $nq) or die(" Name Query Failed ");
+	  $nrow = mysqli_fetch_array($n_res);
+	  $cname = $nrow['name'];
 	  
 	  // get total sales
-	  $sq = $salesQuery.$cname."'";
+	  $sq = $salesQuery.$cid."'";
 	  $sq = addDateCheck($sq, $from, $to);
 	  $s_res = mysqli_query($con, $sq) or die(" Sales Query Failed ");
 	  
-	  while ($saleRow = mysqli_fetch_array($s_res)) {
-	    $pid = $saleRow['pid'];
+	  $count = 0;
+	  $cost = 0;
+	  while ($saleRow = mysqli_fetch_array($s_res)) {	    	  
+	    $amt = $saleRow['amount'];
+	    $price = $saleRow['price'];
+	    $cost += $amt * $price;	    
 	    
-	    
+	    $count += $amt;
 	  }
 	  
-	  $values = array($cname, $pid, 'billions');
+	  $values = array($cname, $count, $cost);
 	  $output .= addTableRow($values);	  	  
 	}
 	

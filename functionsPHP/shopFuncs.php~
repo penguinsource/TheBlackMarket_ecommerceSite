@@ -55,7 +55,7 @@ function printProducts($con, $category){
 		//GET RATING HERE
 		$rating = rand(0,5);
 		$ratingString = "";
-		if ($rating == 0) {
+		if ($rating == 0){
 			$ratingString = "No Rating";
 		} else {
 			$j = 0;
