@@ -39,7 +39,7 @@
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
 		$searchType = $_POST['searchType'];									// assign and save a value for this global
 		$searchQuery = $_POST['searchQuery'];								// assign and save a value for this global
-		$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
+		$basicQuery .= "($searchType LIKE '% $searchQuery %' OR $searchType LIKE '%$searchQuery %' OR $searchType LIKE '% $searchQuery%') ";
 		// save the current filters	in printing state
 		$original_filters .= "Searching for: '$searchQuery' of type '$searchType', ";			// save filters for printing
 		//addQueryType($_POST['searchType'], $_POST['searchQuery']);
@@ -395,6 +395,7 @@
 		//return $qinit;
 		return searchProducts($con, $qinit, 'mod');
 	}
+	
 	/*
 	search queries
 	
@@ -405,7 +406,6 @@
 	//$basicQuery .= "price > '1000'";
 		
 	*/
-	
 function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of			
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';

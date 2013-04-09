@@ -7,7 +7,7 @@
 	checkPage(); 
 	
 	if (!isset($_SESSION['email']) || $_SESSION['email'] != "admin") {
-		header("Location: shop.php");
+		header(Location: "shop.php");
 		exit;
 	}
 	

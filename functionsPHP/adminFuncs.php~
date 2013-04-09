@@ -45,7 +45,7 @@ function printStats($con, $opt, $from, $to) {
 	} else if ($opt == "customers") {
 		displayCustomerStats($con, $from, $to);	
   } else if ($opt == "categories") {
-    displayCategorySummary($con, $from, $to);  
+    displayCategorySummary($con, "2011-12-12", $to);  
 	} else if ($opt == "products") {
 		displayProductSales($con, $from, $to);
 	} else if ($opt == "imports") {

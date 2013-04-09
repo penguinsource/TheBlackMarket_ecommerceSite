@@ -52,7 +52,7 @@ function refreshTable() {
 
 // grab history with new dates
 function reloadHistory(opt) {
-  var link = "/functionsPHP/adminService";
+  var link = "/functionsPHP/historyService";
   var f = $("#hf").val();
   var t = $("#ht").val();
 
