@@ -174,6 +174,16 @@ CREATE TABLE `productOrders` (
 -- Dumping data for table `productOrders`
 --
 
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('bmOrder_1', 'c000001', 2, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('bmOrder_2', 'c000001', 1, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('bmOrder_3', 'c000001', 1, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('bmOrder_4', 'c000001', 1, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('5', 'c000001', 1, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('6', 'c000001', 2, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('6', 'c000002', 1, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('6', 'c000005', 2, '');
+INSERT INTO `productOrders` (`orderid`, `pid`, `amount`, `totalprice`) VALUES('bmOrder_3', 'c000035', 4, '');
+
 -- --------------------------------------------------------
 
 --
@@ -239,3 +249,13 @@ CREATE TABLE `userOrders` (
   PRIMARY KEY (`orderid`),
   KEY `userid` (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `userOrders`
+--
+
+INSERT INTO `userOrders` (`orderid`, `userid`, `delivery_date`) VALUES('bmOrder_1', 18, '2013-04-05');
+INSERT INTO `userOrders` (`orderid`, `userid`, `delivery_date`) VALUES('bmOrder_2', 18, '2013-04-05');
+INSERT INTO `userOrders` (`orderid`, `userid`, `delivery_date`) VALUES('bmOrder_3', 18, '2013-04-05');
+INSERT INTO `userOrders` (`orderid`, `userid`, `delivery_date`) VALUES('bmOrder_4', 18, '2013-04-05');
+INSERT INTO `userOrders` (`orderid`, `userid`, `delivery_date`) VALUES('5', 25, '2013-04-12');

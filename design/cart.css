@@ -79,7 +79,7 @@ a {text-decoration:none;}
 }
 
 .cart-item-product img{
-	/*vertical-align:middle;*/
+	vertical-align:middle;
 	display:inline-block;
 	margin-left:10px;
 	
