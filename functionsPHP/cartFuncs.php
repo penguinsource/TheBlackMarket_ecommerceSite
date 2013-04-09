@@ -14,6 +14,7 @@ function printCartItems(){
 		foreach($cartJSON['products'] as $item){
 			$id = $item['id'];
 			$name = $item['name'];
+			$name = shorten($name, 70);
 			$price = $item['price'];
 			$quantity = $item['quantity'];
 			$img = $item['img'];
@@ -22,7 +23,7 @@ function printCartItems(){
 			
 			echo "<div id='cart-item-$id' class='cart-item'>\n";				
 				echo "<div class='cart-item-product'>\n";
-					echo "<a href='/product/dishwashers/$id'> <img src='images/$img'></img> <div style='margin-left:20px;display:inline-block;'>$name</div> </a>\n";
+					echo "<a href='/product/dishwashers/$id'> <img src='images/$img'></img> <div style='margin-left:20px;display:inline-block;width:80%;height:85px;overflow:hidden;'>$name</div> </a>\n";
 				echo "</div> </a>";
 				
 				echo "<div align='center' class='cart-item-quantity'>\n";
@@ -39,6 +40,12 @@ function printCartItems(){
 	
 	
 	echo "<div id='cart-total'> Total: <div id='cart-total-price'>$$total</div> </div>";
+}
+
+function shorten($string, $chars = 100){
+    preg_match('/^.{0,' . $chars. '}(?:.*?)\b/iu', $string, $matches);
+    $new_string = $matches[0];
+    return ($new_string === $string) ? $string : $new_string . '&hellip;';
 }
 
 ?>

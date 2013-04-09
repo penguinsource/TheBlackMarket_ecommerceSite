@@ -149,7 +149,7 @@ function filterSearch(){
         data: { priceLowArg: priceLow, priceHighArg: priceHigh, minQuantity: minimum_quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch , searchQuery: searchQueryValue, categories: cateJSON},
         success: function(response) {
         	//alert("response: " + response);
-			
+
 			console.log(response);
 			obj = JSON.parse(response);
 			

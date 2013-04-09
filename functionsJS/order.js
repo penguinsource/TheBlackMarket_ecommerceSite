@@ -7,7 +7,9 @@ function orderFunc(){
 		data: { nothing : 'nothing'},
 		success: function(response) {
 			console.log(response);
-			window.location.href = response;
+			if (response != "") {
+				window.location.href = response;
+			}
 		}
 	})		
 

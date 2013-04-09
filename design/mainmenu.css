@@ -45,14 +45,14 @@
 	position:absolute;
 	top: 12px;
 	right: 12px;
-	line-height:22px;
+	line-height:2em;
 }
 
 #login-reg-form{
 	display:inline-block;
 	overflow:hidden;
 	width:auto;
-	max-height:25px;
+	max-height:1.8em;
 	vertical-align:middle;
 }
 
