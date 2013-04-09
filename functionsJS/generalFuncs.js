@@ -161,16 +161,17 @@ function filterSearch(){
 			modResults = obj['modifiedResults'];
 			modResultsCount = obj['modifiedResultsCount'];
 			
-			filtersApplied = obj['currFilters'];
+			originalFiltersText = obj['origFilters'];
+			modFiltersText = obj['modFilters'];
 			//modQuery = obj['modifQuery'];
 			
 			//mod
 			//if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
 				document.getElementById('searchContent').innerHTML = originalResults;
-				document.getElementById('searchResultsCount').innerHTML = origResultCount;
+				document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
 				
 				document.getElementById('searchContentRecom').innerHTML = modResults;
-				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount;
+				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText;
 				
 			//} else if (resultType == 'few'){
 				

@@ -1,11 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <?php include("functionsPHP/generalFuncs.php"); ?>
 <?php //include("functionsPHP/shopFuncs.php"); ?>
 <?php include("functionsPHP/productFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php include ("functionsPHP/searchFuncs.php"); ?>
-<?php //include_once("functionsPHP/ChromePhp.php"); ?>
+<?php include("functionsPHP/ChromePhp.php"); ?>
 
 <?php 
 	checkPage(); 

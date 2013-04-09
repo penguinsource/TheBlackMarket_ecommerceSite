@@ -2,7 +2,7 @@
 	session_start();
 	include('dbConnection.php');
 	//include('searchFuncs.php');
-	
+	//include_once("ChromePhp.php");
 	
 	/* INIT BASIC QUERY */
 	$con = connectToDB();		// open db connection
@@ -36,7 +36,7 @@
 		$searchQuery = $_POST['searchQuery'];								// assign and save a value for this global
 		$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
 		// save the current filters	in printing state
-		$original_filters .= "Searching for: '".$searchQuery."', ";			// save filters for printing
+		$original_filters .= "Searching for: '$searchQuery' of type '$searchType', ";			// save filters for printing
 		//addQueryType($_POST['searchType'], $_POST['searchQuery']);
 	}
 	
@@ -59,7 +59,7 @@
 	/* APPENDING CATEGORIES TO THE QUERY */
 	if (!$allCategories){			// if not all categories are included in the query.. then go through each and see which is selected
 		if ($categoriesSelected){
-		$original_filters = "Categories: ";
+		$original_filters = "Categories: ";														// save filters for printing
 		$basicQuery .= "AND ( ";		// if some categories are selected, append 'AND' as there are categories conditions to append
 			foreach ($categoriesArray as $key => $value) {
 				if ($value){			// if category '$key' is selected
@@ -105,7 +105,7 @@
 		$weightLow = $_POST['weightLowArg'];
 		$weightHigh = $_POST['weightHighArg'];
 		$basicQuery .= "AND (weight > '$weightLow' AND weight < '$weightHigh' ) ";
-		$original_filters = "Weight > '$weightLow' and Weight < '$weightHigh', ";				// save filters for printing
+		$original_filters .= "Weight > '$weightLow' and Weight < '$weightHigh', ";				// save filters for printing
 	}	
 	
 	/* SEARCH USING THE FILTERS PROVIDED*/
@@ -118,7 +118,7 @@
 	/* Recommendation conditions */
 	
 	//$modified_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $priceHigh, $minQuantity, $weightLow, $weightHigh);
-	if ($origResultCount < 4){	// if < 4 products found, try and relax search
+	/*if ($origResultCount < 4){	// if < 4 products found, try and relax search
 		// $origResultCount =99;
 		// $modResultCount = 50;
 		// $returnObject['type'] = 'few';		// set type to 'few'
@@ -126,10 +126,12 @@
 		$n = 0;
 		while ($origResultCount >= $modResultCount){
 			++$n;
-			if ($n == 10){
-				//$modResultCount = 99;
+			if ($n == 15){					// potentially increase price by $50 * 14.. if nothing extra is found
+				$modified_results = '';		// then reset the results as no recommendation can be made based on price
+				
 				break;
 			}
+			$modified_filters = '';
 			$modResultCount = 0;
 			//$GLOBALS['modResultCount'] = 0;
 			$moddedPriceHigh += 50;
@@ -138,6 +140,14 @@
 		}
 	} else if ($origResultCount > 9) {	// if > 9 products found, try and narrow search
 		//$returnObject['type'] = 'extra';		// set type to 'few'
+	}*/
+	
+	if ($origResultCount < 4){
+		recommendProducts('more');
+		//$GLOBALS['modResultCount'] = $priceHigh * 5/100%;
+		//$priceHigh
+	} else if ($origResultCount > 10){
+		recommendProducts('fewer');
 	}
 	
 	//ChromePhP::log("value: " . $modifiedQuery);
@@ -153,7 +163,8 @@
 	$returnObject['modifiedResultsCount'] = $modResultCount;
 	
 	
-	$returnObject['currFilters'] = $original_filters;
+	$returnObject['origFilters'] = $original_filters;
+	$returnObject['modFilters'] = $modified_filters;
 	
 	
 	//$returnObject['modifQuery'] = 'BLAH !';
@@ -161,27 +172,65 @@
 	echo (json_encode($returnObject));
 	
 	closeDBConnection($con);    // close the database connection
-		
+	
+	/*function recommendProducts($type_arg){
+		$p_index = 0;
+		if ($type_arg == 'more'){
+			$moddedPriceHigh = $GLOBALS['priceHigh'];
+			$n = 0;
+			while ($GLOBALS['origResultCount'] >= $GLOBALS['modResultCount']){
+				++$n;
+				if ($n == 15){					// potentially increase price by $50 * 14.. if nothing extra is found
+					//$GLOBALS['modified_results'] = '';		// then reset the results as no recommendation can be made based on price
+					
+					break;
+				}
+				$GLOBALS['modified_filters'] = '';
+				$GLOBALS['modResultCount'] = 0;
+				//$GLOBALS['modResultCount'] = 0;
+				$moddedPriceHigh += 50;
+				// first: increasing the price high limit (if it's not strict - not implemented yet)
+				$GLOBALS['modified_results'] = buildModQuery($con, $GLOBALS['searchType'], $GLOBALS['searchQuery'], $GLOBALS['savedCategoriesSelected'], $GLOBALS['priceLow'], $moddedPriceHigh, $GLOBALS['minQuantity'],
+					$GLOBALS['weightLow'], $GLOBALS['weightHigh']);
+			}
+		}
+	}*/
+	
+	
+	
 	/* BUILDING A QUERY GIVEN ALL PARAMETERS (currently used only for modified queries/recommendations)*/
 	function buildModQuery($con, $qSearchType, $qSearchQuery, $qCategorieSelectedList, $qPriceLow, $qPriceHigh, $qMinQuantity, $qWeightLow, $qWeightHigh){
 		$qinit = "SELECT * FROM product WHERE ";
 		$qinit .= "($qSearchType LIKE '%$qSearchQuery%') ";
-		if (!$GLOBALS['allCategories']){										// if not all the categories are included in the array..
+		$GLOBALS['modified_filters'] .= "Searching for: '$qSearchQuery' of type '$qSearchType', ";				// save filters for printing
+		
+		if (!$GLOBALS['allCategories']){															// if not all the categories are included in the array..
+			$GLOBALS['modified_filters'] = "Categories: ";														// save filters for printing
 			$n = 0;
 			$qinit .= "AND ( ";
 			foreach ($qCategorieSelectedList as $key => $value) {
 				if ($n == 0){
 					$qinit .= "pcategory = '$value' ";
+					$GLOBALS['modified_filters'] .= "'$value', ";												// save filters for printing
 				}else{
 					$qinit .= "OR pcategory = '$value' ";
+					$GLOBALS['modified_filters'] .= "'$value', ";												// save filters for printing
 				}
 				++$n;
 			}
 			$qinit .= ") ";
+		} else {
+			$GLOBALS['modified_filters'] .= "Categories: all, ";												// save filters for printing
 		}
+		$GLOBALS['modified_filters'] .= "Price Range: price > '$qPriceLow' and price < '$qPriceHigh', ";		// save filters for printing
 		$qinit .= "AND (price > '$qPriceLow' AND price < '$qPriceHigh' ) ";
+		
+		$GLOBALS['modified_filters'] .= "Min. quantity in-stock: '$qMinQuantity', ";							// save filters for printing
 		$qinit .= "AND (quantity > '$qMinQuantity') ";
+		
+		$GLOBALS['modified_filters'] .= "Weight > '$qWeightLow' and Weight < '$qWeightHigh', ";					// save filters for printing
 		$qinit .= "AND ( weight > '$qWeightLow' AND weight < '$qWeightHigh' ) ";
+		
 		$GLOBALS['modifiedQuery'] = $qinit;
 		//return $qinit;
 		return searchProducts($con, $qinit, 'mod');
@@ -245,6 +294,7 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 			$br = "<br><br><br><br>";
 		}
 		$i++;
+		
 		/*
 		echo "<div class='product$border'> \n";
 			echo "<a href='product/$category/$id'> <img class='imgthumb' src='images/$img'> \n";
@@ -259,6 +309,7 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		echo "</div>";
 		echo $br;
 		*/
+		
 		$returnString .= "<div class='product$border'>";
 		$returnString .= "<a href='product/$category/$id'> <img class='imgthumb' src='images/$img'> ";
 		$returnString .= "<p class='product-name'>$name</p> </a> ";
