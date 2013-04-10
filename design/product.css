@@ -21,18 +21,18 @@ H2{
 /* ------------ */
 
 span.categoryText {
-	font-size: 16px;
+	font-size: 15px;
 	/*font-size: 14px;*/
 	color: #666666;
 }
 
 .subtitleText {
-	font-size: 20px;
+	font-size: 18px;
 	/*font-size: 18px;*/
 }
 
 p.productText {
-	font-size: 14px;
+	font-size: 13px;
 	/*font-size: 12px;*/
 }
 
@@ -47,17 +47,16 @@ p.productText {
 	margin-left: 230px;
 	padding-top:10px;
 	/*font-family: "Open Sans",Verdana,sans-serif;*/
-	font-family: calibri;
+	font-family: "Open Sans",Verdana,sans-serif;
 	color: #000000;
 }
 
 .productName {
 	font-size: 24px;
-	//font-size: 22px;
 	margin:0;
 	padding:0;
 	margin-left:25px;
-	padding-bottom: 15px;
+	padding-bottom: 20px;
 	margin-bottom: 15px;
 	color: #444444;
 	/*background-color:green;*/
@@ -121,7 +120,17 @@ p.productText {
 	/* background-color: blue; */
 }
 
+.product-rating{
+	height:20px;
+	line-height:20px;
+	color: #C9C9C9;
+    display:inline-block;
+    margin-bottom:5px;
+    padding-rigth:5px;
+}
+
 span.productRatingPrice {
+    display:inline-block;
 	float: right;
 	width: auto;
 	margin-right: 15px;
@@ -163,6 +172,12 @@ span.quantity {
 	/*width:75px;*/
 	margin-top: 2px;
 	margin-right: 10px;
+    
+    font-size: 13;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .clear {
