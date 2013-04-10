@@ -413,7 +413,8 @@
 	//$basicQuery .= "price > '1000'";
 		
 	*/
-function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of			
+function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of
+	$query .= "ORDER BY price";
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
 	$returnString .= $query . "<br>";
