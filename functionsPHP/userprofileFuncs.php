@@ -43,7 +43,7 @@ function displayProfileSettings($user) {
     .p("First Name")
     ."<input type='text' name='fname' id='fname' value='".$user['firstname']."' />"
     .p("Last Name")
-    ."<input type='text' name='fname' id='fname' value='".$user['lastname']."' />"
+    ."<input type='text' name='lname' id='lname' value='".$user['lastname']."' />"
     .p("City")
     ."<input type='text' name='city' id='city' value='".$user['city']."' />"
     .p("Postal Code")
@@ -52,7 +52,7 @@ function displayProfileSettings($user) {
     ."<input type='text' name='address' id='address' value='".$user['address']."' />"
     .p("Phone Number")
     ."<input type='text' name='phonenumber' id='phonenumber' value='".$user['phone']."'/>"
-    ."<br><br><button onClick='updateUserProfile()'>Save Profile</button></div>"
+    ."<br><br><input type='button' onClick='updateProfile()' value='Save Profile' /></div>"
     ."<div class='smallColumn' id='profileSettings'>"
     .p("Email")
     ."<input type='text' name='email' id='email' value='".$user['email']."' disabled />"
@@ -122,43 +122,4 @@ function getProductName($con, $pid) {
   return $row['pname'];
 }
 
-/*
-function getUserCurrentOrders($userid) {
-	return getUserOrders($userid, " AND userOrders.delivery_date >= DATE(NOW());");
-}
-
-function getUserPastOrders($userid) {
-	return getUserOrders($userid, " AND userOrders.delivery_date < DATE(NOW());");
-}
-
-function getUserOrders($userid, $queryEnd) {
-	$con = connectToDB();		// open db connection
-	$query = "
-		SELECT product.pname, product.imageurl, productOrders.amount, product.price, userOrders.delivery_date, product.pid, product.pcategory
-		FROM userOrders, productOrders, product 
-		WHERE 
-			userOrders.userid = '$userid' AND
-			productOrders.orderid = userOrders.orderid AND
-			product.pid = productOrders.pid" . $queryEnd
-	;
-	$result = mysqli_query($con, $query) or die("Query failed getting order details.");
-	$output = "<table class='ordersTable'>";
-	$row = mysqli_fetch_row($result);
-	if ($row == NULL) return "None";
-	while ($row != NULL) {
-		$output .= "<tr>";
-		//echo "<a href='/product/dishwashers/$id'> <img src='images/$row[1]'></img> <div style='margin-left:20px;display:inline-block;'>$row[0]</div> </a>\n";
-		$output .= "<td><a href='/product/$row[6]/$row[5]'>'$row[0]'</td>";
-		//$output .= "<td><img src='images/$row[1]'></td>";
-		$output .= "<td>'$row[2]'</td>";
-		$output .= "<td>'$row[3]'</td>";
-		$output .= "<td>'$row[4]'</td>";
-		$output .= "</tr>";
-		$row = mysqli_fetch_row($result);
-	}
-	$output .= "</table>";
-	closeDBConnection($con);    // close the database connection
-	return $output;
-}
-*/
 ?>

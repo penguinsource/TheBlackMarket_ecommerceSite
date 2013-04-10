@@ -1,8 +1,9 @@
 <?php
 session_start();
 include("dbConnection.php");
+include("userprofileFuncs.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST  
 	$con = connectToDB();	// connect to db
 	
 	/* get all the vars from POST */
@@ -25,17 +26,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
 		$phone = $_POST['phone'];
 	}
 	
-	$email = $_SESSION['email'];		// save email of the user logged in
+	$email = $_SESSION['email'];		// save email of the user logged in		
 	
 	// update database record
-	$queryInsert = "UPDATE user SET firstname = '$fname', lastname = '$lname', city = '$city', postal = '$postal', address = '$address', phone = '$phone' WHERE email = '$email';";
-    mysqli_query($con, $queryInsert);
-	echo "done";
-    closeDBConnection($con);    // close the database connection
-} else if  ($_SERVER['REQUEST_METHOD'] == 'GET'){
-	
-}
+	$queryInsert = "UPDATE user"
+	  ." SET firstname = '$fname', lastname = '$lname', city = '$city', "
+	  ."postal = '$postal', address = '$address', phone = '$phone'"
+	  ." WHERE email = '$email'";
+	  		  	  
+  mysqli_query($con, $queryInsert) or die(" User Profile Update Failed ");      
+  closeDBConnection($con);    // close the database connection
 
+  /*
+  $output = "<div style=\"border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;\">"
+    ."</div><div class='leftMenu'>"
+    .showLeftMenu()
+    ."</div>"
+    .showProfile();
+  */
+  echo showProfile();
+}
 
 
 ?>

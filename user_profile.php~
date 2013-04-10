@@ -30,13 +30,13 @@
 <body>
   <?php printMenu(); ?>
 
-  <div class='main'>
+  <div class='main' id='mainPage'>
     <div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
     <div class="leftMenu">
       <?php showLeftMenu(); ?>
     </div>    
     
-    <?php showProfile($con); ?>
+    <?php showProfile(); ?>
   </div>  
 
 </body>

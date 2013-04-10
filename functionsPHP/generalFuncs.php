@@ -1,7 +1,7 @@
 <?php 
 
 	// GLOBAL VARIABLES --------------------------------------------------
-	$localhostON = 0;		// 0 for 000webhost server
+	$localhostON = 3;		// 0 for 000webhost server
 							// 1 for localhost mihai pc
 							// 2 for vm consort (not setup; to add, just add another if below and the url)
 							

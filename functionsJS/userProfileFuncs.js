@@ -10,3 +10,29 @@ $(document).ready(function(){
 	
 	$("#profileTable").tablesorter({ sortList: [[0, 0]] });
 });
+
+
+function updateProfile(){
+  // get values  
+  var ifirst = $("#fname").val();
+  var ilast = $("#lname").val();
+  var icity = $("#city").val();
+  var ipostal = $("#postalcode").val();
+  var iaddress = $("#address").val();
+  var iphone = $("#phonenumber").val();
+  var iemail = $("#email").val();
+
+	// post
+	var link = '/functionsPHP/userprofileService';
+	
+	$.post(link, 
+	  {fname: ifirst, lname: ilast, city: icity, postal: ipostal, address: iaddress, phone: iphone},
+	  function(data) {
+	    $("#window").fadeOut("slow");
+      $("#window").html(data);
+      $("#window").fadeIn("slow");
+      alert("Profile Successfully Changed");
+	  }	
+	);
+}
+
