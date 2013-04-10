@@ -133,10 +133,40 @@ $(function() {
 	alert('value 1 is ' + $( "#slider-range" ).slider( "values", 0 ) );
 	alert('value 2 is ' + $( "#slider-range" ).slider( "values", 1 ) );
 	//$( ".selector" ).slider( "values", [ 55, 105 ] );
-	$( "#slider-range" ).slider( "values", [0, 100] )
+	$( "#slider-range" ).slider( "values", [0, 100] );
   }
 
-  <!-- END Filter search scripts -->
+  // used when narrowing down a search
+  function narrowSearch($attribute){
+	if ($attribute == 'more'){
+		showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('fewer')\" class='showResultsButton'>Show More Results</button>";
+		document.getElementById('searchContent').innerHTML = originalResults + showMoreButton;
+		document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
+		$('#showResultsBound').html('Show filtered results');
+	} else if ($attribute == 'fewer'){
+		showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show More Results</button>";
+		document.getElementById('searchContent').innerHTML = modResults + showMoreButton;
+		document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+		$('#showResultsBound').html('Show all results');
+	}
+  }
+  
+    // used when narrowing down a search
+  function expandSearch($attribute){
+	if ($attribute == 'expand'){
+		expandBtn = "<br><button id='expandBtnid' onclick=\"expandSearch('original')\" class='showResultsButton'>Back to normal results</button>";
+		document.getElementById('searchContent').innerHTML = modResults + expandBtn;
+		document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+		//$('#expandBtnid').html('Show filtered results');
+	} else if ($attribute == 'original'){
+		expandBtn = "<br><button id='expandBtnid' onclick=\"expandSearch('expand')\" class='showResultsButton'>Expand Search</button>";
+		document.getElementById('searchContent').innerHTML = originalResults + expandBtn;
+		document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
+		//$('#showResultsBound').html('Show all results');
+	}
+  }
+  
+  /* END Filter search scripts */
   </script>
 </head>
 
@@ -210,11 +240,12 @@ $(function() {
 				</div>
 				
 			-->
-			<div style='clear'></div>
+			<div class='clear'></div>
 			<br>
 			<div class='border80'></div>
-
 		</div>
+		
+		
 		
 		<div class='clear'></div>
 		<div id='searchResultsCountRecom' class='searchRecomHeader'> Recommendations: 15 results found </div>
