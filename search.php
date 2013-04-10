@@ -25,6 +25,7 @@
 	<!-- script imports -->
 	<!-- other scripts: -->
 	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
+	<script>filterSearch();</script>
 	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
@@ -177,7 +178,16 @@ $(function() {
 	<div class='searchWrapper'>
 		<div class='searchInput'>
 			<span>
-				<input onkeyup='filterSearch()' type='text' id='searchQuery'> </input>
+				<?php 
+				if (isset($_GET['squery'])){
+					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery' value='".$_GET['squery']."'></input>";
+					echo "<script>filterSearch()</script>";
+				}else {
+					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery'></input>";
+				}?>
+				
+				 <!-- REFRESH THE PAGE -->
+				<!-- <input onkeyup='filterSearch()' type='text' id='searchQuery'> </input> -->
 				<button onclick='filterSearch()'>Go </button>
 				<span>Search By:</span>
 				<select onchange='filterSearch()' id='searchType'>

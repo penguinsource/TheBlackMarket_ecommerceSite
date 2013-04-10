@@ -76,7 +76,7 @@
 					echo "<img valign='center' class='activelogo' src='/design/images/logo1-small.png'>\n";
 					/*	SEARCH FORM below */
 					echo "<div class='searchWrap'><form action='/search.php' method='GET'>";
-					echo "<input type='text'></input>";
+					echo "<input type='text' name='squery'></input>";
 					echo "<button>Search !</button>";
 					echo "</form></div>";
 					/*	SEARCH FORM above */
