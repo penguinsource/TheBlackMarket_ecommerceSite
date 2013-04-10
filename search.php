@@ -176,9 +176,10 @@ $(function() {
 <div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 	<div class='searchWrapper'>
 		<div class='searchInput'>
-			<span> Search: 
+			<span>
 				<input onkeyup='filterSearch()' type='text' id='searchQuery'> </input>
 				<button onclick='filterSearch()'>Go </button>
+				<span>Search By:</span>
 				<select onchange='filterSearch()' id='searchType'>
 					<option id='pname' name='name' value='Name'>Name</option>
 					<option id='pcategory' name='category' value='Category'>Category</option>
