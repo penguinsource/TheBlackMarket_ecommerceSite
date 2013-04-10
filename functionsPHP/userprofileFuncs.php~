@@ -43,7 +43,6 @@ function showProfile($tab, $user) {
       ."<input type='text' name='fname' id='fname' value='".$user['firstname']."'></input>"
       .p("Last Name")
       ."<input type='text' name='fname' id='fname' value='".$user['lastname']."'></input>"
-      .p("City")
   }
   
   echo $output;

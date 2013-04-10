@@ -42,7 +42,7 @@
       <?php showLeftMenu(); ?>
     </div>    
     
-    <?php showProfile($tab, $user); ?>
+    <?php showProfile($tab); ?>
   </div>  
 
 </body>
