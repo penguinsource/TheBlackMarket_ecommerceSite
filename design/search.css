@@ -5,8 +5,8 @@
 	margin:0;
 	padding:0;
 	padding-bottom: 50px;
-	/* margin-bottom: 20px; */
-	background-color: red;
+	/* margin-bottom: 20px; 
+	background-color: red;*/
 	/* background-color: #DADDE4; */
 }
 
@@ -16,7 +16,7 @@
 	margin:0;
 	padding:0;
 	margin-left: 200px;
-	background-color: blue;
+	/*background-color: blue;*/
 }
 
 /* Search Filter Menu */
@@ -31,9 +31,9 @@
 	width: 20%;
 	height: auto;
 	border-right: 1px solid;
-    border-color: #E4E4E4;
+	border-color: #E4E4E4;
 	float: left;
-	background-color: gray;
+	/*background-color: gray;*/
 }
 
 .filterTab {
@@ -80,11 +80,11 @@
 	width: 75%;
 	height: auto;
 	float: left;
-	background-color: gray;
+	/*background-color: gray;*/
 }
 
 .searchResultsCount {
-background-color: white;
+	background-color: white;
 	display: inline-block;
 	vertical-align: top;
 	margin:0;
@@ -97,7 +97,7 @@ background-color: white;
 }
 
 .searchRecommendations {
-	background-color: red;
+	/*background-color: red;*/
 	width: 100px;
 	height:50px;
 	
@@ -121,6 +121,10 @@ background-color: white;
 	margin-left: 22%;
 	margin-bottom: 10px;
 	margin-top: 10px;
+}
+
+.showResultsButton {
+	margin-top: 20px;
 }
 
 /*
@@ -255,6 +259,10 @@ background-color: white;
 .clear {
 	clear:both;
 	display: block;
+}
+
+.hidden {
+	display: none;
 }
 
 /*

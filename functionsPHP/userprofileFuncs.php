@@ -25,69 +25,54 @@ function showLeftMenu() {
   echo $output;
 }
 
-function showProfile($tab, $user) {
-  $output = "";
-  
-  if ($tab == null) {             // settings
-    $output .= "<div class='mediumColumn' id='profileOrders'>"
-      ."<p>Current Orders</p>"
-      ."<div id='orders-header'>"
-      ."<span style='display:inline-block;width:68%;'></span>"
-      ."<span style='display:inline-block;width:8%;text-align:center;'>Quantity</span>"
-      ."<span style='display:inline-block;width:14%;text-align:center;'>Price</span>"
-      ."<span style='display:inline-block;width:8%;text-align:center;'>Arrival Date</span>"
-      ."</div>";
-  } else {                        // order
-    $output .= "<div class='smallColumn' id='profileSettings'>"
-      .p("First Name")
-      ."<input type='text' name='fname' id='fname' value='".$user['firstname']."'></input>"
-      .p("Last Name")
-      ."<input type='text' name='fname' id='fname' value='".$user['lastname']."'></input>"
-      .p("City")
-  }
-  
-  echo $output;
+function showProfile() {
+  if (isset($_SESSION['email'])) {
+	  $user = getUserInfo($_SESSION['email']);
+	} else {
+	  header("Location: shop");
+		exit;
+	}	
+	$tab = isset($_GET['profileOrders']) ? 1 : 0;
 
-/*
-  if (isset($_GET['profileOrders'])){		// ORDERS PAGE OF USER PROFILE
-			echo "<div class='mediumColumn' id='profileOrders'>";
-			echo "<p> Current Orders </p>";
-			echo "<div id='orders-header'>
-				<span style='display:inline-block;width:68%;'> </span>   
-				<span style='display:inline-block;width:8%;text-align:center;'>Qty</span>   
-				<span style='display:inline-block;width:14%;text-align:center;'>Price</span>   
-				<span style='display:inline-block;width:8%;text-align:center;'>Arrival Date</span>
-			</div>";
-			echo getUserCurrentOrders($user['userid']);
-			echo "<div class='maxBorder'></div>";
-			echo "<p> Past Orders </p>";
-			echo getUserPastOrders($user['userid']);
-			echo "<div class='maxBorder'></div>";
-			echo "</div>";
-*/
-  } else {	// SETTINGS PAGE OF USER PROFILE
-			echo "<div class='smallColumn' id='profileSettings'>";
-			echo "<p> First Name </p>";
-			echo "<input type='text' name='fname' id='fname' value='". $user['firstname'] . "'></input>";
-			echo "<p> Last Name </p>";
-			echo "<input type='text' name='lname' id='lname' value='". $user['lastname'] . "'></input>";
-			echo "<p> City </p>";
-			echo "<input type='text' name='city' id='city' value='". $user['city'] . "'></input>";
-			echo "<p> Postal Code </p>";
-			echo "<input type='text' name='postalcode' id='postalcode' value='". $user['postal'] . "'></input>";
-			echo "<p> Address </p>";
-			echo "<input type='text' name='address' id='address' value='". $user['address'] . "'></input>";
-			echo "<p> Phone Number </p>";
-			echo "<input type='text' name='phonenumber' id='phonenumber' value='". $user['phone'] . "'></input>";
-			echo "<br><br>";
-			echo "<button onClick='updateUserProfile()'>Save Profile</button>";
-			echo "</div>";
-			
-			echo "<div class='smallColumn' id='profileSettings'>";
-			echo "<p>Email </p>";
-			echo "<input type='text' name='email' id='email' value='". $user['email']. "' disabled></input>";
-			echo "</div>";
-  }
+  $output = ($tab > 0) ? displayCurrentOrders($user) : displayProfileSettings($user);
+  echo $output;
+}
+
+function displayProfileSettings($user) {
+  $value = "<div class='smallColumn' id='profileSettings'>"
+    .p("First Name")
+    ."<input type='text' name='fname' id='fname' value='".$user['firstname']."' />"
+    .p("Last Name")
+    ."<input type='text' name='fname' id='fname' value='".$user['lastname']."' />"
+    .p("City")
+    ."<input type='text' name='city' id='city' value='".$user['city']."' />"
+    .p("Postal Code")
+    ."<input type='text' name='postalcode' id='postalcode' value='".$user['postal']."' />"
+    .p("Address")
+    ."<input type='text' name='address' id='address' value='".$user['address']."' />"
+    .p("Phone Number")
+    ."<input type='text' name='phonenumber' id='phonenumber' value='".$user['phone']."'/>"
+    ."<br><br><button onClick='updateUserProfile()'>Save Profile</button></div>"
+    ."<div class='smallColumn' id='profileSettings'>"
+    .p("Email")
+    ."<input type='text' name='email' id='email' value='".$user['email']."' disabled />"
+    ."</div>";
+    
+  return $value;
+}
+
+function displayCurrentOrders($user) {
+  $value = "<div class='mediumColumn' id='profileOrders'>";
+  
+  $cols = array("Products", "Price", "Arrival Date");
+  $value .= createTableHeader($cols, 'profileTable', 'Current Orders', null, null);
+  
+  $vals = array("ITEMS", "INFINITY BILLION DOLLARS", "the day of the dead");
+  $value .= addTableRow($vals);
+  
+  $value .= "</tbody></table></div>";
+    
+  return $value;
 }
 
 function getUserInfo($userEmail){

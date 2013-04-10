@@ -130,14 +130,14 @@ function displayTransactionHistory($con, $from, $to) {
 	$result = mysqli_query($con, $query) or 
 		die(" Transaction History Query Failed ");
     
-  // transaction query
+  // transaction query  
   $orderSelect = "SELECT * FROM productOrders, product";
   $orderCondition = " WHERE productOrders.pid=product.pid"
     ." AND productOrders.orderid='";
   $orderQuery = $orderSelect.$orderCondition;
 
 	// init table
-	$columns = array("Date", "User Email", "Products", "Total Cost");
+	$columns = array("Date", "User Email", "Order#", "Products", "Total Cost");
 	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table
@@ -152,20 +152,20 @@ function displayTransactionHistory($con, $from, $to) {
     $o_res = mysqli_query($con, $oq) or die(" Order Query Failed ");
        
     $products = "";
+    
     $cost = 0;
     while ($orow = mysqli_fetch_array($o_res)) {
       $prod = $orow['pname'];
       $qty = $orow['amount'];
-      $tag = $orow['price'];
-      
+
       $products .= ($products == "") ? "" : ", ";
       $products .= $prod." [x$qty]";
       
-      $cost += ($qty * $tag);
+      $cost += $orow['totalprice'];
     }       
 
 		// add row to table
-		$values = array($date, $row['email'], $products, $cost);
+		$values = array($date, $row['email'], $oid, $products, $cost);
 		$output .= addTableRow($values);
     $i++;
 	}
@@ -191,12 +191,11 @@ function displayCustomerStats($con, $from, $to) {
 		die(" User Query Failed ");
 
 	// prep transaction query
-	$queryNumTrans = "SELECT COUNT(*) FROM userOrders WHERE userOrders.userid=";
+  $queryNumTrans = "SELECT COUNT(*) FROM userOrders WHERE userOrders.userid=";
 
 	// prep purchases query
-	$view = "userOrders, productOrders, product";
+	$view = "userOrders, productOrders";
 	$cond = " WHERE userOrders.orderid=productOrders.orderid"
-		." AND productOrders.pid=product.pid"
 		." AND userOrders.userid=";
 
 	$queryPurchases = "SELECT * FROM ".$view.$cond;	
@@ -228,13 +227,10 @@ function displayCustomerStats($con, $from, $to) {
     $pFinalQuery = addDateCheck($queryPurchases.$uid, $from, $to);
 		$purchases = mysqli_query($con, $pFinalQuery) or
 			die(" Query Failed: Purchase Sum - ".$email." ");
-			
+	  
 	  $cost = 0;
 		while ($prows = mysqli_fetch_array($purchases)) {
-		  $qty = $prows['amount'];
-		  $price = $prows['price'];
-		  
-		  $cost += ($qty * $price);
+		  $cost += $prows['totalprice'];
 		}
     		
 		// add row to table
@@ -285,10 +281,10 @@ function displayCategorySummary($con, $from, $to) {
 	  $count = 0;
 	  $cost = 0;
 	  while ($saleRow = mysqli_fetch_array($s_res)) {	    	  
-	    $amt = $saleRow['amount'];
-	    $price = $saleRow['price'];
-	    $cost += $amt * $price;	    
+	    $amt = $saleRow['amount'];  
+	    $total = $saleRow['totalprice'];
 	    
+	    $cost += $total;
 	    $count += $amt;
 	  }
 	  
@@ -315,6 +311,9 @@ function displayProductSales($con, $from, $to) {
     " WHERE productOrders.orderid=userOrders.orderid AND productOrders.pid=\"";  
 	$salesQuery = $salesSelect.$salesCondition;
 	
+	// find total cost
+	$costQuery = "SELECT * FROM productOrders WHERE productOrders.pid='";
+	
 	// init table
 	$columns = array("Product", "Category", "Quantity Purchased", "Total Income");
 	$output .= createTableHeader($columns, "productTable", "Overall Product Sales", $from, $to);
@@ -334,7 +333,12 @@ function displayProductSales($con, $from, $to) {
 		$qty = empty($qa[0]) ? 0 : $qa[0];
 
 		// get gross income
-		$total = $prodRow['price'] * $qty;
+		$cq = $costQuery.$pid."'";
+		$costs = mysqli_query($con, $cq) or die(" Cost Query Failed ");
+		$total = 0;
+		while ($crow = mysqli_fetch_array($costs)) {
+		  $total += $crow['totalprice'];
+		}
 
 		// add row to table
 		$values = array($prodRow['pname'], $prodRow['pcategory'], $qty, $total);
@@ -352,7 +356,9 @@ function displayOtherStores($con, $from, $to) {
   // get other store orders
   $select = "SELECT * FROM userOrders";
   $condition = " WHERE EXISTS "
-    ."(SELECT * FROM orderSources WHERE userOrders.orderid=orderSources.orderid)";
+    ."(SELECT * FROM orderSources, productOrders"
+    ." WHERE userOrders.orderid=orderSources.orderid"
+    ." AND userOrders.orderid=productOrders.orderid)";
     
   $query = $select.$condition;    
   $query = addDateCheck($query, $from, $to);        
@@ -370,10 +376,11 @@ function displayOtherStores($con, $from, $to) {
   $storeQuery = "SELECT * FROM orderSources WHERE orderSources.orderid='";
   
   // init table
-  $columns = array("Partner", "User Email", "Products", "Total Cost");
+  $columns = array("Partner", "User Email", "Order#", "Products", "Total Cost");
   $output .= createTableHeader($columns, "storeTable", "Partner Retailer Orders", $from, $to);
   
   $i = 0;
+  $cost = 0;
   while ($row = mysqli_fetch_array($sources)) {
     $uid = $row['userid'];
     $oid = $row['orderid'];
@@ -398,21 +405,21 @@ function displayOtherStores($con, $from, $to) {
     $cost = 0;
     while ($orderRow = mysqli_fetch_array($o_res)) {
       $pid = $orderRow['pid'];
-      $qty = $orderRow['amount'];
+      $qty = $orderRow['amount'];      
+      $total = $orderRow['totalprice'];
       
       $pq = $prodQuery.$pid."'";
       $p_res = mysqli_query($con, $pq) or die(" Product Query Failed ");
       $prodRow = mysqli_fetch_array($p_res);
       $pname = $prodRow['pname'];
-      $price = $prodRow['price'];
       
       $items .= ($items == "") ? "" : ", ";
       $items .= $pname." [x$qty]";
-      
-      $cost += $qty * $price;      
+       
+      $cost += $total;
     }
 
-    $values = array($store, $email, $items, $cost);
+    $values = array($store, $email, $oid, $items, $cost);
     $output .= addTableRow($values);
     
     $i++;

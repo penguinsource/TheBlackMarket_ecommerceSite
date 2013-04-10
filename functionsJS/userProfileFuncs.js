@@ -7,4 +7,6 @@ $(document).ready(function(){
 		$(this).stop(true, true).removeClass('menuhover', 100);
 		$(this).removeClass('menuhover', 100);
 	});
+	
+	$("#profileTable").tablesorter({ sortList: [[0, 0]] });
 });
