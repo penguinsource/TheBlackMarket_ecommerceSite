@@ -122,10 +122,6 @@ $(function() {
   
   <!-- Filter search scripts -->
   <script>
-  function updateAvail(){
-	alert("ha");
-	document.getElementById('availAmount').innerHTML = $( "#slider-range-min" ).slider( "value" ) + " or more items";
-  }
   
   function checkSlider(){
 	//var value = $( ".selector" ).slider( "values", 0 );
@@ -138,31 +134,31 @@ $(function() {
   }
 
   // used when narrowing down a search
-  function narrowSearch($attribute){
-	if ($attribute == 'more'){
+  function narrowSearch(attribute){
+	if (attribute == 'more'){
 		showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('fewer')\" class='showResultsButton'>Show More Results</button>";
-		document.getElementById('searchContent').innerHTML = originalResults + showMoreButton;
-		document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
+		document.getElementById('searchResultsCount').innerHTML = origResultCount + " products found.<br> <span style='color: gray;'>" + originalFiltersText + "</span> <br><br> <div class='border60'></div>";
+		document.getElementById('searchContent').innerHTML = showMoreButton + "<br>" + originalResults;
 		$('#showResultsBound').html('Show filtered results');
-	} else if ($attribute == 'fewer'){
+	} else if (attribute == 'fewer'){
 		showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show More Results</button>";
-		document.getElementById('searchContent').innerHTML = modResults + showMoreButton;
-		document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+		document.getElementById('searchResultsCount').innerHTML = modResultsCount + " products recommended for you.<br> <span style='color: gray;'>" + modFiltersText + "</span> <br><br> <div class='border60'></div>";
+		document.getElementById('searchContent').innerHTML = showMoreButton + "<br>" + modResults;
 		$('#showResultsBound').html('Show all results');
 	}
   }
   
     // used when narrowing down a search
-  function expandSearch($attribute){
-	if ($attribute == 'expand'){
+  function expandSearch(attribute){
+	if (attribute == 'expand'){
 		expandBtn = "<br><button id='expandBtnid' onclick=\"expandSearch('original')\" class='showResultsButton'>Back to normal results</button>";
-		document.getElementById('searchContent').innerHTML = modResults + expandBtn;
-		document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+		document.getElementById('searchResultsCount').innerHTML = modResultsCount + " products recommended for you.<br> <span style='color: gray;'>" + modFiltersText + "</span> <br><br> <div class='border60'></div>";
+		document.getElementById('searchContent').innerHTML = expandBtn + "<br>" + modResults;
 		//$('#expandBtnid').html('Show filtered results');
-	} else if ($attribute == 'original'){
+	} else if (attribute == 'original'){
 		expandBtn = "<br><button id='expandBtnid' onclick=\"expandSearch('expand')\" class='showResultsButton'>Expand Search</button>";
-		document.getElementById('searchContent').innerHTML = originalResults + expandBtn;
-		document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
+		document.getElementById('searchResultsCount').innerHTML = origResultCount + " products found.<br> <span style='color: gray;'>" + originalFiltersText + "</span> <br><br> <div class='border60'></div>";
+		document.getElementById('searchContent').innerHTML = expandBtn + "<br>" + originalResults;
 		//$('#showResultsBound').html('Show all results');
 	}
   }
@@ -242,7 +238,7 @@ $(function() {
 			<div class='border80'></div>
 		</div>
 		<!-- Search Results (Wrapper) -->
-		<div id='searchResultsCount' class='searchResultsCount'> 15 results found </div>
+		<div id='searchResultsCount' class='searchResultsCount'></div>
 		<div id='searchContent' class='searchContent'>
 		
 			<?php /*$con = connectToDB();

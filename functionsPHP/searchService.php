@@ -430,7 +430,7 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 	
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
-	$returnString .= $query . "<br>";
+	//$returnString .= $query . "<br>";
 	$i = 1;
 	while($row = mysqli_fetch_array($result)) {
 		$id = $row['pid'];
@@ -511,9 +511,8 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		$returnString .= "<div class='product-stock'>In Stock: $quantity <a href='javascript:void(0)'>
 					<div onClick='addToCart(\"$id\",\"$name\",$price,\"$img\");' class='cart-button'> Add to Cart</div></a></div>";
 		$returnString .= "</div>";
-		
-//$returnString .= $br;
-		}
+		//$returnString .= $br;
+	}
     
 	return $returnString;
 }

@@ -168,35 +168,37 @@ function filterSearch(){
 			originalFiltersText = obj['origFilters'];
 			modFiltersText = obj['modFilters'];
 			
-			recList = obj['recomQueryList'];
+			// recList = obj['recomQueryList'];
 			
 			//mod
 			if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
+				document.getElementById('searchResultsCount').innerHTML = origResultCount + " products found.<br><span style='color: gray;'>" + originalFiltersText + "</span> <br><br> <div class='border60'></div>";
 				document.getElementById('searchContent').innerHTML = originalResults;
-				document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
 				
-				document.getElementById('searchContentRecom').innerHTML = modResults;
-				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+				// document.getElementById('searchContentRecom').innerHTML = modResults;
+				// document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>";
 			
 				// show the div ( in case it's hidden ) DELETE THESE:
-				document.getElementById('searchContentRecom').className = 'searchRecom';
-				document.getElementById('searchResultsCountRecom').className = 'searchRecomHeader';
+				//document.getElementById('searchContentRecom').className = 'searchRecom';
+				//document.getElementById('searchResultsCountRecom').className = 'searchRecomHeader';
+				document.getElementById('searchResultsCountRecom').className = 'hidden';
+				document.getElementById('searchContentRecom').className = 'hidden';
 			} else if (resultType == 'few'){
 				expandBtn = "<br><button id='expandBtnid' onclick=\"expandSearch('expand')\" class='showResultsButton'>Expand Search</button>";
-				document.getElementById('searchContent').innerHTML = originalResults + expandBtn;
-				document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
-			
-				// hide the extra div
-				document.getElementById('searchContentRecom').className = 'hidden';
-				document.getElementById('searchResultsCountRecom').className = 'hidden';
-			} else if (resultType == 'extra'){
-				showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show all results</button>";
-				document.getElementById('searchContent').innerHTML = modResults + showMoreButton;
-				document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+				document.getElementById('searchResultsCount').innerHTML = origResultCount + " products found.<br> <span style='color: gray;'>" + originalFiltersText + "</span> <br><br> <div class='border60'></div>";
+				document.getElementById('searchContent').innerHTML = expandBtn + "<br>" + originalResults;
 				
 				// hide the extra div
-				document.getElementById('searchContentRecom').className = 'hidden';
 				document.getElementById('searchResultsCountRecom').className = 'hidden';
+				document.getElementById('searchContentRecom').className = 'hidden';
+			} else if (resultType == 'extra'){
+				showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show all results</button>";
+				document.getElementById('searchResultsCount').innerHTML = modResultsCount + " products recommended for you.<br> <span style='color: gray;'>" + modFiltersText + "</span> <br><br> <div class='border60'></div>";
+				document.getElementById('searchContent').innerHTML = showMoreButton + "<br>" + modResults;
+				
+				// hide the extra div
+				document.getElementById('searchResultsCountRecom').className = 'hidden';
+				document.getElementById('searchContentRecom').className = 'hidden';
 			}
 			//} else if (resultType == 'few'){
 				
