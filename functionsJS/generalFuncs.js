@@ -168,13 +168,33 @@ function filterSearch(){
 			recList = obj['recomQueryList'];
 			
 			//mod
-			//if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
+			if (resultType == 'normal'){		// no recommendations for type 'normal', as of right now
 				document.getElementById('searchContent').innerHTML = originalResults;
 				document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
 				
 				document.getElementById('searchContentRecom').innerHTML = modResults;
 				document.getElementById('searchResultsCountRecom').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
+			
+				// show the div ( in case it's hidden ) DELETE THESE:
+				document.getElementById('searchContentRecom').className = 'searchRecom';
+				document.getElementById('searchResultsCountRecom').className = 'searchRecomHeader';
+			} else if (resultType == 'few'){
+				expandBtn = "<br><button id='expandBtnid' onclick=\"expandSearch('expand')\" class='showResultsButton'>Expand Search</button>";
+				document.getElementById('searchContent').innerHTML = originalResults + expandBtn;
+				document.getElementById('searchResultsCount').innerHTML = origResultCount + ' products found.<br>' + originalFiltersText;
+			
+				// hide the extra div
+				document.getElementById('searchContentRecom').className = 'hidden';
+				document.getElementById('searchResultsCountRecom').className = 'hidden';
+			} else if (resultType == 'extra'){
+				showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show More Results</button>";
+				document.getElementById('searchContent').innerHTML = modResults + showMoreButton;
+				document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
 				
+				// hide the extra div
+				document.getElementById('searchContentRecom').className = 'hidden';
+				document.getElementById('searchResultsCountRecom').className = 'hidden';
+			}
 			//} else if (resultType == 'few'){
 				
 			//} else if (resultType == 'extra'){	// if there are too many, show recommended ones and a button to show more

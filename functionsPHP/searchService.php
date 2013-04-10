@@ -39,6 +39,7 @@
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
 		$searchType = $_POST['searchType'];									// assign and save a value for this global
 		$searchQuery = $_POST['searchQuery'];								// assign and save a value for this global
+		//$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
 		$basicQuery .= "($searchType LIKE '% $searchQuery %' OR $searchType LIKE '%$searchQuery %' OR $searchType LIKE '% $searchQuery%') ";
 		// save the current filters	in printing state
 		$original_filters .= "Searching for: '$searchQuery' of type '$searchType', ";			// save filters for printing
@@ -149,8 +150,12 @@
 	
 	if ($origResultCount < 5){
 		recommendProducts('more');
+		$returnObject['type'] = 'few';
 	} else if ($origResultCount > 10){
 		recommendProducts('fewer');
+		$returnObject['type'] = 'extra';
+	} else {
+		$returnObject['type'] = 'normal';
 	}
 	
 	$recList = '';
@@ -163,7 +168,8 @@
 	
 	/*  --------------------------------------  */
 	/*	BUILDING JSON ARRAY TO SEND AS RESPONSE */
-	$returnObject['type'] = 'normal';
+	
+	// $returnObject['type'] = 'normal';
 	
 	$returnObject['originalResults'] = $original_results;
 	$returnObject['originalResultCount'] = $origResultCount;
@@ -360,7 +366,8 @@
 	/* BUILDING A QUERY GIVEN ALL PARAMETERS (currently used only for modified queries/recommendations)*/
 	function buildModQuery($con, $qSearchType, $qSearchQuery, $qCategorieSelectedList, $qPriceLow, $qPriceHigh, $qMinQuantity, $qWeightLow, $qWeightHigh){
 		$qinit = "SELECT * FROM product WHERE ";
-		$qinit .= "($qSearchType LIKE '%$qSearchQuery%') ";
+		//$qinit .= "($qSearchType LIKE '%$qSearchQuery%') ";
+		$qinit .= "($qSearchType LIKE '% $qSearchQuery %' OR $qSearchType LIKE '%$qSearchQuery %' OR $qSearchType LIKE '% $qSearchQuery%') ";
 		$GLOBALS['modified_filters'] .= "Searching for: '$qSearchQuery' of type '$qSearchType', ";				// save filters for printing
 		
 		if (!$GLOBALS['allCategories']){															// if not all the categories are included in the array..
@@ -406,7 +413,8 @@
 	//$basicQuery .= "price > '1000'";
 		
 	*/
-function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of			
+function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of
+	$query .= "ORDER BY price";
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
 	$returnString .= $query . "<br>";
@@ -431,10 +439,10 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		} else if ($countSel == 'mod'){
 			$GLOBALS['modResultCount']++;
 			
-			if (in_array($id, $GLOBALS['pids_in_original_query'])){
+			/*if (in_array($id, $GLOBALS['pids_in_original_query'])){
 				//echo "id sel: $id";
 				continue;
-			}
+			}*/
 		}
 		
 		//print_r($GLOBALS['pids_in_original_query']);
