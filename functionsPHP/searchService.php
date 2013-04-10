@@ -11,6 +11,7 @@
 	
 	/* GLOBALS */
 	/* NEEDED TO BUILD MODIFIED QUERY LATER */
+	$sortingBy = '';
 	$searchType = '';														// search types are: by code, by name, by category
 	$searchQuery = '';
 	$priceLow = 0;
@@ -34,6 +35,11 @@
 	$pids_in_original_query = array();
 	
 	$recommendationQueryList = array();
+	
+	/* Get the sorting method */
+	if (isset($_POST['sortBy'])){
+		$sortingBy = $_POST['sortBy'];
+	}
 	
 	/* APPEND THE TYPE OF SEARCH AND ITS QUERY */
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
@@ -414,7 +420,14 @@
 		
 	*/
 function searchProducts($con, $query, $countSel){			// countSel keeps track of which counter to keep track of
-	$query .= "ORDER BY price";
+	// Sorting the results by ..
+	if ($GLOBALS['sortingBy'] == 'noSorting'){
+	}else if ($GLOBALS['sortingBy'] == 'lowestPrice'){
+		$query .= "ORDER BY price ASC";
+	} else if ($GLOBALS['sortingBy'] == 'highestPrice'){
+		$query .= "ORDER BY price DESC";
+	}
+	
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
 	$returnString .= $query . "<br>";

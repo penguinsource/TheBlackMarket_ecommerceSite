@@ -170,7 +170,7 @@ $(function() {
   </script>
 </head>
 
-<body>
+<body onLoad='document.getElementById()'>
 
 <div class='main'>
 <div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
@@ -184,7 +184,9 @@ $(function() {
 					<option id='pcategory' name='category' value='Category'>Category</option>
 					<option id='pid' name='code' value='Code'>Code</option>
 				</select>
+				<span>Sort By:</span>
 				<select onchange='filterSearch()' id='sortBy'>
+					<option id='noSort' name='noSort' value='noSorting'></option>
 					<option id='sortLowestPrice' name='sortLowestPrice' value='lowestPrice'>Lowest Price</option>
 					<option id='sortHighestPrice' name='sortHighestPrice' value='highestPrice'>Highest Price</option>
 				</select>
