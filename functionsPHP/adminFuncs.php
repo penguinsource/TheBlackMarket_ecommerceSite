@@ -32,7 +32,7 @@ function printAdminList($con, $selected){
       $imgpre = ($i == ($selIndex - 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/images/corner-br.png'>" : "";
       $imgpost = ($i == ($selIndex + 1)) ? "<img style='display: ;position:relative; float:right;' src='../design/images/corner-tr.png'>" : "";
       echo "";
-			echo "<a href='admin?opt=$id'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
+			echo "<a href='admin/$id'> <div class ='$class'>$name $imgpre $imgpost</div></a>\n";
       $i++;
   }
 }
@@ -145,7 +145,7 @@ function displayTransactionHistory($con, $from, $to) {
   $orderQuery = $orderSelect.$orderCondition;
 
 	// init table
-	$columns = array("Date", "User Email", "Order#", "Products", "Total Cost");
+	$columns = array("Delivery Date", "User Email", "Order#", "Products", "Total Cost");
 	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table

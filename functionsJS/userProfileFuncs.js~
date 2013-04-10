@@ -23,7 +23,8 @@ function updateProfile(){
   var iemail = $("#email").val();
 
 	// post
-	$.post('/functionsPHP/userprofileService', 
+	var link = '/functionsPHP/userprofileService';	
+	$.post(link, 
 	  {fname: ifirst, lname: ilast, city: icity, postal: ipostal, address: iaddress, phone: iphone},
 	  function(data) {
 	    $("#window").fadeOut("slow");

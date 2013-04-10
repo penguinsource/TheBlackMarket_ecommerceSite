@@ -1,0 +1,10 @@
+#dateWrapper
+{ 
+  text-align: center;  
+}
+
+#tableView
+{
+  /*padding-right: 15px;*/
+}
+
