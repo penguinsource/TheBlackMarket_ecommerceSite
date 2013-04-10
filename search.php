@@ -25,7 +25,7 @@
 	<!-- script imports -->
 	<!-- other scripts: -->
 	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
-	<script>filterSearch();</script>
+	
 	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
@@ -181,11 +181,13 @@ $(function() {
 				<?php 
 				if (isset($_GET['squery'])){
 					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery' value='".$_GET['squery']."'></input>";
-					echo "<script>filterSearch()</script>";
+					//echo "<script>filterSearch()</script>";
+					echo "<script> setTimeout(function(){filterSearch()},100);</script>"; // after 500 milliseconds, call the filter search function
 				}else {
 					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery'></input>";
+					echo "<script> setTimeout(function(){filterSearch()},500);</script>"; // after 500 milliseconds, call the filter search function
 				}?>
-				
+				 
 				 <!-- REFRESH THE PAGE -->
 				<!-- <input onkeyup='filterSearch()' type='text' id='searchQuery'> </input> -->
 				<button onclick='filterSearch()'>Go </button>
