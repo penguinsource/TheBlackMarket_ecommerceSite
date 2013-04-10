@@ -82,10 +82,6 @@
 
 			<?php 
 			if (isset($_GET['category'])){
-				// saving category in javascript
-				//$val = $_GET['category'];
-				//echo "<script> currCategory = ".$val."; </script>";
-			
 				echo "<div class='sortDiv'>";
 					echo "<span>Sort By: </span>";
 					echo "<select onchange=\"goToSortedPage('".$_GET['category'] ."')\" id='sortBy'>";
@@ -98,15 +94,6 @@
 				//echo "<script> setTimeout(function(){document.getElementById('".$_GET['sortBy']."').selected = true;},500);</script>"; // after 500 milliseconds, call the filter search function
 			}
 			?>
-			<!-- <div class='sortDiv'>
-				<span>Sort By:</span>
-				<?php  ?>
-				<select onchange='shop/' id='sortBy'>
-					<option id='noSort' name='noSort' value='noSorting'></option>
-					<option id='sortLowestPrice' name='sortLowestPrice' value='lowestPrice'>Lowest Price</option>
-					<option id='sortHighestPrice' name='sortHighestPrice' value='highestPrice'>Highest Price</option>
-				</select>
-			</div> -->
 			
 		</div>
 	</div>
