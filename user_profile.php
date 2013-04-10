@@ -3,7 +3,6 @@
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php include ("functionsPHP/adminFuncs.php"); ?>
-<?php include ("api/orders.php"); ?>
 
 
 <?php 

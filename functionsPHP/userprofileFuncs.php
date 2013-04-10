@@ -78,9 +78,8 @@ function displayCurrentOrders($user) {
   // get products
   while ($row = mysqli_fetch_array($res)) {  
     $oid = $row['orderid'];
-    $date = $row['delivery_date'];
-    //$date = 
-    getUpdatedDelivery($con, $oid); // CURL
+    //$date = $row['delivery_date'];
+    $date = getUpdatedDelivery($con, $oid); // CURL
     
     $inner = "SELECT * FROM productOrders WHERE productOrders.orderid='".$oid."'";
     $ir = mysqli_query($con, $inner) or die(" User Profile Product Query Failed ");
@@ -125,15 +124,24 @@ function getProductName($con, $pid) {
 }
 
 function getUpdatedDelivery($con, $oid) {
-  echo getUrlFromOID($con, $oid);
+  $query = "SELECT * FROM orderSources WHERE orderSources.orderid='$oid'";
+  $res = mysqli_query($con, $query) or die(" URL Query Failed ");
+  
+  //$retVal = "";
+  
+  while ($row = mysqli_fetch_array($res)) {
+    $soid = $row['storeorderid'];
+    $surl = $row['storeurl'];
+    
+    $furl = getCurl($surl.'/orders/'.$soid);
+    
+    //$retVal .= $furl['delivery_date'].", ";
+    $dates[] = $furl['delivery_date'];
+  }
+
+  return max($dates);
 }
 
-function getUrlFromOID($con, $oid) {
-  $query = "SELECT * FROM orderSources WHERE orderSources.orderid='".$oid."'";
-  $res = mysqli_query($con, $query) or die(" URL Query Failed ");
-  $row = mysqil_fetch_array($res);
-  return $row['storeurl'];
-}
 
 function getCurl($url){
 	$ch = curl_init($url);
