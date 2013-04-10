@@ -2,18 +2,7 @@
 <?php include("functionsPHP/generalFuncs.php"); ?>
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
-<?php 
-	checkPage(); 
-	
-	if (isset($_SESSION['email'])) {
-	  $user = getUserInfo($_SESSION['email']);
-	} else {
-	  header("Location: shop");
-		exit;
-	}
-	
-	$tab = (isset($_GET['profileOrders']) ? $_GET['profileOrders'] : null;
-?>
+<?php checkPage(); ?>	
 
 <hmtl>
 
@@ -24,12 +13,16 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>tablesorter/themes/blue/style.css" TYPE="text/CSS">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css">
 	
+	
+	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
-	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
-	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
-	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/userProfileFuncs.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>tablesorter/jquery.tablesorter.js"></script> 
 	
 </head>
 
@@ -42,7 +35,7 @@
       <?php showLeftMenu(); ?>
     </div>    
     
-    <?php showProfile($tab); ?>
+    <?php showProfile(); ?>
   </div>  
 
 </body>
