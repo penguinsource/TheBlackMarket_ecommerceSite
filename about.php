@@ -32,13 +32,20 @@
 	<?php printMenu(); ?>
 
 	<div class='main'>
-		<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
+		<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;">
+		  <h3 style="color: #919191;text-align:center;">
+		    Black Market - Better than you, and proud of it!
+		  </h3>
+		</div>
 		
 		<div style="position:relative;">
 			
-			<div class='body'>		
-			
-				This is the test 'About' page
+			<div class='body'>					
+				A guy comes in a bar...
+				<br><br>
+				...wait no it was a horse!
+				<br>
+				ok so a guy comes in a horse...
 			
 			</div>
 		</div>

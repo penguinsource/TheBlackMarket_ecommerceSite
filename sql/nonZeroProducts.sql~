@@ -1,0 +1,2 @@
+UPDATE product SET quantity=0 WHERE pid="c000001";
+UPDATE product SET quantity=FLOOR(1 + RAND() * 99) WHERE pid<>"c000001"; 

@@ -32,7 +32,11 @@
 	<?php printMenu(); ?>
 
 	<div class='main'>
-		<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
+		<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> 
+		  <h3 style="color: #919191;text-align:center;">
+		    Hello IT? Have you tried turning it off and on again?
+		  </h3>
+		</div>
 		
 		<div style="position:relative;">
 			
@@ -42,6 +46,7 @@
 				Email: support@blackmarket.com<br>
 				Phone: 1-800-555-5555
 			
+			  
 			</div>
 		</div>
 	</div>
