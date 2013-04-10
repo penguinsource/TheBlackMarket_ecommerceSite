@@ -37,14 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){	//hande POST
   mysqli_query($con, $queryInsert) or die(" User Profile Update Failed ");      
   closeDBConnection($con);    // close the database connection
 
-  /*
-  $output = "<div style=\"border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;\">"
-    ."</div><div class='leftMenu'>"
-    .showLeftMenu()
-    ."</div>"
-    .showProfile();
-  */
-  echo $output;
+  
+  echo showProfile();
 }
 
 

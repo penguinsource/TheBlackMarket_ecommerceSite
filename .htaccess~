@@ -2,7 +2,7 @@ RewriteEngine on
 RewriteBase /
 
 RewriteRule ^admin/(.+)/?$ admin.php?opt=$1
-#RewriteRule ^admin/.*$ -
+RewriteRule ^admin/.*$ -
 RewriteRule ^shop/(.+)/(.+)/?$ shop.php?category=$1&sortBy=$2
 RewriteRule ^shop/(.+)/?$ shop.php?category=$1
 RewriteRule ^shop/.*$ -

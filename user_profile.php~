@@ -3,7 +3,13 @@
 <?php include("functionsPHP/dbConnection.php"); ?>
 <?php include ("functionsPHP/userprofileFuncs.php"); ?>
 <?php include ("functionsPHP/adminFuncs.php"); ?>
-<?php checkPage(); ?>	
+<?php include (); ?>
+
+
+<?php 
+  // start session
+  checkPage(); 
+?>	
 
 <hmtl>
 
@@ -24,6 +30,7 @@
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/userProfileFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>tablesorter/jquery.tablesorter.js"></script> 
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
 	
 </head>
 
@@ -36,7 +43,9 @@
       <?php showLeftMenu(); ?>
     </div>    
     
+    <span id='window'>
     <?php showProfile(); ?>
+    </span>
   </div>  
 
 </body>
