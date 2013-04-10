@@ -167,14 +167,15 @@ $(function() {
   </script>
 </head>
 
-<body onLoad='document.getElementById()'>
+<body onLoad="document.getElementById('searchQuery').focus()">
 
 <div class='main'>
 <div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
 	<div class='searchWrapper'>
 		<div class='searchInput'>
-			<span>
+			<span><span>Search By:</span>
 				<?php 
+				
 				if (isset($_GET['squery'])){
 					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery' value='".$_GET['squery']."'></input>";
 					//echo "<script>filterSearch()</script>";
@@ -187,7 +188,7 @@ $(function() {
 				 <!-- REFRESH THE PAGE -->
 				<!-- <input onkeyup='filterSearch()' type='text' id='searchQuery'> </input> -->
 				<button onclick='filterSearch()'>Go </button>
-				<span>Search By:</span>
+				<span>Type:</span>
 				<select onchange='filterSearch()' id='searchType'>
 					<option id='pname' name='name' value='Name'>Name</option>
 					<option id='pcategory' name='category' value='Category'>Category</option>
@@ -201,13 +202,13 @@ $(function() {
 				</select>
 			</span>
 		</div>
+		<div class='fullBorder'></div>
 		<div class='searchFilters'>
 			<!-- Price Filter -->
 			<div class='filterTab'>
 				<p> Price Range </p>
 				<div id="priceRangeSlider"></div>
 				<p class='pFilter' align='center' name='priceAmount' id='priceAmount'></p>
-				<input type='checkbox'>Strict</input>
 			</div>
 			<!-- Categories Filter -->
 			<div class='border80'></div>

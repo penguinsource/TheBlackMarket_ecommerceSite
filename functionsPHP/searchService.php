@@ -406,7 +406,7 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 	
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
-	$returnString .= $query . "<br>";
+	//$returnString .= $query . "<br>";
 	$i = 1;
 	while($row = mysqli_fetch_array($result)) {
 		$id = $row['pid'];
