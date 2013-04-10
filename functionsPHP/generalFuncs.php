@@ -74,12 +74,6 @@
 			echo "<div id='menulogo'>\n";
 				echo "<a href='/index'>\n";
 					echo "<img valign='center' class='activelogo' src='/design/images/logo1-small.png'>\n";
-					/*	SEARCH FORM below */
-					echo "<div class='searchWrap'><form action='/search.php' method='GET'>";
-					echo "<input type='text' name='squery'></input>";
-					echo "<button>Search !</button>";
-					echo "</form></div>";
-					/*	SEARCH FORM above */
 					echo "<img valign='center' src='/design/images/logo2-small.png'>\n";
 				echo "</a>\n";
 			echo "</div>\n";
@@ -122,6 +116,13 @@
 				echo "<br><div id='auth-alert'> </div>\n";
 			echo "</div>\n";
 			
+            /*	SEARCH FORM below */
+					echo "<div class='searchWrap'><form action='/search.php' method='GET'>";
+					echo "<input type='text' name='squery'></input>";
+					echo "<button>Search !</button>";
+					echo "</form></div>";
+					/*	SEARCH FORM above */
+            
 			echo "<div class='blueline'> </div>\n";
 		echo "</div>\n";
 		

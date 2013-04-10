@@ -437,7 +437,7 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 		//print_r($GLOBALS['pids_in_original_query']);
 		
 		//GET RATING HERE
-		$rating = rand(0,5);
+		$rating = getRating($con, $id);
 		$ratingString = "";
 		if ($rating == 0){
 			$ratingString = "No Rating";
@@ -491,6 +491,19 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 	}
     
 	return $returnString;
+}
+
+function getRating($con, $pid){
+	$query = "SELECT ratingSum, ratingCount FROM product WHERE pid='$pid';";	
+	$result = mysqli_query($con, $query) or die(" Query failed ");
+	$row = mysqli_fetch_array($result);
+	
+	$ratingSum = $row['ratingSum'];
+	$ratingTotal = $row['ratingCount'];
+	
+	if ($ratingTotal == 0) return 0;
+	
+	return round($ratingSum/$ratingTotal);
 }
 
 	/* TYPES INFO: types: 'normal' ( no recommendations needed )

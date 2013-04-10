@@ -163,6 +163,11 @@ function printPage($con){
 	//delete from pending orders
 	$query = "DELETE FROM pendingOrders WHERE orderid='$sqlorderid'";	
 	$result = mysqli_query($con, $query);
+    
+    unset($_SESSION['cart']);
+    
+    $query = "UPDATE user SET cart = '' WHERE email = '" . $_SESSION['email'] . "'";
+	mysqli_query($con, $query);
 	
 }
 
