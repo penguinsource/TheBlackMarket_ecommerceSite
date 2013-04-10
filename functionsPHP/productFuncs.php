@@ -42,7 +42,7 @@ function getRatingStars($userBought, $con, $pid){
 }
 
 function getRatingP($con, $pid){
-	$query = "SELECT ratingSum, ratingCount FROM product WHERE pid='$pid';";								
+	$query = "SELECT ratingSum, ratingCount FROM product WHERE pid='$pid';";	
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$row = mysqli_fetch_array($result);
 	

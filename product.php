@@ -84,7 +84,7 @@
 			<!-- <div class="productName">LG 6.3 Cu. Ft. Self-Clean Smooth Top Range <br> <span class="categoryText">Dishwashers</span> -->
 			<div class="productName"><?php echo $product['pname']; ?> <br> <span class="categoryText"><?php echo getCategoryName($con, $product['pcategory']); ?></span>
 				<span class="productRatingPrice">
-					<?php getRatingStars($userbought, $con, $pid); ?> 
+					<?php getRatingStars($userbought, $con, $product['pid']); ?> 
 					
 					<span class="price">$<?php echo $product['price']; ?></span> 
 				</span>
