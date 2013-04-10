@@ -174,8 +174,8 @@
 	function recommendProducts($type_arg){
 		$p_index = 0;
 		if ($type_arg == 'more'){
-			if (relaxRange(3, 1)){		// CHECK rangeType below for more info
-				return;						//maximum 5% of range (high and low), return these products as a recommendation
+			if (relaxRange(3, 1)){		
+				return;						
 			} else if (relaxRange(3, 2)){
 				return;
 			} else if (relaxRange(3, 3)){
@@ -188,8 +188,8 @@
 				return;
 			}
 		} else if ($type_arg == 'fewer'){
-			if (narrowRange(3, 1)){		// CHECK rangeType below for more info
-				return;						//maximum 5% of range (high and low), return these products as a recommendation
+			if (narrowRange(3, 1)){		
+				return;						
 			} else if (narrowRange(3, 2)){
 				return;
 			} else if (narrowRange(3, 3)){

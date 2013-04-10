@@ -7,10 +7,10 @@
 
 <head>
 	<?php echo $GLOBALS['basehref']; // print the site's base href?>
-    <LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/flexslider.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
-	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/shop.css" TYPE="text/CSS">
-  <link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
+    <link rel=STYLESHEET href="<?= $GLOBALS['baseURL']; ?>design/flexslider.css" type="text/CSS">
+	<link rel=STYLESHEET href="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" type="text/CSS">
+	<link rel=STYLESHEET href="<?= $GLOBALS['baseURL']; ?>design/shop.css" type="text/CSS">
+	<link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
 	
 	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
