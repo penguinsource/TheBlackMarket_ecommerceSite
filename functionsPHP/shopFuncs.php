@@ -61,7 +61,7 @@ function printProducts($con, $category, $sortType){
 		$br = "";
 		
 		//GET RATING HERE
-		$rating = rand(0,5);
+		$rating = getRating($con,$id);
 		$ratingString = "";
 		if ($rating == 0) {
 			$ratingString = "No Rating";
@@ -100,6 +100,19 @@ function printProducts($con, $category, $sortType){
 		echo "</div>";
 		echo $br;
     }
+}
+
+function getRating($con, $pid){
+	$query = "SELECT ratingSum, ratingCount FROM product WHERE pid='$pid';";								
+	$result = mysqli_query($con, $query) or die(" Query failed ");
+	$row = mysqli_fetch_array($result);
+	
+	$ratingSum = $row['ratingSum'];
+	$ratingTotal = $row['ratingCount'];
+	
+	if ($ratingTotal == 0) return 0;
+	
+	return round($ratingSum/$ratingTotal);
 }
 
 ?>

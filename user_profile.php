@@ -24,6 +24,7 @@
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/userProfileFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>tablesorter/jquery.tablesorter.js"></script> 
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
 	
 </head>
 

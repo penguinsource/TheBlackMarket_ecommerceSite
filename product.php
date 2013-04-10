@@ -24,8 +24,10 @@
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
+
     
     <?php
+		echo "<script> var pid = '".$_GET['productID']."';</script>";
         $con = connectToDB();
         if (isset($_GET["productID"])){
             $productID = $_GET["productID"];
@@ -82,7 +84,7 @@
 			<!-- <div class="productName">LG 6.3 Cu. Ft. Self-Clean Smooth Top Range <br> <span class="categoryText">Dishwashers</span> -->
 			<div class="productName"><?php echo $product['pname']; ?> <br> <span class="categoryText"><?php echo getCategoryName($con, $product['pcategory']); ?></span>
 				<span class="productRatingPrice">
-					<?php getRatingStars($userbought); ?> 
+					<?php getRatingStars($userbought, $con, $pid); ?> 
 					
 					<span class="price">$<?php echo $product['price']; ?></span> 
 				</span>

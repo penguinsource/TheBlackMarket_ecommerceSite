@@ -13,8 +13,8 @@ function getCategoryName($con, $categoryid){
 	echo $row[0];
 }
 
-function getRatingStars($userBought){
-    $rating = rand(0,5);
+function getRatingStars($userBought, $con, $pid){
+    $rating = getRatingP($con, $pid);
     $ratingString = "";
 
     $aopen = ($userBought) ? "<a href='javascript:void(0)'>" : "";
@@ -39,6 +39,19 @@ function getRatingStars($userBought){
     echo "<div class='product-rating'>";
 		echo $ratingString;
 	echo "</div>";
+}
+
+function getRatingP($con, $pid){
+	$query = "SELECT ratingSum, ratingCount FROM product WHERE pid='$pid';";								
+	$result = mysqli_query($con, $query) or die(" Query failed ");
+	$row = mysqli_fetch_array($result);
+	
+	$ratingSum = $row['ratingSum'];
+	$ratingTotal = $row['ratingCount'];
+	
+	if ($ratingTotal == 0) return 0;
+	
+	return round($ratingSum/$ratingTotal);
 }
 
 function userBought($pid, $con){
