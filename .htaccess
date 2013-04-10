@@ -1,6 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
+RewriteRule ^shop/(.+)/(.+)/?$ shop.php?category=$1&sortBy=$2
 RewriteRule ^shop/(.+)/?$ shop.php?category=$1
 RewriteRule ^shop/.*$ -
 RewriteRule ^product/(.+)/(.+)/?$ product.php?category=$1&productID=$2

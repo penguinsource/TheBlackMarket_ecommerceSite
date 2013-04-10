@@ -143,9 +143,7 @@ function filterSearch(){
 	var typeOfSearch = searche.options[searche.selectedIndex].id;		// GET the search type
 	var searchQueryValue = document.getElementById('searchQuery').value;
 	var sortType = document.getElementById('sortBy').value;
-	//alert('sort type is ' + sortType);
-	//alert("search type:"+typeOfSearch);
-	//var dish= null;
+	
 	$.ajax({url: '/functionsPHP/searchService',
         type: 'POST',
         data: { priceLowArg: priceLow, priceHighArg: priceHigh, minQuantity: minimum_quantity, weightLowArg: weightLow, weightHighArg: weightHigh, searchType:typeOfSearch ,

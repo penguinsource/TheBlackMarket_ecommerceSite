@@ -18,8 +18,7 @@ function printCategories($con, $selected){
 		}
         $selIndex++;
     }
-    
-    
+	
     mysqli_data_seek($result, 0);
     $i = 1;
     while($row = mysqli_fetch_array($result)) {
@@ -38,8 +37,17 @@ function printCategories($con, $selected){
     }
 }
 
-function printProducts($con, $category){
-	$query =   "SELECT * FROM product WHERE pcategory='$category';";								
+function printProducts($con, $category, $sortType){
+	$query = "SELECT * FROM product WHERE pcategory='$category' ";
+	
+	// grabbing a sorted list of products (sorted by $sortType)
+	if ($sortType == 'noSorting'){
+	} else if ($sortType == 'lowestPrice'){
+		$query .= "ORDER BY price ASC";
+	} else if ($sortType == 'highestPrice'){
+		$query .= "ORDER BY price DESC";
+	}
+
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	
 	$i = 1;

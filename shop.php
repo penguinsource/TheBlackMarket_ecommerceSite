@@ -54,8 +54,16 @@
 			
 			<div class='body'>		
 			
-				<?php printProducts($con, $category); ?>
-			
+				<?php //printProducts($con, $category, 'noSorting'); ?>
+				<?php 
+				if (isset($_GET['sortBy'])){
+					printProducts($con, $category, $_GET['sortBy']);
+				} else {
+					printProducts($con, $category, 'noSorting');
+				}
+				
+				?>
+				
 				<!--<div class='product product-rightborder'>
 					<a href='products/c000002'> <img class='imgthumb' src='images/c000002.jpg'>
 					<p class='product-name'><b>LG 6.3 Cu. Ft. Self-Clean Smooth Top Range</b></p> </a>
@@ -69,6 +77,37 @@
 				</div>-->
 				
 			</div>
+			
+
+
+			<?php 
+			if (isset($_GET['category'])){
+				// saving category in javascript
+				//$val = $_GET['category'];
+				//echo "<script> currCategory = ".$val."; </script>";
+			
+				echo "<div class='sortDiv'>";
+					echo "<span>Sort By: </span>";
+					echo "<select onchange=\"goToSortedPage('".$_GET['category'] ."')\" id='sortBy'>";
+						echo "<option id='noSorting' name='noSort' value='noSorting'></option>";
+						echo "<option id='lowestPrice' name='lowestPrice' value='lowestPrice'>Lowest Price</option>";
+						echo "<option id='highestPrice' name='highestPrice' value='highestPrice'>Highest Price</option>";
+					echo "</select>";
+				echo "</div>";
+				echo "<script>document.getElementById('".$_GET['sortBy']."').selected = true;</script>";
+				//echo "<script> setTimeout(function(){document.getElementById('".$_GET['sortBy']."').selected = true;},500);</script>"; // after 500 milliseconds, call the filter search function
+			}
+			?>
+			<!-- <div class='sortDiv'>
+				<span>Sort By:</span>
+				<?php  ?>
+				<select onchange='shop/' id='sortBy'>
+					<option id='noSort' name='noSort' value='noSorting'></option>
+					<option id='sortLowestPrice' name='sortLowestPrice' value='lowestPrice'>Lowest Price</option>
+					<option id='sortHighestPrice' name='sortHighestPrice' value='highestPrice'>Highest Price</option>
+				</select>
+			</div> -->
+			
 		</div>
 	</div>
 

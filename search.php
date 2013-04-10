@@ -21,11 +21,13 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/product.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/search.css" TYPE="text/CSS">
+	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
 	
 	<!-- script imports -->
 	<!-- other scripts: -->
 	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
-	
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
+		
 	<script src='http://code.jquery.com/jquery-latest.min.js' type="text/javascript"></script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
@@ -168,6 +170,8 @@ $(function() {
 </head>
 
 <body onLoad="document.getElementById('searchQuery').focus()">
+
+<?php printMenu(); ?>
 
 <div class='main'>
 <div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>
