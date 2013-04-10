@@ -73,6 +73,6 @@
     
 </body>
 
-<?php closeDBConnection($con);?>
+<?php //closeDBConnection($con);?>
 
 </html>

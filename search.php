@@ -184,6 +184,10 @@ $(function() {
 					<option id='pcategory' name='category' value='Category'>Category</option>
 					<option id='pid' name='code' value='Code'>Code</option>
 				</select>
+				<select onchange='filterSearch()' id='sortBy'>
+					<option id='sortLowestPrice' name='sortLowestPrice' value='lowestPrice'>Lowest Price</option>
+					<option id='sortHighestPrice' name='sortHighestPrice' value='highestPrice'>Highest Price</option>
+				</select>
 			</span>
 		</div>
 		<div class='searchFilters'>

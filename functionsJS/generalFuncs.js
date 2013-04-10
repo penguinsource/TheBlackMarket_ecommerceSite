@@ -187,7 +187,7 @@ function filterSearch(){
 				document.getElementById('searchContentRecom').className = 'hidden';
 				document.getElementById('searchResultsCountRecom').className = 'hidden';
 			} else if (resultType == 'extra'){
-				showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show More Results</button>";
+				showMoreButton = "<br><button id='showResultsBound' onclick=\"narrowSearch('more')\" class='showResultsButton'>Show all results</button>";
 				document.getElementById('searchContent').innerHTML = modResults + showMoreButton;
 				document.getElementById('searchResultsCount').innerHTML = modResultsCount + ' products recommended for you.<br>' + modFiltersText + "<br>" +recList;
 				

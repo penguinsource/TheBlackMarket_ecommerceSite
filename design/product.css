@@ -47,7 +47,8 @@ p.productText {
 	margin-left: 230px;
 	padding-top:10px;
 	/*font-family: "Open Sans",Verdana,sans-serif;*/
-	font-family: "Open Sans",Verdana,sans-serif;
+	/* font-family: "Open Sans",Verdana,sans-serif; */
+	font-family: calibri;
 	color: #000000;
 }
 
@@ -68,7 +69,8 @@ p.productText {
 	display: inline-block;
 	vertical-align: top;
 	/* background-color:gray; */
-	font-family: "Open Sans",Verdana,sans-serif;
+	/* font-family: "Open Sans",Verdana,sans-serif; */
+	font-family: calibri;
 	font-size: 13px;
 	margin:0;
 	padding:0;
