@@ -45,8 +45,11 @@
 	if (isset($_POST['searchType']) && isset($_POST['searchQuery'])){
 		$searchType = $_POST['searchType'];									// assign and save a value for this global
 		$searchQuery = $_POST['searchQuery'];								// assign and save a value for this global
-		//$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
-		$basicQuery .= "($searchType LIKE '% $searchQuery %' OR $searchType LIKE '%$searchQuery %' OR $searchType LIKE '% $searchQuery%') ";
+		if ( ($searchType == 'pcategory') || ($searchType == 'pid') ){
+			$basicQuery .= "($searchType LIKE '%$searchQuery%') ";
+		} else {
+			$basicQuery .= "($searchType LIKE '% $searchQuery %' OR $searchType LIKE '%$searchQuery %' OR $searchType LIKE '% $searchQuery%') ";
+		}
 		// save the current filters	in printing state
 		$original_filters .= "Searching for: '$searchQuery' of type '$searchType', ";			// save filters for printing
 		//addQueryType($_POST['searchType'], $_POST['searchQuery']);
@@ -125,35 +128,8 @@
 	$originalQuery = $basicQuery;
 	
 	$returnObject = array();								// array to store everything to be returned
-	
-	/* -------------------------- */
-	/* Recommendation conditions */
-	
-	//$modified_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $priceHigh, $minQuantity, $weightLow, $weightHigh);
-	/*if ($origResultCount < 4){	// if < 4 products found, try and relax search
-		// $origResultCount =99;
-		// $modResultCount = 50;
-		// $returnObject['type'] = 'few';		// set type to 'few'
-		$moddedPriceHigh = $priceHigh;
-		$n = 0;
-		while ($origResultCount >= $modResultCount){
-			++$n;
-			if ($n == 15){					// potentially increase price by $50 * 14.. if nothing extra is found
-				$modified_results = '';		// then reset the results as no recommendation can be made based on price
-				
-				break;
-			}
-			$modified_filters = '';
-			$modResultCount = 0;
-			//$GLOBALS['modResultCount'] = 0;
-			$moddedPriceHigh += 50;
-			// first: increasing the price high limit (if it's not strict - not implemented yet)
-			$modified_results = buildModQuery($con, $searchType, $searchQuery, $savedCategoriesSelected, $priceLow, $moddedPriceHigh, $minQuantity, $weightLow, $weightHigh);
-		}
-	} else if ($origResultCount > 9) {	// if > 9 products found, try and narrow search
-		//$returnObject['type'] = 'extra';		// set type to 'few'
-	}*/
-	
+
+	/* Recommendations */	
 	if ($origResultCount < 5){
 		recommendProducts('more');
 		$returnObject['type'] = 'few';
@@ -430,7 +406,7 @@ function searchProducts($con, $query, $countSel){			// countSel keeps track of w
 	
 	$result = mysqli_query($con, $query) or die(" Query failed ");
 	$returnString = '';
-	//$returnString .= $query . "<br>";
+	$returnString .= $query . "<br>";
 	$i = 1;
 	while($row = mysqli_fetch_array($result)) {
 		$id = $row['pid'];
