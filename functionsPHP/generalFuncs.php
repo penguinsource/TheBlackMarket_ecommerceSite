@@ -1,7 +1,7 @@
 <?php 
 
 	// GLOBAL VARIABLES --------------------------------------------------
-	$localhostON = 0;		// 0 for 000webhost server
+	$localhostON = 2;		// 0 for 000webhost server
 							// 1 for localhost mihai pc
 							// 2 for vm consort (not setup; to add, just add another if below and the url)
 							
@@ -74,12 +74,6 @@
 			echo "<div id='menulogo'>\n";
 				echo "<a href='/index'>\n";
 					echo "<img valign='center' class='activelogo' src='/design/images/logo1-small.png'>\n";
-					/*	SEARCH FORM below */
-					echo "<div class='searchWrap'><form action='/search.php' method='GET'>";
-					echo "<input type='text' name='squery'></input>";
-					echo "<button>Search !</button>";
-					echo "</form></div>";
-					/*	SEARCH FORM above */
 					echo "<img valign='center' src='/design/images/logo2-small.png'>\n";
 				echo "</a>\n";
 			echo "</div>\n";
@@ -122,6 +116,13 @@
 				echo "<br><div id='auth-alert'> </div>\n";
 			echo "</div>\n";
 			
+            /*	SEARCH FORM below */
+					echo "<div class='searchWrap'><form action='/search.php' method='GET'>";
+					echo "<input type='text' name='squery'></input>";
+					echo "<button>Search !</button>";
+					echo "</form></div>";
+					/*	SEARCH FORM above */
+            
 			echo "<div class='blueline'> </div>\n";
 		echo "</div>\n";
 		

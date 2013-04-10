@@ -22,8 +22,7 @@
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/user_profile.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/search.css" TYPE="text/CSS">
 	<LINK REL=STYLESHEET HREF="<?= $GLOBALS['baseURL']; ?>design/mainmenu.css" TYPE="text/CSS">
-	<link href='http://fonts.googleapis.com/css?family=Noto+Sans|Tauri|Economica|Istok+Web|Monda|Merriweather+Sans|Share+Tech+Mono|Roboto+Condensed|Oxygen|Maven+Pro' rel='stylesheet' type='text/css'>
-
+	
 	<!-- script imports -->
 	<!-- other scripts: -->
 	<script type="text/javascript" src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
@@ -180,14 +179,14 @@ $(function() {
 		<div class='searchInput'>
 			<span><span>Search By:</span>
 				<?php 
-				$bool = isset($_SESSION['email']);
+				
 				if (isset($_GET['squery'])){
 					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery' value='".$_GET['squery']."'></input>";
 					//echo "<script>filterSearch()</script>";
-					echo "<script> setTimeout(function(){filterSearch();toggleLoggedIn(". $bool .");},100);</script>"; // after 500 milliseconds, call the filter search function
+					echo "<script> setTimeout(function(){filterSearch();toggleLoggedIn(". isset($_SESSION['email']) .");},100);</script>"; // after 500 milliseconds, call the filter search function
 				}else {
 					echo "<input onkeyup='filterSearch()' type='text' id='searchQuery'></input>";
-					echo "<script> setTimeout(function(){filterSearch();toggleLoggedIn(". $bool .");},500);</script>"; // after 500 milliseconds, call the filter search function
+					echo "<script> setTimeout(function(){filterSearch();toggleLoggedIn(". isset($_SESSION['email']) .");},500);</script>"; // after 500 milliseconds, call the filter search function
 				}?>
 				 
 				 <!-- REFRESH THE PAGE -->
