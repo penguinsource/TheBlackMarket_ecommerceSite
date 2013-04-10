@@ -62,16 +62,47 @@ function displayProfileSettings($user) {
 }
 
 function displayCurrentOrders($user) {
+  $con = connectToDB();
+
   $value = "<div class='mediumColumn' id='profileOrders'>";
   
-  $cols = array("Products", "Price", "Arrival Date");
+  // init table
+  $cols = array("Order#", "Products", "Price", "Arrival Date");
   $value .= createTableHeader($cols, 'profileTable', 'Current Orders', null, null);
   
-  $vals = array("ITEMS", "INFINITY BILLION DOLLARS", "the day of the dead");
-  $value .= addTableRow($vals);
+  // query all use transactions
+  $query = "SELECT * FROM userOrders WHERE userOrders.userid=".$user['userid'];
+  // possible date check
+  $res = mysqli_query($con, $query) or die(" Current Order Query Failed ");
   
-  $value .= "</tbody></table></div>";
+  // get products
+  while ($row = mysqli_fetch_array($res)) {  
+    $oid = $row['orderid'];
+    $date = $row['delivery_date'];
     
+    $inner = "SELECT * FROM productOrders WHERE productOrders.orderid='".$oid."'";
+    $ir = mysqli_query($con, $inner) or die(" User Profile Product Query Failed ");
+    
+    $items = "";
+    $cost = 0;
+    while ($prow = mysqli_fetch_array($ir)) {
+      $pid = $prow['pid'];
+      $qty = $prow['amount'];
+      $price = $prow['totalprice'];
+      
+      $pname = getProductName($con, $pid);
+      $items .= ($items == "") ? "" : ", ";
+      $items .= $pname." [x$qty]";
+      
+      $cost += $price;
+    }
+          
+    $next = array($oid, $items, $cost, $date);
+    $value .= addTableRow($next);
+  }
+      
+  $value .= "</tbody></table></div>";    
+  closeDBConnection($con);
   return $value;
 }
 
@@ -84,6 +115,14 @@ function getUserInfo($userEmail){
 	return $row;					// return array with all of user's info
 }
 
+function getProductName($con, $pid) {
+  $query = "SELECT * FROM product WHERE product.pid='".$pid."'";
+  $result = mysqli_query($con, $query);
+  $row = mysqli_fetch_array($result);
+  return $row['pname'];
+}
+
+/*
 function getUserCurrentOrders($userid) {
 	return getUserOrders($userid, " AND userOrders.delivery_date >= DATE(NOW());");
 }
@@ -121,5 +160,5 @@ function getUserOrders($userid, $queryEnd) {
 	closeDBConnection($con);    // close the database connection
 	return $output;
 }
-
+*/
 ?>

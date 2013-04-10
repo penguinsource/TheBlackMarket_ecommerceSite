@@ -21,7 +21,7 @@
 	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
-	<script src="<?php echo $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
+	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/userProfileFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>tablesorter/jquery.tablesorter.js"></script> 
 	

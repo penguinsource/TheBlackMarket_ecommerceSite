@@ -161,7 +161,7 @@ function displayTransactionHistory($con, $from, $to) {
       $products .= ($products == "") ? "" : ", ";
       $products .= $prod." [x$qty]";
       
-      $cost = $orow['totalprice'];
+      $cost += $orow['totalprice'];
     }       
 
 		// add row to table
@@ -302,17 +302,18 @@ function displayProductSales($con, $from, $to) {
 
 	// find all products
 	$queryProducts = "SELECT * FROM product";
-	$allProducts = mysqli_query($con, $queryProducts) or
-		die(" Product Query Failed ");
+	$allProducts = mysqli_query($con, $queryProducts) or die(" Product Query Failed ");
 
 	// find all sales
   $salesSelect = "SELECT SUM(amount) FROM productOrders, userOrders";
   $salesCondition = 
-    " WHERE productOrders.orderid=userOrders.orderid AND productOrders.pid=\"";  
+    " WHERE productOrders.orderid=userOrders.orderid AND productOrders.pid='";  
 	$salesQuery = $salesSelect.$salesCondition;
 	
 	// find total cost
-	$costQuery = "SELECT * FROM productOrders WHERE productOrders.pid='";
+	$costQuery = "SELECT * FROM productOrders, userOrders"
+	  ." WHERE productOrders.orderid=userOrders.orderid"
+	  ." AND productOrders.pid='";
 	
 	// init table
 	$columns = array("Product", "Category", "Quantity Purchased", "Total Income");
@@ -324,16 +325,16 @@ function displayProductSales($con, $from, $to) {
 		$pid = $prodRow['pid'];
 
 		// get total sales	
-    $query = $salesQuery.$pid."\"";
+    $query = $salesQuery.$pid."'";
     $query = addDateCheck($query, $from, $to);    
-		$sales = mysqli_query($con, $query) or 
-			die(" Sales Query Fail ");
+		$sales = mysqli_query($con, $query) or die(" Sales Query Fail ");
 
 		$qa = mysqli_fetch_array($sales);
 		$qty = empty($qa[0]) ? 0 : $qa[0];
 
 		// get gross income
 		$cq = $costQuery.$pid."'";
+		$cq = addDateCheck($cq, $from, $to);
 		$costs = mysqli_query($con, $cq) or die(" Cost Query Failed ");
 		$total = 0;
 		while ($crow = mysqli_fetch_array($costs)) {
@@ -346,7 +347,7 @@ function displayProductSales($con, $from, $to) {
 	}
   
 	$output .= "</tbody></table>";
-	echo "$output";
+	echo $output;
 }
 
 // partner retailer information
@@ -363,8 +364,7 @@ function displayOtherStores($con, $from, $to) {
   $query = $select.$condition;    
   $query = addDateCheck($query, $from, $to);        
   
-  $sources = mysqli_query($con, $query) or 
-    die(" Order Sources Query Failed ");
+  $sources = mysqli_query($con, $query) or die(" Order Sources Query Failed ");
         
   // order query
   $orderQuery = "SELECT * FROM productOrders WHERE productOrders.orderid='";
