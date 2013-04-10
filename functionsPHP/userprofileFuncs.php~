@@ -138,9 +138,8 @@ function getUpdatedDelivery($con, $oid) {
     //$retVal .= $furl['delivery_date'].", ";
     $dates[] = $furl['delivery_date'];
   }
-  
-  $max = max($dates);
-  return $max[0];
+
+  return max($dates);
 }
 
 

@@ -145,7 +145,7 @@ function displayTransactionHistory($con, $from, $to) {
   $orderQuery = $orderSelect.$orderCondition;
 
 	// init table
-	$columns = array("Date", "User Email", "Order#", "Products", "Total Cost");
+	$columns = array("Delivery Date", "User Email", "Order#", "Products", "Total Cost");
 	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table

@@ -127,15 +127,12 @@ function getUpdatedDelivery($con, $oid) {
   $query = "SELECT * FROM orderSources WHERE orderSources.orderid='$oid'";
   $res = mysqli_query($con, $query) or die(" URL Query Failed ");
   
-  //$retVal = "";
-  
   while ($row = mysqli_fetch_array($res)) {
     $soid = $row['storeorderid'];
     $surl = $row['storeurl'];
     
     $furl = getCurl($surl.'/orders/'.$soid);
     
-    //$retVal .= $furl['delivery_date'].", ";
     $dates[] = $furl['delivery_date'];
   }
 
