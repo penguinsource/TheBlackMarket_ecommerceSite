@@ -137,7 +137,7 @@ function displayTransactionHistory($con, $from, $to) {
   $orderQuery = $orderSelect.$orderCondition;
 
 	// init table
-	$columns = array("Date", "User Email", "Products", "Total Cost");
+	$columns = array("Date", "User Email", "Order#", "Products", "Total Cost");
 	$output .= createTableHeader($columns, "historyTable", "Transaction History", $from, $to);
 
 	// fill table
@@ -153,6 +153,7 @@ function displayTransactionHistory($con, $from, $to) {
        
     $products = "";
     
+    $cost = 0;
     while ($orow = mysqli_fetch_array($o_res)) {
       $prod = $orow['pname'];
       $qty = $orow['amount'];
@@ -160,11 +161,11 @@ function displayTransactionHistory($con, $from, $to) {
       $products .= ($products == "") ? "" : ", ";
       $products .= $prod." [x$qty]";
       
-      $cost = $orow['totalprice'];
+      $cost += $orow['totalprice'];
     }       
 
 		// add row to table
-		$values = array($date, $row['email'], $products, $cost);
+		$values = array($date, $row['email'], $oid, $products, $cost);
 		$output .= addTableRow($values);
     $i++;
 	}
@@ -355,7 +356,9 @@ function displayOtherStores($con, $from, $to) {
   // get other store orders
   $select = "SELECT * FROM userOrders";
   $condition = " WHERE EXISTS "
-    ."(SELECT * FROM orderSources WHERE userOrders.orderid=orderSources.orderid)";
+    ."(SELECT * FROM orderSources, productOrders"
+    ." WHERE userOrders.orderid=orderSources.orderid"
+    ." AND userOrders.orderid=productOrders.orderid)";
     
   $query = $select.$condition;    
   $query = addDateCheck($query, $from, $to);        
@@ -373,7 +376,7 @@ function displayOtherStores($con, $from, $to) {
   $storeQuery = "SELECT * FROM orderSources WHERE orderSources.orderid='";
   
   // init table
-  $columns = array("Partner", "User Email", "Products", "Total Cost");
+  $columns = array("Partner", "User Email", "Order#", "Products", "Total Cost");
   $output .= createTableHeader($columns, "storeTable", "Partner Retailer Orders", $from, $to);
   
   $i = 0;
@@ -409,16 +412,14 @@ function displayOtherStores($con, $from, $to) {
       $p_res = mysqli_query($con, $pq) or die(" Product Query Failed ");
       $prodRow = mysqli_fetch_array($p_res);
       $pname = $prodRow['pname'];
-      //$price = $prodRow['price'];
       
       $items .= ($items == "") ? "" : ", ";
       $items .= $pname." [x$qty]";
-      
-      //$cost += $qty * $price;      
+       
       $cost += $total;
     }
 
-    $values = array($store, $email, $items, $cost);
+    $values = array($store, $email, $oid, $items, $cost);
     $output .= addTableRow($values);
     
     $i++;
