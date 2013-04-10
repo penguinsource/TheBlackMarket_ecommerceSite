@@ -152,7 +152,7 @@ function purchaseProduct($pid, $amount){
     
     // get current count of orders
     $queryCount = "SELECT  (	SELECT COUNT(*)	FROM  pendingOrders) AS count1,	(SELECT COUNT(*) FROM userOrders) AS count2	FROM dual";
-    $result = mysqli_query($con, $queryCount);
+    $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
 	$orderCcount = $row['count1'] + $row['count2'] + 1;
     $orderid = "bmorder". $orderCount;

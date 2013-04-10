@@ -221,7 +221,7 @@
 	function getOrderId($con){
 		$query = "SELECT  (	SELECT COUNT(*)	FROM  pendingOrders) AS count1,	(SELECT COUNT(*) FROM userOrders) AS count2	FROM dual";
 		    
-        $result = mysqli_query($con, $query);
+        $result = mysqli_query($con, $query); Fb::log("grabbing row", "");
         $row = mysqli_fetch_assoc($result);
 		$count = $row['count1'] + $row['count2'] + 1;
 
