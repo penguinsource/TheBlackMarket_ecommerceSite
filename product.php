@@ -24,6 +24,24 @@
 	<script  src="<?= $GLOBALS['baseURL']; ?>functionsJS/jquery.animate-colors.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/generalFuncs.js"></script>
 	<script src="<?= $GLOBALS['baseURL']; ?>functionsJS/menuFuncs.js"></script>
+    
+    <?php
+        $con = connectToDB();
+        if (isset($_GET["productID"])){
+            $productID = $_GET["productID"];
+            $product = getProductInfo($con, $productID);
+        }else {
+            echo "No product id sent";
+        }
+    
+        $userbought = userBought($productID, $con);
+    
+        if ($userbought){
+            echo "<script src=\"" . $GLOBALS['baseURL'] . "functionsJS/product.js\"></script>";
+        }    
+       
+    ?>
+        
 	
 	<script >
 		$(document).ready(function(){
@@ -42,13 +60,6 @@
 <body>
 
 <?php
-    $con = connectToDB();
-	if (isset($_GET["productID"])){
-		$productID = $_GET["productID"];
-		$product = getProductInfo($con, $productID);
-	}else {
-		echo "No product id sent";
-	}
 	if (isset($_GET["category"])){
 		$category = $_GET["category"];
 	}else {
@@ -71,9 +82,9 @@
 			<!-- <div class="productName">LG 6.3 Cu. Ft. Self-Clean Smooth Top Range <br> <span class="categoryText">Dishwashers</span> -->
 			<div class="productName"><?php echo $product['pname']; ?> <br> <span class="categoryText"><?php echo getCategoryName($con, $product['pcategory']); ?></span>
 				<span class="productRatingPrice">
-					<span class="rating"><img src='design/images/star.png'> <img src='design/images/star.png'> <img src='design/images/star.png'> <img src='design/images/star.png'> <img src='design/images/star.png'> </span>
+					<?php getRatingStars($userbought); ?> 
 					
-					<span class="price"><?php echo $product['price']; ?></span>
+					<span class="price">$<?php echo $product['price']; ?></span> 
 				</span>
 			</div>
 			<div class="productContent">
@@ -92,7 +103,7 @@
 			<div class="imageWrapper">
 				<img class='productImage' src='<?php echo $baseURL.'images/'.$product['imageurl']; ?>'>
 				<div class="productImageInfo">
-					<span class='floatRighty'><span class='quantity'>Qty:<input id='input-quantity' size="1" type='text'></input></span>
+					<span class='floatRighty'><span class='quantity'>Qty:<input style='text-align:center;' id='input-quantity' size="1" type='text' value='1'></input></span>
 					<a href='javascript:void(0)'>
 						<span class='addCartButton' onClick='addToCart("<?= $product['pid'];?>" , "<?= $product['pname'];?>", <?= $product['price'];?>, "<?= $product['imageurl'];?>", getElementById("input-quantity").value);'>  Add to Cart  </span>
 					</a>

@@ -113,8 +113,8 @@ function printPage($con){
             $totalprice = $price * $quantity;
             
             echo "<span style='display:inline-block;width:23%'> $name </span>\n";
-			echo "<span style='display:inline-block;width:10%'> x$quantity </span>\n";
-			echo "<span style='display:inline-block;width:14%'> $$totalprice ($$price ea.) </span>\n";
+			echo "<span style='display:inline-block;width:8%'> x$quantity </span>\n";
+			echo "<span style='display:inline-block;width:16%'> $$totalprice ($$price ea.) </span>\n";
 			
 			//if store is black market, subtract quantity
 			if ($name == "The Black Market"){
@@ -132,7 +132,7 @@ function printPage($con){
 				$response = curlPost($url . "/products/" . $pid . "/order", $quantity);
                 $response = json_decode($response, true);
 				$storeDate = $response['delivery_date'];
-                echo $storeDate . "\n";
+                //echo $storeDate . "\n";
                 $storeId = $response['order_id'];
 				
 				//add date to arrauy

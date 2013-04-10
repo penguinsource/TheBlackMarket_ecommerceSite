@@ -46,27 +46,26 @@
 	<?php printMenu(); ?>
 
 	<div class='main'>
-		<div style="border-bottom: 1px solid;border-color: #E4E4E4;width:100%;height:40px;"> </div>			
+		<div style="width:100%;height:40px;"> </div>			
 		<div style="position:relative;">
 
         <!--<p style="text-align: center">WELCOME TO HOME PAGE</p>-->
 
                 <!-- Place somewhere in the <body> of your page -->
-        <div class="flexslider">
-          <ul class="slides">
-            <li>
-              <img src="images/slider1.jpg" />
-            </li>
-            <li>
-              <img src="images/slider2.jpg" />
-            </li>
-            <li>
-              <img src="images/slider3.jpg" />
-            </li>
-            <li>
-              <img src="images/slider4.jpg" />
-            </li>
-          </ul>
+        <div id="slide-wrapper">
+            <div class="flexslider">
+              <ul class="slides">
+                <li>
+                  <img src="images/slider1.jpg" />
+                </li>
+                <li>
+                  <img src="images/slider2.jpg" />
+                </li>
+                <li>
+                  <img src="images/slider3.jpg" />
+                </li>
+              </ul>
+            </div>
         </div>
         
 		</div>
@@ -74,6 +73,6 @@
     
 </body>
 
-<?php closeDBConnection($con);?>
+<?php //closeDBConnection($con);?>
 
 </html>
