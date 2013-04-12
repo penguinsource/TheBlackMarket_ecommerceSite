@@ -34,7 +34,7 @@
 	
     function redirect($url){
         header("Location: " . $url);
-    }
+    }//
     
     function checkPage(){
         // start session if any user is logged in..
